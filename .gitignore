@@ -1,0 +1,9 @@
+# 数据文件（过大，不纳入版本控制）
+data/
+
+# 常见忽略
+node_modules/
+.vscode/
+.idea/
+*.log
+.DS_Store
