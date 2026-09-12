@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    const games = [
+      { name: "CS:GO", price: 0, rating: 88 },
+      { name: "赛博朋克2077", price: 298, rating: 76 },
+      { name: "杀戮尖塔", price: 48, rating: 97 },
+      { name: "黑神话悟空", price: 268, rating: 90 }
+    ];
+
+
+    //  练习1：打印所有游戏名字 
+    for (let i = 0; i < games.length; i++) {
+      console.log(games[i].name);
+    }
+
+
+    //  练习2：找出最贵的游戏 
+    const mostExpensive = games[0];
+    for (let i = 1; i < games.length; i++) {
+      if (games[i].price > mostExpensive.price) {
+        mostExpensive = games[i];
+      }
+    }
+    console.log("最贵的游戏：", mostExpensive.name, "$" + mostExpensive.price);
+
+
+
+    // 练习3：计算平均好评率
+    const total = 0;
+    for (let i = 0; i < games.length; i++) {
+      total += games[i].rating;
+    }
+    console.log("平均好评率：", (total / games.length).toFixed(2) + "%");
+
+
+    //  练习4：封装函数 - 筛选免费游戏
+    function filterFree(games) {
+      const result = [];
+      for (let i = 0; i < games.length; i++) {
+        if (games[i].price === 0) {
+          result.push(games[i].name);
+        }
+      }
+      return result;
+    }
+    console.log("免费游戏：", filterFree(games));
+
+
+    //  练习5：封装函数 - 求平均好评率 
+    function getAvgRating(games) {
+      const total = 0;
+      for (let i = 0; i < games.length; i++) {
+        total += games[i].rating;
+      }
+      return total / games.length;
+    }
+    console.log("平均好评率：", getAvgRating(games).toFixed(2) + "%");
+
+
+  </script>
+</body>
+
+</html>

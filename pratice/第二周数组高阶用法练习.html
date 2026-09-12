@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const games = [
+      { name: "CS:GO", price: 0, rating: 88, type: "射击", dev: "Valve" },
+      { name: "赛博朋克2077", price: 298, rating: 76, type: "角色扮演", dev: "CD Projekt" },
+      { name: "杀戮尖塔", price: 48, rating: 97, type: "策略", dev: "Mega Crit" },
+      { name: "黑神话悟空", price: 268, rating: 90, type: "动作", dev: "游戏科学" }
+    ];
+
+    const colors = ["red", "blue", "green"];
+
+    // 练习1：剩余参数
+    function sumAll(...nums) {
+      return nums.reduce((a, b) => a + b, 0);
+    }
+    console.log("sumAll(1, 2, 3) ->", sumAll(1, 2, 3));
+    console.log("sumAll(5, 10, 15, 20) ->", sumAll(5, 10, 15, 20));
+
+    // 练习2：箭头函数
+    const double = (x) => x * 2;
+    const isEven = (num) => num % 2 === 0;
+    console.log("double(5) ->", double(5));
+    console.log("isEven(4) ->", isEven(4));
+    console.log("isEven(7) ->", isEven(7));
+
+    // 练习3：数组解构
+    const [red, , green] = colors;  // 跳过 blue
+    console.log("red ->", red);
+    console.log("green ->", green);
+    const [first, ...rest] = colors;
+    console.log("rest ->", rest);
+
+    // 练习4：对象解构
+    const game = games[0];
+    const { name, rating } = game;
+    console.log("name ->", name);
+    console.log("rating ->", rating);
+    const { name: title } = game;
+    console.log("title ->", title);
+
+    // 练习5：forEach
+    console.log("所有游戏名字：");
+    games.forEach(item => console.log("  -", item.name));
+
+    // 练习6：map
+    const names = games.map(item => item.name);
+    console.log("names ->", names);
+    const info = games.map(item => `${item.name} - $${item.price}`);
+    console.log("info ->", info);
+
+    // 练习7：reduce 基础
+    const totalPrice = games.reduce((sum, item) => sum + item.price, 0);
+    console.log("总价格 ->", totalPrice);
+    const totalRating = games.reduce((sum, item) => sum + item.rating, 0);
+    const avgRating = totalRating / games.length;
+    console.log("平均好评率 ->", avgRating.toFixed(2));
+
+    // 练习8：reduce 分组统计
+    const grouped = games.reduce((acc, item) => {
+      acc[item.type] = (acc[item.type] || 0) + 1;
+      return acc;
+    }, {});
+    console.log("按类型分组统计 ->", grouped);
+
+    // 练习9：filter
+    const free = games.filter(item => item.price === 0);
+    console.log("免费游戏 ->", free.map(item => item.name));
+    const topRated = games.filter(item => item.rating >= 90);
+    console.log("好评率 >= 90 ->", topRated.map(item => item.name));
+
+    // 练习10：find
+    const found = games.find(item => item.name === "杀戮尖塔");
+    console.log("找到杀戮尖塔：", found);
+    const expensive = games.find(item => item.price > 100);
+    console.log("价格 > 100 的第一个 ->", expensive.name);
+
+    // 练习11：sort
+    const byPriceLow = [...games].sort((a, b) => a.price - b.price);
+    console.log("价格从低到高：", byPriceLow.map(item => `${item.name} $${item.price}`));
+    const byRatingHigh = [...games].sort((a, b) => b.rating - a.rating);
+    console.log("好评率从高到低：", byRatingHigh.map(item => `${item.name} ${item.rating}%`));
+
+    // 练习12：组合实战
+    const topFree = games
+      .filter(item => item.price === 0)
+      .sort((a, b) => b.rating - a.rating)
+      .slice(0, 3)
+      .map(item => item.name);
+    console.log("免费游戏 TOP3（按好评率）->", topFree);
+
+    const cheapGames = games
+      .filter(item => item.price < 100)
+      .sort((a, b) => b.price - a.price);
+    console.log("价格 < 100，按价格从高到低 ->",
+      cheapGames.map(item => `${item.name} $${item.price}`));
+
+    // 练习13：reduce 进阶：按类型计算平均好评率
+    const groupedAvg = games.reduce((acc, item) => {
+      if (!acc[item.type]) acc[item.type] = { sum: 0, count: 0 };
+      acc[item.type].sum += item.rating;
+      acc[item.type].count += 1;
+      return acc;
+    }, {});
+    const result2 = Object.keys(groupedAvg).map(type => ({
+      type,
+      avg: (groupedAvg[type].sum / groupedAvg[type].count).toFixed(2)
+    }));
+    console.log("各类型平均好评率：", result2);
+
+    // 练习14：综合筛选
+    const result3 = games
+      .filter(item => item.price > 100 && item.rating < 90)
+      .sort((a, b) => b.price - a.price);
+    console.log("结果 ->",
+      result3.map(item => `${item.name} $${item.price} ${item.rating}%`));
+  </script>
+</body>
+
+</html>
