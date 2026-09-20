@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <title>第3周练习合集</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 800px;
+      margin: 20px auto;
+      line-height: 1.6;
+    }
+
+    hr {
+      margin: 30px 0;
+      border: 1px dashed #ccc;
+    }
+
+    h2 {
+      background: #f0f0f0;
+      padding: 8px;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      background: gray;
+      margin: 10px 0;
+    }
+
+    .active {
+      color: red;
+      font-weight: bold;
+      font-size: 24px;
+    }
+
+    .highlight {
+      background: yellow;
+      padding: 10px;
+    }
+
+    button {
+      margin-right: 10px;
+      padding: 6px 12px;
+    }
+
+    input {
+      padding: 6px;
+      width: 300px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 8px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+    }
+
+    .empty {
+      color: #999;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>练习一:DOM基础</h2>
+  <h1 id="p1-title">原始标题</h1>
+  <p class="p1-desc">第一段描述</p>
+  <p class="p1-desc">第二段描述</p>
+  <div id="p1-box" class="box"></div>
+
+  <script>
+    // 练习1：把标题改成 "Steam游戏市场洞察平台"
+    const p1Title = document.querySelector('#p1-title');
+    p1Title.innerText = 'Steam游戏市场洞察平台';
+
+    // 练习2：把第一个 .p1-desc 的文字改成 "这是第一段"
+    const p1DescList = document.querySelectorAll('.p1-desc');
+    p1DescList[0].innerText = '这是第一段';
+
+    // 练习3：把 #p1-box 背景改成蓝色
+    const p1Box = document.querySelector('#p1-box');
+    p1Box.style.background = 'blue';
+
+    // 练习4：控制台打印标题文字
+    console.log('练习一标题内容：', p1Title.innerText);
+  </script>
+
+  <hr>
+
+  <h2>练习二:DOM属性与classList</h2>
+  <h1 id="p2-title">点我切换样式</h1>
+  <button id="p2-btn1">切换 active 类</button>
+  <button id="p2-btn2">切换 highlight 类</button>
+
+  <script>
+    const p2Title = document.querySelector('#p2-title');
+    const p2Btn1 = document.querySelector('#p2-btn1');
+    const p2Btn2 = document.querySelector('#p2-btn2');
+
+    // 练习2：btn1 切换 active 类
+    p2Btn1.addEventListener('click', function () {
+      p2Title.classList.toggle('active');
+    });
+
+    // 练习3：btn2 切换 highlight 类
+    p2Btn2.addEventListener('click', function () {
+      p2Title.classList.toggle('highlight');
+    });
+
+    // 练习4：设置自定义属性并读取
+    p2Title.setAttribute('data-id', '1001');
+    console.log('练习二 data-id:', p2Title.getAttribute('data-id'));
+  </script>
+
+  <hr>
+
+  <h2>练习三：事件监听</h2>
+  <button id="p3-btn">点击我</button>
+  <button id="p3-clearBtn">清空</button>
+  <p id="p3-output">这里显示点击结果</p>
+
+  <script>
+    const p3Btn = document.querySelector('#p3-btn');
+    const p3ClearBtn = document.querySelector('#p3-clearBtn');
+    const p3Output = document.querySelector('#p3-output');
+
+    let p3Count = 0;
+    p3Btn.addEventListener('click', function () {
+      p3Count++;
+      p3Output.innerText = '点击了' + p3Count + '次';
+    });
+
+    p3ClearBtn.addEventListener('click', function () {
+      p3Output.innerText = '';
+      p3Count = 0;
+    });
+  </script>
+
+  <hr>
+
+  <h2>练习四：输入事件</h2>
+  <input type="text" id="p4-search" placeholder="输入游戏名...">
+  <p id="p4-result">实时显示输入内容</p>
+
+  <script>
+    const p4Search = document.querySelector('#p4-search');
+    const p4Result = document.querySelector('#p4-result');
+
+    p4Search.addEventListener('input', function () {
+      if (p4Search.value.trim() === '') {
+        p4Result.innerText = '请输入内容';
+        p4Result.style.color = '';
+        return;
+      }
+
+      p4Result.innerText = p4Search.value;
+
+      if (p4Search.value.length > 10) {
+        p4Result.style.color = 'red';
+      } else {
+        p4Result.style.color = '';
+      }
+    });
+  </script>
+
+  <hr>
+  <h2>练习五：事件委托</h2>
+  <ul id="p5-gameList">
+    <li>CS:GO</li>
+    <li>赛博朋克2077</li>
+    <li>杀戮尖塔</li>
+    <li>黑神话悟空</li>
+  </ul>
+  <p id="p5-output">点击列表项，这里显示结果</p>
+
+  <script>
+    const p5GameList = document.querySelector('#p5-gameList');
+    const p5Output = document.querySelector('#p5-output');
+
+    p5GameList.addEventListener('click', function (e) {
+      if (e.target.tagName === 'LI') {
+        p5Output.innerText = '你点击了：' + e.target.innerText;
+
+        const items = p5GameList.querySelectorAll('li');
+        items.forEach(function (li) {
+          li.style.background = '';
+        });
+        e.target.style.background = 'red';
+      }
+    });
+  </script>
+
+  <hr>
+
+  <h2>练习六:fetch读取JSON</h2>
+  <p id="p6-output">等待加载...</p>
+
+  <script>
+    const p6Output = document.querySelector('#p6-output');
+
+    fetch('模拟data/games.JSON')
+      .then(res => res.json())
+      .then(games => {
+        console.log('练习六数据：', games);
+
+        p6Output.innerText = '共 ' + games.length + ' 款游戏';
+
+        const allNames = games.map(g => g.name).join('、');
+        p6Output.innerText += '\n所有游戏：' + allNames;
+
+        const topRated = games.filter(g => g.rating >= 90).map(g => g.name);
+        p6Output.innerText += '\n好评率≥90:' + topRated.join('、');
+      })
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <title>好评率TOP10 · Steam游戏市场洞察</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'PingFang SC', sans-serif;
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 0 20px;
+      background: #f5f7fa;
+      color: #333;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+      color: #1a2a4a;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 24px;
+    }
+
+    #search {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 15px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      outline: none;
+      transition: border 0.2s;
+    }
+
+    #search:focus {
+      border-color: #3b82f6;
+    }
+
+    #gameList {
+      list-style: none;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    #gameList li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 15px;
+    }
+
+    #gameList li:last-child {
+      border-bottom: none;
+    }
+
+    #gameList li:hover {
+      background: #f9fafb;
+    }
+
+    .rank {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      line-height: 28px;
+      text-align: center;
+      border-radius: 50%;
+      background: #e5e7eb;
+      color: #555;
+      font-size: 13px;
+      font-weight: 600;
+      margin-right: 12px;
+    }
+
+    .rank.top3 {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: #fff;
+    }
+
+    .name {
+      flex: 1;
+      color: #1f2937;
+    }
+
+    .rating {
+      font-weight: 600;
+      color: #3b82f6;
+    }
+
+    .empty {
+      text-align: center;
+      color: #999;
+      padding: 40px 0;
+      font-size: 14px;
+    }
+
+    .year {
+      font-size: 12px;
+      color: #aaa;
+      margin-left: 8px;
+      font-weight: 400;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>🏆 好评率 TOP10</h1>
+  <p class="subtitle">数据来源：Steam Games Dataset（示例数据）</p>
+
+  <input type="text" id="search" placeholder="搜索游戏名称...">
+  <ul id="gameList">
+    <li class="empty">加载中...</li>
+  </ul>
+
+  <!-- PapaParse：CSV 解析库（本地文件） -->
+  <script src="../js/papaparse.min.js"></script>
+
+  <script>
+    const search = document.querySelector('#search');
+    const gameList = document.querySelector('#gameList');
+
+    let top10 = [];
+
+    // 1. 新方式：fetch 读取 CSV 文本，用 PapaParse 解析
+    fetch('模拟data/games.CSV')
+      .then(res => res.text())
+      .then(text => {
+        const games = Papa.parse(text, {
+          header: true,
+          skipEmptyLines: true
+        }).data;
+
+        // 2. 好评率从高到低排序
+        top10 = games
+          .sort((a, b) => b.rating - a.rating)
+          .slice(0, 10);
+
+        // 3. 渲染列表
+        renderList(top10);
+      })
+      .catch(err => {
+        console.error(err);
+        gameList.innerHTML = '<li class="empty">加载失败，请用 Live Server 打开</li>';
+      });
+
+    // ===== 旧方式：fetch + res.json() 读 JSON（已换成 PapaParse，留作对比）=====
+    // fetch('模拟data/games.JSON')
+    //   .then(res => res.json())
+    //   .then(games => {
+    //     top10 = games
+    //       .sort((a, b) => b.rating - a.rating)
+    //       .slice(0, 10);
+    //     renderList(top10);
+    //   })
+    //   .catch(err => {
+    //     console.error(err);
+    //     gameList.innerHTML = '<li class="empty">加载失败，请用 Live Server 打开</li>';
+    //   });
+
+    // 渲染函数
+    function renderList(list) {
+      if (list.length === 0) {
+        gameList.innerHTML = '<li class="empty">没有找到匹配的游戏</li>';
+        return;
+      }
+
+      gameList.innerHTML = list.map((g, index) => {
+        const rankClass = index < 3 ? 'rank top3' : 'rank';
+        return `
+          <li>
+            <span class="${rankClass}">${index + 1}</span>
+            <span class="name">${g.name}<span class="year">${g.year}</span></span>
+            <span class="rating">${g.rating}%</span>
+          </li>
+        `;
+      }).join('');
+    }
+
+    // 4. 搜索框
+    search.addEventListener('input', function () {
+      const keyword = search.value.trim().toLowerCase();
+      const filtered = top10.filter(g =>
+        g.name.toLowerCase().includes(keyword)
+      );
+      renderList(filtered);
+    });
+  </script>
+
+</body>
+
+</html>
