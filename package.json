@@ -1,0 +1,13 @@
+{
+  "name": "steam-market-insight",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Steam 游戏市场洞察：前端 + Node 爬虫 + 迷你服务器，数据来自 Steam 官方接口",
+  "scripts": {
+    "crawl": "node scripts/crawler.js",
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

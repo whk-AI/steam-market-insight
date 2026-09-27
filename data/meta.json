@@ -1,0 +1,27 @@
+{
+  "fetchedAt": "2026-09-22T07:55:05.200Z",
+  "durationSec": 190,
+  "gameCount": 149,
+  "poolTotal": 158,
+  "successCount": 149,
+  "failCount": 9,
+  "failedAppids": [
+    1202520,
+    1390270,
+    3652840,
+    3691330,
+    4165890,
+    4861300,
+    4922560,
+    4978440,
+    5142990
+  ],
+  "sources": [
+    "top_sellers",
+    "new_releases",
+    "specials",
+    "热销",
+    "新品",
+    "特惠"
+  ]
+}

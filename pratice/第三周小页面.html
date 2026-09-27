@@ -120,7 +120,7 @@
 <body>
 
   <h1>🏆 好评率 TOP10</h1>
-  <p class="subtitle">数据来源：Steam Games Dataset（示例数据）</p>
+  <p class="subtitle" id="subtitle">数据来源：Steam 官方接口 · 加载中...</p>
 
   <input type="text" id="search" placeholder="搜索游戏名称...">
   <ul id="gameList">
@@ -133,44 +133,75 @@
   <script>
     const search = document.querySelector('#search');
     const gameList = document.querySelector('#gameList');
+    const subtitle = document.querySelector('#subtitle');
 
     let top10 = [];
 
-    // 1. 新方式：fetch 读取 CSV 文本，用 PapaParse 解析
-    fetch('模拟data/games.CSV')
-      .then(res => res.text())
-      .then(text => {
-        const games = Papa.parse(text, {
-          header: true,
-          skipEmptyLines: true
-        }).data;
+    // 好评率榜单门槛：至少 1000 条评价才算"有参考价值"
+    // （避免只有 1~2 条评价的冷门新游以 100% 好评霸榜）
+    const MIN_REVIEWS = 1000;
 
-        // 2. 好评率从高到低排序
+    // ================================================================
+    // 数据加载（V2：真实数据优先，本地文件兜底）
+    //   1) 走我们的服务器接口  /api/games        （活数据，推荐方式）
+    //   2) 回退读爬虫生成的    ../data/games.json
+    //      这样即使直接用 Live Server 打开页面，也能显示最新抓取的数据
+    // 旧方式（第三周学习内容）保留在文件底部注释里，模拟数据也在
+    //   pratice/模拟data/games.CSV 中未动，可随时对照学习。
+    // ================================================================
+    async function loadData() {
+      try {
+        const res = await fetch('/api/games');
+        if (res.ok) return await res.json();
+      } catch (e) { /* 没走我们的服务器，继续回退 */ }
+      const res = await fetch('../data/games.json');
+      if (!res.ok) throw new Error('数据源不可用');
+      return await res.json();
+    }
+
+    // 数据更新时间（抓不到也不影响列表展示）
+    async function loadMeta() {
+      for (const url of ['/api/meta', '../data/meta.json']) {
+        try {
+          const res = await fetch(url);
+          if (res.ok) return await res.json();
+        } catch (e) { /* 尝试下一个 */ }
+      }
+      return null;
+    }
+
+    // 防 XSS：把特殊字符转成 HTML 实体（游戏名是外部数据，必须转义）
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[c]));
+    }
+
+    // 启动：并行加载数据 + 元信息
+    (async function init() {
+      try {
+        const [games, meta] = await Promise.all([loadData(), loadMeta()]);
+
+        // 好评率从高到低排序，取前 10（要求达到最低评价数门槛）
         top10 = games
+          .filter(g => g.rating != null && g.total_reviews >= MIN_REVIEWS)
           .sort((a, b) => b.rating - a.rating)
           .slice(0, 10);
 
-        // 3. 渲染列表
         renderList(top10);
-      })
-      .catch(err => {
-        console.error(err);
-        gameList.innerHTML = '<li class="empty">加载失败，请用 Live Server 打开</li>';
-      });
 
-    // ===== 旧方式：fetch + res.json() 读 JSON（已换成 PapaParse，留作对比）=====
-    // fetch('模拟data/games.JSON')
-    //   .then(res => res.json())
-    //   .then(games => {
-    //     top10 = games
-    //       .sort((a, b) => b.rating - a.rating)
-    //       .slice(0, 10);
-    //     renderList(top10);
-    //   })
-    //   .catch(err => {
-    //     console.error(err);
-    //     gameList.innerHTML = '<li class="empty">加载失败，请用 Live Server 打开</li>';
-    //   });
+        const total = meta && meta.gameCount ? meta.gameCount : games.length;
+        if (meta && meta.fetchedAt) {
+          const t = new Date(meta.fetchedAt);
+          subtitle.textContent = `数据来源：Steam 官方接口 · 更新于 ${t.toLocaleString('zh-CN')} · 共 ${total} 款`;
+        } else {
+          subtitle.textContent = `数据来源：Steam 官方接口 · 共 ${total} 款`;
+        }
+      } catch (err) {
+        console.error(err);
+        gameList.innerHTML = '<li class="empty">加载失败：请先运行 npm run crawl 生成数据，再用 npm start 启动服务器访问本页</li>';
+      }
+    })();
 
     // 渲染函数
     function renderList(list) {
@@ -184,14 +215,14 @@
         return `
           <li>
             <span class="${rankClass}">${index + 1}</span>
-            <span class="name">${g.name}<span class="year">${g.year}</span></span>
-            <span class="rating">${g.rating}%</span>
+            <span class="name">${escapeHtml(g.name)}<span class="year">${g.year || ''}</span></span>
+            <span class="rating">${g.rating != null ? g.rating + '%' : '暂无'}</span>
           </li>
         `;
       }).join('');
     }
 
-    // 4. 搜索框
+    // 搜索框
     search.addEventListener('input', function () {
       const keyword = search.value.trim().toLowerCase();
       const filtered = top10.filter(g =>
@@ -199,6 +230,12 @@
       );
       renderList(filtered);
     });
+
+    // ===== 旧方式回顾（第三周学习内容，已由 V2 取代）=====
+    // 1. 新方式：fetch 读取 CSV 文本，用 PapaParse 解析
+    //    fetch('模拟data/games.CSV') -> Papa.parse(...) -> sort -> render
+    // 2. 更早的方式：fetch('模拟data/games.JSON') + res.json()
+    // 模拟数据仍保留在 pratice/模拟data/ 下，作为第三周学习素材
   </script>
 
 </body>

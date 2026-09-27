@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <title>第4周练习合集 · ECharts 可视化（真实数据版）</title>
+  <!-- 练习一：CDN 引入 ECharts -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'PingFang SC', sans-serif;
+      background: #0f1b2d;
+      color: #e8eef7;
+      line-height: 1.6;
+      padding: 24px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 26px;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #9fc3ef;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .subtitle code {
+      background: #1c2f4a;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .panel {
+      background: #16233a;
+      border-radius: 10px;
+      padding: 14px 14px 8px;
+    }
+
+    .panel h2 {
+      font-size: 15px;
+      color: #4da3ff;
+      margin-bottom: 8px;
+    }
+
+    .chart {
+      width: 100%;
+      height: 360px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>第4周 · ECharts 练习合集</h1>
+  <p class="subtitle">数据源 <code>../data/games.json</code></p>
+
+  <div class="grid">
+
+    <div class="panel">
+      <h2>练习一：柱状图 · 最贵游戏 TOP10</h2>
+      <div id="chart1" class="chart"></div>
+    </div>
+
+    <div class="panel">
+      <h2>练习二：柱状图 · 价格区间分布</h2>
+      <div id="chart2" class="chart"></div>
+    </div>
+
+    <div class="panel">
+      <h2>练习三：饼图 · 游戏类型分布（genres 拆分）</h2>
+      <div id="chart3" class="chart"></div>
+    </div>
+
+    <div class="panel">
+      <h2>练习四：折线图 · 年度发售数量</h2>
+      <div id="chart4" class="chart"></div>
+    </div>
+
+    <div class="panel">
+      <h2>练习五：双折线 · 年度发售数量 vs 平均好评率</h2>
+      <div id="chart5" class="chart"></div>
+    </div>
+
+    <div class="panel">
+      <h2>练习六：横向条形图 · 好评率 TOP10（全套配置美化）</h2>
+      <div id="chart6" class="chart"></div>
+    </div>
+
+  </div>
+
+  <script>
+    // 所有图表实例，练习七 resize 时统一自适应
+    const charts = [];
+
+    fetch('../data/games.json')
+      .then(res => res.json())
+      .then(games => {
+        console.log('读取到游戏数据：', games.length, '款');
+        console.log('字段示例：', games[0]);
+
+        drawChart1(games);
+        drawChart2(games);
+        drawChart3(games);
+        drawChart4(games);
+        drawChart5(games);
+        drawChart6(games);
+
+        // 练习七：窗口缩放时所有图表自适应
+        window.addEventListener('resize', function () {
+          charts.forEach(c => c.resize());
+        });
+      })
+
+    // 练习一：柱状图
+    function drawChart1(games) {
+      const top10 = games
+        .filter(g => g.price != null)
+        .sort((a, b) => b.price - a.price)
+        .slice(0, 10);
+
+      const myChart = echarts.init(document.getElementById('chart1'));
+      charts.push(myChart);
+
+      myChart.setOption({
+        title: { text: '最贵游戏 TOP10（元）', textStyle: { color: '#e8eef7', fontSize: 14 } },
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        grid: { left: 60, right: 20, top: 40, bottom: 90 },
+        xAxis: {
+          type: 'category',
+          data: top10.map(g => g.name),
+          axisLabel: { rotate: 35, color: '#9fc3ef', fontSize: 11 }
+        },
+        yAxis: { type: 'value', axisLabel: { color: '#9fc3ef' } },
+        series: [{
+          name: '价格',
+          type: 'bar',
+          data: top10.map(g => g.price),
+          itemStyle: { color: '#4da3ff', borderRadius: [4, 4, 0, 0] }
+        }]
+      });
+    }
+
+    // 练习二：柱状图，价格区间分布
+    function drawChart2(games) {
+      const buckets = [
+        { name: '免费', min: 0, max: 0, count: 0 },
+        { name: '1-50元', min: 1, max: 50, count: 0 },
+        { name: '51-100元', min: 51, max: 100, count: 0 },
+        { name: '101-200元', min: 101, max: 200, count: 0 },
+        { name: '200元以上', min: 201, max: Infinity, count: 0 }
+      ];
+      games.forEach(g => {
+        if (g.price == null) return;
+        const b = buckets.find(b => g.price >= b.min && g.price <= b.max);
+        if (b) b.count++;
+      });
+
+      const myChart = echarts.init(document.getElementById('chart2'));
+      charts.push(myChart);
+
+      myChart.setOption({
+        title: { text: '价格区间分布', textStyle: { color: '#e8eef7', fontSize: 14 } },
+        tooltip: { trigger: 'axis' },
+        grid: { left: 50, right: 20, top: 40, bottom: 40 },
+        xAxis: { type: 'category', data: buckets.map(b => b.name), axisLabel: { color: '#9fc3ef' } },
+        yAxis: { type: 'value', axisLabel: { color: '#9fc3ef' } },
+        series: [{
+          name: '游戏数',
+          type: 'bar',
+          data: buckets.map(b => b.count),
+          itemStyle: { color: '#36c98e', borderRadius: [4, 4, 0, 0] },
+          label: { show: true, position: 'top', color: '#e8eef7' }
+        }]
+      });
+    }
+
+    //练习三：饼图，类型分布
+    function drawChart3(games) {
+      // 把每款游戏的 genres 数组铺开，逐个类型计数
+      const typeCount = {};
+      games.forEach(g => {
+        (g.genres || []).forEach(t => {
+          t = t.trim();
+          if (t) typeCount[t] = (typeCount[t] || 0) + 1;
+        });
+      });
+      // 转成 [{name,value}] 并按数量降序
+      let pieData = Object.keys(typeCount).map(t => ({ name: t, value: typeCount[t] }));
+      pieData.sort((a, b) => b.value - a.value);
+
+      // 类型太多时只取前8，其余合并为"其他"
+      if (pieData.length > 8) {
+        const top = pieData.slice(0, 8);
+        const rest = pieData.slice(8);
+        top.push({ name: '其他', value: rest.reduce((s, x) => s + x.value, 0) });
+        pieData = top;
+      }
+
+      const myChart = echarts.init(document.getElementById('chart3'));
+      charts.push(myChart);
+
+      myChart.setOption({
+        title: { text: '游戏类型分布（多标签）', textStyle: { color: '#e8eef7', fontSize: 14 } },
+        tooltip: { trigger: 'item', formatter: '{b}：{c} 款（{d}%）' },
+        legend: { bottom: 0, textStyle: { color: '#9fc3ef' }, type: 'scroll' },
+        color: ['#4da3ff', '#36c98e', '#f7b84b', '#ff6b8a', '#9d7bff', '#5ad8e6', '#f78fb3', '#a0d911', '#7f8ea3'],
+        series: [{
+          type: 'pie',
+          radius: ['35%', '62%'],
+          center: ['50%', '44%'],
+          data: pieData,
+          label: { color: '#e8eef7', fontSize: 12 },
+          emphasis: { itemStyle: { shadowBlur: 12, shadowColor: 'rgba(0,0,0,0.5)' } }
+        }]
+      });
+    }
+
+    // 练习四：折线图，年度发售数量
+    function drawChart4(games) {
+      const yearCount = {};
+      games.forEach(g => {
+        const y = Number(g.year);
+        if (y >= 2000 && y <= 2026) yearCount[y] = (yearCount[y] || 0) + 1;
+      });
+      const years = Object.keys(yearCount).map(Number).sort((a, b) => a - b);
+
+      const myChart = echarts.init(document.getElementById('chart4'));
+      charts.push(myChart);
+
+      myChart.setOption({
+        title: { text: '年度发售数量', textStyle: { color: '#e8eef7', fontSize: 14 } },
+        tooltip: { trigger: 'axis' },
+        grid: { left: 50, right: 20, top: 40, bottom: 40 },
+        xAxis: { type: 'category', data: years, axisLabel: { color: '#9fc3ef' } },
+        yAxis: { type: 'value', axisLabel: { color: '#9fc3ef' } },
+        series: [{
+          name: '发售数量',
+          type: 'line',
+          data: years.map(y => yearCount[y]),
+          smooth: true,
+          areaStyle: {},
+          itemStyle: { color: '#f7b84b' },
+          lineStyle: { width: 3 }
+        }]
+      });
+    }
+
+    //练习五：双折线
+    function drawChart5(games) {
+      const yearStats = {};
+      games.forEach(g => {
+        const y = Number(g.year);
+        if (y < 2000 || y > 2026 || g.rating == null) return;
+        if (!yearStats[y]) yearStats[y] = { count: 0, sum: 0 };
+        yearStats[y].count++;
+        yearStats[y].sum += g.rating;
+      });
+      const years = Object.keys(yearStats).map(Number).sort((a, b) => a - b);
+      const counts = years.map(y => yearStats[y].count);
+      const avgs = years.map(y => +(yearStats[y].sum / yearStats[y].count).toFixed(1));
+
+      const myChart = echarts.init(document.getElementById('chart5'));
+      charts.push(myChart);
+
+      myChart.setOption({
+        title: { text: '年度发售数量 vs 平均好评率', textStyle: { color: '#e8eef7', fontSize: 14 } },
+        tooltip: { trigger: 'axis' },
+        legend: { top: 6, textStyle: { color: '#9fc3ef' } },
+        grid: { left: 50, right: 50, top: 45, bottom: 40 },
+        xAxis: { type: 'category', data: years, axisLabel: { color: '#9fc3ef' } },
+        yAxis: [
+          { type: 'value', name: '数量', nameTextStyle: { color: '#9fc3ef' }, axisLabel: { color: '#9fc3ef' } },
+          { type: 'value', name: '好评率', min: 50, max: 100, nameTextStyle: { color: '#9fc3ef' }, axisLabel: { color: '#9fc3ef' }, splitLine: { show: false } }
+        ],
+        series: [
+          {
+            name: '发售数量',
+            type: 'line',
+            data: counts,
+            smooth: true,
+            itemStyle: { color: '#f7b84b' }
+          },
+          {
+            name: '平均好评率',
+            type: 'line',
+            yAxisIndex: 1,
+            data: avgs,
+            smooth: true,
+            itemStyle: { color: '#ff6b8a' }
+          }
+        ]
+      });
+    }
+
+    //练习六：横向条形图，TOP10 好评率
+    function drawChart6(games) {
+      const top10 = games
+        .filter(g => g.rating != null && g.total_reviews >= 100)
+        .sort((a, b) => b.rating - a.rating)
+        .slice(0, 10);
+
+      const myChart = echarts.init(document.getElementById('chart6'));
+      charts.push(myChart);
+
+      myChart.setOption({
+        backgroundColor: '#1a2740',
+        title: {
+          text: '好评率 TOP10',
+          subtext: '口径：total_reviews ≥ 100',
+          left: 'center',
+          textStyle: { color: '#e8eef7', fontSize: 15 },
+          subtextStyle: { color: '#7f8ea3', fontSize: 11 }
+        },
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        legend: { show: false },
+        grid: { left: 110, right: 60, top: 55, bottom: 20 },
+        color: ['#36c98e'],
+        xAxis: { type: 'value', max: 100, axisLabel: { color: '#9fc3ef' } },
+        yAxis: {
+          type: 'category',
+          data: top10.map(g => g.name),
+          axisLabel: { color: '#9fc3ef', fontSize: 11 }
+        },
+        series: [{
+          name: '好评率',
+          type: 'bar',
+          data: top10.map(g => g.rating),
+          barWidth: 14,
+          itemStyle: { borderRadius: [0, 7, 7, 0] },
+          label: {
+            show: true,
+            position: 'right',
+            color: '#e8eef7',
+            formatter: p => p.value + '%'
+          }
+        }]
+      });
+    }
+  </script>
+
+</body>
+
+</html>
