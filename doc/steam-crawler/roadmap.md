@@ -25,7 +25,7 @@
 | 爬虫脚本 `scripts/crawler.js`（Steam 官方接口） | 不接 Kaggle 静态数据集（仅参考字段名） |
 | 真实数据文件 `data/games.json` + `data/meta.json` | 不做账号系统、不做数据库（文件即库） |
 | 迷你服务器 `server.js`（静态托管 + `/api/games`） | 不部署公网服务器（本地运行即可） |
-| 现有练习页数据源切换为真实数据 | 不改动模拟数据 `pratice/模拟data/`（保留为第三周数据） |
+| 现有练习页数据源切换为真实数据 | 不改动模拟数据 `practice/模拟data/`（保留为第三周数据） |
 | 每日定时更新（Windows 任务计划，需用户确认后配置） | 不做实时轮询（每次访问现查接口会被限流） |
 
 ### 1.4 数据字段口径（对齐现有模拟数据 + 扩展）
@@ -72,7 +72,7 @@ F:\steam-market-insight\
 ├── index.html                  （已有，后续作为项目首页）
 ├── CSS\CSS1.css                （已有，不动）
 ├── js\papaparse.min.js         （已有，不动）
-├── pratice\                    （已有，全部不动）
+├── practice\                   （已有，全部不动）
 │   ├── 模拟data\games.JSON / games.CSV   ← 保留，第三周数据
 │   ├── 第一周基础语法.html
 │   ├── 第二周数组高阶用法练习.html

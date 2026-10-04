@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <title>第5周练习合集</title>
+  <script src="../js/echarts.min.js"></script>
+  <script src="../js/echarts-wordcloud.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'PingFang SC', sans-serif;
+      background: #0d1626;
+      color: #e8eef7;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .sub {
+      text-align: center;
+      color: #7f8ea3;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .sub code {
+      background: #1c2f4a;
+      padding: 2px 8px;
+      border-radius: 4px;
+      color: #5ad8e6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #16233a;
+      border: 1px solid #233451;
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .card h2 {
+      font-size: 14px;
+      color: #4da3ff;
+      font-weight: normal;
+      margin-bottom: 6px;
+    }
+
+    .card .tip {
+      font-size: 11px;
+      color: #7f8ea3;
+      margin-bottom: 4px;
+    }
+
+    .chart {
+      width: 100%;
+      height: 340px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>第5周 · ECharts 进阶练习</h1>
+  <p class="sub">数据源 <code>../data/games.json</code> · 散点图 / 雷达图 / 热力图 / 词云图</p>
+
+  <div class="grid">
+
+    <div class="card">
+      <h2>练习一：散点图 · 价格 vs 好评率</h2>
+      <p class="tip">x=price, y=rating, 点大小=评价数（log缩放）</p>
+      <div id="c1" class="chart"></div>
+    </div>
+
+    <div class="card">
+      <h2>练习二：雷达图 · 三大热门类型五维对比</h2>
+      <p class="tip">动作 / 角色扮演 / 独立，各维度标准化到 0-100</p>
+      <div id="c2" class="chart"></div>
+    </div>
+
+    <div class="card">
+      <h2>练习三：热力图 · 类型 × 价格区间</h2>
+      <p class="tip">visualMap 连续视觉映射，格子颜色=游戏数</p>
+      <div id="c3" class="chart"></div>
+    </div>
+
+    <div class="card">
+      <h2>练习四：词云图 · 游戏类型标签</h2>
+      <p class="tip">echarts-wordcloud 插件，词大小=出现次数</p>
+      <div id="c4" class="chart"></div>
+    </div>
+
+  </div>
+
+  <script>
+    const charts = [];
+
+    fetch('../data/games.json')
+      .then(res => res.json())
+      .then(games => {
+        console.log('第5周练习，共', games.length, '款游戏');
+
+        drawScatter(games);       // 练习一
+        drawRadar(games);         // 练习二
+        drawHeatmap(games);       // 练习三
+        drawWordcloud(games);     // 练习四
+
+        // 全图自适应
+        window.addEventListener('resize', () => charts.forEach(c => c.resize()));
+      })
+      .catch(err => {
+        document.body.innerHTML += '<p style="color:#ff6b6b;text-align:center">数据加载失败，请用 Live Server：' + err + '</p>';
+      });
+
+    // ---------- 练习一：散点图 ----------
+    function drawScatter(games) {
+      // 每款游戏一个点：[price, rating, total_reviews, name]
+      const data = games
+        .filter(g => g.price != null && g.rating != null)
+        .map(g => [g.price, g.rating, g.total_reviews || 0, g.name]);
+
+      const c = echarts.init(document.getElementById('c1'));
+      charts.push(c);
+      c.setOption({
+        tooltip: {
+          formatter: p => `${p.data[3]}<br>价格：${p.data[0]}元<br>好评率：${p.data[1]}%<br>评价数：${p.data[2]}`
+        },
+        grid: { left: 50, right: 20, top: 20, bottom: 40 },
+        xAxis: { name: '价格(元)', nameTextStyle: { color: '#9fc3ef' }, axisLabel: { color: '#9fc3ef' } },
+        yAxis: { name: '好评率(%)', min: 40, max: 100, nameTextStyle: { color: '#9fc3ef' }, axisLabel: { color: '#9fc3ef' } },
+        series: [{
+          type: 'scatter',
+          data: data,
+          // 评价数差几个数量级，用 log10 缩放点大小（6~22px）
+          symbolSize: d => Math.max(6, Math.min(22, Math.log10(d[2] + 1) * 5)),
+          itemStyle: { color: '#4da3ff', opacity: 0.7 }
+        }]
+      });
+    }
+
+    // ---------- 练习二：雷达图 ----------
+    function drawRadar(games) {
+      // 选 3 个热门类型：动作 / 角色扮演 / 独立
+      const targets = ['动作', '角色扮演', '独立'];
+      // 每个类型统计 5 维指标
+      const stats = targets.map(t => {
+        const list = games.filter(g => (g.genres || []).includes(t));
+        const n = list.length || 1;
+        return {
+          name: t + '(' + n + '款)',
+          // 平均价格（除以350元最大价*100）
+          price: Math.round(list.reduce((s, g) => s + (g.price || 0), 0) / n / 350 * 100),
+          // 平均好评率（本身0-100）
+          rating: +(list.reduce((s, g) => s + (g.rating || 0), 0) / n).toFixed(1),
+          // 平均评价数（log缩放：log10(百万)≈6 → 映射到0-100）
+          reviews: Math.round(Math.log10(list.reduce((s, g) => s + (g.total_reviews || 0), 0) / n + 1) / 7 * 100),
+          // 免费率（免费游戏占比*100）
+          free: Math.round(list.filter(g => g.price === 0).length / n * 100),
+          // 平均折扣力度
+          discount: Math.round(list.reduce((s, g) => s + (g.discount_percent || 0), 0) / n)
+        };
+      });
+      console.log('雷达图数据：', stats);
+
+      const c = echarts.init(document.getElementById('c2'));
+      charts.push(c);
+      c.setOption({
+        tooltip: {},
+        legend: { bottom: 0, textStyle: { color: '#9fc3ef' } },
+        color: ['#ff6b8a', '#f7b84b', '#36c98e'],
+        radar: {
+          indicator: [
+            { name: '平均价格', max: 100 },
+            { name: '好评率', max: 100 },
+            { name: '平均评价数', max: 100 },
+            { name: '免费率', max: 100 },
+            { name: '平均折扣', max: 100 }
+          ],
+          axisName: { color: '#9fc3ef' },
+          splitArea: { areaStyle: { color: ['#16233a', '#1a2740'] } }
+        },
+        series: [{
+          type: 'radar',
+          data: stats.map(s => ({
+            name: s.name,
+            value: [s.price, s.rating, s.reviews, s.free, s.discount]
+          }))
+        }]
+      });
+    }
+
+    // ---------- 练习三：热力图 ----------
+    function drawHeatmap(games) {
+      // 类型（取前8）× 价格分桶（5桶）
+      const priceBuckets = ['免费', '1-50', '51-100', '101-200', '200+'];
+      const bucketOf = p => p === 0 ? 0 : p <= 50 ? 1 : p <= 100 ? 2 : p <= 200 ? 3 : 4;
+
+      // 先统计所有类型频次，取前8
+      const typeCount = {};
+      games.forEach(g => (g.genres || []).forEach(t => { t = t.trim(); if (t) typeCount[t] = (typeCount[t] || 0) + 1; }));
+      const topTypes = Object.keys(typeCount).sort((a, b) => typeCount[b] - typeCount[a]).slice(0, 8);
+
+      // 构建热力图数据：[xIndex(桶), yIndex(类型), value(数量)]
+      const data = [];
+      let maxVal = 0;
+      topTypes.forEach((t, yi) => {
+        priceBuckets.forEach((b, xi) => {
+          const cnt = games.filter(g => (g.genres || []).includes(t) && bucketOf(g.price) === xi).length;
+          data.push([xi, yi, cnt]);
+          if (cnt > maxVal) maxVal = cnt;
+        });
+      });
+
+      const c = echarts.init(document.getElementById('c3'));
+      charts.push(c);
+      c.setOption({
+        tooltip: {
+          formatter: p => `${topTypes[p.data[1]]} / ${priceBuckets[p.data[0]]}元：${p.data[2]} 款`
+        },
+        grid: { left: 70, right: 20, top: 10, bottom: 60 },
+        xAxis: { type: 'category', data: priceBuckets, axisLabel: { color: '#9fc3ef' } },
+        yAxis: { type: 'category', data: topTypes, axisLabel: { color: '#9fc3ef' } },
+        visualMap: {
+          min: 0, max: maxVal,
+          calculable: true,
+          orient: 'horizontal',
+          left: 'center', bottom: 0,
+          textStyle: { color: '#9fc3ef' },
+          inRange: { color: ['#16233a', '#1c4a6e', '#4da3ff', '#f7b84b'] }
+        },
+        series: [{
+          type: 'heatmap',
+          data: data,
+          label: { show: true, color: '#e8eef7' }
+        }]
+      });
+    }
+
+    // ---------- 练习四：词云图 ----------
+    function drawWordcloud(games) {
+      const freq = {};
+      games.forEach(g => (g.genres || []).forEach(t => { t = t.trim(); if (t) freq[t] = (freq[t] || 0) + 1; }));
+      const data = Object.keys(freq).map(t => ({ name: t, value: freq[t] }));
+      console.log('词云数据：', data);
+
+      const c = echarts.init(document.getElementById('c4'));
+      charts.push(c);
+
+      // 检测词云插件是否注册成功：echarts 内部会缓存已注册的 series
+      // 如果插件没加载，wordCloud 类型不存在，ECharts 会静默不渲染
+      const pluginLoaded = !!echarts.getMap || (() => {
+        // 试创建一个临时实例探测
+        const probe = echarts.init(document.createElement('div'));
+        probe.setOption({ series: [{ type: 'wordCloud', data: [] }] });
+        const ok = !probe.getOption().series[0].notExists;
+        probe.dispose();
+        return ok;
+      })();
+
+      if (!pluginLoaded) {
+        console.warn('词云插件未加载，降级为饼图显示');
+        c.setOption({
+          title: { text: '词云插件未加载，降级为饼图', left: 'center', textStyle: { color: '#ff6b6b', fontSize: 13 } },
+          tooltip: { trigger: 'item', formatter: '{b}：{c} 款（{d}%）' },
+          legend: { bottom: 0, textStyle: { color: '#9fc3ef' } },
+          series: [{ type: 'pie', radius: ['30%', '60%'], center: ['50%', '50%'], data: data, label: { color: '#e8eef7' } }]
+        });
+        return;
+      }
+
+      c.setOption({
+        tooltip: { formatter: p => `${p.name}：${p.value} 款` },
+        series: [{
+          type: 'wordCloud',
+          shape: 'circle',
+          sizeRange: [12, 46],
+          rotationRange: [-30, 30],
+          gridSize: 6,
+          textStyle: {
+            fontFamily: 'sans-serif',
+            color: () => ['#4da3ff', '#36c98e', '#f7b84b', '#ff6b8a', '#9d7bff', '#5ad8e6'][Math.floor(Math.random() * 6)]
+          },
+          emphasis: { textStyle: { textShadowBlur: 10, textShadowColor: '#4da3ff' } },
+          data: data
+        }]
+      });
+    }
+  </script>
+
+</body>
+
+</html>

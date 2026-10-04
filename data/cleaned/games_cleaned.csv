@@ -1,0 +1,108 @@
+﻿appid,name,price,original_price,final_price,discount_percent,currency,rating,positive,total_reviews,type,genres,year,release_date,url
+570,Dota 2,0.0,0.0,0.0,0.0,,,,,策略,"['策略', '免费开玩', '动作']",2013.0,2013-07-09,https://store.steampowered.com/app/570
+730,Counter-Strike 2,0.0,0.0,0.0,0.0,,,,,惊悚,"['惊悚', '免费开玩']",,,https://store.steampowered.com/app/730
+230410,Warframe,0.0,0.0,0.0,0.0,,,,,免费开玩,"['免费开玩', '动作', '角色扮演']",2013.0,2013-03-25,https://store.steampowered.com/app/230410
+236390,War Thunder,0.0,0.0,0.0,0.0,,,,,模拟,"['模拟', '大型多人在线', '免费开玩', '动作']",2013.0,2013-08-15,https://store.steampowered.com/app/236390
+252490,Rust,268.0,268.0,268.0,0.0,USD,,,,大型多人在线,"['大型多人在线', '独立', '冒险', '动作', '角色扮演']",2018.0,2018-02-08,https://store.steampowered.com/app/252490
+275850,No Man's Sky,161.0,402.0,161.0,60.0,USD,,,,冒险,"['冒险', '动作']",2016.0,2016-08-12,https://store.steampowered.com/app/275850
+294100,RimWorld,235.0,235.0,235.0,0.0,USD,,,,策略,"['策略', '模拟', '独立']",2018.0,2018-10-17,https://store.steampowered.com/app/294100
+322330,Don't Starve Together,101.0,101.0,101.0,0.0,USD,,,,策略,"['策略', '模拟', '独立', '冒险', '动作', '角色扮演']",2016.0,2016-04-21,https://store.steampowered.com/app/322330
+359550,Tom Clancy's Rainbow Six® Siege X,0.0,0.0,0.0,0.0,,,,,免费开玩,"['免费开玩', '动作']",2015.0,2015-12-01,https://store.steampowered.com/app/359550
+381210,Dead by Daylight,134.0,134.0,134.0,0.0,USD,,,,动作,['动作'],2016.0,2016-06-14,https://store.steampowered.com/app/381210
+400750,Call to Arms - Gates of Hell: Ostfront,59.0,235.0,59.0,75.0,USD,,,,策略,"['策略', '模拟', '动作']",2021.0,2021-06-11,https://store.steampowered.com/app/400750
+413150,Stardew Valley,48.0,48.0,48.0,0.0,CNY,,,,模拟,"['模拟', '独立', '角色扮演']",2016.0,2016-02-26,https://store.steampowered.com/app/413150
+431960,Wallpaper Engine,34.0,34.0,34.0,0.0,PLN,,,,独立,"['独立', '休闲', '动画与建模', '设计与插画', '照片编辑', '实用工具']",2018.0,2018-11-16,https://store.steampowered.com/app/431960
+447040,Watch_Dogs® 2,335.0,335.0,335.0,0.0,USD,,,,冒险,"['冒险', '动作']",2016.0,2016-11-28,https://store.steampowered.com/app/447040
+477160,Human Fall Flat,134.0,134.0,134.0,0.0,USD,,,,模拟,"['模拟', '独立', '休闲', '冒险']",2016.0,2016-07-22,https://store.steampowered.com/app/477160
+518790,theHunter: Call of the Wild™,134.0,134.0,134.0,0.0,USD,,,,模拟,"['模拟', '体育', '冒险']",2017.0,2017-02-16,https://store.steampowered.com/app/518790
+534380,Dying Light 2 Stay Human: Reloaded Edition,133.0,404.0,133.0,67.0,NOK,,,,冒险,"['冒险', '角色扮演', '动作']",,,https://store.steampowered.com/app/534380
+544810,KARDS - The WW2 Card Game,0.0,0.0,0.0,0.0,,,,,策略,"['策略', '独立', '休闲', '免费开玩']",2020.0,2020-04-15,https://store.steampowered.com/app/544810
+552990,World of Warships,0.0,0.0,0.0,0.0,,,,,策略,"['策略', '模拟', '大型多人在线', '免费开玩', '动作']",2017.0,2017-11-15,https://store.steampowered.com/app/552990
+553850,HELLDIVERS™ 2,268.0,268.0,268.0,0.0,USD,,,,动作,['动作'],2024.0,2024-02-08,https://store.steampowered.com/app/553850
+578080,PUBG: BATTLEGROUNDS,0.0,0.0,0.0,0.0,,,,,大型多人在线,"['大型多人在线', '免费开玩', '冒险', '动作']",2017.0,2017-12-21,https://store.steampowered.com/app/578080
+582010,Monster Hunter: World,201.0,201.0,201.0,0.0,USD,,,,动作,['动作'],2018.0,2018-08-08,https://store.steampowered.com/app/582010
+582160,Assassin's Creed® Origins,236.0,236.0,236.0,0.0,PHP,,,,冒险,"['冒险', '动作', '角色扮演']",2017.0,2017-10-26,https://store.steampowered.com/app/582160
+594650,Hunt: Showdown 1896,188.0,188.0,188.0,0.0,CAD,,,,动作,['动作'],2019.0,2019-08-27,https://store.steampowered.com/app/594650
+648800,Raft,134.0,134.0,134.0,0.0,USD,,,,模拟,"['模拟', '独立', '冒险']",2022.0,2022-06-20,https://store.steampowered.com/app/648800
+728880,Overcooked! 2,136.0,136.0,136.0,0.0,CAD,,,,独立,"['独立', '休闲', '动作']",2018.0,2018-08-07,https://store.steampowered.com/app/728880
+812140,Assassin's Creed® Odyssey,60.0,402.0,60.0,85.0,USD,,,,冒险,"['冒险', '动作', '角色扮演']",2018.0,2018-10-05,https://store.steampowered.com/app/812140
+813780,Age of Empires II: Definitive Edition,235.0,235.0,235.0,0.0,USD,,,,策略,['策略'],2019.0,2019-11-14,https://store.steampowered.com/app/813780
+815370,Green Hell,47.0,188.0,47.0,75.0,USD,,,,模拟,"['模拟', '独立', '冒险', '动作']",2019.0,2019-09-05,https://store.steampowered.com/app/815370
+872410,ROMANCE OF THE THREE KINGDOMS XIV,402.0,402.0,402.0,0.0,USD,,,,模拟,['模拟'],2020.0,2020-01-15,https://store.steampowered.com/app/872410
+892970,Valheim,134.0,134.0,134.0,0.0,USD,,,,独立,"['独立', '抢先体验', '冒险', '动作', '角色扮演']",2021.0,2021-02-02,https://store.steampowered.com/app/892970
+949230,Cities: Skylines II,335.0,335.0,335.0,0.0,USD,,,,模拟,['模拟'],2023.0,2023-10-24,https://store.steampowered.com/app/949230
+1086940,Baldur's Gate 3,302.0,402.0,302.0,25.0,USD,,,,策略,"['策略', '冒险', '角色扮演']",2023.0,2023-08-03,https://store.steampowered.com/app/1086940
+1091500,Cyberpunk 2077,402.0,402.0,402.0,0.0,USD,,,,角色扮演,['角色扮演'],2020.0,2020-12-09,https://store.steampowered.com/app/1091500
+1142710,Total War: WARHAMMER III,71.0,238.0,71.0,70.0,PHP,,,,策略,"['策略', '动作']",2022.0,2022-02-16,https://store.steampowered.com/app/1142710
+1172470,Apex Legends™,0.0,0.0,0.0,0.0,,,,,免费开玩,"['免费开玩', '冒险', '动作']",2020.0,2020-11-04,https://store.steampowered.com/app/1172470
+1172620,Sea of Thieves: 2025 Edition,268.0,268.0,268.0,0.0,USD,,,,冒险,"['冒险', '动作']",2020.0,2020-06-03,https://store.steampowered.com/app/1172620
+1174180,Red Dead Redemption 2,94.0,376.0,94.0,75.0,CAD,,,,冒险,"['冒险', '动作']",2019.0,2019-12-05,https://store.steampowered.com/app/1174180
+1203220,NARAKA: BLADEPOINT,0.0,0.0,0.0,0.0,,,,,大型多人在线,"['大型多人在线', '冒险', '动作']",2021.0,2021-08-11,https://store.steampowered.com/app/1203220
+1222140,Detroit: Become Human,268.0,268.0,268.0,0.0,USD,,,,冒险,"['冒险', '动作']",2020.0,2020-06-18,https://store.steampowered.com/app/1222140
+1237970,Titanfall® 2,142.0,142.0,142.0,0.0,IDR,,,,动作,['动作'],2020.0,2020-06-18,https://store.steampowered.com/app/1237970
+1238810,Battlefield™ V,335.0,335.0,335.0,0.0,USD,,,,动作,['动作'],2020.0,2020-10-22,https://store.steampowered.com/app/1238810
+1245620,ELDEN RING,402.0,402.0,402.0,0.0,USD,,,,动作,"['动作', '角色扮演']",2022.0,2022-02-24,https://store.steampowered.com/app/1245620
+1260320,Party Animals,134.0,134.0,134.0,0.0,USD,,,,独立,"['独立', '休闲', '动作']",2023.0,2023-09-20,https://store.steampowered.com/app/1260320
+1282100,REMNANT II®,335.0,335.0,335.0,0.0,USD,,,,冒险,"['冒险', '动作', '角色扮演']",2023.0,2023-07-25,https://store.steampowered.com/app/1282100
+1285190,Borderlands 4,469.0,469.0,469.0,0.0,USD,,,,冒险,"['冒险', '动作', '角色扮演']",2025.0,2025-09-12,https://store.steampowered.com/app/1285190
+1289670,EA Play,40.0,40.0,40.0,0.0,USD,,,,未知,[],2020.0,2020-08-31,https://store.steampowered.com/app/1289670
+1352890,Seekers Alliance: Hero's Journey,,,,,,,,,策略,"['策略', '独立', '角色扮演']",,,https://store.steampowered.com/app/1352890
+1364780,Street Fighter™ 6,268.0,268.0,268.0,0.0,USD,,,,冒险,"['冒险', '动作']",2023.0,2023-06-01,https://store.steampowered.com/app/1364780
+1426210,It Takes Two,268.0,268.0,268.0,0.0,USD,,,,独立,"['独立', '冒险', '动作']",2021.0,2021-03-25,https://store.steampowered.com/app/1426210
+1449850,Yu-Gi-Oh! Master Duel,0.0,0.0,0.0,0.0,,,,,策略,"['策略', '模拟', '免费开玩']",2022.0,2022-01-18,https://store.steampowered.com/app/1449850
+1462040,FINAL FANTASY VII REMAKE INTERGRADE,252.0,252.0,252.0,0.0,CAD,,,,冒险,"['冒险', '动作', '角色扮演']",2022.0,2022-06-17,https://store.steampowered.com/app/1462040
+1473480,A.V.A Global,0.0,0.0,0.0,0.0,,,,,大型多人在线,"['大型多人在线', '免费开玩', '动作']",2022.0,2022-08-23,https://store.steampowered.com/app/1473480
+1478500,Big Walk,,,,,,,,,冒险,['冒险'],,,https://store.steampowered.com/app/1478500
+1623730,Palworld,201.0,201.0,201.0,0.0,USD,,,,独立,"['独立', '抢先体验', '冒险', '动作', '角色扮演']",2024.0,2024-01-18,https://store.steampowered.com/app/1623730
+1757300,Jump Space,,,,,,,,,独立,"['独立', '抢先体验', '冒险', '动作']",2025.0,2025-09-19,https://store.steampowered.com/app/1757300
+1876890,Wandering Sword,134.0,168.0,134.0,20.0,USD,,,,策略,"['策略', '独立', '冒险', '角色扮演']",2023.0,2023-09-14,https://store.steampowered.com/app/1876890
+1903340,Clair Obscur: Expedition 33,294.0,326.0,294.0,10.0,AUD,,,,动作,"['动作', '角色扮演']",2025.0,2025-04-24,https://store.steampowered.com/app/1903340
+1943950,Escape the Backrooms,67.0,67.0,67.0,0.0,USD,,,,独立,"['独立', '抢先体验']",2022.0,2022-08-11,https://store.steampowered.com/app/1943950
+1971650,OCTOPATH TRAVELER II,402.0,402.0,402.0,0.0,USD,,,,角色扮演,['角色扮演'],2023.0,2023-02-24,https://store.steampowered.com/app/1971650
+1973530,Limbus Company,0.0,0.0,0.0,0.0,,,,,策略,"['策略', '动作', '角色扮演']",2023.0,2023-02-26,https://store.steampowered.com/app/1973530
+2001120,Split Fiction,355.0,355.0,355.0,0.0,GBP,,,,冒险,"['冒险', '动作']",2025.0,2025-03-06,https://store.steampowered.com/app/2001120
+2050650,Resident Evil 4,268.0,268.0,268.0,0.0,USD,,,,冒险,"['冒险', '动作']",2023.0,2023-03-23,https://store.steampowered.com/app/2050650
+2073620,Arena Breakout: Infinite,0.0,0.0,0.0,0.0,,,,,策略,"['策略', '大型多人在线', '免费开玩', '冒险', '动作', '角色扮演']",2025.0,2025-09-15,https://store.steampowered.com/app/2073620
+2139460,Once Human,0.0,0.0,0.0,0.0,,,,,策略,"['策略', '模拟', '免费开玩', '冒险', '动作', '角色扮演']",2024.0,2024-07-09,https://store.steampowered.com/app/2139460
+2140700,SO BELOW,127.0,127.0,127.0,0.0,USD,,,,独立,"['独立', '抢先体验', '冒险', '动作']",2022.0,2022-10-25,https://store.steampowered.com/app/2140700
+2246340,Monster Hunter Wilds,469.0,469.0,469.0,0.0,USD,,,,冒险,"['冒险', '动作', '角色扮演']",2025.0,2025-02-27,https://store.steampowered.com/app/2246340
+2290180,Riders Republic,268.0,268.0,268.0,0.0,USD,,,,大型多人在线,"['大型多人在线', '体育']",2023.0,2023-06-08,https://store.steampowered.com/app/2290180
+2344520,Diablo® IV,335.0,335.0,335.0,0.0,USD,,,,动作,"['动作', '角色扮演']",2023.0,2023-10-17,https://store.steampowered.com/app/2344520
+2358720,Black Myth: Wukong,402.0,402.0,402.0,0.0,USD,,,,冒险,"['冒险', '动作', '角色扮演']",2024.0,2024-08-19,https://store.steampowered.com/app/2358720
+2369390,Far Cry® 6,402.0,402.0,402.0,0.0,USD,,,,冒险,"['冒险', '动作']",2023.0,2023-05-11,https://store.steampowered.com/app/2369390
+2384580,DYNASTY WARRIORS: ORIGINS,469.0,469.0,469.0,0.0,USD,,,,策略,"['策略', '动作', '角色扮演']",2025.0,2025-01-16,https://store.steampowered.com/app/2384580
+2402680,Dimraeth,,,,,,,,,冒险,"['冒险', '角色扮演']",,,https://store.steampowered.com/app/2402680
+2406770,Bodycam,223.0,223.0,223.0,0.0,USD,,,,策略,"['策略', '模拟', '大型多人在线', '独立', '抢先体验', '动作']",2024.0,2024-06-07,https://store.steampowered.com/app/2406770
+2444750,Shape of Dreams,,,,,,,,,独立,"['独立', '冒险', '动作', '角色扮演']",2025.0,2025-09-10,https://store.steampowered.com/app/2444750
+2507950,Delta Force,0.0,0.0,0.0,0.0,,,,,大型多人在线,"['大型多人在线', '免费开玩', '冒险', '动作']",2024.0,2024-12-04,https://store.steampowered.com/app/2507950
+2537590,Microsoft Flight Simulator 2024,469.0,469.0,469.0,0.0,USD,,,,模拟,['模拟'],2024.0,2024-11-19,https://store.steampowered.com/app/2537590
+2552430,KINGDOM HEARTS -HD 1.5+2.5 ReMIX-,306.0,306.0,306.0,0.0,CAD,,,,冒险,"['冒险', '动作', '角色扮演']",2024.0,2024-06-13,https://store.steampowered.com/app/2552430
+2636430,Soggy Beans,,,,,,,,,模拟,"['模拟', '独立', '休闲']",,,https://store.steampowered.com/app/2636430
+2638890,Onimusha: Way of the Sword,,,,,,,,,动作,['动作'],,,https://store.steampowered.com/app/2638890
+2767030,Marvel Rivals,0.0,0.0,0.0,0.0,,,,,免费开玩,"['免费开玩', '动作']",2024.0,2024-12-05,https://store.steampowered.com/app/2767030
+2868840,Slay the Spire 2,,,,,,,,,策略,"['策略', '独立']",,,https://store.steampowered.com/app/2868840
+2879840,Escape Simulator 2,,,,,,,,,模拟,"['模拟', '独立', '休闲', '冒险']",2025.0,2025-10-21,https://store.steampowered.com/app/2879840
+2909400,FINAL FANTASY VII REBIRTH,469.0,469.0,469.0,0.0,USD,,,,冒险,"['冒险', '动作', '角色扮演']",2025.0,2025-01-23,https://store.steampowered.com/app/2909400
+3008130,Dying Light: The Beast,402.0,402.0,402.0,0.0,USD,,,,冒险,"['冒险', '动作', '角色扮演']",2025.0,2025-09-18,https://store.steampowered.com/app/3008130
+3008700,Eagle Knight Paradox,,,,,,,,,模拟,"['模拟', '独立', '冒险', '动作']",,,https://store.steampowered.com/app/3008700
+3077650,Reinforced Hearts,,,,,,,,,大型多人在线,"['大型多人在线', '独立', '冒险', '动作', '角色扮演']",,,https://store.steampowered.com/app/3077650
+3159330,Assassin’s Creed Shadows,469.0,469.0,469.0,0.0,USD,,,,冒险,"['冒险', '动作', '角色扮演']",2025.0,2025-03-19,https://store.steampowered.com/app/3159330
+3208930,Galvatein : Adventurers' Guild,,,,,,,,,模拟,"['模拟', '独立', '休闲']",,,https://store.steampowered.com/app/3208930
+3240220,Grand Theft Auto V Enhanced,133.0,302.0,133.0,56.0,USD,,,,竞速,"['竞速', '冒险', '动作']",2025.0,2025-03-04,https://store.steampowered.com/app/3240220
+3241660,R.E.P.O.,47.0,67.0,47.0,30.0,USD,,,,抢先体验,"['抢先体验', '动作']",2025.0,2025-02-26,https://store.steampowered.com/app/3241660
+3255500,Ved:Recure,,,,,,,,,冒险,"['冒险', '动作', '角色扮演']",,,https://store.steampowered.com/app/3255500
+3321460,Crimson Desert,,,,,,,,,冒险,"['冒险', '动作']",,,https://store.steampowered.com/app/3321460
+3328490,Airport Control 25,,,,,,,,,策略,"['策略', '模拟']",,,https://store.steampowered.com/app/3328490
+3357650,PRAGMATA,,,,,,,,,冒险,"['冒险', '动作']",,,https://store.steampowered.com/app/3357650
+3407390,ENDLESS™ Legend 2,,,,,,,,,策略,"['策略', '模拟', '角色扮演']",2025.0,2025-09-22,https://store.steampowered.com/app/3407390
+3447040,Sora no Kiseki the 1st,,,,,,,,,角色扮演,['角色扮演'],2025.0,2025-09-19,https://store.steampowered.com/app/3447040
+3493540,Transport Fever 3,,,,,,,,,策略,"['策略', '模拟', '休闲']",,,https://store.steampowered.com/app/3493540
+3527290,PEAK,54.0,54.0,54.0,0.0,USD,,,,独立,"['独立', '冒险', '动作']",2025.0,2025-06-16,https://store.steampowered.com/app/3527290
+3664670,Kick Bot Classic DX,,,,,,,,,动作,['动作'],,,https://store.steampowered.com/app/3664670
+3681010,Nioh 3,,,,,,,,,动作,"['动作', '角色扮演']",,,https://store.steampowered.com/app/3681010
+3709430,Witch's Apocalyptic Journey,,,,,,,,,策略,"['策略', '独立', '角色扮演']",,,https://store.steampowered.com/app/3709430
+3722330,Shift At Midnight,,,,,,,,,模拟,"['模拟', '独立']",,,https://store.steampowered.com/app/3722330
+3751260,The Blood of Dawnwalker,,,,,,,,,冒险,"['冒险', '动作', '角色扮演']",,,https://store.steampowered.com/app/3751260
+3764200,Resident Evil Requiem,,,,,,,,,冒险,"['冒险', '动作']",2026.0,2026-02-27,https://store.steampowered.com/app/3764200
+3768760,007 First Light,533.0,533.0,533.0,0.0,GBP,,,,冒险,"['冒险', '动作']",2026.0,2026-03-27,https://store.steampowered.com/app/3768760
+3892270,Gamble With Your Friends,,,,,,,,,策略,"['策略', '模拟', '独立', '休闲']",,,https://store.steampowered.com/app/3892270

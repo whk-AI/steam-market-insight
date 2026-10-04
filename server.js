@@ -58,7 +58,7 @@ function sendJson(res, fileName) {
 
 /** 返回静态文件（带路径穿越防护：不许访问项目目录之外的文件） */
 function sendStaticFile(res, pathname) {
-  // pathname 形如 /pratice/第三周小页面.html，join 后解析出真实路径
+  // pathname 形如 /practice/第三周小页面.html，join 后解析出真实路径
   let filePath = path.normalize(path.join(ROOT, pathname));
 
   // 安全校验：解析后的路径必须以 ROOT 开头，防止用 ../ 跳出项目目录

@@ -49,7 +49,7 @@
 - [x] 好评率榜单加"最低 1000 条评价"门槛（避免冷门新游霸榜）
 - [x] 防 XSS：游戏名 HTML 转义
 - [x] 核对前端字段（name/price/rating/type/year）与真实数据对齐
-- [x] 确认模拟数据 `pratice/模拟data/` 未被改动
+- [x] 确认模拟数据 `practice/模拟data/` 未被改动
 
 ### M5 自动化与交付
 - [x] 配置 Windows 计划任务 `SteamMarketCrawlerDaily`（每日 08:00，已注册验证）
