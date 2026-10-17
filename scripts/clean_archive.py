@@ -22,7 +22,6 @@ PROJ = Path(r"F:\steam-market-insight")
 GAMES_JSON = PROJ / "data" / "games.json"
 OUT_DIR = PROJ / "data" / "cleaned"
 
-# ---------------- 汇率（新浪财经 2026-10-04 行情，2026-10-03 收盘快照） ----------------
 FX = {
     "USD": 6.7050, "CAD": 4.7037, "GBP": 8.8794, "AUD": 4.6642,
     "PHP": 0.1073, "PLN": 1.7221, "NOK": 0.6978, "IDR": 0.0003752,
