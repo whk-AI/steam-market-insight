@@ -4,8 +4,9 @@
   "private": true,
   "description": "Steam 游戏市场洞察：前端 + Node 爬虫 + 迷你服务器，数据来自 Steam 官方接口",
   "scripts": {
+    "start": "node server.js",
     "crawl": "node scripts/crawler.js",
-    "start": "node server.js"
+    "crawl:test": "node scripts/crawler.js --limit 3"
   },
   "engines": {
     "node": ">=18"

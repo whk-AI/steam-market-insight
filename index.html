@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steam 游戏市场洞察平台 · 数据新闻</title>
+  <meta name="description" content="用 123 款真实游戏样本和实时在线榜单，读懂 Steam 市场的头部集中、类型格局、价格带与口碑分化。">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#08111a">
+  <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="brand" href="#opening" aria-label="回到开篇">
+        <img class="brand__logo" src="assets/steam-logo.png" alt="Steam 官方图标">
+        <span class="brand__text">
+          <strong>Steam 游戏市场洞察平台</strong>
+          <small>STEAM MARKET INSIGHT</small>
+        </span>
+      </a>
+      <div class="topbar__meta">
+        <span class="live"><i aria-hidden="true"></i> LIVE</span>
+        <span>数据更新 <b id="data-updated">2026-10-18 18:36</b></span>
+        <span class="topbar__note">TOP10 实时 · 其余为本地清洗样本</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 第 0 幕 · 开篇 -->
+    <section class="scene scene--hero" id="opening" aria-labelledby="hero-title">
+      <div class="scene__inner">
+        <p class="eyebrow reveal">STEAM MARKET INSIGHT · 2026</p>
+        <div class="hero__grid">
+          <div class="hero__copy">
+            <h1 class="hero__title reveal" id="hero-title">
+              <span id="hero-games">123</span> 款游戏，<span id="hero-online-title">450.4</span> 万人同时在线——
+              <em>Steam 到底在玩什么？</em>
+            </h1>
+            <p class="lede reveal">
+              从清洗后的游戏样本出发，沿着在线人数、类型、价格、年份和口碑走一遍 Steam 市场：
+              谁在玩，他们为什么买单，什么样的游戏能笑到最后。
+            </p>
+            <div class="hero__facts reveal">
+              <span class="badge badge--fact">数据可证</span>
+              <span>123 款本地清洗样本</span>
+              <span class="dot" aria-hidden="true"></span>
+              <span>TOP10 来自 Steam 实时接口</span>
+            </div>
+          </div>
+
+          <aside class="live-panel reveal" aria-label="TOP10 实时在线面板">
+            <p class="live-panel__label">TOP10 实时在线合计</p>
+            <p class="live-panel__value">
+              <span id="hero-online">450.4</span><small>万</small>
+            </p>
+            <p class="live-panel__time">抓取时间 <span id="hero-snapshot">2026-10-18 18:36</span></p>
+            <p class="live-panel__hint">只统计此刻 Steam 在线人数最高的 10 款游戏</p>
+            <div class="live-panel__spark" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </aside>
+        </div>
+
+        <a class="scroll-hint reveal" href="#scene-online">
+          <span>向下读</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v14M6 12l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- 第 1 幕 · 现在谁在线 -->
+    <section class="scene" id="scene-online" aria-labelledby="title-online">
+      <div class="scene__inner">
+        <p class="scene__label reveal">现场 · 此刻</p>
+        <h2 class="scene__title reveal" id="title-online">此刻，几百万人挤在这 10 款游戏里</h2>
+
+        <div class="prose reveal">
+          <p>
+            这是一个周日傍晚的快照。Steam 的在线榜从不平均：排在第一的
+            <strong>Counter-Strike 2</strong> 有 136.1 万人在线，第十名的
+            <strong>Grand Theft Auto V</strong> 只剩 7.3 万，相差 18 倍。
+          </p>
+          <p>
+            把 TOP10 加在一起，是 <strong id="online-total">450.4 万</strong>人。
+            其中前三名——CS2、Dota 2、PUBG——就吃掉了近七成。剩下的七款游戏分食三成，
+            在线人数的头部集中，比很多人想象得更极端。
+          </p>
+        </div>
+
+        <div class="stat-inline reveal" aria-label="在线集中度数据">
+          <div><b id="stat-top3">69.7%</b><span>TOP3 占 TOP10 在线人数</span></div>
+          <div><b>136.1 万</b><span>第 1 名 CS2 当前在线</span></div>
+          <div><b>7.3 万</b><span>第 10 名 GTA V 当前在线</span></div>
+          <div><b>18.6×</b><span>第 1 名与第 10 名的量级差</span></div>
+        </div>
+
+        <figure class="evidence reveal">
+          <div class="chart chart--top10" id="chart-top10" role="img" aria-label="Steam 当前在线人数最高的十款游戏横向条形图"></div>
+          <figcaption>
+            数据来源：Steam MostPlayed + GetNumberOfCurrentPlayers
+            <span class="js-source">· 快照 2026-10-18 18:36</span> · 单位：人
+          </figcaption>
+        </figure>
+
+        <p class="kicker reveal">
+          <span class="badge badge--fact">数据可证</span>
+          头部 3 款游戏就占了 TOP10 在线人数的近七成——这是个赢家通吃的市场。
+        </p>
+        <p class="transition reveal">这些人在玩的，都是什么类型的游戏？</p>
+      </div>
+    </section>
+
+    <!-- 第 2 幕 · 类型格局 -->
+    <section class="scene" id="scene-types" aria-labelledby="title-types">
+      <div class="scene__inner">
+        <p class="scene__label reveal">格局 · 类型</p>
+        <h2 class="scene__title reveal" id="title-types">动作一家独大，但真正赚钱的不是它</h2>
+
+        <div class="prose reveal">
+          <p>
+            123 款样本里，动作类是绝对主力：<strong>70 款，占 56.9%</strong>。
+            休闲、冒险、独立依次排在后面，数量都不足动作的四分之一。
+          </p>
+          <p>
+            但数量多不等于客单价高。动作类平均售价 <strong>94.8 元</strong>，
+            模拟类只有 6 款，均价却达到 <strong>142.5 元</strong>；策略类 2 款，均价 137 元。
+            真正把价格带往上撑的，是这些“更垂直、更硬核”的品类。
+          </p>
+          <p class="caveat">
+            <span class="badge badge--infer">推断</span>
+            我们没有销量和收入，只能用价格带做代理指标。角色扮演只有 3 款、均价 56.3 元，
+            样本太小，不能支持“RPG 吃掉高客单价市场”的说法。
+          </p>
+        </div>
+
+        <div class="stat-inline reveal" aria-label="类型与价格数据">
+          <div><b id="stat-action-share">56.9%</b><span>动作类占样本</span></div>
+          <div><b id="stat-action-price">94.8 元</b><span>动作类平均售价</span></div>
+          <div><b id="stat-sim-price">142.5 元</b><span>模拟类平均售价</span></div>
+          <div><b>10 类</b><span>样本覆盖的主类型数量</span></div>
+        </div>
+
+        <div class="chart-grid chart-grid--2">
+          <figure class="evidence reveal">
+            <h3 class="evidence__title">谁的数量最多</h3>
+            <div class="chart chart--rose" id="chart-type-rose" role="img" aria-label="游戏主类型分布玫瑰图"></div>
+            <figcaption>数据来源：本地清洗样本 123 款 <span class="js-source"></span></figcaption>
+          </figure>
+          <figure class="evidence reveal">
+            <h3 class="evidence__title">钱花在哪个价格带</h3>
+            <div class="chart chart--price" id="chart-price" role="img" aria-label="按主类型堆叠的价格带分布图"></div>
+            <figcaption>数据来源：本地清洗样本 123 款 · 按主类型堆叠 <span class="js-source"></span></figcaption>
+          </figure>
+        </div>
+
+        <p class="kicker reveal">
+          <span class="badge badge--fact">数据可证</span>
+          动作是入场券；按平均客单价，模拟类比动作更高。但 250 元以上仍有 9 款动作——
+          均价不是总收入，别把“贵”直接等同于“赚”。
+        </p>
+        <p class="transition reveal">这些游戏是新做出来的，还是老本在吃？</p>
+      </div>
+    </section>
+
+    <!-- 第 3 幕 · 时间线 -->
+    <section class="scene" id="scene-time" aria-labelledby="title-time">
+      <div class="scene__inner">
+        <p class="scene__label reveal">时间 · 趋势</p>
+        <h2 class="scene__title reveal" id="title-time">2026 年突然井喷——但别急着下结论</h2>
+
+        <div class="prose reveal">
+          <p>
+            把 123 款游戏按发售年份排开，2026 年像一根突然立起来的柱子：
+            <strong id="stat-2026">46 款</strong>，比 2024、2025 两年的总和还多。
+            如果只看这张图，很容易得出“Steam 新游戏正在爆发”的结论。
+          </p>
+          <p>
+            但这是样本偏差。我们的样本来自热销、新品、特惠榜单和搜索接口，
+            <strong>最近上架的新游天然更容易被爬到</strong>；2026 年的高数字，
+            首先说明的是“样本怎么来的”，而不是“市场真的翻了几倍”。
+          </p>
+          <p>
+            不过，折线里有一件事相对稳：2009–2011 年的老游戏，平均好评率都在 97% 以上；
+            2024–2025 年的新游，平均好评率跌到 80% 上下。老游戏被时间筛过一遍，
+            留下来的本来就是口碑赢家。
+          </p>
+        </div>
+
+        <figure class="evidence reveal">
+          <div class="chart chart--trend" id="chart-trend" role="img" aria-label="历年游戏数量柱状图与平均好评率折线图"></div>
+          <figcaption>
+            数据来源：本地清洗样本 123 款 · 柱=当年样本数，线=按评价数加权的好评率
+            <span class="js-source"></span>
+          </figcaption>
+        </figure>
+
+        <p class="kicker reveal">
+          <span class="badge badge--infer">推断</span>
+          样本有偏，但有一件事是真的：老游戏的好评率反而更稳。
+        </p>
+        <p class="transition reveal">玩家用钱投票，最后投给了谁？</p>
+      </div>
+    </section>
+
+    <!-- 第 4 幕 · 口碑真相 -->
+    <section class="scene" id="scene-rating" aria-labelledby="title-rating">
+      <div class="scene__inner">
+        <p class="scene__label reveal">口碑 · 谁在被爱</p>
+        <h2 class="scene__title reveal" id="title-rating">98 分的游戏不稀奇，60 分的游戏才值得看</h2>
+
+        <div class="prose reveal">
+          <p>
+            123 款游戏里，最高分到了 100 分，90 分以上的有 50 款。
+            高分不稀缺，真正有信息量的是低分区间：谁在卖得动，却没能让玩家满意？
+          </p>
+          <p>
+            免费与付费的分化很直接：免费游戏按评价数加权平均
+            <strong>78.1 分</strong>，付费游戏 <strong>89.5 分</strong>，差了 11.4 分。
+            最刺眼的是 PUBG：274.9 万条评价，好评率只有 <strong>60.5%</strong>；
+            城市天际线 2 更低，<strong>56 分</strong>。它们都不缺人玩，但“有人在玩”和“大家喜欢”是两回事。
+          </p>
+        </div>
+
+        <div class="stat-inline reveal" aria-label="口碑数据">
+          <div><b id="stat-free">78.1</b><span>免费游戏加权好评率</span></div>
+          <div><b id="stat-paid">89.5</b><span>付费游戏加权好评率</span></div>
+          <div><b id="stat-gap">11.4</b><span>两者相差（分）</span></div>
+          <div><b>274.9 万</b><span>PUBG 的评价总数</span></div>
+        </div>
+
+        <figure class="evidence reveal">
+          <div class="chart chart--rating" id="chart-rating" role="img" aria-label="免费与付费游戏的好评率分布横向条形图"></div>
+          <figcaption>
+            数据来源：本地清洗样本 123 款 · 好评率区间与免费/付费分组
+            <span class="js-source"></span>
+          </figcaption>
+        </figure>
+
+        <p class="kicker reveal">
+          <span class="badge badge--fact">数据可证</span>
+          在线人数 ≠ 好评，在线最多的游戏不一定是大家最喜欢的。
+        </p>
+        <p class="transition reveal">那这些游戏身上，贴着哪些标签？</p>
+      </div>
+    </section>
+
+    <!-- 第 5 幕 · 标签与交叉 -->
+    <section class="scene" id="scene-tags" aria-labelledby="title-tags">
+      <div class="scene__inner">
+        <p class="scene__label reveal">标签 · 细节</p>
+        <h2 class="scene__title reveal" id="title-tags">“独立”和“抢先体验”，为什么总在一起？</h2>
+
+        <div class="prose reveal">
+          <p>
+            词云里，动作、冒险、独立、模拟反复出现。动作仍是数量上的绝对多数，
+            但“独立”出现在 <strong>49 款</strong>游戏身上，“模拟”出现在 43 款身上——
+            它们不一定是最主类型，却构成了 Steam 最活跃的标签层。
+          </p>
+          <p>
+            一个更具体的细节：7 款带“抢先体验”标签的游戏里，有 <strong>6 款</strong>同时带“独立”。
+            小团队用抢先体验回笼资金、用社区反馈改产品，这不是巧合，是一套被反复使用的方法。
+          </p>
+          <p>
+            热力图把时间维度叠上来：动作类在 2024–2026 年集中出现，
+            2026 年一年就有 20 款；独立类则在更早的年份更分散。
+            这不是“动作突然变多”，而是样本在近几年明显偏向新游。
+          </p>
+        </div>
+
+        <div class="chart-grid chart-grid--2">
+          <figure class="evidence reveal">
+            <h3 class="evidence__title">标签在说什么</h3>
+            <div class="chart chart--wordcloud" id="chart-wordcloud" role="img" aria-label="游戏类型标签词云"></div>
+            <figcaption>数据来源：本地清洗样本 123 款 · 多标签统计 <span class="js-source"></span></figcaption>
+          </figure>
+          <figure class="evidence reveal">
+            <h3 class="evidence__title">类型在哪些年份出现</h3>
+            <div class="chart chart--heatmap" id="chart-heatmap" role="img" aria-label="类型与年份交叉热力图"></div>
+            <figcaption>数据来源：本地清洗样本 123 款 · 主类型 × 发售年份 <span class="js-source"></span></figcaption>
+          </figure>
+        </div>
+
+        <p class="kicker reveal">
+          <span class="badge badge--fact">数据可证</span>
+          动作仍是数量上的多数；但独立、模拟、冒险这些标签，正在把“玩什么”拆得更细。
+        </p>
+        <p class="transition reveal">回到最开始那个问题。</p>
+      </div>
+    </section>
+
+    <!-- 第 6 幕 · 结尾 -->
+    <section class="scene scene--end" id="scene-end" aria-labelledby="title-end">
+      <div class="scene__inner">
+        <p class="scene__label reveal">尾声</p>
+        <h2 class="scene__title reveal" id="title-end">123 款样本，回答不了整个 Steam，但足够看清四件事</h2>
+
+        <div class="prose prose--wide reveal">
+          <p>
+            第一，头部极度集中。TOP10 里前三名吃掉近七成在线人数，
+            第 1 名和第 10 名差 18 倍。流量不是均匀分布的，它更像一个漏斗。
+          </p>
+          <p>
+            第二，动作是数量上的入场券，但不是价格上的天花板。
+            70 款动作撑起样本的 56.9%，模拟类却用 6 款游戏把平均客单价拉到 142.5 元。
+          </p>
+          <p>
+            第三，口碑在分化。免费游戏平均 78.1 分，付费游戏 89.5 分；
+            PUBG 和城市天际线 2 证明，在线人数和好评率可以同时走向两个方向。
+          </p>
+          <p>
+            第四，标签在变细。独立出现在 49 款游戏里，抢先体验 7 款中有 6 款带独立。
+            Steam 早就不是“一个动作游戏平台”，它是一堆互相重叠的小市场。
+          </p>
+          <p class="prose__small">
+            这是一份 123 款的样本，不是全量 Steam。2026 年的数字被新游样本放大，
+            类型占比也不能直接外推到整个市场。所有推断都已标注，欢迎带着怀疑读。
+          </p>
+        </div>
+
+        <p class="kicker reveal">
+          <span class="badge badge--infer">推断</span>
+          如果只记一句话：Steam 的头部在通吃，但长尾里藏着更细的生意。
+        </p>
+
+        <details class="appendix reveal" id="appendix">
+          <summary>查看全部 123 款游戏 <span aria-hidden="true">→</span></summary>
+          <div class="table-wrap">
+            <table class="games-table">
+              <thead>
+                <tr>
+                  <th scope="col">游戏</th>
+                  <th scope="col">主类型</th>
+                  <th scope="col">价格</th>
+                  <th scope="col">好评率</th>
+                  <th scope="col">评价数</th>
+                  <th scope="col">年份</th>
+                </tr>
+              </thead>
+              <tbody id="games-table"></tbody>
+            </table>
+          </div>
+        </details>
+
+        <footer class="footer">
+          <p>导师制项目 · Steam 游戏市场洞察平台 · v1.0</p>
+          <p>数据更新时间 <span id="footer-updated">2026-10-18 18:36</span> · 样本 123 款 · 全程本地渲染</p>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <noscript>
+    <p class="noscript">这个页面需要 JavaScript 才能渲染图表，请开启后刷新。</p>
+  </noscript>
+
+  <script src="js/echarts.min.js"></script>
+  <script src="js/echarts-wordcloud.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

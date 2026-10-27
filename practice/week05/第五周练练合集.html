@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <title>第5周练习合集</title>
-  <script src="../js/echarts.min.js"></script>
-  <script src="../js/echarts-wordcloud.min.js"></script>
+  <script src="../../js/echarts.min.js"></script>
+  <script src="../../js/echarts-wordcloud.min.js"></script>
   <style>
     * {
       margin: 0;
@@ -78,7 +78,7 @@
 <body>
 
   <h1>第5周 · ECharts 进阶练习</h1>
-  <p class="sub">数据源 <code>../data/games.json</code> · 散点图 / 雷达图 / 热力图 / 词云图</p>
+  <p class="sub">数据源 <code>../../data/games.json</code> · 散点图 / 雷达图 / 热力图 / 词云图</p>
 
   <div class="grid">
 
@@ -111,7 +111,7 @@
   <script>
     const charts = [];
 
-    fetch('../data/games.json')
+    fetch('../../data/games.json')
       .then(res => res.json())
       .then(games => {
         console.log('第5周练习，共', games.length, '款游戏');

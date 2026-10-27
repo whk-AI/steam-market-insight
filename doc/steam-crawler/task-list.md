@@ -53,6 +53,7 @@
 
 ### M5 自动化与交付
 - [x] 配置 Windows 计划任务 `SteamMarketCrawlerDaily`（每日 08:00，已注册验证）
+- [x] 按用户要求把触发时间改为每日 **22:00**（2026-10-26，`schtasks /change /ST 22:00`，下次运行 2026-10-26 22:00）
 - [x] 编写 `scripts/run-daily.bat` 启动脚本
 - [x] 全链路验证：爬虫 → 数据 → 服务器接口 → 页面逻辑（模拟 TOP10 渲染）
 - [x] 编写 README 使用说明（含第九周学习指引）
@@ -75,6 +76,8 @@
 | 2026-09-22 | 第三周小页面接入 /api/games（带回退+更新时间+评价门槛+转义） | M4 完成 | TOP10 逻辑模拟验证通过 |
 | 2026-09-22 | 注册计划任务 SteamMarketCrawlerDaily（08:00）+ README + run-daily.bat | M5 大部分完成 | 任务状态 Ready |
 | 2026-09-22 | 网络再次断连，后台重试循环运行中（搜索池扩池待网络恢复） | M5 进行中 | 旧数据完好 |
+| 2026-10-26 | 按用户要求把 `SteamMarketCrawlerDaily` 触发时间由 08:00 改为 **22:00**（`schtasks /change /ST 22:00`） | M5 | 下次运行 2026-10-26 22:00 |
+| 2026-10-26 | 加固 `scripts/run-daily.bat`：优先用 `C:\Program Files\nodejs\node.exe`（避开 node.cmd 转发）、日志加时间戳与结果行、失败返回非 0 | M5 | 原日志无时间戳、曾误用 PATH 里的 node 包装器 |
 
 ---
 

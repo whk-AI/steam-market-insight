@@ -27,19 +27,19 @@ const CONFIG = {
   UA: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36',
 
   // 单个请求的超时时间（毫秒）
-  REQUEST_TIMEOUT_MS: 15000,
+  REQUEST_TIMEOUT_MS: 20000,
 
   // 单个请求失败后的重试次数
-  MAX_RETRY: 2,
+  MAX_RETRY: 3,
 
-  // 重试前的等待时间（毫秒）
-  RETRY_DELAY_MS: 1500,
+  // 重试前的等待时间（毫秒）；实际按 2s / 4s / 8s 退避
+  RETRY_DELAY_MS: 2000,
 
-  // 并发批次大小：每批同时发几个请求（4 个比较礼貌）
-  BATCH_SIZE: 4,
+  // 并发批次大小：每批同时发几个请求（3 个比较礼貌）
+  BATCH_SIZE: 3,
 
   // 每批之间的停顿（毫秒）：给 Steam 服务器"喘口气"
-  BATCH_DELAY_MS: 600,
+  BATCH_DELAY_MS: 1000,
 
   // 游戏池来源：Steam 首页的多个榜单
   POOL_SOURCES: ['top_sellers', 'new_releases', 'specials'],
@@ -79,7 +79,7 @@ function extractAppId(item) {
 
 /**
  * 带重试的 JSON 请求
- * 第 1 次失败 -> 等 1.5s 重试 -> 再失败 -> 等 3s 重试 -> 再失败就抛错
+ * 失败后按 2s / 4s / 8s 退避，最多重试 3 次。
  * 调用方决定这个错误是"跳过这一条"还是"整个退出"
  */
 async function fetchJson(url, retryLeft = CONFIG.MAX_RETRY) {
@@ -88,13 +88,43 @@ async function fetchJson(url, retryLeft = CONFIG.MAX_RETRY) {
       headers: { 'User-Agent': CONFIG.UA, Accept: 'application/json' },
       signal: AbortSignal.timeout(CONFIG.REQUEST_TIMEOUT_MS),
     });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    if (!res.ok) {
+      const err = new Error(`HTTP ${res.status}`);
+      err.status = res.status;
+      err.retryAfter = Number(res.headers.get('retry-after')) || 0;
+      throw err;
+    }
     return await res.json();
   } catch (err) {
     if (retryLeft > 0) {
-      console.log(`    ⚠ 请求失败(${err.message})，${CONFIG.RETRY_DELAY_MS}ms 后重试，剩余 ${retryLeft} 次`);
-      await sleep(CONFIG.RETRY_DELAY_MS);
+      // 429 优先听服务端的 Retry-After，避免越重试越被封
+      const backoff = err.status === 429 && err.retryAfter > 0
+        ? err.retryAfter * 1000
+        : CONFIG.RETRY_DELAY_MS * Math.pow(2, CONFIG.MAX_RETRY - retryLeft);
+      const wait = Math.min(backoff, 30000);
+      console.log(`    ⚠ 请求失败(${err.message})，${wait}ms 后重试，剩余 ${retryLeft} 次`);
+      await sleep(wait);
       return fetchJson(url, retryLeft - 1);
+    }
+    throw err;
+  }
+}
+
+/** 带重试的文本请求（只用于 mostplayed 榜单 HTML） */
+async function fetchText(url, retryLeft = CONFIG.MAX_RETRY) {
+  try {
+    const res = await fetch(url, {
+      headers: { 'User-Agent': CONFIG.UA, Accept: 'text/html,application/xhtml+xml' },
+      signal: AbortSignal.timeout(CONFIG.REQUEST_TIMEOUT_MS),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.text();
+  } catch (err) {
+    if (retryLeft > 0) {
+      const wait = CONFIG.RETRY_DELAY_MS * Math.pow(2, CONFIG.MAX_RETRY - retryLeft);
+      console.log(`    ⚠ 榜单页面失败(${err.message})，${wait}ms 后重试，剩余 ${retryLeft} 次`);
+      await sleep(wait);
+      return fetchText(url, retryLeft - 1);
     }
     throw err;
   }
@@ -256,6 +286,103 @@ async function fetchOneGame(appid) {
   }
 }
 
+// ================== 第 3.5 步：实时在线 TOP10 ==================
+
+/** 读取一个 JSON 文件；不存在或损坏时返回 fallback，不影响主流程 */
+function readJsonIfExists(filePath, fallback) {
+  try {
+    return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  } catch {
+    return fallback;
+  }
+}
+
+/**
+ * 抓 Steam mostplayed 页面拿 TOP10 appid，再逐个查 GetNumberOfCurrentPlayers。
+ * 输出结构对齐现有 online 对象：
+ * { fetchedAt, source, top: [{ rank, appid, peak_in_game, current_players, last_week_rank }] }
+ *
+ * 说明：mostplayed 页面给的是榜单顺序；peak_in_game 字段保留原结构，
+ * 但这里填的是"当前在线人数"，前端文案统一写"当前在线"。
+ */
+async function fetchOnlineTop() {
+  const html = await fetchText('https://store.steampowered.com/charts/mostplayed');
+  const ids = [...new Set([...html.matchAll(/\/apps\/(\d+)/g)].map((m) => Number(m[1])))].slice(0, 10);
+  if (ids.length < 10) {
+    throw new Error(`mostplayed 页面只解析到 ${ids.length} 个 appid，榜单结构可能变了`);
+  }
+
+  const onlinePath = path.join(CONFIG.OUTPUT_DIR, 'online.json');
+  const previous = readJsonIfExists(onlinePath, { top: [] });
+  const previousRank = new Map(
+    (Array.isArray(previous.top) ? previous.top : []).map((x) => [Number(x.appid), Number(x.rank)])
+  );
+
+  const top = [];
+  for (let i = 0; i < ids.length; i += 1) {
+    const appid = ids[i];
+    let current = null;
+    try {
+      const data = await fetchJson(
+        `https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=${appid}&format=json`
+      );
+      if (data && data.response && data.response.result === 1) {
+        current = Number(data.response.player_count);
+      }
+    } catch (err) {
+      console.log(`    ⚠ 在线人数获取失败 appid ${appid}：${err.message}`);
+    }
+    top.push({
+      rank: i + 1,
+      appid,
+      peak_in_game: Number.isFinite(current) ? current : null,
+      current_players: Number.isFinite(current) ? current : null,
+      last_week_rank: previousRank.get(appid) || i + 1,
+    });
+  }
+
+  if (top.every((x) => x.current_players == null)) {
+    throw new Error('TOP10 的在线人数全部获取失败');
+  }
+
+  return {
+    fetchedAt: new Date().toISOString(),
+    source: 'Steam MostPlayed + GetNumberOfCurrentPlayers',
+    top,
+  };
+}
+
+/**
+ * 把本次成功数据与旧 games.json 合并。
+ * 失败的游戏保留旧记录，避免"失败 79 款就把 123 款覆盖成 59 款"。
+ */
+function mergeWithExisting(freshGames, failed, gamesPath) {
+  const existing = readJsonIfExists(gamesPath, []);
+  const existingList = Array.isArray(existing) ? existing : [];
+  const map = new Map(
+    existingList
+      .filter((g) => g && g.appid != null)
+      .map((g) => [Number(g.appid), g])
+  );
+
+  // 首页叙事固定 123 款样本：日常更新只刷新这 123 款，
+  // 不把榜单里新出现的游戏塞进样本，避免样本数/占比每天漂移。
+  if (map.size === 0) {
+    for (const game of freshGames) map.set(Number(game.appid), game);
+  } else {
+    for (const game of freshGames) {
+      if (map.has(Number(game.appid))) map.set(Number(game.appid), game);
+    }
+  }
+
+  const keptCount = failed.filter((f) => map.has(Number(f.appid))).length;
+  return {
+    games: [...map.values()].sort((a, b) => a.appid - b.appid),
+    keptCount,
+    existingCount: existingList.length,
+  };
+}
+
 // ================== 第 4 步：主流程 ==================
 
 async function main() {
@@ -295,28 +422,63 @@ async function main() {
   }
 
   // 第 4 步：汇总写文件
-  console.log(`[3/4] 汇总：成功 ${games.length}，失败 ${failed.length}（失败不会覆盖已有数据）`);
+  const isTestMode = limit > 0;
+  console.log(`[3/4] 汇总：成功 ${games.length}，失败 ${failed.length}`);
   games.sort((a, b) => a.appid - b.appid);
 
-  const gamesPath = path.join(CONFIG.OUTPUT_DIR, 'games.json');
-  const metaPath = path.join(CONFIG.OUTPUT_DIR, 'meta.json');
+  const gamesPath = path.join(CONFIG.OUTPUT_DIR, isTestMode ? 'games.test.json' : 'games.json');
+  const metaPath = path.join(CONFIG.OUTPUT_DIR, isTestMode ? 'meta.test.json' : 'meta.json');
+
+  // 正式抓取：失败的游戏保留旧记录，避免一次网络抖动把 123 款覆盖成 59 款。
+  // --limit 测试模式只写 test 文件，不碰正式数据。
+  let finalGames = games;
+  let keptCount = 0;
+  let existingCount = 0;
+  if (!isTestMode) {
+    const merged = mergeWithExisting(games, failed, gamesPath);
+    finalGames = merged.games;
+    keptCount = merged.keptCount;
+    existingCount = merged.existingCount;
+  }
+
+  if (finalGames.length === 0) {
+    throw new Error('没有任何可用游戏数据，已中止写入（旧文件保持不变）');
+  }
 
   // 元信息：前端用来展示"数据更新时间"
   const meta = {
     fetchedAt: new Date().toISOString(),
     durationSec: Math.round((Date.now() - startTime) / 1000),
-    gameCount: games.length,
+    gameCount: finalGames.length,
     poolTotal: appids.length,
     successCount: games.length,
     failCount: failed.length,
     failedAppids: failed.map((f) => f.appid),
+    failedList: failed.map((f) => ({
+      appid: f.appid,
+      error: f.error || f.message || '未知错误',
+    })),
+    keptCount,
+    existingCount,
     sources: [...CONFIG.POOL_SOURCES, ...CONFIG.SEARCH_POOLS.map((s) => s.label)],
   };
 
-  writeJsonAtomic(gamesPath, games); // 原子写入：旧数据安全
+  writeJsonAtomic(gamesPath, finalGames);
   writeJsonAtomic(metaPath, meta);
+
+  // 实时在线 TOP10：单独抓，失败不拖垮历史数据更新
+  if (!isTestMode) {
+    try {
+      const online = await fetchOnlineTop();
+      writeJsonAtomic(path.join(CONFIG.OUTPUT_DIR, 'online.json'), online);
+      console.log(`      → data/online.json（${online.top.length} 条，抓取时间 ${online.fetchedAt}）`);
+    } catch (err) {
+      console.log(`    ⚠ 实时在线抓取失败：${err.message}（保留旧 online.json）`);
+    }
+  }
+
   console.log(`[4/4] ✔ 完成！用时 ${meta.durationSec}s`);
-  console.log(`      → ${gamesPath}（${games.length} 款游戏）`);
+  console.log(`      → ${gamesPath}（${finalGames.length} 款游戏，成功 ${games.length}，失败 ${failed.length}，保留旧数据 ${keptCount}）`);
   console.log(`      → ${metaPath}（抓取时间 ${meta.fetchedAt}）`);
 }
 

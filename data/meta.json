@@ -1,27 +1,10 @@
 {
-  "fetchedAt": "2026-10-15T00:01:40.417Z",
-  "durationSec": 96,
-  "gameCount": 145,
-  "poolTotal": 154,
-  "successCount": 145,
-  "failCount": 9,
-  "failedAppids": [
-    376282,
-    2138330,
-    2593290,
-    3055670,
-    4412680,
-    4888270,
-    4888690,
-    4893530,
-    5250300
-  ],
+  "fetchedAt": "2026-10-18T10:36:35Z",
+  "gameCount": 123,
+  "successCount": 123,
+  "failCount": 0,
+  "note": "首页固定 123 款样本；日常爬虫只刷新已有 appid，不扩样。",
   "sources": [
-    "top_sellers",
-    "new_releases",
-    "specials",
-    "热销",
-    "新品",
-    "特惠"
+    "data.js 本地快照"
   ]
 }

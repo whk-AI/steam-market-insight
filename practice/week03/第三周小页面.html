@@ -128,7 +128,7 @@
   </ul>
 
   <!-- PapaParse：CSV 解析库（本地文件） -->
-  <script src="../js/papaparse.min.js"></script>
+  <script src="../../js/papaparse.min.js"></script>
 
   <script>
     const search = document.querySelector('#search');
@@ -144,7 +144,7 @@
     // ================================================================
     // 数据加载（V2：真实数据优先，本地文件兜底）
     //   1) 走我们的服务器接口  /api/games        （活数据，推荐方式）
-    //   2) 回退读爬虫生成的    ../data/games.json
+    //   2) 回退读爬虫生成的    ../../data/games.json
     //      这样即使直接用 Live Server 打开页面，也能显示最新抓取的数据
     // 旧方式（第三周学习内容）保留在文件底部注释里，模拟数据也在
     //   practice/模拟data/games.CSV 中未动，可随时对照学习。
@@ -154,14 +154,14 @@
         const res = await fetch('/api/games');
         if (res.ok) return await res.json();
       } catch (e) { /* 没走我们的服务器，继续回退 */ }
-      const res = await fetch('../data/games.json');
+      const res = await fetch('../../data/games.json');
       if (!res.ok) throw new Error('数据源不可用');
       return await res.json();
     }
 
     // 数据更新时间（抓不到也不影响列表展示）
     async function loadMeta() {
-      for (const url of ['/api/meta', '../data/meta.json']) {
+      for (const url of ['/api/meta', '../../data/meta.json']) {
         try {
           const res = await fetch(url);
           if (res.ok) return await res.json();

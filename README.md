@@ -20,7 +20,7 @@
 
 **项目亮点**：
 - 全链路**真实数据**，不是演示假数据：Steam 官方公开接口爬虫 + Kaggle 开源数据集
-- 数据**每日自动更新**（Windows 计划任务，每天 08:00）
+- 数据**每日自动更新**（Windows 计划任务，每天 22:00）
 - **断网可运行**：ECharts 等第三方库已本地化，不依赖 CDN
 - 爬虫代码带**教学式注释**，适合边读边学
 
@@ -43,9 +43,9 @@
 
 ### 已完成 ✅
 
-- **数据获取**：Kaggle《Steam Games Dataset 2025》全量数据集（约 175MB）；Steam 官方公开接口爬虫抓取 **149 款真实游戏**（覆盖热销、新品、特惠等 6 个榜单，含价格、好评率、类型、发售日期等字段）
-- **每日自动更新**：Windows 计划任务 `SteamMarketCrawlerDaily` 每天 08:00 自动抓取，失败自动重试、不覆盖旧数据
-- **本地数据服务**：Node 迷你服务器（静态页面托管 + `/api/games` 数据接口）
+- **数据获取**：Kaggle《Steam Games Dataset 2025》全量数据集（约 175MB）；Steam 官方公开接口爬虫抓取 **123 款真实游戏**（覆盖热销、新品、特惠等榜单，含价格、好评率、类型、发售日期等字段）
+- **每日自动更新**：Windows 计划任务 `SteamMarketCrawlerDaily` 每天 22:00 自动抓取，失败自动重试、不覆盖旧数据
+- **本地数据服务**：Node 迷你服务器（静态页面托管 + `/api/games`、`/api/meta`、`/api/online` 数据接口）
 - **可视化技术**：ECharts 全部基础图表 + 进阶图表（散点图、雷达图、热力图、词云图）练习完成，库已本地化到 `js/`，断网可运行
 - **真实数据接入**："好评率 TOP10"页面已接入爬虫真实数据（含评价数门槛、防 XSS、数据更新时间显示）
 - **工程基础**：Git 版本管理、需求文档（`doc/steam-crawler/`：roadmap + task-list）
@@ -76,8 +76,9 @@ npm start
 
 # 3. 浏览器打开
 #    数据接口：      http://localhost:8080/api/games
-#    好评率 TOP10： http://localhost:8080/practice/第三周小页面.html
-#    第5周练习：    http://localhost:8080/practice/第五周练练合集.html
+#    练习索引：      http://localhost:8080/practice/
+#    好评率 TOP10：  http://localhost:8080/practice/week03/第三周小页面.html
+#    第5周练习：     http://localhost:8080/practice/week05/第五周练练合集.html
 ```
 
 ## 常用命令
@@ -98,15 +99,21 @@ npm start
   - `store.steampowered.com/appreviews` —— 官方评价数（算出好评率）
 - **字段**：`data/games.json` 每款游戏包含
   `appid / name / price(元) / original_price / final_price / discount_percent / currency / rating(好评率%) / positive / total_reviews / type(主分类) / genres / year / release_date / url`
-- **当前数据量**：149 款真实游戏（截至最近一次抓取，见 `data/meta.json` 的 `fetchedAt`）
+- **当前数据量**：123 款真实游戏（截至最近一次抓取，见 `data/meta.json` 的 `fetchedAt`）
+- **实时在线**：`data/online.json`，由 mostplayed 页面 + `GetNumberOfCurrentPlayers` 生成，结构与首页 `online` 对象对齐
 - **更新频率**：每天自动更新一次 + 随时手动 `npm run crawl`（见下）
 - **容错**：抓取失败自动重试、保留上一次数据；免费游戏价格 0；无评分的游戏 `rating` 为 null
 
 ## 每日自动更新（Windows 任务计划）
 
-项目已配置一个 Windows 计划任务，每天 **08:00** 自动运行 `scripts/run-daily.bat` 抓取数据。
+项目已配置一个 Windows 计划任务，**每天 22:00** 自动运行 `scripts/run-daily.bat` 抓取数据（当前触发时间：22:00，日期 2026-10-26 起生效）。
+- 任务名 `SteamMarketCrawlerDaily`，触发方式：每日 22:00
+- 执行内容：`F:\steam-market-insight\scripts\run-daily.bat` → `node scripts\crawler.js`，日志追加到 `data\crawler.log`
 - 查看/修改：`Win + R` 输入 `taskschd.msc`，任务名 `SteamMarketCrawlerDaily`
+- 改时间（命令行，不必开图形界面）：`schtasks /change /TN "SteamMarketCrawlerDaily" /ST 22:00`
 - 立即手动触发：任务计划程序里右键该任务 → 运行；或直接 `npm run crawl`
+- 注意：该任务为「仅在用户登录时运行」（交互式），保持当前 Windows 用户登录（不必开窗口）到 22:00 即可自动执行；抓取失败会保留上一次数据并返回非 0 退出码
+- 已开启容错：错过 22:00（关机/休眠）后开机会尽快补跑一次；笔记本电池供电时也允许运行
 
 ## 第九周学习指引（爬虫代码怎么读）
 
@@ -120,6 +127,14 @@ npm start
 
 三个爬虫铁律（代码里都有体现）：**限速**（别把服务器打爆）、**重试**（网络会抖）、**原子写**（失败不能覆盖旧数据）。
 
+## 项目文件与练习的分界
+
+根目录下**只有这些是项目本体**：`index.html`、`js\`、`CSS\`、`data\`、`scripts\`（爬虫与清洗）、`server.js`、`package.json`、`doc\`（需求与教程）、`README.md`。
+
+**`practice\` 是课程练习区**，和项目无关，可以整体忽略或压缩备份；打开 `practice\index.html`（或 `npm start` 后访问 `/practice/`）即可按周查看所有练习。练习页仍在项目内，所以它们照常引用上级目录的 `js\` 与 `data\`，双击/本地服务器都能打开。
+
+**`data\cleaned\` 是什么**：它是 archive 数据集里与项目游戏交集样本的清洗结果和核查报告，只用于核对数据质量 / 附录，不是首页 123 款叙事样本的直接来源；首页样本来自 `data\games.json`。
+
 ## 目录结构
 
 ```
@@ -127,16 +142,23 @@ F:\steam-market-insight\
 ├── index.html              平台首页（数据大屏整合中）
 ├── js\                     echarts.min.js / echarts-wordcloud / papaparse（已本地化，断网可用）
 ├── CSS\                    页面样式
-├── practice\               每周练习页（第1~5周，含真实数据接入页）
+├── practice\               课程练习区（与项目正式代码分开；练习页仍引用上级的 js\ 和 data\）
+│   ├── index.html          练习索引页（打开 practice/ 即可看到全部练习）
+│   ├── week01\ ~ week05\   第 1~5 周 HTML / ECharts 练习
+│   ├── week09\             第 9 周练习
+│   └── python\             第 7~8 周 Python 练习、清洗数据与洞察报告
+├── assets\                 页面配图
 ├── data\
-│   ├── games.json          爬虫输出的真实数据（149 款，活数据）
+│   ├── games.json          爬虫输出的真实数据（123 款，活数据）
+│   ├── online.json         TOP10 实时在线（mostplayed + GetNumberOfCurrentPlayers）
 │   └── meta.json           抓取时间 / 条数等元信息
 ├── scripts\
 │   ├── crawler.js          爬虫主脚本（教学式注释）
+│   ├── clean_data.py       数据清洗（第二份原始数据 → 分析用）
 │   └── run-daily.bat       每日自动更新用的批处理
 ├── server.js               迷你服务器（静态 + /api/games）
 ├── package.json            npm 脚本入口
-└── doc\steam-crawler\      需求文档（roadmap + task-list）
+└── doc\                    需求与教程（steam-crawler\、data-clean\）
 ```
 
 ## 常见问题
@@ -146,4 +168,4 @@ F:\steam-market-insight\
 | `npm run crawl` 报"Steam 接口当前不可达" | 国内访问 Steam 会间歇性断连，等几分钟重试即可；旧数据不会丢 |
 | 端口 8080 被占用 | `$env:PORT=8090; npm start`（或临时改 server.js 顶部 PORT） |
 | 页面数据是旧的 | 看页面副标题的"更新于"时间；运行 `npm run crawl` 刷新 |
-| 直接双击 html 打开（file:// 协议） | 浏览器会拦截 fetch，请用 `npm start` 后访问 localhost |
+| 直接双击 html 打开（file:// 协议） | 页面会自动降级使用 `js/data.js` 的本地数据；实时 TOP10 仍以 `npm start` 时的 `/api/online` 为准 |

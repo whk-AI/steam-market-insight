@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
   <meta charset="UTF-8">
   <title>第4周练习合集 · ECharts 可视化（真实数据版）</title>
-  <script src="../js/echarts.min.js"></script>
+  <script src="../../js/echarts.min.js"></script>
   <style>
     * {
       margin: 0;
@@ -69,7 +69,7 @@
 <body>
 
   <h1>第4周 · ECharts 练习合集</h1>
-  <p class="subtitle">数据源 <code>../data/games.json</code></p>
+  <p class="subtitle">数据源 <code>../../data/games.json</code></p>
 
   <div class="grid">
 
@@ -109,7 +109,7 @@
     // 所有图表实例，练习七 resize 时统一自适应
     const charts = [];
 
-    fetch('../data/games.json')
+    fetch('../../data/games.json')
       .then(res => res.json())
       .then(games => {
         console.log('读取到游戏数据：', games.length, '款');

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Steam 游戏市场洞察平台图标">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#122b3d"/>
+      <stop offset="0.55" stop-color="#0b1b28"/>
+      <stop offset="1" stop-color="#061018"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#2a6f97"/>
+      <stop offset="1" stop-color="#8ad8ff"/>
+    </linearGradient>
+    <linearGradient id="play" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#b5ecff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 深色圆角底板：Steam 商店夜间氛围 -->
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="url(#bg)" stroke="#2b4a5e" stroke-width="1.5"/>
+
+  <!-- 若隐若现的 Steam 活塞环：品牌暗示，不抢主体 -->
+  <circle cx="32" cy="32" r="22" fill="none" stroke="#66c0f4" stroke-opacity="0.16" stroke-width="2"/>
+
+  <!-- 三根上升柱：市场数据 -->
+  <rect x="14" y="37" width="8" height="15" rx="4" fill="url(#bar)"/>
+  <rect x="26" y="28" width="8" height="24" rx="4" fill="url(#bar)"/>
+  <rect x="38" y="19" width="8" height="33" rx="4" fill="url(#bar)"/>
+
+  <!-- 穿越柱顶的趋势线：洞察 -->
+  <path d="M16 33 L30 23 L43 14.5" fill="none" stroke="#c8f3ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 播放三角：游戏/实时在线 -->
+  <path d="M46.5 10.5 L58.5 17 L46.5 23.5 Z" fill="url(#play)" stroke="#ffffff" stroke-width="1.2" stroke-linejoin="round"/>
+</svg>

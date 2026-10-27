@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第九周练练合集</title>
+  <script src="../../js/echarts.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Microsoft YaHei", sans-serif;
+      background: #f4f6fa;
+      color: #333;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    .sub {
+      color: #666;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    .toolbar {
+      background: #fff;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: center;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, .08);
+    }
+
+    .toolbar label {
+      font-size: 13px;
+      color: #555;
+    }
+
+    .toolbar input[type=text] {
+      padding: 6px 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 200px;
+      font-size: 13px;
+    }
+
+    .toolbar select {
+      padding: 6px 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+
+    .toolbar input[type=range] {
+      width: 120px;
+      vertical-align: middle;
+    }
+
+    .toolbar .range-val {
+      font-size: 12px;
+      color: #1f6feb;
+      min-width: 90px;
+      display: inline-block;
+    }
+
+    .btn {
+      padding: 6px 14px;
+      border: none;
+      border-radius: 6px;
+      background: #1f6feb;
+      color: #fff;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #1858c8;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 14px;
+      text-align: center;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, .08);
+    }
+
+    .card .num {
+      font-size: 26px;
+      font-weight: 700;
+      color: #1f6feb;
+    }
+
+    .card .lbl {
+      font-size: 12px;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    .charts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .chart-box {
+      background: #fff;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, .08);
+    }
+
+    .chart-box h3 {
+      font-size: 14px;
+      color: #444;
+      margin: 4px 6px 0;
+    }
+
+    .chart {
+      width: 100%;
+      height: 320px;
+    }
+
+    .panel {
+      background: #fff;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, .08);
+    }
+
+    .panel h3 {
+      font-size: 14px;
+      color: #444;
+      margin-bottom: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    th,
+    td {
+      padding: 7px 10px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background: #fafbfc;
+      color: #555;
+      font-weight: 600;
+    }
+
+    tr:hover {
+      background: #f0f6ff;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 12px;
+      background: #e8f1ff;
+      color: #1f6feb;
+    }
+
+    .drill {
+      display: none;
+    }
+
+    .drill.show {
+      display: block;
+    }
+
+    .tip {
+      font-size: 12px;
+      color: #1f6feb;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>第九周练练合集 · 交互功能四件套</h1>
+  <div class="sub">数据源：games_clean.csv（第七周清洗产物，123 款真实游戏）｜练习：①搜索 ②下拉筛选 ③价格滑块 ④点击下钻（点击柱状图试试）</div>
+
+  <!-- ============ 筛选工具栏 ============ -->
+  <div class="toolbar">
+    <!-- 练习一：搜索框（input 事件实时过滤，模糊匹配游戏名） -->
+    <div>
+      <label>练习一 · 搜索游戏：</label>
+      <input type="text" id="kw" placeholder="输入游戏名关键词，如 Dota">
+    </div>
+
+    <!-- 练习二：下拉框（change 事件按主类型筛选） -->
+    <div>
+      <label>练习二 · 类型：</label>
+      <select id="typeSel"></select>
+    </div>
+
+    <!-- 练习三：价格双滑块（input 事件，区间筛选） -->
+    <div>
+      <label>练习三 · 价格区间：</label>
+      <input type="range" id="priceMin" min="0" max="348" value="0" step="5">
+      <span class="range-val" id="priceMinV">¥0</span>
+      <input type="range" id="priceMax" min="0" max="348" value="348" step="5">
+      <span class="range-val" id="priceMaxV">¥348</span>
+    </div>
+
+    <button class="btn" id="reset">重置筛选</button>
+  </div>
+
+  <!-- ============ 统计卡片（随筛选实时联动） ============ -->
+  <div class="cards">
+    <div class="card">
+      <div class="num" id="cCount">–</div>
+      <div class="lbl">当前游戏数</div>
+    </div>
+    <div class="card">
+      <div class="num" id="cPrice">–</div>
+      <div class="lbl">平均价格(元)</div>
+    </div>
+    <div class="card">
+      <div class="num" id="cRating">–</div>
+      <div class="lbl">平均好评率(%)</div>
+    </div>
+    <div class="card">
+      <div class="num" id="cFree">–</div>
+      <div class="lbl">免费游戏数</div>
+    </div>
+  </div>
+
+  <!-- ============ 图表区 ============ -->
+  <div class="charts">
+    <div class="chart-box">
+      <h3>类型分布柱状图（练习四：点击柱子下钻该类型游戏）</h3>
+      <div class="chart" id="barChart"></div>
+    </div>
+    <div class="chart-box">
+      <h3>价格 × 好评率 散点图（悬停查看游戏）</h3>
+      <div class="chart" id="scatterChart"></div>
+    </div>
+  </div>
+
+  <!-- ============ 下钻面板（练习四） ============ -->
+  <div class="panel drill" id="drillPanel">
+    <h3 id="drillTitle">下钻明细</h3>
+    <div class="tip">练习四：点击上方柱状图任意柱子，这里会列出该类型游戏（按好评率排序 Top15）</div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>游戏</th>
+          <th>类型</th>
+          <th>价格</th>
+          <th>好评率</th>
+          <th>评价数</th>
+        </tr>
+      </thead>
+      <tbody id="drillBody"></tbody>
+    </table>
+  </div>
+
+  <!-- ============ 明细表 ============ -->
+  <div class="panel">
+    <h3>筛选结果明细（练习一~三的组合筛选实时更新）</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>游戏</th>
+          <th>类型</th>
+          <th>价格</th>
+          <th>折扣</th>
+          <th>好评率</th>
+          <th>评价数</th>
+          <th>年份</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <script>
+    /* ==================== 数据（真实数据，来自 games_clean.csv） ==================== */
+    const RAW = [{ "name": "Left 4 Dead 2", "price": 35.0, "rating": 97.5, "total_reviews": 1064529, "type": "动作", "genres": "动作", "year": "2009", "discount": 0 }, { "name": "Dota 2", "price": 0.0, "rating": 80.4, "total_reviews": 2797722, "type": "动作", "genres": "动作,策略,免费开玩", "year": "2013", "discount": 0 }, { "name": "Counter-Strike 2", "price": 0.0, "rating": 85.8, "total_reviews": 9923603, "type": "动作", "genres": "动作,免费开玩", "year": "2017", "discount": 0 }, { "name": "STAR WARS™ Empire at War - Gold Pack", "price": 76.0, "rating": 97.7, "total_reviews": 43316, "type": "策略", "genres": "策略", "year": "2010", "discount": 0 }, { "name": "Terraria", "price": 21.0, "rating": 97.4, "total_reviews": 1562584, "type": "动作", "genres": "动作,冒险,独立,角色扮演", "year": "2011", "discount": 50 }, { "name": "Project Zomboid", "price": 93.0, "rating": 93.7, "total_reviews": 488689, "type": "独立", "genres": "独立,角色扮演,模拟,抢先体验", "year": "2013", "discount": 0 }, { "name": "Warframe 星际战甲", "price": 0.0, "rating": 87.8, "total_reviews": 679969, "type": "动作", "genres": "动作,角色扮演,免费开玩", "year": "2013", "discount": 0 }, { "name": "战争雷霆", "price": 0.0, "rating": 71.2, "total_reviews": 791034, "type": "动作", "genres": "动作,大型多人在线,模拟,免费开玩", "year": "2013", "discount": 0 }, { "name": "Mount & Blade II: Bannerlord", "price": 248.0, "rating": 87.7, "total_reviews": 299406, "type": "动作", "genres": "动作,独立,角色扮演,模拟,策略", "year": "2022", "discount": 0 }, { "name": "Stellaris", "price": 198.0, "rating": 85.8, "total_reviews": 196632, "type": "模拟", "genres": "模拟,策略", "year": "2016", "discount": 0 }, { "name": "边缘世界 RimWorld", "price": 128.0, "rating": 97.9, "total_reviews": 248049, "type": "独立", "genres": "独立,模拟,策略", "year": "2018", "discount": 0 }, { "name": "饥荒联机版", "price": 24.0, "rating": 94.9, "total_reviews": 544518, "type": "动作", "genres": "动作,冒险,独立,角色扮演,模拟,策略", "year": "2016", "discount": 0 }, { "name": "彩虹六号：围攻", "price": 0.0, "rating": 82.1, "total_reviews": 1562492, "type": "动作", "genres": "动作,免费开玩", "year": "2015", "discount": 0 }, { "name": "Fallout 4", "price": 21.0, "rating": 81.2, "total_reviews": 429932, "type": "角色扮演", "genres": "角色扮演", "year": "2015", "discount": 75 }, { "name": "黎明杀机", "price": 94.0, "rating": 78.3, "total_reviews": 939811, "type": "动作", "genres": "动作", "year": "2016", "discount": 0 }, { "name": "Stardew Valley", "price": 48.0, "rating": 98.5, "total_reviews": 1044985, "type": "独立", "genres": "独立,角色扮演,模拟", "year": "2016", "discount": 0 }, { "name": "Wallpaper Engine：壁纸引擎", "price": 23.0, "rating": 97.6, "total_reviews": 1022483, "type": "休闲", "genres": "休闲,独立,动画制作和建模,设计和插画,照片编辑,实用工具", "year": "2018", "discount": 0 }, { "name": "缺氧", "price": 17.0, "rating": 96.7, "total_reviews": 144439, "type": "独立", "genres": "独立,模拟", "year": "2019", "discount": 70 }, { "name": "沉星之序", "price": 98.0, "rating": 97.2, "total_reviews": 2111, "type": "冒险", "genres": "冒险,独立,策略", "year": "2026", "discount": 0 }, { "name": "World of Warships", "price": 0.0, "rating": 76.3, "total_reviews": 156939, "type": "动作", "genres": "动作,大型多人在线,模拟,策略,免费开玩", "year": "2017", "discount": 0 }, { "name": "HELLDIVERS™ 绝地潜兵2", "price": 198.0, "rating": 75.7, "total_reviews": 1166908, "type": "动作", "genres": "动作", "year": "2024", "discount": 0 }, { "name": "PUBG: BATTLEGROUNDS", "price": 0.0, "rating": 60.5, "total_reviews": 2748646, "type": "动作", "genres": "动作,冒险,大型多人在线,免费开玩", "year": "2017", "discount": 0 }, { "name": "猎杀：对决 1896", "price": 128.0, "rating": 73.7, "total_reviews": 280132, "type": "动作", "genres": "动作", "year": "2019", "discount": 0 }, { "name": "雨中冒险 2", "price": 26.0, "rating": 93.8, "total_reviews": 354910, "type": "动作", "genres": "动作,独立", "year": "2020", "discount": 67 }, { "name": "Raft", "price": 77.0, "rating": 93.0, "total_reviews": 379831, "type": "冒险", "genres": "冒险,独立,模拟", "year": "2022", "discount": 0 }, { "name": "World War Z", "price": 32.0, "rating": 82.4, "total_reviews": 33080, "type": "动作", "genres": "动作", "year": "2021", "discount": 75 }, { "name": "王国：两位君主", "price": 8.0, "rating": 90.0, "total_reviews": 41040, "type": "冒险", "genres": "冒险,独立,模拟,策略", "year": "2018", "discount": 90 }, { "name": "全面战争：三国", "price": 59.0, "rating": 82.2, "total_reviews": 93954, "type": "动作", "genres": "动作,策略", "year": "2019", "discount": 70 }, { "name": "Sekiro™: Shadows Die Twice - GOTY Edition", "price": 134.0, "rating": 95.2, "total_reviews": 357721, "type": "动作", "genres": "动作,冒险", "year": "2019", "discount": 50 }, { "name": "绿色地狱", "price": 9.0, "rating": 84.6, "total_reviews": 103465, "type": "动作", "genres": "动作,冒险,独立,模拟", "year": "2019", "discount": 90 }, { "name": "Noita", "price": 28.0, "rating": 95.1, "total_reviews": 89313, "type": "动作", "genres": "动作,冒险,独立,角色扮演,模拟", "year": "2020", "discount": 60 }, { "name": "Valheim: 英灵神殿", "price": 89.0, "rating": 93.5, "total_reviews": 560163, "type": "动作", "genres": "动作,冒险,独立,角色扮演", "year": "2026", "discount": 0 }, { "name": "Cities: Skylines II 都市：天际线2", "price": 198.0, "rating": 56.0, "total_reviews": 92186, "type": "模拟", "genres": "模拟", "year": "2023", "discount": 0 }, { "name": "DEAD OR ALIVE Xtreme Venus Vacation", "price": 0.0, "rating": 82.9, "total_reviews": 28901, "type": "体育", "genres": "体育,免费开玩", "year": "2019", "discount": 0 }, { "name": "Halo: The Master Chief Collection", "price": 67.0, "rating": 92.0, "total_reviews": 263318, "type": "动作", "genres": "动作", "year": "2019", "discount": 75 }, { "name": "博德之门3", "price": 268.0, "rating": 96.8, "total_reviews": 862065, "type": "冒险", "genres": "冒险,角色扮演,策略", "year": "2023", "discount": 0 }, { "name": "赛博朋克 2077", "price": 89.0, "rating": 87.0, "total_reviews": 987137, "type": "角色扮演", "genres": "角色扮演", "year": "2020", "discount": 70 }, { "name": "Chef Life: A Restaurant Simulator", "price": 11.0, "rating": 83.7, "total_reviews": 2846, "type": "模拟", "genres": "模拟", "year": "2023", "discount": 90 }, { "name": "全面战争：战锤3", "price": 45.0, "rating": 72.2, "total_reviews": 150513, "type": "动作", "genres": "动作,策略", "year": "2022", "discount": 85 }, { "name": "Crusader Kings III", "price": 59.0, "rating": 90.5, "total_reviews": 142280, "type": "角色扮演", "genres": "角色扮演,模拟,策略", "year": "2020", "discount": 70 }, { "name": "Apex Legends™", "price": 0.0, "rating": 67.8, "total_reviews": 1073454, "type": "动作", "genres": "动作,冒险,免费开玩", "year": "2020", "discount": 0 }, { "name": "Red Dead Redemption 2", "price": 70.0, "rating": 92.5, "total_reviews": 927940, "type": "动作", "genres": "动作,冒险", "year": "2019", "discount": 75 }, { "name": "永劫无间", "price": 0.0, "rating": 73.3, "total_reviews": 303270, "type": "动作", "genres": "动作,冒险,大型多人在线,免费开玩", "year": "2021", "discount": 0 }, { "name": "胡闹厨房 全都好吃", "price": 51.0, "rating": 73.0, "total_reviews": 8368, "type": "休闲", "genres": "休闲,独立,模拟,策略", "year": "2021", "discount": 70 }, { "name": "艾尔登法环", "price": 298.0, "rating": 93.0, "total_reviews": 1158814, "type": "动作", "genres": "动作,角色扮演", "year": "2022", "discount": 0 }, { "name": "Legend of Kendor", "price": 22.0, "rating": 80.6, "total_reviews": 31, "type": "动作", "genres": "动作,冒险,独立", "year": "2026", "discount": 0 }, { "name": "Guild Wars 2®", "price": 0.0, "rating": 88.2, "total_reviews": 29975, "type": "冒险", "genres": "冒险,大型多人在线,角色扮演,免费开玩", "year": "2022", "discount": 0 }, { "name": "EA Play", "price": 38.0, "rating": 53.8, "total_reviews": 13, "type": "动作", "genres": "动作,体育", "year": "2020", "discount": 0 }, { "name": "The Outlast Trials", "price": 136.0, "rating": 92.2, "total_reviews": 119851, "type": "动作", "genres": "动作,冒险,独立", "year": "2024", "discount": 0 }, { "name": "雀魂麻将", "price": 0.0, "rating": 43.4, "total_reviews": 84843, "type": "休闲", "genres": "休闲,策略,免费开玩", "year": "2020", "discount": 0 }, { "name": "Street Fighter 6", "price": 79.0, "rating": 81.8, "total_reviews": 81039, "type": "动作", "genres": "动作,冒险", "year": "2023", "discount": 60 }, { "name": "双人成行", "price": 198.0, "rating": 95.4, "total_reviews": 272054, "type": "动作", "genres": "动作,冒险", "year": "2021", "discount": 0 }, { "name": "Yu-Gi-Oh! Master Duel", "price": 0.0, "rating": 71.2, "total_reviews": 102289, "type": "模拟", "genres": "模拟,策略,免费开玩", "year": "2022", "discount": 0 }, { "name": "Big Walk", "price": 62.0, "rating": 96.1, "total_reviews": 42865, "type": "冒险", "genres": "冒险", "year": "2026", "discount": 20 }, { "name": "Clive Barker's Hellraiser: Revival", "price": 189.0, "rating": 94.1, "total_reviews": 5792, "type": "动作", "genres": "动作", "year": "2026", "discount": 0 }, { "name": "Palworld / 幻兽帕鲁", "price": 76.0, "rating": 94.6, "total_reviews": 492803, "type": "动作", "genres": "动作,冒险,独立,角色扮演", "year": "2026", "discount": 30 }, { "name": "FIRE AND ASHES", "price": 39.0, "rating": 96.6, "total_reviews": 29, "type": "动作", "genres": "动作,冒险,独立", "year": "2026", "discount": 40 }, { "name": "WARDOGS", "price": 149.0, "rating": 74.1, "total_reviews": 116781, "type": "动作", "genres": "动作,独立,大型多人在线,模拟,抢先体验", "year": "2026", "discount": 0 }, { "name": "潜水员戴夫 DAVE THE DIVER", "price": 40.0, "rating": 96.5, "total_reviews": 163934, "type": "冒险", "genres": "冒险,休闲,角色扮演,模拟", "year": "2023", "discount": 50 }, { "name": "Escape the Backrooms", "price": 37.0, "rating": 89.7, "total_reviews": 168192, "type": "动作", "genres": "动作,独立", "year": "2025", "discount": 0 }, { "name": "Limbus Company", "price": 0.0, "rating": 88.1, "total_reviews": 121973, "type": "免费开玩", "genres": "免费开玩", "year": "2023", "discount": 0 }, { "name": "双影奇境", "price": 198.0, "rating": 96.9, "total_reviews": 128276, "type": "动作", "genres": "动作,冒险", "year": "2025", "discount": 0 }, { "name": "Dragon's Dogma 2", "price": 198.0, "rating": 62.8, "total_reviews": 119041, "type": "动作", "genres": "动作,角色扮演", "year": "2024", "discount": 0 }, { "name": "暗区突围：无限", "price": 0.0, "rating": 73.9, "total_reviews": 84508, "type": "动作", "genres": "动作,冒险,大型多人在线,角色扮演,策略,免费开玩", "year": "2025", "discount": 0 }, { "name": "七日世界", "price": 0.0, "rating": 79.1, "total_reviews": 191072, "type": "动作", "genres": "动作,冒险,休闲,大型多人在线,竞速,角色扮演,模拟,策略,免费开玩", "year": "2024", "discount": 0 }, { "name": "Warhammer 40,000: 星际战士2", "price": 62.0, "rating": 84.0, "total_reviews": 229942, "type": "动作", "genres": "动作,冒险,角色扮演", "year": "2024", "discount": 75 }, { "name": "双点博物馆", "price": 106.0, "rating": 95.5, "total_reviews": 13741, "type": "休闲", "genres": "休闲,独立,模拟,策略", "year": "2025", "discount": 33 }, { "name": "霓虹深渊2", "price": 46.0, "rating": 70.6, "total_reviews": 2510, "type": "动作", "genres": "动作,冒险,独立,角色扮演", "year": "2026", "discount": 20 }, { "name": "Monster Hunter Wilds", "price": 198.0, "rating": 49.7, "total_reviews": 333445, "type": "动作", "genres": "动作,冒险,角色扮演", "year": "2025", "discount": 0 }, { "name": "空战奇兵8 希孚之翼 (ACE COMBAT 8: WINGS OF THEVE)", "price": 298.0, "rating": 83.2, "total_reviews": 20162, "type": "动作", "genres": "动作", "year": "2026", "discount": 0 }, { "name": "火炬之光：无限", "price": 0.0, "rating": 62.9, "total_reviews": 3328, "type": "动作", "genres": "动作,冒险,角色扮演,免费开玩", "year": "2024", "discount": 0 }, { "name": "银松镇", "price": 81.0, "rating": 94.8, "total_reviews": 1921, "type": "动作", "genres": "动作,冒险,独立,角色扮演", "year": "2026", "discount": 10 }, { "name": "《暗黑破坏神® IV》", "price": 348.0, "rating": 65.2, "total_reviews": 79961, "type": "动作", "genres": "动作,冒险,休闲,大型多人在线,角色扮演", "year": "2023", "discount": 0 }, { "name": "《守望先锋®》", "price": 0.0, "rating": 32.0, "total_reviews": 427635, "type": "动作", "genres": "动作,免费开玩", "year": "2023", "discount": 0 }, { "name": "黑神话：悟空", "price": 268.0, "rating": 96.5, "total_reviews": 1213807, "type": "动作", "genres": "动作,冒险,角色扮演", "year": "2024", "discount": 0 }, { "name": "大厨的轮班 The Chef's Shift", "price": 30.0, "rating": 97.6, "total_reviews": 2134, "type": "休闲", "genres": "休闲,独立,模拟,策略", "year": "2025", "discount": 40 }, { "name": "Bodycam", "price": 128.0, "rating": 80.8, "total_reviews": 70258, "type": "动作", "genres": "动作,独立,大型多人在线,模拟,策略,抢先体验", "year": "2024", "discount": 0 }, { "name": "极限竞速：地平线 6", "price": 298.0, "rating": 80.6, "total_reviews": 102032, "type": "竞速", "genres": "竞速,模拟,体育", "year": "2026", "discount": 0 }, { "name": "三角洲行动 ", "price": 0.0, "rating": 57.7, "total_reviews": 198227, "type": "动作", "genres": "动作,冒险,大型多人在线,免费开玩", "year": "2024", "discount": 0 }, { "name": "Chained Together", "price": 18.0, "rating": 89.6, "total_reviews": 64728, "type": "冒险", "genres": "冒险,休闲,独立,模拟", "year": "2024", "discount": 20 }, { "name": "吉星派对", "price": 0.0, "rating": 54.9, "total_reviews": 21762, "type": "休闲", "genres": "休闲,独立,角色扮演,策略", "year": "2024", "discount": 0 }, { "name": "鬼武者 Way of the Sword", "price": 298.0, "rating": 91.0, "total_reviews": 29321, "type": "动作", "genres": "动作,冒险,角色扮演", "year": "2026", "discount": 0 }, { "name": "KORI", "price": 19.0, "rating": 100.0, "total_reviews": 1, "type": "休闲", "genres": "休闲,独立,策略", "year": "2026", "discount": 15 }, { "name": "后汉姬异录", "price": 58.0, "rating": 93.5, "total_reviews": 31, "type": "独立", "genres": "独立,角色扮演,策略", "year": "2026", "discount": 15 }, { "name": "漫威争锋", "price": 0.0, "rating": 75.2, "total_reviews": 422090, "type": "动作", "genres": "动作,冒险,休闲,大型多人在线,竞速,角色扮演,策略,免费开玩", "year": "2024", "discount": 0 }, { "name": "战地风云™ 6", "price": 79.0, "rating": 63.5, "total_reviews": 373404, "type": "动作", "genres": "动作", "year": "2025", "discount": 60 }, { "name": "不朽遗志", "price": 168.0, "rating": 79.5, "total_reviews": 596, "type": "动作", "genres": "动作,冒险,角色扮演", "year": "2026", "discount": 0 }, { "name": "Slay the Spire 2", "price": 88.0, "rating": 61.4, "total_reviews": 205019, "type": "独立", "genres": "独立,策略,抢先体验", "year": "2026", "discount": 0 }, { "name": "越过山丘 over the hill", "price": 69.0, "rating": 94.6, "total_reviews": 391, "type": "冒险", "genres": "冒险,休闲,独立,竞速,模拟,体育", "year": "2026", "discount": 20 }, { "name": "Gears of War: E-Day", "price": 298.0, "rating": 73.7, "total_reviews": 9453, "type": "动作", "genres": "动作,冒险", "year": "2026", "discount": 0 }, { "name": "战地风云™ 禁区冲突", "price": 0.0, "rating": 44.4, "total_reviews": 16632, "type": "动作", "genres": "动作,免费开玩", "year": "2025", "discount": 0 }, { "name": "《动物园之星 2》", "price": 200.0, "rating": 72.3, "total_reviews": 1980, "type": "模拟", "genres": "模拟,策略", "year": "2026", "discount": 0 }, { "name": "Grand Theft Auto V 增强版", "price": 99.0, "rating": 83.3, "total_reviews": 231940, "type": "动作", "genres": "动作,冒险,竞速", "year": "2025", "discount": 56 }, { "name": "R.E.P.O.", "price": 35.0, "rating": 96.0, "total_reviews": 428763, "type": "动作", "genres": "动作,抢先体验", "year": "2025", "discount": 0 }, { "name": "查无此地", "price": 50.0, "rating": 61.5, "total_reviews": 200, "type": "动作", "genres": "动作,冒险,独立,抢先体验", "year": "2026", "discount": 14 }, { "name": "红色沙漠：增强版", "price": 268.0, "rating": 83.7, "total_reviews": 177082, "type": "动作", "genres": "动作,冒险", "year": "2026", "discount": 0 }, { "name": "千面人在此 Legion Was Here", "price": 32.0, "rating": 91.4, "total_reviews": 58, "type": "冒险", "genres": "冒险,独立,角色扮演,模拟", "year": "2026", "discount": 10 }, { "name": "Transport Fever 3", "price": 198.0, "rating": 71.1, "total_reviews": 6704, "type": "休闲", "genres": "休闲,模拟,策略", "year": "2026", "discount": 0 }, { "name": "PEAK", "price": 33.0, "rating": 94.4, "total_reviews": 379611, "type": "动作", "genres": "动作,冒险,独立", "year": "2025", "discount": 0 }, { "name": "控制: 共振", "price": 268.0, "rating": 91.6, "total_reviews": 17416, "type": "动作", "genres": "动作,冒险,角色扮演", "year": "2026", "discount": 0 }, { "name": "午夜轮班", "price": 38.0, "rating": 87.7, "total_reviews": 13198, "type": "独立", "genres": "独立,模拟", "year": "2026", "discount": 0 }, { "name": "Resident Evil Requiem", "price": 348.0, "rating": 95.9, "total_reviews": 187291, "type": "动作", "genres": "动作,冒险", "year": "2026", "discount": 0 }, { "name": "《全面战争：幕府将军2》完全版", "price": 198.0, "rating": 17.3, "total_reviews": 2595, "type": "策略", "genres": "策略", "year": "2026", "discount": 0 }, { "name": "勇敢者之试炼 : Invokyr", "price": 32.0, "rating": 94.7, "total_reviews": 731, "type": "动作", "genres": "动作,冒险,独立,模拟,免费开玩,抢先体验", "year": "2026", "discount": 25 }, { "name": "朋友，梭哈吧", "price": 20.0, "rating": 89.7, "total_reviews": 25127, "type": "冒险", "genres": "冒险,独立,模拟", "year": "2026", "discount": 38 }, { "name": "Escape from Tarkov", "price": 200.0, "rating": 49.6, "total_reviews": 67386, "type": "动作", "genres": "动作,大型多人在线,角色扮演,模拟", "year": "2025", "discount": 0 }, { "name": "渔力全开", "price": 33.0, "rating": 95.1, "total_reviews": 82512, "type": "动作", "genres": "动作,休闲,独立,模拟", "year": "2026", "discount": 0 }, { "name": "针影裁梦", "price": 59.0, "rating": 98.5, "total_reviews": 15059, "type": "休闲", "genres": "休闲,模拟", "year": "2026", "discount": 0 }, { "name": "Cozy Builder", "price": 42.0, "rating": 83.3, "total_reviews": 18, "type": "休闲", "genres": "休闲,独立", "year": "2026", "discount": 20 }, { "name": "EA SPORTS FC™ 27", "price": 248.0, "rating": 50.4, "total_reviews": 9549, "type": "模拟", "genres": "模拟,体育", "year": "2026", "discount": 0 }, { "name": "机械狂欢", "price": 33.0, "rating": 86.6, "total_reviews": 5721, "type": "动作", "genres": "动作,独立", "year": "2026", "discount": 0 }, { "name": "Fish & Hike", "price": 49.0, "rating": 91.3, "total_reviews": 23, "type": "冒险", "genres": "冒险,休闲,独立", "year": "2026", "discount": 0 }, { "name": "生存日志", "price": 46.0, "rating": 81.8, "total_reviews": 3555, "type": "冒险", "genres": "冒险,角色扮演,模拟,策略", "year": "2026", "discount": 0 }, { "name": "Text Dungeon: The Ring of Life", "price": 28.0, "rating": 0.0, "total_reviews": 1, "type": "冒险", "genres": "冒险,独立,角色扮演", "year": "2026", "discount": 15 }, { "name": "Mudventure", "price": 25.0, "rating": 100.0, "total_reviews": 3, "type": "冒险", "genres": "冒险,休闲", "year": "2026", "discount": 40 }, { "name": "《NBA 2K27》", "price": 209.0, "rating": 49.0, "total_reviews": 3551, "type": "体育", "genres": "体育", "year": "2026", "discount": 30 }, { "name": "BOMBANANA!", "price": 17.0, "rating": 96.4, "total_reviews": 4144, "type": "休闲", "genres": "休闲,独立", "year": "2026", "discount": 40 }, { "name": "MECCHA CHAMELEON", "price": 26.0, "rating": 87.6, "total_reviews": 90948, "type": "休闲", "genres": "休闲", "year": "2026", "discount": 0 }, { "name": "Gallery Organizer", "price": 22.0, "rating": 100.0, "total_reviews": 1, "type": "休闲", "genres": "休闲,模拟", "year": "2026", "discount": 15 }, { "name": "Thief Simulator 3: First Loot", "price": 0.0, "rating": 66.7, "total_reviews": 9, "type": "动作", "genres": "动作,冒险,独立,模拟,免费开玩", "year": "2026", "discount": 0 }, { "name": "Keyboard Chaos", "price": 20.0, "rating": 40.0, "total_reviews": 10, "type": "休闲", "genres": "休闲,独立,模拟", "year": "2026", "discount": 10 }, { "name": "ForgeTax", "price": 15.0, "rating": 52.9, "total_reviews": 833, "type": "休闲", "genres": "休闲,独立,模拟,策略", "year": "2026", "discount": 0 }, { "name": "Lootkeeper: Tidy Up the Loot", "price": 16.0, "rating": 100.0, "total_reviews": 1, "type": "休闲", "genres": "休闲,独立,模拟", "year": "2026", "discount": 10 }];
+
+    /* ==================== 工具函数 ==================== */
+    const $ = id => document.getElementById(id);
+    const fmt = n => n >= 10000 ? (n / 10000).toFixed(1) + '万' : String(n);
+    const numFmt = n => Number.isFinite(n) ? n.toFixed(1) : '–';
+
+    // 类型下拉框初始化（练习二：把数据里的主类型去重塞进 select）
+    const types = [...new Set(RAW.map(g => g.type))].sort();
+    $('typeSel').innerHTML = '<option value="">全部类型</option>' + types.map(t => `<option>${t}</option>`).join('');
+
+    /* ==================== 组合筛选（练习一 + 二 + 三） ==================== */
+    let currentDrillType = null;   // 记录当前下钻类型（点击柱状图时设置）
+
+    function applyFilter() {
+      const kw = $('kw').value.trim().toLowerCase();
+      const type = $('typeSel').value;
+      const pMin = +$('priceMin').value;
+      const pMax = +$('priceMax').value;
+
+      // 练习一：关键词模糊匹配（name 包含）；练习二：类型相等；练习三：价格区间
+      const list = RAW.filter(g =>
+        (!kw || g.name.toLowerCase().includes(kw)) &&
+        (!type || g.type === type) &&
+        (g.price >= pMin && g.price <= pMax)
+      );
+
+      // 联动更新：卡片 + 柱状图 + 散点图 + 明细表
+      updateCards(list);
+      renderBar(list);
+      renderScatter(list);
+      renderTable(list);
+      renderDrill(list);
+    }
+
+    /* ==================== 统计卡片 ==================== */
+    function updateCards(list) {
+      const n = list.length;
+      $('cCount').textContent = n;
+      $('cPrice').textContent = n ? numFmt(list.reduce((s, g) => s + g.price, 0) / n) : '–';
+      $('cRating').textContent = n ? numFmt(list.reduce((s, g) => s + g.rating, 0) / n) : '–';
+      $('cFree').textContent = list.filter(g => g.price === 0).length;
+    }
+
+    /* ==================== 图表：类型分布柱状图（练习四的载体） ==================== */
+    const barChart = echarts.init($('barChart'));
+    function renderBar(list) {
+      const map = {};
+      list.forEach(g => map[g.type] = (map[g.type] || 0) + 1);
+      const names = Object.keys(map).sort((a, b) => map[b] - map[a]);
+      barChart.setOption({
+        tooltip: { trigger: 'axis' },
+        xAxis: { type: 'category', data: names, axisLabel: { rotate: 30 } },
+        yAxis: { type: 'value', name: '游戏数' },
+        series: [{
+          type: 'bar', data: names.map(t => map[t]), barMaxWidth: 34,
+          itemStyle: { color: '#4e8ef7', borderRadius: [4, 4, 0, 0] },
+          emphasis: { itemStyle: { color: '#ff8a3d' } }
+        }]
+      }, true);
+    }
+
+    // 练习四：点击柱子 -> 记录类型并刷新下钻面板
+    barChart.on('click', params => {
+      currentDrillType = params.name;
+      applyFilter();   // 面板内容依赖当前筛选结果，直接复用
+    });
+
+    /* ==================== 图表：价格×好评率散点图 ==================== */
+    const scatterChart = echarts.init($('scatterChart'));
+    function renderScatter(list) {
+      const data = list.map(g => ({ value: [g.price, g.rating], name: g.name }));
+      scatterChart.setOption({
+        tooltip: { formatter: p => `${p.data.name}<br>价格 ¥${p.data.value[0]}　好评率 ${p.data.value[1]}%` },
+        xAxis: { type: 'value', name: '价格(元)', max: 360 },
+        yAxis: { type: 'value', name: '好评率(%)', max: 100 },
+        series: [{
+          type: 'scatter', data: data, symbolSize: 9,
+          itemStyle: { color: 'rgba(78,142,247,.75)', borderColor: '#fff', borderWidth: 1 }
+        }]
+      }, true);
+    }
+
+    /* ==================== 明细表 ==================== */
+    function renderTable(list) {
+      const sorted = [...list].sort((a, b) => b.rating - a.rating);
+      $('tableBody').innerHTML = sorted.map(g => `
+    <tr>
+      <td>${g.name}</td>
+      <td>${g.type}</td>
+      <td>${g.price === 0 ? '免费' : '¥' + g.price}</td>
+      <td>${g.discount > 0 ? g.discount + '% OFF' : '—'}</td>
+      <td>${g.rating}%</td>
+      <td>${fmt(g.total_reviews)}</td>
+      <td>${g.year}</td>
+    </tr>`).join('');
+    }
+
+    /* ==================== 下钻面板（练习四） ==================== */
+    function renderDrill(list) {
+      const panel = $('drillPanel');
+      if (!currentDrillType) { panel.classList.remove('show'); return; }
+      const sub = list.filter(g => g.type === currentDrillType).sort((a, b) => b.rating - a.rating);
+      $('drillTitle').textContent = `【${currentDrillType}】类游戏明细（当前筛选下 ${sub.length} 款）`;
+      $('drillBody').innerHTML = sub.slice(0, 15).map((g, i) => `
+    <tr><td>${i + 1}</td><td>${g.name}</td><td>${g.type}</td>
+        <td>${g.price === 0 ? '免费' : '¥' + g.price}</td><td>${g.rating}%</td>
+        <td>${fmt(g.total_reviews)}</td></tr>`).join('')
+        || '<tr><td colspan="6" style="text-align:center;color:#999">当前筛选条件下该类型暂无游戏</td></tr>';
+      panel.classList.add('show');
+    }
+
+    /* ==================== 事件绑定 ==================== */
+    // 练习一：搜索框 input 事件
+    $('kw').addEventListener('input', applyFilter);
+    // 练习二：下拉 change 事件
+    $('typeSel').addEventListener('change', applyFilter);
+    // 练习三：两个滑块 input 事件
+    $('priceMin').addEventListener('input', () => { $('priceMinV').textContent = '¥' + $('priceMin').value; applyFilter(); });
+    $('priceMax').addEventListener('input', () => { $('priceMaxV').textContent = '¥' + $('priceMax').value; applyFilter(); });
+    // 重置
+    $('reset').addEventListener('click', () => {
+      $('kw').value = ''; $('typeSel').value = ''; $('priceMin').value = 0; $('priceMax').value = 348;
+      $('priceMinV').textContent = '¥0'; $('priceMaxV').textContent = '¥348';
+      currentDrillType = null; applyFilter();
+    });
+
+    // 窗口变化时图表自适应
+    window.addEventListener('resize', () => { barChart.resize(); scatterChart.resize(); });
+
+    /* ==================== 首次渲染 ==================== */
+    applyFilter();
+  </script>
+</body>
+
+</html>

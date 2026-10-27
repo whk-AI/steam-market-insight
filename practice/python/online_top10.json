@@ -1,66 +1,66 @@
 {
-  "fetchedAt": "2026-10-17T10:26:41Z",
+  "fetchedAt": "2026-10-18T10:36:35Z",
   "source": "Steam GetMostPlayedGames 官方接口",
   "top": [
     {
       "rank": 1,
       "appid": 730,
       "last_week_rank": 1,
-      "peak_in_game": 1297140
+      "peak_in_game": 1360532
     },
     {
       "rank": 2,
       "appid": 570,
       "last_week_rank": 2,
-      "peak_in_game": 937935
+      "peak_in_game": 969895
     },
     {
       "rank": 3,
       "appid": 578080,
       "last_week_rank": 3,
-      "peak_in_game": 795174
+      "peak_in_game": 809673
     },
     {
       "rank": 4,
       "appid": 431960,
       "last_week_rank": 4,
-      "peak_in_game": 113719
+      "peak_in_game": 122675
     },
     {
       "rank": 5,
       "appid": 1422450,
-      "last_week_rank": 6,
-      "peak_in_game": 303347
+      "last_week_rank": 5,
+      "peak_in_game": 255488
     },
     {
       "rank": 6,
-      "appid": 1867240,
-      "last_week_rank": 8,
-      "peak_in_game": 298596
+      "appid": 1172470,
+      "last_week_rank": 7,
+      "peak_in_game": 231338
     },
     {
       "rank": 7,
-      "appid": 1172470,
-      "last_week_rank": 7,
-      "peak_in_game": 221139
+      "appid": 1867240,
+      "last_week_rank": 8,
+      "peak_in_game": 304002
     },
     {
       "rank": 8,
       "appid": 3393110,
-      "last_week_rank": 5,
-      "peak_in_game": 288259
+      "last_week_rank": 6,
+      "peak_in_game": 301962
     },
     {
       "rank": 9,
       "appid": 322170,
-      "last_week_rank": 12,
-      "peak_in_game": 64506
+      "last_week_rank": 10,
+      "peak_in_game": 75166
     },
     {
       "rank": 10,
       "appid": 271590,
       "last_week_rank": 11,
-      "peak_in_game": 69818
+      "peak_in_game": 72903
     }
   ]
 }
