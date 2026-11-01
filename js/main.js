@@ -1,1219 +1,973 @@
-/* ============================================================
-   Steam 游戏市场洞察 · 数据新闻渲染
-   数据接入：/api/games + /api/meta + /api/online；失败回退 data.js
-   图表：ECharts 5 + echarts-wordcloud（全部本地）
-   ============================================================ */
+'use strict';
 
-(function () {
-  'use strict';
+/* =========================================================
+   0. 常量与工具
+   ========================================================= */
 
-  const API = {
-    games: '/api/games',
-    meta: '/api/meta',
-    online: '/api/online',
+const PALETTE = ['#c63b2f', '#2f7f74', '#d99b2b', '#7a5aa8', '#4f7d38', '#3f6f8f', '#a9683a', '#8e4b6b', '#6b7a3f', '#b25a3a'];
+const RANK_COLORS = ['#d4af37', '#c0c0c0', '#cd7f32', '#2f7f74', '#2f7f74', '#2f7f74', '#8a7f6d', '#8a7f6d', '#8a7f6d', '#8a7f6d'];
+const REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const state = {
+  games: [],
+  online: { fetchedAt: '', top: [] },
+  meta: null,
+  fallback: false,
+  // 'api' = 走 server.js 的 /api/*；'snapshot' = 读 js/data.js
+  source: 'api',
+  sort: { key: 'rating', dir: 'desc' },
+};
+
+const $ = (id) => document.getElementById(id);
+const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
+
+function escapeHtml(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function sum(list, pick) {
+  return list.reduce((total, item) => total + (Number(pick(item)) || 0), 0);
+}
+
+function average(list, pick) {
+  return list.length ? sum(list, pick) / list.length : 0;
+}
+
+function fmt1(value) {
+  return Number(value || 0).toFixed(1);
+}
+
+function formatNumber(value) {
+  return Number(value || 0).toLocaleString('zh-CN');
+}
+
+function formatWan(value) {
+  const n = Number(value) || 0;
+  if (n >= 10000) {
+    const wan = n / 10000;
+    return `${wan >= 100 ? wan.toFixed(1) : wan.toFixed(1)}万`;
+  }
+  return formatNumber(n);
+}
+
+function formatPrice(price) {
+  const p = Number(price) || 0;
+  return p <= 0 ? '免费' : `¥${p}`;
+}
+
+function formatDateTime(iso) {
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return '—';
+  // 项目数据按北京时间展示，显式 +8 小时，避免访问者时区不同导致时间跳变
+  const local = new Date(date.getTime() + 8 * 60 * 60 * 1000);
+  return local.toISOString().slice(0, 16).replace('T', ' ');
+}
+
+function debounce(fn, wait) {
+  let timer = null;
+  return function debounced(...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this, args), wait);
   };
+}
 
-  const PALETTE = [
-    '#66c0f4', '#2ec4b6', '#f5a623', '#b18cff', '#a4d007',
-    '#4aa8e0', '#5eead4', '#f08a5d', '#c4b5fd', '#84cc16',
-  ];
+/* =========================================================
+   1. 数据接入与字段归一化
+   ========================================================= */
 
-  const TEXT = '#eaf4ff';
-  const MUTED = '#8fa7bd';
-  const MUTED_2 = '#6f879c';
-  const ACCENT = '#66c0f4';
-  const PANEL = '#0b1622';
-  const GRID_LINE = 'rgba(102, 192, 244, 0.08)';
-  const AXIS_LINE = 'rgba(102, 192, 244, 0.18)';
+async function fetchJson(url, timeout = 4200) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeout);
+  try {
+    const response = await fetch(url, { cache: 'no-store', signal: controller.signal });
+    if (!response.ok) throw new Error(`${url} → HTTP ${response.status}`);
+    return await response.json();
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
-  const PRICE_BANDS = [
-    { label: '免费', min: 0, max: 0 },
-    { label: '1–30 元', min: 1, max: 30 },
-    { label: '30–60 元', min: 30, max: 60 },
-    { label: '60–90 元', min: 60, max: 90 },
-    { label: '90–150 元', min: 90, max: 150 },
-    { label: '150–250 元', min: 150, max: 250 },
-    { label: '250 元以上', min: 250, max: Infinity },
-  ];
+function readLocalGames() {
+  // data.js 里是顶层 const，脚本之间共享词法作用域；用 typeof 防止文件缺失时报错
+  return typeof games !== 'undefined' && Array.isArray(games) ? games : [];
+}
 
-  const RATING_BANDS = [
-    { label: '95–100 分', min: 95, max: 100.1 },
-    { label: '90–95 分', min: 90, max: 95 },
-    { label: '80–90 分', min: 80, max: 90 },
-    { label: '70–80 分', min: 70, max: 80 },
-    { label: '60–70 分', min: 60, max: 70 },
-    { label: '60 分以下', min: 0, max: 60 },
-  ];
+function readLocalOnline() {
+  return typeof online !== 'undefined' && online && Array.isArray(online.top)
+    ? online
+    : { fetchedAt: '', top: [] };
+}
 
-  const STACK_TYPES = ['动作', '模拟', '角色扮演', '冒险', '独立', '其他'];
+/**
+ * 统一 data.js / data/games.json 的字段差异：
+ * - genres 数组 → 逗号字符串
+ * - discount_percent → discount
+ * - final_price / price 取实际售价
+ * - 没有 positive 时，用 rating × total_reviews 估算
+ */
+function normalizeGame(raw) {
+  const totalReviews = Number(raw.total_reviews) || 0;
+  const rating = Number(raw.rating) || 0;
+  const positive = raw.positive != null
+    ? Number(raw.positive) || 0
+    : Math.round((rating / 100) * totalReviews);
+  const genres = Array.isArray(raw.genres)
+    ? raw.genres.filter(Boolean).join(',')
+    : String(raw.genres || '');
 
-  const charts = {};
-  const state = {
-    games: [],
-    online: { fetchedAt: null, top: [] },
-    meta: null,
-    source: 'local',
+  return {
+    appid: Number(raw.appid),
+    name: String(raw.name || '未知游戏'),
+    price: Number(raw.final_price != null ? raw.final_price : raw.price) || 0,
+    discount: clamp(Number(raw.discount_percent != null ? raw.discount_percent : raw.discount) || 0, 0, 100),
+    type: String(raw.type || '未知'),
+    genres,
+    year: Number(raw.year) || 0,
+    rating: clamp(rating, 0, 100),
+    positive,
+    total_reviews: totalReviews,
+    url: String(raw.url || `https://store.steampowered.com/app/${raw.appid}/`),
   };
+}
 
-  const reducedMotion = window.matchMedia
-    && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function normalizeOnline(raw) {
+  const top = (Array.isArray(raw && raw.top) ? raw.top : [])
+    .map((item, index) => ({
+      rank: Number(item.rank) || index + 1,
+      appid: Number(item.appid),
+      current_players: Number(
+        item.current_players != null ? item.current_players : item.peak_in_game
+      ) || 0,
+      last_week_rank: item.last_week_rank != null ? Number(item.last_week_rank) : null,
+    }))
+    .filter((item) => item.appid > 0)
+    .sort((a, b) => a.rank - b.rank)
+    .slice(0, 10);
 
-  /* ---------------- 基础工具 ---------------- */
+  return {
+    fetchedAt: String((raw && raw.fetchedAt) || ''),
+    source: String((raw && raw.source) || ''),
+    top,
+  };
+}
 
-  function toNumber(value, fallback = 0) {
-    const n = Number(value);
-    return Number.isFinite(n) ? n : fallback;
+async function loadData() {
+  const localGames = readLocalGames();
+  const localOnline = readLocalOnline();
+  const results = await Promise.allSettled([
+    fetchJson('/api/games'),
+    fetchJson('/api/meta'),
+    fetchJson('/api/online'),
+  ]);
+
+  let rawGames = null;
+  let rawMeta = null;
+  let rawOnline = null;
+
+  if (results[0].status === 'fulfilled' && Array.isArray(results[0].value) && results[0].value.length) {
+    rawGames = results[0].value;
+  }
+  if (results[1].status === 'fulfilled' && results[1].value) {
+    rawMeta = results[1].value;
+  }
+  if (results[2].status === 'fulfilled' && results[2].value) {
+    rawOnline = results[2].value;
   }
 
-  function clamp(n, min, max) {
-    return Math.min(max, Math.max(min, n));
-  }
+  const gamesOk = rawGames && rawGames.length;
+  const onlineOk = rawOnline && Array.isArray(rawOnline.top) && rawOnline.top.length;
+  state.fallback = !gamesOk || !onlineOk;
+  state.source = (gamesOk && onlineOk) ? 'api' : 'snapshot';
 
-  function formatNumber(n) {
-    return new Intl.NumberFormat('zh-CN').format(Math.round(n));
-  }
+  state.games = (gamesOk ? rawGames : localGames).map(normalizeGame).filter((g) => g.appid);
+  state.online = normalizeOnline(onlineOk ? rawOnline : localOnline);
+  state.meta = rawMeta || null;
 
-  function formatWan(n) {
-    if (n >= 10000) {
-      return `${(n / 10000).toFixed(1).replace(/\.0$/, '')}万`;
+  // 后端失败时 body 加 no-motion，CSS 会把卡片直接显示，数字也不再滚动
+  if (state.fallback) {
+    document.body.classList.add('no-motion');
+  }
+}
+
+/* =========================================================
+   2. 指标计算（全部从 state.games / state.online 实时算）
+   ========================================================= */
+
+function computeStats() {
+  const games = state.games;
+  const totalReviews = sum(games, (g) => g.total_reviews);
+  const positive = sum(games, (g) => g.positive);
+  const free = games.filter((g) => g.price <= 0);
+  const paid = games.filter((g) => g.price > 0);
+  const onlineTop = state.online.top;
+
+  const typeMap = new Map();
+  for (const game of games) {
+    const item = typeMap.get(game.type) || { name: game.type, count: 0, priceSum: 0 };
+    item.count += 1;
+    item.priceSum += game.price;
+    typeMap.set(game.type, item);
+  }
+  const typeStats = [...typeMap.values()]
+    .map((item) => ({
+      name: item.name,
+      count: item.count,
+      avgPrice: item.count ? item.priceSum / item.count : 0,
+      share: games.length ? (item.count / games.length) * 100 : 0,
+    }))
+    .sort((a, b) => b.count - a.count);
+
+  const yearMap = new Map();
+  for (const game of games) {
+    if (!game.year) continue;
+    const item = yearMap.get(game.year) || { year: game.year, count: 0, positive: 0, reviews: 0 };
+    item.count += 1;
+    item.positive += game.positive;
+    item.reviews += game.total_reviews;
+    yearMap.set(game.year, item);
+  }
+  const yearStats = [...yearMap.values()]
+    .sort((a, b) => a.year - b.year)
+    .map((item) => ({
+      year: item.year,
+      count: item.count,
+      avgRating: item.reviews ? (item.positive / item.reviews) * 100 : 0,
+      reviews: item.reviews,
+    }));
+
+  const genreMap = new Map();
+  for (const game of games) {
+    for (const tag of game.genres.split(',').map((s) => s.trim()).filter(Boolean)) {
+      genreMap.set(tag, (genreMap.get(tag) || 0) + 1);
     }
-    if (n >= 1000) {
-      return `${(n / 1000).toFixed(1).replace(/\.0$/, '')}千`;
+  }
+  const genreStats = [...genreMap.entries()]
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => b.count - a.count);
+
+  const typeYearMap = new Map();
+  for (const game of games) {
+    if (!game.year) continue;
+    const key = `${game.type}__${game.year}`;
+    typeYearMap.set(key, (typeYearMap.get(key) || 0) + 1);
+  }
+
+  const top3 = onlineTop.slice(0, 3);
+  const top3Players = sum(top3, (item) => item.current_players);
+  const onlineTotal = sum(onlineTop, (item) => item.current_players);
+
+  return {
+    total: games.length,
+    avgPrice: average(games, (g) => g.price),
+    paidAvgPrice: average(paid, (g) => g.price),
+    weightedRating: totalReviews ? (positive / totalReviews) * 100 : 0,
+    arithmeticRating: average(games, (g) => g.rating),
+    freeCount: free.length,
+    paidCount: paid.length,
+    freeShare: games.length ? (free.length / games.length) * 100 : 0,
+    typeStats,
+    yearStats,
+    genreStats,
+    typeYearMap,
+    onlineTotal,
+    top3Share: onlineTotal ? (top3Players / onlineTotal) * 100 : 0,
+    reviews: totalReviews,
+  };
+}
+
+let stats = null;
+
+/* =========================================================
+   3. DOM 渲染
+   ========================================================= */
+
+function setText(id, value) {
+  const el = $(id);
+  if (el) el.textContent = value;
+}
+
+function animateNumber(el, target, decimals = 0) {
+  if (!el) return;
+  const final = Number(target) || 0;
+  if (state.fallback || REDUCED) {
+    el.textContent = final.toFixed(decimals);
+    return;
+  }
+  const duration = 800;
+  const start = performance.now();
+  const from = 0;
+  const tick = (now) => {
+    const progress = clamp((now - start) / duration, 0, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = (from + (final - from) * eased).toFixed(decimals);
+    if (progress < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+function renderHeader() {
+  const fetchedAt = state.online.fetchedAt;
+  const stamp = formatDateTime(fetchedAt);
+  setText('update-time', `数据更新：${stamp}`);
+  setText('hero-fetched', stamp);
+
+  const tag = $('fallback-tag');
+  if (tag) {
+    if (!state.fallback) {
+      tag.hidden = true;
+      tag.textContent = '';
+      tag.removeAttribute('title');
+    } else {
+      tag.hidden = false;
+      tag.textContent = `（本地快照模式 · ${stamp}）`;
+      tag.title = '未能连接本地服务 /api/*，正在显示 js/data.js 的静态快照；运行 npm start 后访问 http://localhost:8080 可看到实时数据';
     }
-    return formatNumber(n);
   }
+}
 
-  function formatPrice(n) {
-    return n === 0 ? '免费' : `¥${Math.round(n)}`;
+function renderHero() {
+  setText('hero-games', stats.total);
+  setText('chip-games', stats.total);
+  setText('chip-price', fmt1(stats.avgPrice));
+  setText('chip-rating', fmt1(stats.weightedRating));
+  setText('chip-free', fmt1(stats.freeShare));
+  setText('hero-online', (stats.onlineTotal / 10000).toFixed(1));
+
+  animateNumber($('hero-games'), stats.total, 0);
+  animateNumber($('chip-games'), stats.total, 0);
+  animateNumber($('chip-price'), stats.avgPrice, 1);
+  animateNumber($('chip-rating'), stats.weightedRating, 1);
+  animateNumber($('chip-free'), stats.freeShare, 1);
+  animateNumber($('hero-online'), stats.onlineTotal / 10000, 1);
+}
+
+function onlineName(item) {
+  const game = state.games.find((g) => g.appid === item.appid);
+  if (game) return game.name;
+  const fallback = typeof appNameFallback !== 'undefined' ? appNameFallback[String(item.appid)] : '';
+  return fallback || `AppID ${item.appid}`;
+}
+
+function renderTop10() {
+  const wrap = $('top10-list');
+  if (!wrap) return;
+  const top = state.online.top.slice(0, 10);
+  if (!top.length) {
+    wrap.innerHTML = '<p class="table-empty">实时在线数据暂不可用</p>';
+    return;
   }
+  const max = Math.max(...top.map((item) => item.current_players), 1);
+  wrap.innerHTML = top.map((item) => {
+    const color = RANK_COLORS[item.rank - 1] || RANK_COLORS[9];
+    const width = Math.max(2, (item.current_players / max) * 100);
+    const name = onlineName(item);
+    const last = item.last_week_rank;
+    const trend = last == null ? 'flat' : item.rank < last ? 'up' : item.rank > last ? 'down' : 'flat';
+    const arrow = trend === 'up' ? '↑' : trend === 'down' ? '↓' : '—';
+    const trendTitle = last == null ? '上周排名未知' : `上周第 ${last} 名`;
+    return `
+      <div class="top10__row" title="${escapeHtml(name)} · 当前在线 ${formatNumber(item.current_players)} 人">
+        <span class="medal medal--${item.rank}">${String(item.rank).padStart(2, '0')}</span>
+        <span class="top10__name">${escapeHtml(name)}</span>
+        <span class="top10__bar"><i style="width:${width}%;background:${color}"></i></span>
+        <span class="top10__players">${formatWan(item.current_players)}</span>
+        <span class="top10__trend top10__trend--${trend}" title="${trendTitle}">${arrow}</span>
+        <span class="top10__dot" aria-hidden="true"></span>
+      </div>`;
+  }).join('');
+}
 
-  function formatDateTime(iso) {
-    if (!iso) return '—';
-    const date = new Date(iso);
-    if (Number.isNaN(date.getTime())) return String(iso);
-    const bj = new Date(date.getTime() + 8 * 60 * 60 * 1000);
-    const pad = (n) => String(n).padStart(2, '0');
-    return `${bj.getUTCFullYear()}-${pad(bj.getUTCMonth() + 1)}-${pad(bj.getUTCDate())} ${pad(bj.getUTCHours())}:${pad(bj.getUTCMinutes())}`;
-  }
+const PRICE_BANDS = [
+  { label: '免费', min: 0, max: 0 },
+  { label: '1–30 元', min: 1, max: 30 },
+  { label: '31–60 元', min: 31, max: 60 },
+  { label: '61–100 元', min: 61, max: 100 },
+  { label: '101–200 元', min: 101, max: 200 },
+  { label: '200+ 元', min: 201, max: Infinity },
+];
 
-  function truncate(text, max) {
-    const value = String(text || '');
-    return value.length > max ? `${value.slice(0, max)}…` : value;
-  }
+function renderPriceWall() {
+  const wrap = $('price-wall');
+  if (!wrap) return;
+  wrap.innerHTML = PRICE_BANDS.map((band) => {
+    const games = state.games.filter((g) => g.price >= band.min && g.price <= band.max);
+    const discounts = games.map((g) => g.discount).filter((d) => d > 0).sort((a, b) => b - a);
+    const visible = Math.min(games.length, 12);
+    const badges = [];
 
-  function escapeHtml(value) {
-    return String(value)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
-  }
-
-  function average(list) {
-    return list.length ? list.reduce((sum, n) => sum + n, 0) / list.length : 0;
-  }
-
-  /* 按评价数加权的好评率 */
-  function weightedRating(list) {
-    const valid = list.filter((g) => g.rating > 0);
-    const reviews = valid.reduce((sum, g) => sum + (g.total_reviews || 0), 0);
-    if (!reviews) return average(valid.map((g) => g.rating));
-    return valid.reduce((sum, g) => sum + g.rating * (g.total_reviews || 0), 0) / reviews;
-  }
-
-  function setText(id, value) {
-    const el = document.getElementById(id);
-    if (el) el.textContent = value;
-  }
-
-  function debounce(fn, wait) {
-    let timer = null;
-    return function debounced() {
-      window.clearTimeout(timer);
-      timer = window.setTimeout(fn, wait);
-    };
-  }
-
-  /* ---------------- 数据加载 / 归一化 ---------------- */
-
-  function readFallback() {
-    let fallbackGames = [];
-    let fallbackOnline = { fetchedAt: null, top: [] };
-    let fallbackNames = {};
-
-    try {
-      if (typeof games !== 'undefined' && Array.isArray(games)) fallbackGames = games;
-      if (typeof online !== 'undefined' && online && Array.isArray(online.top)) fallbackOnline = online;
-      if (typeof appNameFallback !== 'undefined' && appNameFallback) fallbackNames = appNameFallback;
-    } catch (error) {
-      console.warn('本地回退数据读取失败', error);
+    for (let i = 0; i < visible; i += 1) {
+      const discount = discounts[i];
+      const text = discount ? `-${discount}%` : (band.min === 0 ? 'FREE' : '原价');
+      const plain = discount ? '' : ' discount-badge--plain';
+      badges.push(`<span class="discount-badge${plain}">${text}</span>`);
+    }
+    if (games.length > visible) {
+      badges.push(`<span class="discount-badge discount-badge--more">+${games.length - visible}</span>`);
     }
 
-    return { games: fallbackGames, online: fallbackOnline, names: fallbackNames };
-  }
+    return `
+      <div class="price-band">
+        <div class="price-band__badges">${badges.join('')}</div>
+        <div class="price-band__name">${band.label}</div>
+        <div class="price-band__count">${games.length}<small> 款</small></div>
+      </div>`;
+  }).join('');
+}
 
-  function fetchJson(url, timeout = 2200) {
-    const controller = new AbortController();
-    const timer = window.setTimeout(() => controller.abort(), timeout);
-    return fetch(url, {
-      signal: controller.signal,
-      headers: { Accept: 'application/json' },
-      cache: 'no-store',
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error(`${url} HTTP ${res.status}`);
-        return res.json();
-      })
-      .finally(() => window.clearTimeout(timer));
-  }
+const RATING_BANDS = [
+  { label: '好评如潮', min: 95, max: 100, bg: '#1f6f4a' },
+  { label: '特别好评', min: 80, max: 94.999, bg: '#4c9a2a', light: true },
+  { label: '多半好评', min: 70, max: 79.999, bg: '#9ab52f', light: true },
+  { label: '褒贬不一', min: 40, max: 69.999, bg: '#c47a24' },
+  { label: '差评', min: 0, max: 39.999, bg: '#a83b38' },
+];
 
-  function unwrapGames(payload) {
-    if (Array.isArray(payload)) return payload;
-    if (payload && Array.isArray(payload.games)) return payload.games;
-    if (payload && Array.isArray(payload.data)) return payload.data;
-    return [];
-  }
+function renderRatingWall() {
+  const wrap = $('rating-wall');
+  if (!wrap) return;
+  wrap.innerHTML = RATING_BANDS.map((band) => {
+    const count = state.games.filter((g) => g.rating >= band.min && g.rating <= band.max).length;
+    return `
+      <div class="rating-tag ${band.light ? 'rating-tag--light' : ''}" style="--tag-bg:${band.bg}" title="${band.label}：${count} 款">
+        <span class="rating-tag__label">${band.label}</span>
+        <span class="rating-tag__count">${count}<small> 款</small></span>
+      </div>`;
+  }).join('');
+}
 
-  function unwrapOnline(payload) {
-    if (!payload) return null;
-    if (Array.isArray(payload.top)) return payload;
-    if (Array.isArray(payload.games)) return { ...payload, top: payload.games };
-    if (payload.data && Array.isArray(payload.data.top)) return payload.data;
-    return null;
-  }
+function findGame(...keywords) {
+  return state.games.find((game) => keywords.some((keyword) => game.name.includes(keyword)));
+}
 
-  function normalizeGenres(value, type) {
-    let list = [];
+function renderCases() {
+  const wrap = $('case-grid');
+  if (!wrap) return;
+  const cases = [
+    { game: findGame('Stardew', '星露谷'), label: '星露谷', tag: '口碑天花板', color: '#9bff3d' },
+    { game: findGame('博德之门3', 'Baldur'), label: '博德之门3', tag: '高分神作', color: '#2f7f74' },
+    { game: findGame('都市：天际线2', '城市天际线2', 'Cities: Skylines'), label: '城市天际线2', tag: '在线高但口碑争议', color: '#d99b2b' },
+    { game: findGame('PUBG'), label: 'PUBG', tag: '流量大但好评不高', color: '#e25d5d' },
+  ];
+  wrap.innerHTML = cases.map((item) => {
+    const game = item.game;
+    if (!game) return '';
+    return `
+      <div class="case-card" style="--case-color:${item.color}">
+        <div class="case-card__name">${escapeHtml(item.label)}</div>
+        <div class="case-card__score">${fmt1(game.rating)}</div>
+        <div class="case-card__tag">${item.tag}</div>
+      </div>`;
+  }).join('');
+}
 
-    if (Array.isArray(value)) {
-      list = value;
-    } else if (typeof value === 'string') {
-      list = value.split(/[,，、|/]/);
+/* =========================================================
+   4. 明细表：一次渲染、前端筛选/排序
+   ========================================================= */
+
+function fillTypeFilter() {
+  const select = $('type-filter');
+  if (!select) return;
+  const types = [...new Set(state.games.map((g) => g.type))].sort((a, b) => a.localeCompare(b, 'zh-CN'));
+  select.innerHTML = '<option value="">全部类型</option>' + types
+    .map((type) => `<option value="${escapeHtml(type)}">${escapeHtml(type)}</option>`)
+    .join('');
+}
+
+function tableRows() {
+  const type = ($('type-filter') && $('type-filter').value) || '';
+  const keyword = ($('search-input') && $('search-input').value.trim().toLowerCase()) || '';
+  const rows = state.games.filter((game) => {
+    if (type && game.type !== type) return false;
+    if (keyword && !game.name.toLowerCase().includes(keyword)) return false;
+    return true;
+  });
+
+  const { key, dir } = state.sort;
+  const factor = dir === 'asc' ? 1 : -1;
+  rows.sort((a, b) => {
+    if (key === 'name' || key === 'type') {
+      return a[key].localeCompare(b[key], 'zh-CN') * factor;
     }
+    return ((Number(a[key]) || 0) - (Number(b[key]) || 0)) * factor;
+  });
+  return rows;
+}
 
-    const cleaned = list
-      .map((item) => String(item || '').trim())
-      .filter(Boolean);
+function renderTable() {
+  const tbody = $('games-tbody');
+  if (!tbody) return;
+  const rows = tableRows();
+  setText('table-count', `${rows.length} 款`);
 
-    if (!cleaned.length) cleaned.push(type || '其他');
-    return Array.from(new Set(cleaned));
-  }
+  tbody.innerHTML = rows.length
+    ? rows.map((game) => `
+      <tr>
+        <td title="${escapeHtml(game.name)}">${escapeHtml(game.name)}</td>
+        <td>${escapeHtml(game.type)}</td>
+        <td>${formatPrice(game.price)}</td>
+        <td>${fmt1(game.rating)}</td>
+        <td>${formatNumber(game.total_reviews)}</td>
+        <td>${game.year || '—'}</td>
+      </tr>`).join('')
+    : '<tr><td class="table-empty" colspan="6">没有匹配的游戏</td></tr>';
 
-  function normalizeGames(rawList) {
-    return rawList
-      .map((raw) => {
-        const appid = toNumber(raw.appid ?? raw.app_id ?? raw.id, 0);
-        const name = String(raw.name || `AppID ${appid}`);
-        let price = raw.price;
-
-        if (price == null) price = raw.final_price;
-        if (price == null && raw.price_overview) price = raw.price_overview.final / 100;
-        price = Math.max(0, toNumber(price, 0));
-
-        let totalReviews = toNumber(
-          raw.total_reviews ?? raw.reviews ?? raw.review_count,
-          0,
-        );
-
-        let rating = raw.rating == null ? null : Number(raw.rating);
-        if (rating == null && raw.positive != null && totalReviews > 0) {
-          rating = (Number(raw.positive) / totalReviews) * 100;
-        }
-        rating = clamp(toNumber(rating, 0), 0, 100);
-
-        let year = toNumber(raw.year, 0);
-        if (!year && raw.release_date) {
-          const match = /(\d{4})/.exec(String(raw.release_date));
-          if (match) year = Number(match[1]);
-        }
-
-        // 已核实：Valheim 的发售年份不是 2026
-        if (appid === 892970) year = 2022;
-
-        const type = String(raw.type || '').trim()
-          || (Array.isArray(raw.genres) && raw.genres[0])
-          || '其他';
-        const genres = normalizeGenres(raw.genres, type);
-
-        return {
-          appid,
-          name,
-          price,
-          rating,
-          total_reviews: totalReviews,
-          type,
-          genres,
-          year,
-          discount: toNumber(raw.discount ?? raw.discount_percent, 0),
-        };
-      })
-      .filter((g) => g.appid && g.name);
-  }
-
-  function normalizeOnline(raw, gamesList, fallbackNames) {
-    const byAppId = new Map(gamesList.map((g) => [g.appid, g]));
-    const topRaw = raw && Array.isArray(raw.top) ? raw.top : [];
-    const top = topRaw.slice(0, 10).map((item, index) => {
-      const appid = toNumber(item.appid ?? item.app_id, 0);
-      const value = toNumber(
-        item.peak_in_game ?? item.current_players ?? item.player_count ?? item.online,
-        0,
-      );
-      const rank = toNumber(item.rank, index + 1);
-      const lastRank = toNumber(item.last_week_rank ?? item.last_rank, rank);
-      const local = byAppId.get(appid);
-      const name = item.name
-        || (local && local.name)
-        || (fallbackNames && fallbackNames[appid])
-        || `AppID ${appid}`;
-
-      return { appid, name, value, rank, lastRank };
-    }).sort((a, b) => a.rank - b.rank);
-
-    return {
-      fetchedAt: (raw && (raw.fetchedAt || raw.fetched_at || raw.time)) || null,
-      top,
-    };
-  }
-
-  async function loadData() {
-    const fallback = readFallback();
-    const results = await Promise.allSettled([
-      fetchJson(API.games),
-      fetchJson(API.meta),
-      fetchJson(API.online),
-    ]);
-
-    const gamesResult = results[0];
-    const metaResult = results[1];
-    const onlineResult = results[2];
-
-    const apiGames = gamesResult.status === 'fulfilled' ? unwrapGames(gamesResult.value) : [];
-    const rawGames = apiGames.length ? apiGames : fallback.games;
-    const gamesList = normalizeGames(rawGames);
-
-    const apiOnline = onlineResult.status === 'fulfilled'
-      ? unwrapOnline(onlineResult.value)
-      : null;
-    const rawOnline = apiOnline && apiOnline.top.length ? apiOnline : fallback.online;
-    const onlineData = normalizeOnline(rawOnline, gamesList, fallback.names);
-
-    return {
-      games: gamesList,
-      online: onlineData,
-      meta: metaResult.status === 'fulfilled' ? metaResult.value : null,
-      source: apiGames.length ? 'api' : 'local',
-    };
-  }
-
-  /* ---------------- 统计 ---------------- */
-
-  function deriveStats(gamesList, onlineData) {
-    const totalGames = gamesList.length;
-    const prices = gamesList.map((g) => g.price);
-    const ratings = gamesList.filter((g) => g.rating > 0).map((g) => g.rating);
-    const freeGames = gamesList.filter((g) => g.price === 0);
-    const paidGames = gamesList.filter((g) => g.price > 0);
-
-    const typeMap = new Map();
-    gamesList.forEach((game) => {
-      if (!typeMap.has(game.type)) typeMap.set(game.type, []);
-      typeMap.get(game.type).push(game);
+  const table = $('games-table');
+  if (table) {
+    table.querySelectorAll('th button').forEach((button) => {
+      const active = button.dataset.sort === state.sort.key;
+      button.setAttribute('aria-sort', active ? (state.sort.dir === 'asc' ? 'ascending' : 'descending') : 'none');
     });
+  }
+}
 
-    const typeStats = Array.from(typeMap.entries())
-      .map(([name, list]) => ({
-        name,
-        count: list.length,
-        share: totalGames ? (list.length / totalGames) * 100 : 0,
-        avgPrice: average(list.map((g) => g.price)),
-        rating: weightedRating(list),
-      }))
-      .sort((a, b) => b.count - a.count);
+function bindTable() {
+  const typeFilter = $('type-filter');
+  const search = $('search-input');
+  if (typeFilter) typeFilter.addEventListener('change', renderTable);
+  if (search) search.addEventListener('input', debounce(renderTable, 120));
 
-    const yearMap = new Map();
-    gamesList.forEach((game) => {
-      if (!game.year) return;
-      if (!yearMap.has(game.year)) yearMap.set(game.year, []);
-      yearMap.get(game.year).push(game);
-    });
-
-    const yearStats = Array.from(yearMap.entries())
-      .map(([year, list]) => ({
-        year,
-        count: list.length,
-        rating: weightedRating(list),
-      }))
-      .sort((a, b) => a.year - b.year);
-
-    const genreMap = new Map();
-    gamesList.forEach((game) => {
-      game.genres.forEach((genre) => {
-        genreMap.set(genre, (genreMap.get(genre) || 0) + 1);
+  const table = $('games-table');
+  if (table) {
+    table.querySelectorAll('th button').forEach((button) => {
+      button.addEventListener('click', () => {
+        const key = button.dataset.sort;
+        if (state.sort.key === key) {
+          state.sort.dir = state.sort.dir === 'asc' ? 'desc' : 'asc';
+        } else {
+          state.sort = { key, dir: key === 'name' || key === 'type' ? 'asc' : 'desc' };
+        }
+        renderTable();
       });
     });
-
-    const genreStats = Array.from(genreMap.entries())
-      .map(([name, count]) => ({ name, count }))
-      .sort((a, b) => b.count - a.count);
-
-    const priceBands = PRICE_BANDS.map((band) => {
-      const list = gameBand(gamesList, band.min, band.max);
-      return {
-        label: band.label,
-        total: list.length,
-        types: STACK_TYPES.map((type) => ({
-          type,
-          count: list.filter((g) => (type === '其他' ? !STACK_TYPES.includes(g.type) : g.type === type)).length,
-        })),
-      };
-    });
-
-    const ratingBands = RATING_BANDS.map((band) => {
-      const list = gamesList.filter((g) => g.rating >= band.min && g.rating < band.max);
-      const free = list.filter((g) => g.price === 0).length;
-      return {
-        label: band.label,
-        total: list.length,
-        free,
-        paid: list.length - free,
-      };
-    });
-
-    const onlineTotal = onlineData.top.reduce((sum, item) => sum + item.value, 0);
-    const top3 = onlineData.top.slice(0, 3).reduce((sum, item) => sum + item.value, 0);
-    const freeRating = weightedRating(freeGames);
-    const paidRating = weightedRating(paidGames);
-    const action = typeStats.find((item) => item.name === '动作') || { count: 0, share: 0, avgPrice: 0 };
-    const simulation = typeStats.find((item) => item.name === '模拟') || { avgPrice: 0 };
-    const year2026 = yearStats.find((item) => item.year === 2026) || { count: 0 };
-
-    return {
-      totalGames,
-      avgPrice: average(prices),
-      weightedRating: weightedRating(gamesList),
-      freeShare: totalGames ? (freeGames.length / totalGames) * 100 : 0,
-      freeCount: freeGames.length,
-      typeStats,
-      yearStats,
-      genreStats,
-      priceBands,
-      ratingBands,
-      onlineTotal,
-      top3Share: onlineTotal ? (top3 / onlineTotal) * 100 : 0,
-      freeRating,
-      paidRating,
-      ratingGap: paidRating - freeRating,
-      action,
-      simulation,
-      year2026: year2026.count,
-      maxRating: ratings.length ? Math.max(...ratings) : 0,
-      highRatingCount: gamesList.filter((g) => g.rating >= 90).length,
-    };
   }
 
-  function gameBand(list, min, max) {
-    return list.filter((game) => {
-      if (min === 0 && max === 0) return game.price === 0;
-      return game.price >= min && game.price < max;
+  const toggle = $('table-toggle');
+  const wrap = $('table-wrap');
+  if (toggle && wrap) {
+    toggle.addEventListener('click', () => {
+      const open = wrap.hidden;
+      wrap.hidden = !open;
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.innerHTML = open
+        ? '收起游戏明细 <span aria-hidden="true">↑</span>'
+        : '查看全部 123 款游戏明细 <span aria-hidden="true">→</span>';
+      if (open) wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
+}
 
-  /* ---------------- 图表公共样式 ---------------- */
+/* =========================================================
+   5. ECharts：只保留 4 张真正需要图的图
+   ========================================================= */
 
-  function baseTooltip() {
-    return {
-      backgroundColor: 'rgba(7, 17, 26, 0.97)',
-      borderColor: 'rgba(102, 192, 244, 0.34)',
+const charts = {};
+
+function chartBase() {
+  return {
+    backgroundColor: 'transparent',
+    textStyle: { fontFamily: '"Microsoft YaHei", "PingFang SC", sans-serif', color: '#6f604c' },
+    tooltip: {
+      backgroundColor: 'rgba(248, 239, 217, 0.98)',
+      borderColor: '#211c15',
       borderWidth: 1,
-      padding: [10, 13],
-      textStyle: { color: TEXT, fontSize: 12, lineHeight: 19 },
-      extraCssText: 'box-shadow: 0 16px 40px rgba(0,0,0,.46); border-radius: 8px;',
-    };
-  }
+      padding: [8, 10],
+      textStyle: { color: '#211c15', fontSize: 12 },
+      extraCssText: 'box-shadow:4px 4px 0 rgba(33,28,21,.18);',
+    },
+  };
+}
 
-  function axisLabel(extra) {
-    return Object.assign({ color: MUTED, fontSize: 10.5 }, extra || {});
-  }
+function initCharts() {
+  if (typeof echarts === 'undefined') return;
+  const rose = $('chart-type-rose');
+  const trend = $('chart-trend');
+  const wordcloud = $('chart-wordcloud');
+  const heatmap = $('chart-heatmap');
 
-  function splitLine() {
-    return { lineStyle: { color: GRID_LINE, type: 'dashed' } };
-  }
+  if (rose) charts.rose = echarts.init(rose);
+  if (trend) charts.trend = echarts.init(trend);
+  if (wordcloud) charts.wordcloud = echarts.init(wordcloud);
+  if (heatmap) charts.heatmap = echarts.init(heatmap);
+}
 
-  function chartOf(id) {
-    return charts[id] || null;
-  }
+function renderRose() {
+  if (!charts.rose) return;
+  const data = stats.typeStats.map((item) => ({
+    name: item.name,
+    value: item.count,
+    share: item.share,
+  }));
 
-  /* ---------------- 图表：TOP10 ---------------- */
-
-  function renderTop10(onlineData) {
-    const chart = chartOf('chart-top10');
-    if (!chart) return;
-
-    const rows = onlineData.top.slice().sort((a, b) => b.rank - a.rank);
-    if (!rows.length) {
-      chart.clear();
-      chart.setOption({
-        title: {
-          text: '暂无实时在线数据',
-          left: 'center',
-          top: 'middle',
-          textStyle: { color: MUTED, fontSize: 14, fontWeight: 400 },
+  charts.rose.setOption({
+    ...chartBase(),
+    color: PALETTE,
+    tooltip: {
+      ...chartBase().tooltip,
+      trigger: 'item',
+      formatter: (params) => `${params.name}<br/>游戏数：${params.value} 款<br/>占比：${params.percent}%`,
+    },
+    legend: {
+      type: 'scroll',
+      orient: 'vertical',
+      left: 0,
+      top: 'center',
+      itemWidth: 8,
+      itemHeight: 8,
+      itemGap: 10,
+      textStyle: { color: '#6f604c', fontSize: 11 },
+      pageTextStyle: { color: '#6f604c' },
+    },
+    series: [{
+      name: '类型数量',
+      type: 'pie',
+      radius: ['38%', '64%'],
+      center: ['59%', '50%'],
+      roseType: 'radius',
+      avoidLabelOverlap: true,
+      itemStyle: { borderColor: '#f8efd9', borderWidth: 2 },
+      label: { show: false },
+      emphasis: {
+        scale: true,
+        scaleSize: 5,
+        label: {
+          show: true,
+          color: '#eaf3fa',
+          fontSize: 12,
+          fontWeight: 700,
+          formatter: '{b}\n{c} 款',
         },
-      });
-      return;
-    }
+      },
+      data,
+    }],
+  }, true);
+}
 
-    chart.setOption({
-      animationDuration: reducedMotion ? 0 : 700,
-      textStyle: { fontFamily: getComputedStyle(document.body).fontFamily },
-      grid: { left: 340, right: 92, top: 10, bottom: 18, containLabel: false },
-      tooltip: Object.assign(baseTooltip(), {
-        trigger: 'item',
-        formatter: (params) => {
-          const row = rows[params.dataIndex];
-          const trend = row.lastRank > row.rank
-            ? `↑ 上升 ${row.lastRank - row.rank} 位`
-            : row.lastRank < row.rank
-              ? `↓ 下降 ${row.rank - row.lastRank} 位`
-              : '— 与上周持平';
-          return `<b>#${row.rank} ${escapeHtml(row.name)}</b><br/>`
-            + `当前在线：${formatNumber(row.value)} 人（${formatWan(row.value)}）<br/>`
-            + `上周排名：第 ${row.lastRank} 名<br/>`
-            + `名次变化：${trend}`;
-        },
-      }),
-      xAxis: {
+function renderTrend() {
+  if (!charts.trend) return;
+  const years = stats.yearStats.map((item) => item.year);
+  const counts = stats.yearStats.map((item) => item.count);
+  const ratings = stats.yearStats.map((item) => Number(fmt1(item.avgRating)));
+
+  charts.trend.setOption({
+    ...chartBase(),
+    color: ['#2f7f74', '#c63b2f'],
+    tooltip: {
+      ...chartBase().tooltip,
+      trigger: 'axis',
+      axisPointer: { type: 'shadow', shadowStyle: { color: 'rgba(102,192,244,.06)' } },
+      formatter: (params) => {
+        const year = params[0].axisValue;
+        const bar = params.find((p) => p.seriesName === '上架数量');
+        const line = params.find((p) => p.seriesName === '加权好评率');
+        return `${year} 年<br/>上架：${bar ? bar.value : 0} 款<br/>加权好评率：${line ? line.value : '—'}%`;
+      },
+    },
+    legend: {
+      top: 0,
+      left: 'center',
+      itemWidth: 12,
+      itemHeight: 8,
+      textStyle: { color: '#6f604c', fontSize: 11 },
+      data: ['上架数量', '加权好评率'],
+    },
+    grid: { left: 44, right: 56, top: 44, bottom: 34 },
+    xAxis: {
+      type: 'category',
+      data: years,
+      axisLine: { lineStyle: { color: 'rgba(33,28,21,.28)' } },
+      axisTick: { show: false },
+      axisLabel: { color: '#6f604c', fontSize: 10, interval: 0 },
+    },
+    yAxis: [
+      {
         type: 'value',
-        axisLine: { show: false },
-        axisTick: { show: false },
-        axisLabel: axisLabel({ formatter: (value) => formatWan(value) }),
-        splitLine: splitLine(),
+        name: '款',
+        nameTextStyle: { color: '#5f7489', fontSize: 10, padding: [0, 0, 4, 0] },
+        min: 0,
+        max: 50,
+        splitLine: { lineStyle: { color: 'rgba(33,28,21,.10)' } },
+        axisLabel: { color: '#6f604c', fontSize: 10 },
       },
-      yAxis: {
-        type: 'category',
-        data: rows.map((row) => row.name),
-        axisLine: { show: false },
-        axisTick: { show: false },
-        axisLabel: {
-          interval: 0,
-          formatter: (value, index) => {
-            const row = rows[index];
-            return `{rank|${String(row.rank).padStart(2, '0')}}  `
-              + `{name|${truncate(value, 21)}}`;
-          },
-          rich: {
-            rank: {
-              color: MUTED_2, fontSize: 11, fontWeight: 600, width: 26, align: 'right',
-            },
-            name: {
-              color: '#cfe6f7', fontSize: 13, width: 248, align: 'right',
-            },
-          },
-        },
+      {
+        type: 'value',
+        name: '好评率 %',
+        nameTextStyle: { color: '#5f7489', fontSize: 10, padding: [0, 0, 4, 0] },
+        min: 60,
+        max: 100,
+        splitLine: { show: false },
+        axisLabel: { color: '#6f604c', fontSize: 10, formatter: '{value}' },
       },
-      series: [{
+    ],
+    series: [
+      {
+        name: '上架数量',
         type: 'bar',
-        barWidth: 22,
-        showBackground: true,
-        backgroundStyle: { color: 'rgba(102, 192, 244, 0.055)' },
-        data: rows.map((row) => row.value),
+        data: counts,
+        barWidth: 12,
         itemStyle: {
-          borderRadius: [0, 3, 3, 0],
-          color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-            { offset: 0, color: '#1d4e70' },
-            { offset: 1, color: '#66c0f4' },
+          borderRadius: [2, 2, 0, 0],
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: '#7fb7a8' },
+            { offset: 1, color: '#2f7f74' },
           ]),
         },
-        emphasis: {
-          itemStyle: { color: '#9bdcff' },
-        },
-        label: {
-          show: true,
-          position: 'right',
-          distance: 9,
-          formatter: (params) => {
-            const row = rows[params.dataIndex];
-            const trendKey = row.lastRank > row.rank ? 'up'
-              : row.lastRank < row.rank ? 'down' : 'flat';
-            const arrow = trendKey === 'up' ? '↑' : trendKey === 'down' ? '↓' : '—';
-            return `{value|${formatWan(params.value)}}  {${trendKey}|${arrow}}`;
-          },
-          rich: {
-            value: { color: '#bfe7ff', fontSize: 12.5, fontWeight: 600 },
-            up: { color: '#ff7b7b', fontSize: 13, fontWeight: 700 },
-            down: { color: '#6ee7b7', fontSize: 13, fontWeight: 700 },
-            flat: { color: '#6f879c', fontSize: 13 },
-          },
-        },
-      }],
-    }, true);
-  }
-
-  /* ---------------- 图表：类型玫瑰 ---------------- */
-
-  function renderTypeRose(typeStats) {
-    const chart = chartOf('chart-type-rose');
-    if (!chart) return;
-
-    chart.setOption({
-      animationDuration: reducedMotion ? 0 : 700,
-      color: PALETTE,
-      tooltip: Object.assign(baseTooltip(), {
-        trigger: 'item',
-        formatter: (params) => {
-          const item = typeStats[params.dataIndex];
-          return `<b>${escapeHtml(params.name)}</b><br/>`
-            + `游戏数：${item.count} 款<br/>`
-            + `占样本：${item.share.toFixed(1)}%<br/>`
-            + `平均售价：${item.avgPrice.toFixed(1)} 元`;
-        },
-      }),
-      legend: {
-        type: 'scroll',
-        orient: 'vertical',
-        right: 2,
-        top: 'middle',
-        itemWidth: 7,
-        itemHeight: 7,
-        itemGap: 10,
-        icon: 'circle',
-        textStyle: { color: MUTED, fontSize: 10.5 },
-        pageTextStyle: { color: MUTED },
-        pageIconColor: ACCENT,
+        emphasis: { itemStyle: { color: '#a8d4c7' } },
       },
-      graphic: [{
-        type: 'text',
-        left: '39%',
-        top: '52%',
-        style: {
-          text: `${typeStats.length}\n类主类型`,
-          textAlign: 'center',
-          textVerticalAlign: 'middle',
-          fill: '#dcecf8',
-          fontSize: 20,
-          fontWeight: 600,
-          lineHeight: 24,
-        },
-      }],
-      series: [{
-        name: '主类型',
-        type: 'pie',
-        radius: ['34%', '70%'],
-        center: ['39%', '52%'],
-        roseType: 'radius',
-        selectedMode: 'single',
-        selectedOffset: 8,
-        avoidLabelOverlap: true,
-        itemStyle: {
-          borderColor: '#0b1622',
-          borderWidth: 2,
-          borderRadius: 3,
-        },
-        label: { show: false },
-        labelLine: { show: false },
-        emphasis: {
-          scale: true,
-          scaleSize: 5,
-          itemStyle: { shadowBlur: 18, shadowColor: 'rgba(102, 192, 244, 0.3)' },
-        },
-        data: typeStats.map((item, index) => ({
-          name: item.name,
-          value: item.count,
-          itemStyle: { color: PALETTE[index % PALETTE.length] },
-        })),
-      }],
-    }, true);
-  }
-
-  /* ---------------- 图表：价格带 ---------------- */
-
-  function renderPrice(stats) {
-    const chart = chartOf('chart-price');
-    if (!chart) return;
-
-    const labels = stats.priceBands.map((band) => band.label);
-    const series = STACK_TYPES.map((type, index) => ({
-      name: type,
-      type: 'bar',
-      stack: 'price',
-      barWidth: '48%',
-      itemStyle: { color: PALETTE[index % PALETTE.length] },
-      emphasis: { focus: 'series' },
-      data: stats.priceBands.map((band) => {
-        const row = band.types.find((item) => item.type === type);
-        return row ? row.count : 0;
-      }),
-    }));
-
-    chart.setOption({
-      animationDuration: reducedMotion ? 0 : 650,
-      tooltip: Object.assign(baseTooltip(), {
-        trigger: 'axis',
-        axisPointer: { type: 'shadow', shadowStyle: { color: 'rgba(102, 192, 244, 0.06)' } },
-        formatter: (params) => {
-          const index = params[0].dataIndex;
-          const band = stats.priceBands[index];
-          const rows = params
-            .filter((item) => item.value > 0)
-            .map((item) => `${item.marker} ${item.seriesName}：${item.value} 款`)
-            .join('<br/>');
-          return `<b>${band.label}</b><br/>${rows}<br/>合计：${band.total} 款`;
-        },
-      }),
-      legend: {
-        top: 0,
-        left: 0,
-        itemWidth: 8,
-        itemHeight: 8,
-        itemGap: 12,
-        icon: 'roundRect',
-        textStyle: { color: MUTED, fontSize: 10.5 },
+      {
+        name: '加权好评率',
+        type: 'line',
+        yAxisIndex: 1,
+        data: ratings,
+        smooth: false,
+        connectNulls: false,
+        symbol: 'circle',
+        symbolSize: 5,
+        lineStyle: { width: 2, color: '#c63b2f' },
+        itemStyle: { color: '#c63b2f', borderColor: '#f8efd9', borderWidth: 2 },
+        emphasis: { scale: 1.5 },
       },
-      grid: { left: 40, right: 16, top: 38, bottom: 32 },
-      xAxis: {
-        type: 'category',
-        data: labels,
-        axisLine: { lineStyle: { color: AXIS_LINE } },
-        axisTick: { show: false },
-        axisLabel: axisLabel({ interval: 0, fontSize: 9.5, rotate: 22 }),
+    ],
+  }, true);
+}
+
+function renderWordcloud() {
+  if (!charts.wordcloud) return;
+  charts.wordcloud.setOption({
+    ...chartBase(),
+    tooltip: {
+      ...chartBase().tooltip,
+      formatter: (params) => `${params.name}<br/>出现次数：${params.value} 次`,
+    },
+    series: [{
+      type: 'wordCloud',
+      shape: 'circle',
+      left: 'center',
+      top: 'center',
+      width: '98%',
+      height: '94%',
+      sizeRange: [15, 62],
+      rotationRange: [-30, 30],
+      rotationStep: 15,
+      gridSize: 4,
+      drawOutOfBound: false,
+      textStyle: {
+        fontFamily: '"Microsoft YaHei", "PingFang SC", sans-serif',
+        fontWeight: 700,
+        color: (params) => PALETTE[params.dataIndex % PALETTE.length],
       },
-      yAxis: {
-        type: 'value',
-        name: '款',
-        nameTextStyle: { color: MUTED_2, fontSize: 10 },
-        axisLine: { show: false },
-        axisTick: { show: false },
-        axisLabel: axisLabel(),
-        splitLine: splitLine(),
-      },
-      series,
-    }, true);
-  }
-
-  /* ---------------- 图表：年度趋势 ---------------- */
-
-  function renderTrend(yearStats) {
-    const chart = chartOf('chart-trend');
-    if (!chart) return;
-
-    const years = yearStats.map((item) => item.year);
-    chart.setOption({
-      animationDuration: reducedMotion ? 0 : 700,
-      textStyle: { fontFamily: getComputedStyle(document.body).fontFamily },
-      tooltip: Object.assign(baseTooltip(), {
-        trigger: 'axis',
-        axisPointer: { type: 'cross', crossStyle: { color: 'rgba(102,192,244,.3)' } },
-        formatter: (params) => {
-          const index = params[0].dataIndex;
-          const item = yearStats[index];
-          return `<b>${item.year} 年</b><br/>`
-            + `样本游戏数：${item.count} 款<br/>`
-            + `加权好评率：${item.rating.toFixed(1)}%`;
-        },
-      }),
-      legend: {
-        top: 4,
-        left: 'center',
-        itemWidth: 9,
-        itemHeight: 9,
-        itemGap: 14,
-        icon: 'circle',
-        textStyle: { color: MUTED, fontSize: 10.5 },
-      },
-      grid: { left: 46, right: 48, top: 42, bottom: 32 },
-      xAxis: {
-        type: 'category',
-        data: years,
-        axisLine: { lineStyle: { color: AXIS_LINE } },
-        axisTick: { show: false },
-        axisLabel: axisLabel({ interval: 0, fontSize: 9.5 }),
-      },
-      yAxis: [
-        {
-          type: 'value',
-          name: '样本数',
-          nameTextStyle: { color: MUTED_2, fontSize: 10 },
-          min: 0,
-          axisLine: { show: false },
-          axisTick: { show: false },
-          axisLabel: axisLabel(),
-          splitLine: splitLine(),
-        },
-        {
-          type: 'value',
-          name: '好评率 %',
-          nameTextStyle: { color: MUTED_2, fontSize: 10 },
-          min: 60,
-          max: 100,
-          interval: 10,
-          axisLine: { show: false },
-          axisTick: { show: false },
-          axisLabel: axisLabel({ formatter: '{value}%' }),
-          splitLine: { show: false },
-        },
-      ],
-      series: [
-        {
-          name: '当年样本数',
-          type: 'bar',
-          barWidth: '42%',
-          data: yearStats.map((item) => item.count),
-          itemStyle: {
-            borderRadius: [2, 2, 0, 0],
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-              { offset: 0, color: '#66c0f4' },
-              { offset: 1, color: 'rgba(35, 111, 151, 0.32)' },
-            ]),
-          },
-          emphasis: { itemStyle: { color: '#9bdcff' } },
-        },
-        {
-          name: '加权好评率',
-          type: 'line',
-          yAxisIndex: 1,
-          data: yearStats.map((item) => Number(item.rating.toFixed(1))),
-          smooth: false,
-          symbol: 'circle',
-          symbolSize: 6,
-          lineStyle: { width: 2, color: '#f5a623' },
-          itemStyle: { color: '#f5a623', borderColor: '#0b1622', borderWidth: 1 },
-          emphasis: { scale: 1.6 },
-        },
-      ],
-    }, true);
-  }
-
-  /* ---------------- 图表：口碑分布 ---------------- */
-
-  function renderRating(stats) {
-    const chart = chartOf('chart-rating');
-    if (!chart) return;
-
-    const rows = stats.ratingBands.slice().reverse();
-    const labels = rows.map((band) => band.label);
-    const totalFree = stats.freeCount;
-    const totalPaid = stats.totalGames - stats.freeCount;
-
-    chart.setOption({
-      animationDuration: reducedMotion ? 0 : 650,
-      tooltip: Object.assign(baseTooltip(), {
-        trigger: 'axis',
-        axisPointer: { type: 'shadow', shadowStyle: { color: 'rgba(102, 192, 244, 0.06)' } },
-        formatter: (params) => {
-          const index = params[0].dataIndex;
-          const band = rows[index];
-          const list = params.map((item) => {
-            const base = item.seriesName === '免费' ? totalFree : totalPaid;
-            const share = base ? ((item.value / base) * 100).toFixed(1) : '0.0';
-            return `${item.marker} ${item.seriesName}：${item.value} 款（占该组 ${share}%）`;
-          }).join('<br/>');
-          return `<b>${band.label}</b><br/>${list}<br/>合计：${band.total} 款`;
-        },
-      }),
-      legend: {
-        top: 0,
-        left: 0,
-        itemWidth: 8,
-        itemHeight: 8,
-        itemGap: 16,
-        icon: 'roundRect',
-        textStyle: { color: MUTED, fontSize: 10.5 },
-      },
-      grid: { left: 92, right: 80, top: 36, bottom: 28 },
-      xAxis: {
-        type: 'value',
-        name: '款',
-        nameTextStyle: { color: MUTED_2, fontSize: 10 },
-        axisLine: { show: false },
-        axisTick: { show: false },
-        axisLabel: axisLabel(),
-        splitLine: splitLine(),
-      },
-      yAxis: {
-        type: 'category',
-        data: labels,
-        axisLine: { show: false },
-        axisTick: { show: false },
-        axisLabel: axisLabel({ fontSize: 11 }),
-      },
-      series: [
-        {
-          name: '免费',
-          type: 'bar',
-          barWidth: 14,
-          data: rows.map((band) => band.free),
-          itemStyle: { color: '#2ec4b6', borderRadius: [0, 2, 2, 0] },
-          label: {
-            show: true,
-            position: 'right',
-            color: '#8fe3d8',
-            fontSize: 10,
-            formatter: (params) => (params.value > 0 ? params.value : ''),
-          },
-        },
-        {
-          name: '付费',
-          type: 'bar',
-          barWidth: 14,
-          data: rows.map((band) => band.paid),
-          itemStyle: { color: '#66c0f4', borderRadius: [0, 2, 2, 0] },
-          label: {
-            show: true,
-            position: 'right',
-            color: '#bfe7ff',
-            fontSize: 10,
-            formatter: (params) => (params.value > 0 ? params.value : ''),
-          },
-        },
-      ],
-    }, true);
-  }
-
-  /* ---------------- 图表：词云 ---------------- */
-
-  function renderWordCloud(genreStats) {
-    const chart = chartOf('chart-wordcloud');
-    if (!chart) return;
-
-    const words = genreStats.map((item, index) => ({
-      name: item.name,
-      value: item.count,
-      textStyle: { color: PALETTE[index % PALETTE.length] },
-    }));
-
-    chart.setOption({
-      animationDuration: reducedMotion ? 0 : 500,
-      tooltip: Object.assign(baseTooltip(), {
-        trigger: 'item',
-        formatter: (params) => `<b>${escapeHtml(params.name)}</b><br/>出现：${params.value} 款游戏`,
-      }),
-      series: [{
-        type: 'wordCloud',
-        shape: 'circle',
-        width: '96%',
-        height: '88%',
-        left: 'center',
-        top: 'center',
-        sizeRange: [13, 46],
-        rotationRange: [0, 0],
-        rotationStep: 0,
-        gridSize: 7,
-        drawOutOfBound: false,
-        layoutAnimation: !reducedMotion,
+      emphasis: {
         textStyle: {
-          fontFamily: 'Inter, "HarmonyOS Sans SC", "Microsoft YaHei", sans-serif',
-          fontWeight: 650,
+          textShadowBlur: 12,
+          textShadowColor: 'rgba(102, 192, 244, 0.45)',
         },
-        emphasis: {
-          textStyle: {
-            shadowBlur: 14,
-            shadowColor: 'rgba(102, 192, 244, 0.45)',
-          },
-        },
-        data: words,
-      }],
-    }, true);
+      },
+      data: stats.genreStats.map((item) => ({ name: item.name, value: item.count })),
+    }],
+  }, true);
+}
+
+function renderHeatmap() {
+  if (!charts.heatmap) return;
+  const years = Array.from({ length: 2026 - 2009 + 1 }, (_, i) => 2009 + i);
+  const types = stats.typeStats.map((item) => item.name);
+  const cells = [];
+  let maxValue = 1;
+
+  for (let y = 0; y < types.length; y += 1) {
+    for (let x = 0; x < years.length; x += 1) {
+      const value = stats.typeYearMap.get(`${types[y]}__${years[x]}`) || 0;
+      maxValue = Math.max(maxValue, value);
+      cells.push([x, y, value]);
+    }
   }
 
-  /* ---------------- 图表：热力图 ---------------- */
-
-  function renderHeatmap(stats) {
-    const chart = chartOf('chart-heatmap');
-    if (!chart) return;
-
-    const years = stats.yearStats.map((item) => item.year);
-    const minYear = Math.min(...years);
-    const maxYear = Math.max(...years);
-    const fullYears = [];
-    for (let year = minYear; year <= maxYear; year += 1) fullYears.push(year);
-
-    const types = stats.typeStats.map((item) => item.name);
-    const typeIndex = new Map(types.map((type, index) => [type, index]));
-    const yearIndex = new Map(fullYears.map((year, index) => [year, index]));
-
-    const counts = new Map();
-
-    // 直接按游戏重新计算，避免丢失年份内类型分布
-    const data = [];
-    state.games.forEach((game) => {
-      if (!yearIndex.has(game.year)) return;
-      const key = `${game.year}|${game.type}`;
-      counts.set(key, (counts.get(key) || 0) + 1);
-    });
-
-    counts.forEach((count, key) => {
-      const parts = key.split('|');
-      const year = Number(parts[0]);
-      const type = parts.slice(1).join('|');
-      if (!typeIndex.has(type) || !yearIndex.has(year)) return;
-      data.push([yearIndex.get(year), typeIndex.get(type), count]);
-    });
-
-    const maxCount = Math.max(5, ...counts.values());
-
-    chart.setOption({
-      animationDuration: reducedMotion ? 0 : 600,
-      tooltip: Object.assign(baseTooltip(), {
+  charts.heatmap.setOption({
+    ...chartBase(),
+    tooltip: {
+      ...chartBase().tooltip,
+      formatter: (params) => {
+        const [x, y, value] = params.value;
+        return `${types[y]} · ${years[x]} 年<br/>游戏数：${value} 款`;
+      },
+    },
+    grid: { left: 64, right: 44, top: 10, bottom: 46 },
+    xAxis: {
+      type: 'category',
+      data: years,
+      splitArea: { show: false },
+      axisLine: { lineStyle: { color: 'rgba(33,28,21,.28)' } },
+      axisTick: { show: false },
+      axisLabel: { color: '#6f604c', fontSize: 9, rotate: 45 },
+    },
+    yAxis: {
+      type: 'category',
+      data: types,
+      inverse: true,
+      splitArea: { show: false },
+      axisLine: { lineStyle: { color: 'rgba(33,28,21,.32)' } },
+      axisTick: { show: false },
+      axisLabel: { color: '#3a3227', fontSize: 10 },
+    },
+    visualMap: {
+      min: 0,
+      max: Math.max(8, maxValue),
+      calculable: false,
+      orient: 'vertical',
+      right: 0,
+      top: 'center',
+      itemWidth: 10,
+      itemHeight: 110,
+      itemGap: 8,
+      textStyle: { color: '#6f604c', fontSize: 9 },
+      inRange: {
+        color: ['#efe0c4', '#e3cda6', '#d3b17a', '#c48c52', '#bd6338', '#a83f2b', '#7f2118'],
+      },
+    },
+    series: [{
+      name: '类型 × 年份',
+      type: 'heatmap',
+      data: cells,
+      label: {
+        show: true,
+        fontSize: 9,
         formatter: (params) => {
-          const [x, y, value] = params.value;
-          return `<b>${types[y]}</b><br/>${fullYears[x]} 年：${value} 款`;
+          const value = params.value[2];
+          if (value < 5) return '';
+          return value >= 12 ? `{w|${value}}` : `{d|${value}}`;
         },
-      }),
-      grid: { left: 112, right: 72, top: 12, bottom: 58 },
-      xAxis: {
-        type: 'category',
-        data: fullYears,
-        axisLine: { lineStyle: { color: AXIS_LINE } },
-        axisTick: { show: false },
-        axisLabel: axisLabel({ rotate: 45, fontSize: 9 }),
-        splitArea: { show: false },
-      },
-      yAxis: {
-        type: 'category',
-        data: types,
-        inverse: true,
-        axisLine: { show: false },
-        axisTick: { show: false },
-        axisLabel: axisLabel({ fontSize: 10 }),
-        splitArea: { show: false },
-      },
-      visualMap: {
-        min: 0,
-        max: maxCount,
-        calculable: false,
-        orient: 'vertical',
-        right: 6,
-        top: 'middle',
-        itemWidth: 10,
-        itemHeight: 140,
-        text: ['多', '少'],
-        textStyle: { color: MUTED_2, fontSize: 10 },
-        inRange: {
-          color: ['#183247', '#21506c', '#2b6f95', '#3d8fba', '#66c0f4', '#a9e3ff'],
+        rich: {
+          w: { color: '#f8efd9', fontSize: 9, fontWeight: 700 },
+          d: { color: '#211c15', fontSize: 9, fontWeight: 700 },
         },
       },
-      series: [{
-        name: '类型 × 年份',
-        type: 'heatmap',
-        data,
-        label: {
-          show: true,
-          fontSize: 10,
-          fontWeight: 600,
-          formatter: (params) => {
-            const value = params.value[2];
-            if (value < 5) return '';
-            return value >= 12 ? `{dark|${value}}` : `{light|${value}}`;
-          },
-          rich: {
-            dark: { color: '#06121c', fontSize: 10, fontWeight: 700 },
-            light: { color: '#e6f7ff', fontSize: 10, fontWeight: 700 },
-          },
-        },
-        itemStyle: {
-          borderColor: 'rgba(7, 15, 23, 0.92)',
-          borderWidth: 2,
-          borderRadius: 2,
-        },
-        emphasis: {
-          itemStyle: {
-            borderColor: '#bfe7ff',
-            borderWidth: 1,
-            shadowBlur: 12,
-            shadowColor: 'rgba(102, 192, 244, 0.4)',
-          },
-        },
-      }],
-    }, true);
+      itemStyle: { borderColor: '#d8c7ab', borderWidth: 1 },
+      emphasis: {
+        itemStyle: { borderColor: '#211c15', borderWidth: 1, shadowBlur: 6, shadowColor: 'rgba(198,59,47,.25)' },
+      },
+    }],
+  }, true);
+}
+
+function resizeCharts() {
+  Object.values(charts).forEach((chart) => {
+    if (chart && !chart.isDisposed()) chart.resize();
+  });
+}
+
+/* =========================================================
+   6. 章节入场与图表尺寸
+   ========================================================= */
+
+function observeSections() {
+  const sections = [...document.querySelectorAll('.chapter, .annual')];
+  if (!('IntersectionObserver' in window) || state.fallback || REDUCED) {
+    sections.forEach((section) => section.classList.add('is-in'));
+    requestAnimationFrame(resizeCharts);
+    return;
   }
 
-  /* ---------------- 页面数字 / 文案 ---------------- */
-
-  function countUp(el, target, decimals = 0) {
-    if (!el || !Number.isFinite(target)) return;
-    if (reducedMotion) {
-      el.textContent = target.toFixed(decimals);
-      return;
-    }
-
-    const start = performance.now();
-    const duration = 900;
-    const tick = (now) => {
-      const progress = Math.min(1, (now - start) / duration);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = (target * eased).toFixed(decimals);
-      if (progress < 1) window.requestAnimationFrame(tick);
-    };
-    window.requestAnimationFrame(tick);
-  }
-
-  function renderPageStats(stats, onlineData) {
-    const snapshot = formatDateTime(onlineData.fetchedAt);
-    const onlineWan = onlineData.top.length
-      ? (stats.onlineTotal / 10000).toFixed(1).replace(/\.0$/, '')
-      : '—';
-
-    setText('data-updated', snapshot);
-    setText('hero-snapshot', snapshot);
-    setText('footer-updated', snapshot);
-    setText('hero-online-title', onlineWan);
-    setText('hero-online', onlineWan);
-    setText('online-total', `${onlineWan} 万`);
-    setText('stat-top3', `${stats.top3Share.toFixed(1)}%`);
-    setText('stat-2026', stats.year2026);
-    setText('stat-action-share', `${stats.action.share.toFixed(1)}%`);
-    setText('stat-action-price', `${stats.action.avgPrice.toFixed(1)} 元`);
-    setText('stat-sim-price', `${stats.simulation.avgPrice.toFixed(1)} 元`);
-    const freeRounded = Math.round(stats.freeRating * 10) / 10;
-    const paidRounded = Math.round(stats.paidRating * 10) / 10;
-    setText('stat-free', freeRounded.toFixed(1));
-    setText('stat-paid', paidRounded.toFixed(1));
-    setText('stat-gap', (paidRounded - freeRounded).toFixed(1));
-
-    countUp(document.getElementById('hero-games'), stats.totalGames, 0);
-    countUp(document.getElementById('hero-online'), Number(onlineWan), 1);
-
-    document.querySelectorAll('.js-source').forEach((el) => {
-      el.textContent = ` · 快照 ${snapshot}`;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-in');
+      requestAnimationFrame(resizeCharts);
+      observer.unobserve(entry.target);
     });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
 
-    const summary = document.querySelector('#appendix summary');
-    if (summary) {
-      summary.innerHTML = `查看全部 ${stats.totalGames} 款游戏 <span aria-hidden="true">→</span>`;
-    }
-  }
+  sections.forEach((section) => observer.observe(section));
+}
 
-  function renderTable(gamesList) {
-    const tbody = document.getElementById('games-table');
-    if (!tbody) return;
+/* =========================================================
+   7. 启动
+   ========================================================= */
 
-    const rows = gamesList.slice().sort((a, b) => b.rating - a.rating);
-    const fragment = document.createDocumentFragment();
+function renderAll() {
+  stats = computeStats();
+  renderHeader();
+  renderHero();
+  renderTop10();
+  renderPriceWall();
+  renderRatingWall();
+  renderCases();
+  fillTypeFilter();
+  renderTable();
+  bindTable();
+  initCharts();
+  renderRose();
+  renderTrend();
+  renderWordcloud();
+  renderHeatmap();
+  observeSections();
 
-    rows.forEach((game) => {
-      const tr = document.createElement('tr');
-      const cells = [
-        game.name,
-        game.type,
-        formatPrice(game.price),
-        `${game.rating.toFixed(1)}%`,
-        formatNumber(game.total_reviews),
-        game.year || '—',
-      ];
+  // 年度海报里的 123 也参与数字动画
+  const annualNumber = document.querySelector('.annual__title strong[data-count]');
+  if (annualNumber) animateNumber(annualNumber, stats.total, 0);
+}
 
-      cells.forEach((value, index) => {
-        const td = document.createElement('td');
-        td.textContent = value;
-        if (index === 0) td.title = game.name;
-        tr.appendChild(td);
-      });
+/* 顶栏导航：按当前滚动章节切换高亮 */
+function initNavSpy() {
+  const links = Array.from(document.querySelectorAll('.topnav__link'));
+  const sections = ['chapter-reviews', 'chapter-trends']
+    .map((id) => document.getElementById(id))
+    .filter(Boolean);
+  if (!links.length || !sections.length) return;
 
-      fragment.appendChild(tr);
+  const update = () => {
+    const marker = window.scrollY + 150;
+    let activeHash = '#top';
+    sections.forEach((section) => {
+      if (section.offsetTop <= marker) activeHash = `#${section.id}`;
     });
-
-    tbody.replaceChildren(fragment);
-  }
-
-  /* ---------------- 初始化 ---------------- */
-
-  function initCharts() {
-    const ids = [
-      'chart-top10',
-      'chart-type-rose',
-      'chart-price',
-      'chart-trend',
-      'chart-rating',
-      'chart-wordcloud',
-      'chart-heatmap',
-    ];
-
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      charts[id] = echarts.init(el, null, { renderer: 'canvas' });
+    links.forEach((link) => {
+      const on = link.getAttribute('href') === activeHash;
+      link.classList.toggle('is-active', on);
+      if (on) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
     });
-  }
+  };
 
-  function setupReveal() {
-    const elements = Array.from(document.querySelectorAll('.reveal'));
-
-    if (!('IntersectionObserver' in window) || reducedMotion) {
-      elements.forEach((el) => el.classList.add('is-visible'));
-      return;
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          const chartEl = entry.target.querySelector('.chart');
-          if (chartEl && charts[chartEl.id]) charts[chartEl.id].resize();
-        } else {
-          entry.target.classList.remove('is-visible');
-        }
-      });
-    }, {
-      threshold: 0.16,
-      rootMargin: '0px 0px -8% 0px',
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(() => {
+      update();
+      ticking = false;
     });
+  }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+}
 
-    elements.forEach((el) => observer.observe(el));
-  }
-
-  function setupResize() {
-    const resizeAll = debounce(() => {
-      Object.values(charts).forEach((chart) => chart.resize());
-    }, 140);
-
-    window.addEventListener('resize', resizeAll);
-  }
-
-  function renderAll() {
-    const stats = deriveStats(state.games, state.online);
-
-    renderPageStats(stats, state.online);
-    renderTop10(state.online);
-    renderTypeRose(stats.typeStats);
-    renderPrice(stats);
-    renderTrend(stats.yearStats);
-    renderRating(stats);
-    renderWordCloud(stats.genreStats);
-    renderHeatmap(stats);
-    renderTable(state.games);
-
-    setupReveal();
-
-    if (state.source === 'local') {
-      console.info('[Steam] 使用本地 data.js 回退数据');
+async function boot() {
+  try {
+    await loadData();
+    renderAll();
+    initNavSpy();
+  } catch (error) {
+    // 极端情况：data.js 也缺失时，至少把错误暴露在页面上
+    document.body.classList.add('no-motion');
+    setText('update-time', '数据加载失败');
+    const tag = $('fallback-tag');
+    if (tag) {
+      tag.hidden = false;
+      tag.textContent = '（数据不可用）';
     }
+    console.error('[Steam insight] 初始化失败', error);
   }
+}
 
-  async function boot() {
-    initCharts();
-    setupResize();
+window.addEventListener('resize', debounce(resizeCharts, 160));
+window.addEventListener('load', resizeCharts);
 
-    try {
-      const data = await loadData();
-      state.games = data.games;
-      state.online = data.online;
-      state.meta = data.meta;
-      state.source = data.source;
-      renderAll();
-    } catch (error) {
-      console.error('[Steam] 渲染失败', error);
-      // 最后一道兜底：直接用 data.js，不允许页面空白
-      const fallback = readFallback();
-      state.games = normalizeGames(fallback.games);
-      state.online = normalizeOnline(fallback.online, state.games, fallback.names);
-      state.source = 'local';
-      renderAll();
-    }
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', boot);
-  } else {
-    boot();
-  }
-}());
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', boot);
+} else {
+  boot();
+}

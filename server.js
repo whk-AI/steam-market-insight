@@ -76,8 +76,8 @@ function sendStaticFile(req, res, pathname) {
     const ext = path.extname(filePath).toLowerCase();
     const headers = {
       'Content-Type': MIME[ext] || 'application/octet-stream',
-      // HTML 不缓存，保证改完页面刷新就能看到；其余静态资源短缓存
-      'Cache-Control': ext === '.html' ? 'no-cache' : 'public, max-age=3600',
+      // 本地教学项目：所有静态资源都回源，改完刷新即可看到
+      'Cache-Control': 'no-cache',
     };
 
     const acceptsGzip = /\bgzip\b/.test(String(req.headers['accept-encoding'] || ''));

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "crawl": "node scripts/crawler.js",
-    "crawl:test": "node scripts/crawler.js --limit 3"
+    "crawl:test": "node scripts/crawler.js --limit 20"
   },
   "engines": {
     "node": ">=18"

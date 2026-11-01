@@ -299,25 +299,45 @@ function readJsonIfExists(filePath, fallback) {
 
 /**
  * 抓 Steam mostplayed 页面拿 TOP10 appid，再逐个查 GetNumberOfCurrentPlayers。
- * 输出结构对齐现有 online 对象：
- * { fetchedAt, source, top: [{ rank, appid, peak_in_game, current_players, last_week_rank }] }
+ * 输出结构：{ fetchedAt, source, top: [{ rank, appid, current_players }] }
  *
- * 说明：mostplayed 页面给的是榜单顺序；peak_in_game 字段保留原结构，
- * 但这里填的是"当前在线人数"，前端文案统一写"当前在线"。
+ * 说明：mostplayed 页面给的是榜单顺序；current_players 是"当前在线"，
+ * 不是 peak_in_game（历史峰值），前端文案统一写"当前在线"。
  */
 async function fetchOnlineTop() {
-  const html = await fetchText('https://store.steampowered.com/charts/mostplayed');
-  const ids = [...new Set([...html.matchAll(/\/apps\/(\d+)/g)].map((m) => Number(m[1])))].slice(0, 10);
-  if (ids.length < 10) {
-    throw new Error(`mostplayed 页面只解析到 ${ids.length} 个 appid，榜单结构可能变了`);
+  const apiKey = process.env.STEAM_API_KEY;
+  let ids = [];
+
+  // ① 有 Steam Web API Key 时，优先用官方榜单接口；没有 key 就明确跳过，不硬编码。
+  if (apiKey) {
+    try {
+      const url = `https://api.steampowered.com/ISteamChartsService/GetMostPlayedGames/v1/?key=${encodeURIComponent(apiKey)}`;
+      const data = await fetchJson(url);
+      const ranks = data && data.response && Array.isArray(data.response.ranks) ? data.response.ranks : [];
+      ids = [...new Set(ranks.map((item) => Number(item.appid)).filter(Boolean))].slice(0, 10);
+      if (ids.length === 10) {
+        console.log('    [在线榜] 使用 GetMostPlayedGames API');
+      } else {
+        ids = [];
+      }
+    } catch (err) {
+      console.log(`    ⚠ GetMostPlayedGames 失败：${err.message}，改用 HTML 榜单`);
+    }
+  } else {
+    console.log('    [在线榜] 未配置 STEAM_API_KEY，跳过官方 API，使用 HTML 榜单');
   }
 
-  const onlinePath = path.join(CONFIG.OUTPUT_DIR, 'online.json');
-  const previous = readJsonIfExists(onlinePath, { top: [] });
-  const previousRank = new Map(
-    (Array.isArray(previous.top) ? previous.top : []).map((x) => [Number(x.appid), Number(x.rank)])
-  );
+  // ② 官方 API 不可用：抓 mostplayed 服务端渲染 HTML，取前 10 个 appid。
+  if (ids.length < 10) {
+    const html = await fetchText('https://store.steampowered.com/charts/mostplayed?cc=cn&l=schinese');
+    ids = [...new Set([...html.matchAll(/\/apps\/(\d+)/g)].map((m) => Number(m[1])))].slice(0, 10);
+  }
 
+  if (ids.length < 10) {
+    throw new Error(`mostplayed 榜单只解析到 ${ids.length} 个 appid，页面结构可能变了`);
+  }
+
+  // ③ 逐个查 GetNumberOfCurrentPlayers（免 key），拿"当前在线"而不是峰值。
   const top = [];
   for (let i = 0; i < ids.length; i += 1) {
     const appid = ids[i];
@@ -335,9 +355,7 @@ async function fetchOnlineTop() {
     top.push({
       rank: i + 1,
       appid,
-      peak_in_game: Number.isFinite(current) ? current : null,
       current_players: Number.isFinite(current) ? current : null,
-      last_week_rank: previousRank.get(appid) || i + 1,
     });
   }
 
@@ -347,7 +365,7 @@ async function fetchOnlineTop() {
 
   return {
     fetchedAt: new Date().toISOString(),
-    source: 'Steam MostPlayed + GetNumberOfCurrentPlayers',
+    source: 'Steam charts + GetNumberOfCurrentPlayers',
     top,
   };
 }
@@ -426,6 +444,23 @@ async function main() {
   console.log(`[3/4] 汇总：成功 ${games.length}，失败 ${failed.length}`);
   games.sort((a, b) => a.appid - b.appid);
 
+  // 失败原因归类：日志按 “原因:数量” 打印，方便判断是网络还是页面结构问题
+  const reasonOf = (item) => {
+    const message = String(item.error || item.message || '未知错误');
+    if (/appdetails/i.test(message)) return 'appdetails无数据';
+    if (/类型/.test(message)) return 'type非game';
+    if (/timeout|timed out|超时|aborted/i.test(message)) return '超时';
+    return message.slice(0, 30);
+  };
+  const failedList = failed.map((item) => ({ appid: item.appid, reason: reasonOf(item) }));
+  const failedGroups = failedList.reduce((map, item) => {
+    map.set(item.reason, (map.get(item.reason) || 0) + 1);
+    return map;
+  }, new Map());
+  if (failedGroups.size) {
+    console.log(`[失败原因] ${[...failedGroups.entries()].map(([reason, count]) => `${reason}:${count}`).join(' / ')}`);
+  }
+
   const gamesPath = path.join(CONFIG.OUTPUT_DIR, isTestMode ? 'games.test.json' : 'games.json');
   const metaPath = path.join(CONFIG.OUTPUT_DIR, isTestMode ? 'meta.test.json' : 'meta.json');
 
@@ -453,11 +488,7 @@ async function main() {
     poolTotal: appids.length,
     successCount: games.length,
     failCount: failed.length,
-    failedAppids: failed.map((f) => f.appid),
-    failedList: failed.map((f) => ({
-      appid: f.appid,
-      error: f.error || f.message || '未知错误',
-    })),
+    failedList,
     keptCount,
     existingCount,
     sources: [...CONFIG.POOL_SOURCES, ...CONFIG.SEARCH_POOLS.map((s) => s.label)],
@@ -471,10 +502,14 @@ async function main() {
     try {
       const online = await fetchOnlineTop();
       writeJsonAtomic(path.join(CONFIG.OUTPUT_DIR, 'online.json'), online);
+      meta.onlineOk = true;
       console.log(`      → data/online.json（${online.top.length} 条，抓取时间 ${online.fetchedAt}）`);
     } catch (err) {
+      meta.onlineOk = false;
       console.log(`    ⚠ 实时在线抓取失败：${err.message}（保留旧 online.json）`);
     }
+    // 在线抓取结果也要写进 meta，供前端判断是否使用旧快照
+    writeJsonAtomic(metaPath, meta);
   }
 
   console.log(`[4/4] ✔ 完成！用时 ${meta.durationSec}s`);

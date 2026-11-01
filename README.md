@@ -1,6 +1,6 @@
 # Steam 游戏市场洞察（Steam Market Insight）
 
-> 把 Steam 上数万款游戏的数据，变成"一眼看懂"的市场洞察大屏。
+> 把 Steam 上数万款游戏的数据，变成一张"只开一晚的游戏货架"海报：纸、墨、价签、奖牌，把市场判断印在墙上。
 
 ## 这个项目是做什么的
 
@@ -52,34 +52,43 @@
 
 ### 进行中 🔄
 
-- **Steam 数据大屏**（第5周）：制作集中展示 ≥5 个图表的可视化大屏（散点 / 雷达 / 热力 / 词云 + 基础统计图表），完成后将作为平台首页入口
+- **三页洞察站**（第5周）：首页「只开一晚的游戏货架」+ 口碑分析页 + 市场趋势页；共享同一套 123 款样本与本地 ECharts。
 
 ### 下一步 ☐
 
-- 大屏整合为项目首页（`index.html`）
-- 交互完善：多图联动、数据筛选、指标卡
-- 跨维度专题分析页面
+- 补充更多年份/类型的交叉分析，完善移动端阅读
 - 项目文档完善、演示视频录制、期末现场展示验收
 
 ---
+
+## 目录说明（先看这一段）
+
+- `practice/`：每周练习作业，不是主站代码；`practice/week03/第三周小页面.html` 是独立练习页，随时可以单独打开。
+- `data/cleaned/`：另一套来自 `archive` 的 **107 款**清洗产物，用于对照实验；主站首页统一读取 `data/games.json` 的 **123 款**样本，两者不要混用。
+- `js/papaparse.min.js`：练习页与 `scripts/verify_week9_data.js` 仍在使用，保留。
+- `data/` 下的 `games.json`、`meta.json`、`online.json` 由 `npm run crawl` 生成；页面加载时优先请求 `/api/*`，失败则回退 `js/data.js` 的静态快照（双击 `index.html` 也能打开）。
 
 ## 快速开始
 
 本机已装 Node.js（v22），**不需要安装任何依赖**。打开命令行（PowerShell），进入项目根目录 `F:\steam-market-insight`：
 
 ```bash
-# 1. 抓取数据（首次约 1~3 分钟，会生成 data/games.json + data/meta.json）
+# 1. 抓取数据（首次约 1~3 分钟，会生成 data/games.json + data/meta.json + data/online.json）
 npm run crawl
 
 # 2. 启动本地服务器（保持这个窗口开着）
 npm start
 
-# 3. 浏览器打开
+# 3. 浏览器打开 http://localhost:8080/
+#    首页：          http://localhost:8080/index.html
+#    口碑分析：      http://localhost:8080/index.html#chapter-reviews
+#    市场趋势：      http://localhost:8080/index.html#chapter-trends
 #    数据接口：      http://localhost:8080/api/games
 #    练习索引：      http://localhost:8080/practice/
-#    好评率 TOP10：  http://localhost:8080/practice/week03/第三周小页面.html
 #    第5周练习：     http://localhost:8080/practice/week05/第五周练练合集.html
 ```
+
+> 跑爬虫前，请先开加速器并选择 **“Steam 商店加速”**；不要登录 Steam 账号。
 
 ## 常用命令
 
@@ -100,7 +109,7 @@ npm start
 - **字段**：`data/games.json` 每款游戏包含
   `appid / name / price(元) / original_price / final_price / discount_percent / currency / rating(好评率%) / positive / total_reviews / type(主分类) / genres / year / release_date / url`
 - **当前数据量**：123 款真实游戏（截至最近一次抓取，见 `data/meta.json` 的 `fetchedAt`）
-- **实时在线**：`data/online.json`，由 mostplayed 页面 + `GetNumberOfCurrentPlayers` 生成，结构与首页 `online` 对象对齐
+- **实时在线**：`data/online.json`，由 mostplayed 页面 + `GetNumberOfCurrentPlayers` 生成，字段为 `rank / appid / current_players / last_week_rank`；前端归一化后同时兼容旧的 `peak_in_game` 快照。
 - **更新频率**：每天自动更新一次 + 随时手动 `npm run crawl`（见下）
 - **容错**：抓取失败自动重试、保留上一次数据；免费游戏价格 0；无评分的游戏 `rating` 为 null
 
@@ -114,6 +123,19 @@ npm start
 - 立即手动触发：任务计划程序里右键该任务 → 运行；或直接 `npm run crawl`
 - 注意：该任务为「仅在用户登录时运行」（交互式），保持当前 Windows 用户登录（不必开窗口）到 22:00 即可自动执行；抓取失败会保留上一次数据并返回非 0 退出码
 - 已开启容错：错过 22:00（关机/休眠）后开机会尽快补跑一次；笔记本电池供电时也允许运行
+- 网络依赖：这台机器直连 `store.steampowered.com` 会 TCP 超时（`api.steampowered.com` 正常），所以 `run-daily.bat` 会先调用 `scripts/start-proxy.ps1`：
+  - 若 `127.0.0.1:7897` 已在监听（Clash Verge 开着），直接复用；
+  - 否则用 `clash_verge_service` 的安装路径找到 `verge-mihomo.exe`，以 `-d <配置目录> -f clash-verge.yaml` 无界面启动，等端口就绪后再让 Node 走 `NODE_USE_ENV_PROXY=1 + HTTPS_PROXY=http://127.0.0.1:7897`；
+  - 抓取结束由 `scripts/stop-proxy.ps1` **只关闭本次自己启动的** mihomo（有 `data/.proxy.pid` 才动手），不会误杀你手动开着的 Clash；
+  - 找不到代理时自动退回直连，任务不会因此中断。
+- 生成产物：爬虫成功后更新 `data/games.json`、`data/meta.json`、`data/online.json`；页面优先用 `/api/*`，失败时回退 `js/data.js` 的 123 款快照，页头标签会显示 `本地快照` / `离线快照` 以区分数据来源。
+
+### 「数据更新时间」没变时怎么查
+
+1. 看 `data/crawler.log` 末尾有没有 `update OK`；出现 `update FAILED` 说明当晚抓取失败（文件保留旧数据）。
+2. 任务计划程序 → `SteamMarketCrawlerDaily` → 「上次运行结果」：`0x0` 成功，`0x1` 表示爬虫返回非 0。
+3. 看 `data/meta.json` 的 `fetchedAt` 与 `data/online.json` 的 `fetchedAt`；两者都新 = 写作成功。
+4. 页面标签若显示「离线快照」，说明 `/api/*` 没连上（例如直接双击 `index.html` 打开），此时数据来自 `js/data.js`；用 `npm start` 后访问 `http://localhost:8080/` 可看到 `/api/*` 的数据。
 
 ## 第九周学习指引（爬虫代码怎么读）
 
@@ -139,8 +161,12 @@ npm start
 
 ```
 F:\steam-market-insight\
-├── index.html              平台首页（数据大屏整合中）
+├── index.html              首页「只开一晚的游戏货架」海报（含口碑分析、市场趋势两章）
 ├── js\                     echarts.min.js / echarts-wordcloud / papaparse（已本地化，断网可用）
+│   ├── main.js             首页数据、图表与顶栏章节导航
+│   ├── insight-core.js     口碑/趋势章节共享数据与工具
+│   ├── reviews.js          口碑章节交互
+│   └── trends.js           趋势章节交互
 ├── CSS\                    页面样式
 ├── practice\               课程练习区（与项目正式代码分开；练习页仍引用上级的 js\ 和 data\）
 │   ├── index.html          练习索引页（打开 practice/ 即可看到全部练习）

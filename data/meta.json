@@ -3,8 +3,5 @@
   "gameCount": 123,
   "successCount": 123,
   "failCount": 0,
-  "note": "首页固定 123 款样本；日常爬虫只刷新已有 appid，不扩样。",
-  "sources": [
-    "data.js 本地快照"
-  ]
+  "note": "首页固定 123 款样本；日常爬虫只刷新已有 appid，不扩样。"
 }

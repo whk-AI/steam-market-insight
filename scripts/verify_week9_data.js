@@ -1,7 +1,7 @@
 /**
  * 第 9 周首页数据校验脚本
  * 用 Node 执行：node scripts/verify_week9_data.js
- * 检查 js/data.js 是否与 pratice(python)/games_clean.csv、online_top10.json 完全一致。
+ * 检查 js/data.js 是否与 practice/python/games_clean.csv、online_top10.json 完全一致。
  */
 const fs = require('fs');
 const path = require('path');
@@ -18,7 +18,7 @@ const { games, online, appNameFallback } = sandbox.__result;
 
 // 2. 用本地 papaparse 解析 CSV（支持引号内的逗号）
 const Papa = require(path.join(root, 'js', 'papaparse.min.js'));
-const csv = Papa.parse(read('pratice(python)/games_clean.csv'), {
+const csv = Papa.parse(read('practice/python/games_clean.csv'), {
   header: true,
   skipEmptyLines: true,
 }).data;
@@ -47,7 +47,7 @@ for (const row of csv) {
 }
 
 // 3. 校验 online 快照
-const onlineJson = JSON.parse(read('pratice(python)/online_top10.json'));
+const onlineJson = JSON.parse(read('practice/python/online_top10.json'));
 if (online.fetchedAt !== onlineJson.fetchedAt) errors.push('online.fetchedAt 不一致');
 if (online.top.length !== onlineJson.top.length) errors.push('online.top 数量不一致');
 online.top.forEach((item, i) => {

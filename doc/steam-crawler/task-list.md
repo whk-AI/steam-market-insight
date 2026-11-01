@@ -55,6 +55,9 @@
 - [x] 配置 Windows 计划任务 `SteamMarketCrawlerDaily`（每日 08:00，已注册验证）
 - [x] 按用户要求把触发时间改为每日 **22:00**（2026-10-26，`schtasks /change /ST 22:00`，下次运行 2026-10-26 22:00）
 - [x] 编写 `scripts/run-daily.bat` 启动脚本
+- [x] 排查「页面仍显示 2026-10-18 快照、数据没更新」（2026-10-28）：根因一是页面 file:// 直开只读 `js/data.js` 快照，二是不开代理时 `store.steampowered.com` TCP 超时导致 10-28 22:00 抓取全失败
+- [x] 修复：新增 `scripts/gen-live-data.js` 生成 `js/live-data.js`（页面 file:// 也读最新抓取），`main.js` 支持 `api → live → snapshot` 三级回退并区分页头标签
+- [x] 修复：新增 `scripts/start-proxy.ps1` / `stop-proxy.ps1`，`run-daily.bat` 自动复用或拉起本地 mihomo（127.0.0.1:7897），抓完只关自己启动的实例
 - [x] 全链路验证：爬虫 → 数据 → 服务器接口 → 页面逻辑（模拟 TOP10 渲染）
 - [x] 编写 README 使用说明（含第九周学习指引）
 - [ ] 网络恢复后扩池重抓（搜索池修复已就绪，后台自动重试中）
