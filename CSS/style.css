@@ -546,6 +546,50 @@ select {
   height: 44px;
   border-bottom: 1px solid rgba(102, 192, 244, 0.09);
   transition: background 0.18s ease;
+  opacity: 0;
+}
+
+/* 章节滚进视口后，10 行按 --i 顺序错峰入场，动画方向按游戏类型分配 */
+.chapter.is-in .top10__row {
+  animation: row-fade-in 0.55s cubic-bezier(0.22, 0.9, 0.3, 1) forwards;
+  animation-delay: calc(var(--i, 0) * 0.11s);
+}
+
+.chapter.is-in .top10__row.row--dash {
+  animation-name: row-dash-in;
+}
+
+.chapter.is-in .top10__row.row--drop {
+  animation-name: row-drop-in;
+}
+
+.chapter.is-in .top10__row.row--rise {
+  animation-name: row-rise-in;
+}
+
+.no-motion .top10__row {
+  opacity: 1;
+  animation: none;
+}
+
+@keyframes row-fade-in {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes row-dash-in {
+  from { opacity: 0; transform: translateX(70px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes row-drop-in {
+  from { opacity: 0; transform: translateY(-28px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes row-rise-in {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: none; }
 }
 
 .top10__row:hover {
@@ -1616,4 +1660,74 @@ body::after {
   border: 1.5px solid #211c15;
   box-shadow: 4px 4px 0 rgba(198, 59, 47, 0.16);
 }
+
+/* ---------- 背景交互层 ---------- */
+.bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+main,
+.footer {
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-canvas {
+    opacity: 0.72;
+  }
+}
+
+/* 词云点选后，在下方空白处列出游戏 */
+.tag-games {
+  min-height: 58px;
+  margin-top: 10px;
+  padding: 9px 11px;
+  border: 1px dashed rgba(33, 28, 21, 0.45);
+  background: #f3e5c9;
+  color: #6f604c;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.tag-games strong {
+  color: #211c15;
+}
+
+.tag-games__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  margin-top: 6px;
+}
+
+.tag-games__item {
+  padding: 2px 6px;
+  border: 1px solid rgba(33, 28, 21, 0.28);
+  background: #fbf3e2;
+  color: #211c15;
+  font-size: 10px;
+}
+
+.tag-games__item b {
+  margin-left: 4px;
+  color: #2f7f74;
+  font-weight: 700;
+}
+
+/* TOP10 的独立数据时间 */
+.chapter__source {
+  margin: 10px 0 0;
+  color: #6f604c;
+  font-family: var(--mono, Consolas, monospace);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+}
+
 

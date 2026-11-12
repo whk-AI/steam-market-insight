@@ -7,14 +7,15 @@
     "final_price": 35,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 97.5,
-    "positive": 1037916,
-    "total_reviews": 1064529,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作"
     ],
     "year": 2009,
+    "release_date": "2009 年 11 月 16 日",
     "url": "https://store.steampowered.com/app/550"
   },
   {
@@ -24,10 +25,10 @@
     "original_price": 0,
     "final_price": 0,
     "discount_percent": 0,
-    "currency": "CNY",
-    "rating": 80.4,
-    "positive": 2249368,
-    "total_reviews": 2797722,
+    "currency": null,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -35,6 +36,7 @@
       "免费开玩"
     ],
     "year": 2013,
+    "release_date": "2013 年 7 月 9 日",
     "url": "https://store.steampowered.com/app/570"
   },
   {
@@ -44,16 +46,17 @@
     "original_price": 0,
     "final_price": 0,
     "discount_percent": 0,
-    "currency": "CNY",
-    "rating": 85.8,
-    "positive": 8514451,
-    "total_reviews": 9923603,
+    "currency": null,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
       "免费开玩"
     ],
     "year": 2017,
+    "release_date": "2017 年 9 月 15 日",
     "url": "https://store.steampowered.com/app/730"
   },
   {
@@ -77,14 +80,14 @@
   {
     "appid": 105600,
     "name": "Terraria",
-    "price": 21,
-    "original_price": 21,
-    "final_price": 21,
-    "discount_percent": 50,
+    "price": 42,
+    "original_price": 42,
+    "final_price": 42,
+    "discount_percent": 0,
     "currency": "CNY",
-    "rating": 97.4,
-    "positive": 1521957,
-    "total_reviews": 1562584,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -93,6 +96,7 @@
       "角色扮演"
     ],
     "year": 2011,
+    "release_date": "2011 年 5 月 16 日",
     "url": "https://store.steampowered.com/app/105600"
   },
   {
@@ -103,9 +107,9 @@
     "final_price": 93,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 93.7,
-    "positive": 457902,
-    "total_reviews": 488689,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "独立",
     "genres": [
       "独立",
@@ -114,6 +118,7 @@
       "抢先体验"
     ],
     "year": 2013,
+    "release_date": "2013 年 11 月 8 日",
     "url": "https://store.steampowered.com/app/108600"
   },
   {
@@ -123,10 +128,10 @@
     "original_price": 0,
     "final_price": 0,
     "discount_percent": 0,
-    "currency": "CNY",
-    "rating": 87.8,
-    "positive": 597013,
-    "total_reviews": 679969,
+    "currency": null,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -134,6 +139,7 @@
       "免费开玩"
     ],
     "year": 2013,
+    "release_date": "2013 年 3 月 25 日",
     "url": "https://store.steampowered.com/app/230410"
   },
   {
@@ -143,10 +149,10 @@
     "original_price": 0,
     "final_price": 0,
     "discount_percent": 0,
-    "currency": "CNY",
-    "rating": 71.2,
-    "positive": 563216,
-    "total_reviews": 791034,
+    "currency": null,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -155,6 +161,7 @@
       "免费开玩"
     ],
     "year": 2013,
+    "release_date": "2013 年 8 月 15 日",
     "url": "https://store.steampowered.com/app/236390"
   },
   {
@@ -165,9 +172,9 @@
     "final_price": 248,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 87.7,
-    "positive": 262579,
-    "total_reviews": 299406,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -177,6 +184,7 @@
       "策略"
     ],
     "year": 2022,
+    "release_date": "2022 年 10 月 25 日",
     "url": "https://store.steampowered.com/app/261550"
   },
   {
@@ -206,9 +214,9 @@
     "final_price": 128,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 97.9,
-    "positive": 242840,
-    "total_reviews": 248049,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "独立",
     "genres": [
       "独立",
@@ -216,6 +224,7 @@
       "策略"
     ],
     "year": 2018,
+    "release_date": "2018 年 10 月 17 日",
     "url": "https://store.steampowered.com/app/294100"
   },
   {
@@ -226,9 +235,9 @@
     "final_price": 24,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 94.9,
-    "positive": 516748,
-    "total_reviews": 544518,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -239,6 +248,7 @@
       "策略"
     ],
     "year": 2016,
+    "release_date": "2016 年 4 月 21 日",
     "url": "https://store.steampowered.com/app/322330"
   },
   {
@@ -248,16 +258,17 @@
     "original_price": 0,
     "final_price": 0,
     "discount_percent": 0,
-    "currency": "CNY",
-    "rating": 82.1,
-    "positive": 1282806,
-    "total_reviews": 1562492,
+    "currency": null,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
       "免费开玩"
     ],
     "year": 2015,
+    "release_date": "2015 年 12 月 1 日",
     "url": "https://store.steampowered.com/app/359550"
   },
   {
@@ -286,14 +297,15 @@
     "final_price": 94,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 78.3,
-    "positive": 735872,
-    "total_reviews": 939811,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作"
     ],
     "year": 2016,
+    "release_date": "2016 年 6 月 14 日",
     "url": "https://store.steampowered.com/app/381210"
   },
   {
@@ -304,9 +316,9 @@
     "final_price": 48,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 98.5,
-    "positive": 1029310,
-    "total_reviews": 1044985,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "独立",
     "genres": [
       "独立",
@@ -314,6 +326,7 @@
       "模拟"
     ],
     "year": 2016,
+    "release_date": "2016 年 2 月 26 日",
     "url": "https://store.steampowered.com/app/413150"
   },
   {
@@ -324,9 +337,9 @@
     "final_price": 23,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 97.6,
-    "positive": 997943,
-    "total_reviews": 1022483,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "休闲",
     "genres": [
       "休闲",
@@ -337,6 +350,7 @@
       "实用工具"
     ],
     "year": 2018,
+    "release_date": "2018 年 11 月 16 日",
     "url": "https://store.steampowered.com/app/431960"
   },
   {
@@ -385,10 +399,10 @@
     "original_price": 0,
     "final_price": 0,
     "discount_percent": 0,
-    "currency": "CNY",
-    "rating": 76.3,
-    "positive": 119744,
-    "total_reviews": 156939,
+    "currency": null,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -398,6 +412,7 @@
       "免费开玩"
     ],
     "year": 2017,
+    "release_date": "2017 年 11 月 15 日",
     "url": "https://store.steampowered.com/app/552990"
   },
   {
@@ -408,14 +423,15 @@
     "final_price": 198,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 75.7,
-    "positive": 883349,
-    "total_reviews": 1166908,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作"
     ],
     "year": 2024,
+    "release_date": "2024 年 2 月 8 日",
     "url": "https://store.steampowered.com/app/553850"
   },
   {
@@ -425,10 +441,10 @@
     "original_price": 0,
     "final_price": 0,
     "discount_percent": 0,
-    "currency": "CNY",
-    "rating": 60.5,
-    "positive": 1662931,
-    "total_reviews": 2748646,
+    "currency": null,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -437,6 +453,7 @@
       "免费开玩"
     ],
     "year": 2017,
+    "release_date": "2017 年 12 月 21 日",
     "url": "https://store.steampowered.com/app/578080"
   },
   {
@@ -447,14 +464,15 @@
     "final_price": 128,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 73.7,
-    "positive": 206457,
-    "total_reviews": 280132,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作"
     ],
     "year": 2019,
+    "release_date": "2019 年 8 月 27 日",
     "url": "https://store.steampowered.com/app/594650"
   },
   {
@@ -484,9 +502,9 @@
     "final_price": 77,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 93,
-    "positive": 353243,
-    "total_reviews": 379831,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "冒险",
     "genres": [
       "冒险",
@@ -494,6 +512,7 @@
       "模拟"
     ],
     "year": 2022,
+    "release_date": "2022 年 6 月 20 日",
     "url": "https://store.steampowered.com/app/648800"
   },
   {
@@ -576,14 +595,14 @@
   {
     "appid": 815370,
     "name": "绿色地狱",
-    "price": 9,
-    "original_price": 9,
-    "final_price": 9,
+    "price": 8,
+    "original_price": 80,
+    "final_price": 8,
     "discount_percent": 90,
     "currency": "CNY",
-    "rating": 84.6,
-    "positive": 87531,
-    "total_reviews": 103465,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -592,6 +611,7 @@
       "模拟"
     ],
     "year": 2019,
+    "release_date": "2019 年 9 月 5 日",
     "url": "https://store.steampowered.com/app/815370"
   },
   {
@@ -639,20 +659,21 @@
   },
   {
     "appid": 949230,
-    "name": "Cities: Skylines II 都市：天际线2",
+    "name": "《都市：天际线2》",
     "price": 198,
     "original_price": 198,
     "final_price": 198,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 56,
-    "positive": 51624,
-    "total_reviews": 92186,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "模拟",
     "genres": [
       "模拟"
     ],
     "year": 2023,
+    "release_date": "2023 年 10 月 24 日",
     "url": "https://store.steampowered.com/app/949230"
   },
   {
@@ -662,16 +683,17 @@
     "original_price": 0,
     "final_price": 0,
     "discount_percent": 0,
-    "currency": "CNY",
-    "rating": 82.9,
-    "positive": 23959,
-    "total_reviews": 28901,
+    "currency": null,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "体育",
     "genres": [
       "体育",
       "免费开玩"
     ],
     "year": 2019,
+    "release_date": "2019 年 3 月 25 日",
     "url": "https://store.steampowered.com/app/958260"
   },
   {
@@ -700,9 +722,9 @@
     "final_price": 268,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 96.8,
-    "positive": 834479,
-    "total_reviews": 862065,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "冒险",
     "genres": [
       "冒险",
@@ -710,24 +732,26 @@
       "策略"
     ],
     "year": 2023,
+    "release_date": "2023 年 8 月 3 日",
     "url": "https://store.steampowered.com/app/1086940"
   },
   {
     "appid": 1091500,
     "name": "赛博朋克 2077",
-    "price": 89,
-    "original_price": 89,
-    "final_price": 89,
-    "discount_percent": 70,
+    "price": 298,
+    "original_price": 298,
+    "final_price": 298,
+    "discount_percent": 0,
     "currency": "CNY",
-    "rating": 87,
-    "positive": 858809,
-    "total_reviews": 987137,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "角色扮演",
     "genres": [
       "角色扮演"
     ],
     "year": 2020,
+    "release_date": "2020 年 12 月 9 日",
     "url": "https://store.steampowered.com/app/1091500"
   },
   {
@@ -751,20 +775,21 @@
   {
     "appid": 1142710,
     "name": "全面战争：战锤3",
-    "price": 45,
-    "original_price": 45,
-    "final_price": 45,
-    "discount_percent": 85,
+    "price": 298,
+    "original_price": 298,
+    "final_price": 298,
+    "discount_percent": 0,
     "currency": "CNY",
-    "rating": 72.2,
-    "positive": 108670,
-    "total_reviews": 150513,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
       "策略"
     ],
     "year": 2022,
+    "release_date": "2022 年 2 月 16 日",
     "url": "https://store.steampowered.com/app/1142710"
   },
   {
@@ -794,10 +819,10 @@
     "original_price": 0,
     "final_price": 0,
     "discount_percent": 0,
-    "currency": "CNY",
-    "rating": 67.8,
-    "positive": 727802,
-    "total_reviews": 1073454,
+    "currency": null,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -805,25 +830,27 @@
       "免费开玩"
     ],
     "year": 2020,
+    "release_date": "2020 年 11 月 4 日",
     "url": "https://store.steampowered.com/app/1172470"
   },
   {
     "appid": 1174180,
     "name": "Red Dead Redemption 2",
-    "price": 70,
-    "original_price": 70,
-    "final_price": 70,
-    "discount_percent": 75,
+    "price": 279,
+    "original_price": 279,
+    "final_price": 279,
+    "discount_percent": 0,
     "currency": "CNY",
-    "rating": 92.5,
-    "positive": 858345,
-    "total_reviews": 927940,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
       "冒险"
     ],
     "year": 2019,
+    "release_date": "2019 年 12 月 5 日",
     "url": "https://store.steampowered.com/app/1174180"
   },
   {
@@ -833,10 +860,10 @@
     "original_price": 0,
     "final_price": 0,
     "discount_percent": 0,
-    "currency": "CNY",
-    "rating": 73.3,
-    "positive": 222297,
-    "total_reviews": 303270,
+    "currency": null,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -845,6 +872,7 @@
       "免费开玩"
     ],
     "year": 2021,
+    "release_date": "2021 年 8 月 11 日",
     "url": "https://store.steampowered.com/app/1203220"
   },
   {
@@ -876,15 +904,16 @@
     "final_price": 298,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 93,
-    "positive": 1077697,
-    "total_reviews": 1158814,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
       "角色扮演"
     ],
     "year": 2022,
+    "release_date": "2022 年 2 月 24 日",
     "url": "https://store.steampowered.com/app/1245620"
   },
   {
@@ -936,15 +965,16 @@
     "final_price": 38,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 53.8,
-    "positive": 7,
-    "total_reviews": 13,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
       "体育"
     ],
     "year": 2020,
+    "release_date": "2020 年 8 月 31 日",
     "url": "https://store.steampowered.com/app/1289670"
   },
   {
@@ -955,9 +985,9 @@
     "final_price": 136,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 92.2,
-    "positive": 110503,
-    "total_reviews": 119851,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -965,6 +995,7 @@
       "独立"
     ],
     "year": 2024,
+    "release_date": "2024 年 3 月 5 日",
     "url": "https://store.steampowered.com/app/1304930"
   },
   {
@@ -974,10 +1005,10 @@
     "original_price": 0,
     "final_price": 0,
     "discount_percent": 0,
-    "currency": "CNY",
-    "rating": 43.4,
-    "positive": 36822,
-    "total_reviews": 84843,
+    "currency": null,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "休闲",
     "genres": [
       "休闲",
@@ -985,25 +1016,27 @@
       "免费开玩"
     ],
     "year": 2020,
+    "release_date": "2020 年 7 月 14 日",
     "url": "https://store.steampowered.com/app/1329410"
   },
   {
     "appid": 1364780,
     "name": "Street Fighter 6",
-    "price": 79,
-    "original_price": 79,
-    "final_price": 79,
-    "discount_percent": 60,
+    "price": 198,
+    "original_price": 198,
+    "final_price": 198,
+    "discount_percent": 0,
     "currency": "CNY",
-    "rating": 81.8,
-    "positive": 66290,
-    "total_reviews": 81039,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
       "冒险"
     ],
     "year": 2023,
+    "release_date": "2023 年 6 月 1 日",
     "url": "https://store.steampowered.com/app/1364780"
   },
   {
@@ -1014,15 +1047,16 @@
     "final_price": 198,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 95.4,
-    "positive": 259540,
-    "total_reviews": 272054,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
       "冒险"
     ],
     "year": 2021,
+    "release_date": "2021 年 3 月 25 日",
     "url": "https://store.steampowered.com/app/1426210"
   },
   {
@@ -1032,10 +1066,10 @@
     "original_price": 0,
     "final_price": 0,
     "discount_percent": 0,
-    "currency": "CNY",
-    "rating": 71.2,
-    "positive": 72830,
-    "total_reviews": 102289,
+    "currency": null,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "模拟",
     "genres": [
       "模拟",
@@ -1043,55 +1077,58 @@
       "免费开玩"
     ],
     "year": 2022,
+    "release_date": "2022 年 1 月 18 日",
     "url": "https://store.steampowered.com/app/1449850"
   },
   {
     "appid": 1478500,
     "name": "Big Walk",
-    "price": 62,
-    "original_price": 62,
-    "final_price": 62,
-    "discount_percent": 20,
+    "price": 78,
+    "original_price": 78,
+    "final_price": 78,
+    "discount_percent": 0,
     "currency": "CNY",
-    "rating": 96.1,
-    "positive": 41193,
-    "total_reviews": 42865,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "冒险",
     "genres": [
       "冒险"
     ],
     "year": 2026,
+    "release_date": "2026 年 8 月 4 日",
     "url": "https://store.steampowered.com/app/1478500"
   },
   {
     "appid": 1551980,
     "name": "Clive Barker's Hellraiser: Revival",
-    "price": 189,
-    "original_price": 189,
-    "final_price": 189,
-    "discount_percent": 0,
+    "price": 175,
+    "original_price": 219,
+    "final_price": 175,
+    "discount_percent": 20,
     "currency": "CNY",
-    "rating": 94.1,
-    "positive": 5450,
-    "total_reviews": 5792,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作"
     ],
     "year": 2026,
+    "release_date": "2026 年 10 月 8 日",
     "url": "https://store.steampowered.com/app/1551980"
   },
   {
     "appid": 1623730,
     "name": "Palworld / 幻兽帕鲁",
-    "price": 76,
-    "original_price": 76,
-    "final_price": 76,
-    "discount_percent": 30,
+    "price": 108,
+    "original_price": 108,
+    "final_price": 108,
+    "discount_percent": 0,
     "currency": "CNY",
-    "rating": 94.6,
-    "positive": 466192,
-    "total_reviews": 492803,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -1100,6 +1137,7 @@
       "角色扮演"
     ],
     "year": 2026,
+    "release_date": "2026 年 7 月 9 日",
     "url": "https://store.steampowered.com/app/1623730"
   },
   {
@@ -1130,9 +1168,9 @@
     "final_price": 149,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 74.1,
-    "positive": 86535,
-    "total_reviews": 116781,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -1142,6 +1180,7 @@
       "抢先体验"
     ],
     "year": 2026,
+    "release_date": "2026 年 9 月 10 日",
     "url": "https://store.steampowered.com/app/1867240"
   },
   {
@@ -1173,15 +1212,16 @@
     "final_price": 37,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 89.7,
-    "positive": 150868,
-    "total_reviews": 168192,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
       "独立"
     ],
     "year": 2025,
+    "release_date": "2025 年 10 月 23 日",
     "url": "https://store.steampowered.com/app/1943950"
   },
   {
@@ -1191,15 +1231,16 @@
     "original_price": 0,
     "final_price": 0,
     "discount_percent": 0,
-    "currency": "CNY",
-    "rating": 88.1,
-    "positive": 107458,
-    "total_reviews": 121973,
+    "currency": null,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "免费开玩",
     "genres": [
       "免费开玩"
     ],
     "year": 2023,
+    "release_date": "2023 年 2 月 26 日",
     "url": "https://store.steampowered.com/app/1973530"
   },
   {
@@ -1210,15 +1251,16 @@
     "final_price": 198,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 96.9,
-    "positive": 124299,
-    "total_reviews": 128276,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
       "冒险"
     ],
     "year": 2025,
+    "release_date": "2025 年 3 月 6 日",
     "url": "https://store.steampowered.com/app/2001120"
   },
   {
@@ -1229,15 +1271,16 @@
     "final_price": 198,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 62.8,
-    "positive": 74758,
-    "total_reviews": 119041,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
       "角色扮演"
     ],
     "year": 2024,
+    "release_date": "2024 年 3 月 21 日",
     "url": "https://store.steampowered.com/app/2054970"
   },
   {
@@ -1247,10 +1290,10 @@
     "original_price": 0,
     "final_price": 0,
     "discount_percent": 0,
-    "currency": "CNY",
-    "rating": 73.9,
-    "positive": 62451,
-    "total_reviews": 84508,
+    "currency": null,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -1261,6 +1304,7 @@
       "免费开玩"
     ],
     "year": 2025,
+    "release_date": "2025 年 9 月 15 日",
     "url": "https://store.steampowered.com/app/2073620"
   },
   {
@@ -1270,10 +1314,10 @@
     "original_price": 0,
     "final_price": 0,
     "discount_percent": 0,
-    "currency": "CNY",
-    "rating": 79.1,
-    "positive": 151138,
-    "total_reviews": 191072,
+    "currency": null,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -1287,19 +1331,20 @@
       "免费开玩"
     ],
     "year": 2024,
+    "release_date": "2024 年 7 月 9 日",
     "url": "https://store.steampowered.com/app/2139460"
   },
   {
     "appid": 2183900,
     "name": "Warhammer 40,000: 星际战士2",
-    "price": 62,
-    "original_price": 62,
-    "final_price": 62,
-    "discount_percent": 75,
+    "price": 249,
+    "original_price": 249,
+    "final_price": 249,
+    "discount_percent": 0,
     "currency": "CNY",
-    "rating": 84,
-    "positive": 193151,
-    "total_reviews": 229942,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -1307,6 +1352,7 @@
       "角色扮演"
     ],
     "year": 2024,
+    "release_date": "2024 年 9 月 9 日",
     "url": "https://store.steampowered.com/app/2183900"
   },
   {
@@ -1354,14 +1400,14 @@
   {
     "appid": 2246340,
     "name": "Monster Hunter Wilds",
-    "price": 198,
+    "price": 149,
     "original_price": 198,
-    "final_price": 198,
-    "discount_percent": 0,
+    "final_price": 149,
+    "discount_percent": 25,
     "currency": "CNY",
-    "rating": 49.7,
-    "positive": 165722,
-    "total_reviews": 333445,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -1369,6 +1415,7 @@
       "角色扮演"
     ],
     "year": 2025,
+    "release_date": "2025 年 2 月 27 日",
     "url": "https://store.steampowered.com/app/2246340"
   },
   {
@@ -1379,14 +1426,15 @@
     "final_price": 298,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 83.2,
-    "positive": 16775,
-    "total_reviews": 20162,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作"
     ],
     "year": 2026,
+    "release_date": "2026 年 10 月 1 日",
     "url": "https://store.steampowered.com/app/2288340"
   },
   {
@@ -1396,10 +1444,10 @@
     "original_price": 0,
     "final_price": 0,
     "discount_percent": 0,
-    "currency": "CNY",
-    "rating": 62.9,
-    "positive": 2093,
-    "total_reviews": 3328,
+    "currency": null,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -1408,6 +1456,7 @@
       "免费开玩"
     ],
     "year": 2024,
+    "release_date": "2024 年 7 月 4 日",
     "url": "https://store.steampowered.com/app/2315040"
   },
   {
@@ -1439,9 +1488,9 @@
     "final_price": 348,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 65.2,
-    "positive": 52135,
-    "total_reviews": 79961,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -1451,6 +1500,7 @@
       "角色扮演"
     ],
     "year": 2023,
+    "release_date": "2023 年 10 月 17 日",
     "url": "https://store.steampowered.com/app/2344520"
   },
   {
@@ -1480,9 +1530,9 @@
     "final_price": 268,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 96.5,
-    "positive": 1171324,
-    "total_reviews": 1213807,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -1490,6 +1540,7 @@
       "角色扮演"
     ],
     "year": 2024,
+    "release_date": "2024 年 8 月 19 日",
     "url": "https://store.steampowered.com/app/2358720"
   },
   {
@@ -1521,9 +1572,9 @@
     "final_price": 128,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 80.8,
-    "positive": 56768,
-    "total_reviews": 70258,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -1534,6 +1585,7 @@
       "抢先体验"
     ],
     "year": 2024,
+    "release_date": "2024 年 6 月 7 日",
     "url": "https://store.steampowered.com/app/2406770"
   },
   {
@@ -1544,9 +1596,9 @@
     "final_price": 298,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 80.6,
-    "positive": 82238,
-    "total_reviews": 102032,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "竞速",
     "genres": [
       "竞速",
@@ -1554,19 +1606,20 @@
       "体育"
     ],
     "year": 2026,
+    "release_date": "2026 年 5 月 18 日",
     "url": "https://store.steampowered.com/app/2483190"
   },
   {
     "appid": 2507950,
-    "name": "三角洲行动",
+    "name": "三角洲行动 ",
     "price": 0,
     "original_price": 0,
     "final_price": 0,
     "discount_percent": 0,
-    "currency": "CNY",
-    "rating": 57.7,
-    "positive": 114377,
-    "total_reviews": 198227,
+    "currency": null,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -1575,19 +1628,20 @@
       "免费开玩"
     ],
     "year": 2024,
+    "release_date": "2024 年 12 月 4 日",
     "url": "https://store.steampowered.com/app/2507950"
   },
   {
     "appid": 2567870,
     "name": "Chained Together",
-    "price": 18,
-    "original_price": 18,
-    "final_price": 18,
-    "discount_percent": 20,
+    "price": 22,
+    "original_price": 22,
+    "final_price": 22,
+    "discount_percent": 0,
     "currency": "CNY",
-    "rating": 89.6,
-    "positive": 57996,
-    "total_reviews": 64728,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "冒险",
     "genres": [
       "冒险",
@@ -1596,6 +1650,7 @@
       "模拟"
     ],
     "year": 2024,
+    "release_date": "2024 年 6 月 19 日",
     "url": "https://store.steampowered.com/app/2567870"
   },
   {
@@ -1627,9 +1682,9 @@
     "final_price": 298,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 91,
-    "positive": 26682,
-    "total_reviews": 29321,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -1637,6 +1692,7 @@
       "角色扮演"
     ],
     "year": 2026,
+    "release_date": "2026 年 9 月 3 日",
     "url": "https://store.steampowered.com/app/2638890"
   },
   {
@@ -1686,10 +1742,10 @@
     "original_price": 0,
     "final_price": 0,
     "discount_percent": 0,
-    "currency": "CNY",
-    "rating": 75.2,
-    "positive": 317412,
-    "total_reviews": 422090,
+    "currency": null,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -1702,24 +1758,26 @@
       "免费开玩"
     ],
     "year": 2024,
+    "release_date": "2024 年 12 月 5 日",
     "url": "https://store.steampowered.com/app/2767030"
   },
   {
     "appid": 2807960,
     "name": "战地风云™ 6",
-    "price": 79,
-    "original_price": 79,
-    "final_price": 79,
-    "discount_percent": 60,
+    "price": 198,
+    "original_price": 198,
+    "final_price": 198,
+    "discount_percent": 0,
     "currency": "CNY",
-    "rating": 63.5,
-    "positive": 237112,
-    "total_reviews": 373404,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作"
     ],
     "year": 2025,
+    "release_date": "2025 年 10 月 10 日",
     "url": "https://store.steampowered.com/app/2807960"
   },
   {
@@ -1750,9 +1808,9 @@
     "final_price": 88,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 61.4,
-    "positive": 125882,
-    "total_reviews": 205019,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "独立",
     "genres": [
       "独立",
@@ -1760,6 +1818,7 @@
       "抢先体验"
     ],
     "year": 2026,
+    "release_date": "2026 年 3 月 5 日",
     "url": "https://store.steampowered.com/app/2868840"
   },
   {
@@ -1811,16 +1870,17 @@
     "original_price": 0,
     "final_price": 0,
     "discount_percent": 0,
-    "currency": "CNY",
-    "rating": 44.4,
-    "positive": 7385,
-    "total_reviews": 16632,
+    "currency": null,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
       "免费开玩"
     ],
     "year": 2025,
+    "release_date": "2025 年 10 月 28 日",
     "url": "https://store.steampowered.com/app/3028330"
   },
   {
@@ -1831,28 +1891,29 @@
     "final_price": 200,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 72.3,
-    "positive": 1432,
-    "total_reviews": 1980,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "模拟",
     "genres": [
       "模拟",
       "策略"
     ],
     "year": 2026,
+    "release_date": "2026 年 10 月 13 日",
     "url": "https://store.steampowered.com/app/3219030"
   },
   {
     "appid": 3240220,
     "name": "Grand Theft Auto V 增强版",
-    "price": 99,
-    "original_price": 99,
-    "final_price": 99,
-    "discount_percent": 56,
+    "price": 149,
+    "original_price": 149,
+    "final_price": 149,
+    "discount_percent": 0,
     "currency": "CNY",
-    "rating": 83.3,
-    "positive": 193206,
-    "total_reviews": 231940,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -1860,6 +1921,7 @@
       "竞速"
     ],
     "year": 2025,
+    "release_date": "2025 年 3 月 4 日",
     "url": "https://store.steampowered.com/app/3240220"
   },
   {
@@ -1870,15 +1932,16 @@
     "final_price": 35,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 96,
-    "positive": 411612,
-    "total_reviews": 428763,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
       "抢先体验"
     ],
     "year": 2025,
+    "release_date": "2025 年 2 月 26 日",
     "url": "https://store.steampowered.com/app/3241660"
   },
   {
@@ -1910,15 +1973,16 @@
     "final_price": 268,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 83.7,
-    "positive": 148218,
-    "total_reviews": 177082,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
       "冒险"
     ],
     "year": 2026,
+    "release_date": "2026 年 3 月 19 日",
     "url": "https://store.steampowered.com/app/3321460"
   },
   {
@@ -1965,14 +2029,14 @@
   {
     "appid": 3527290,
     "name": "PEAK",
-    "price": 33,
+    "price": 20,
     "original_price": 33,
-    "final_price": 33,
-    "discount_percent": 0,
+    "final_price": 20,
+    "discount_percent": 38,
     "currency": "CNY",
-    "rating": 94.4,
-    "positive": 358353,
-    "total_reviews": 379611,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -1980,19 +2044,20 @@
       "独立"
     ],
     "year": 2025,
+    "release_date": "2025 年 6 月 16 日",
     "url": "https://store.steampowered.com/app/3527290"
   },
   {
     "appid": 3669870,
     "name": "控制: 共振",
-    "price": 268,
+    "price": 214,
     "original_price": 268,
-    "final_price": 268,
-    "discount_percent": 0,
+    "final_price": 214,
+    "discount_percent": 20,
     "currency": "CNY",
-    "rating": 91.6,
-    "positive": 15953,
-    "total_reviews": 17416,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -2000,6 +2065,7 @@
       "角色扮演"
     ],
     "year": 2026,
+    "release_date": "2026 年 9 月 24 日",
     "url": "https://store.steampowered.com/app/3669870"
   },
   {
@@ -2010,34 +2076,36 @@
     "final_price": 38,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 87.7,
-    "positive": 11575,
-    "total_reviews": 13198,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "独立",
     "genres": [
       "独立",
       "模拟"
     ],
     "year": 2026,
+    "release_date": "2026 年 7 月 22 日",
     "url": "https://store.steampowered.com/app/3722330"
   },
   {
     "appid": 3764200,
     "name": "Resident Evil Requiem",
-    "price": 348,
+    "price": 244,
     "original_price": 348,
-    "final_price": 348,
-    "discount_percent": 0,
+    "final_price": 244,
+    "discount_percent": 30,
     "currency": "CNY",
-    "rating": 95.9,
-    "positive": 179612,
-    "total_reviews": 187291,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
       "冒险"
     ],
     "year": 2026,
+    "release_date": "2026 年 2 月 26 日",
     "url": "https://store.steampowered.com/app/3764200"
   },
   {
@@ -2084,14 +2152,14 @@
   {
     "appid": 3892270,
     "name": "朋友，梭哈吧",
-    "price": 20,
-    "original_price": 20,
-    "final_price": 20,
-    "discount_percent": 38,
+    "price": 33,
+    "original_price": 33,
+    "final_price": 33,
+    "discount_percent": 0,
     "currency": "CNY",
-    "rating": 89.7,
-    "positive": 22539,
-    "total_reviews": 25127,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "冒险",
     "genres": [
       "冒险",
@@ -2099,6 +2167,7 @@
       "模拟"
     ],
     "year": 2026,
+    "release_date": "2026 年 5 月 1 日",
     "url": "https://store.steampowered.com/app/3892270"
   },
   {
@@ -2109,9 +2178,9 @@
     "final_price": 200,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 49.6,
-    "positive": 33423,
-    "total_reviews": 67386,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -2120,6 +2189,7 @@
       "模拟"
     ],
     "year": 2025,
+    "release_date": "2025 年 11 月 15 日",
     "url": "https://store.steampowered.com/app/3932890"
   },
   {
@@ -2130,9 +2200,9 @@
     "final_price": 33,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 95.1,
-    "positive": 78469,
-    "total_reviews": 82512,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
@@ -2141,6 +2211,7 @@
       "模拟"
     ],
     "year": 2026,
+    "release_date": "2026 年 8 月 20 日",
     "url": "https://store.steampowered.com/app/4001890"
   },
   {
@@ -2151,15 +2222,16 @@
     "final_price": 59,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 98.5,
-    "positive": 14833,
-    "total_reviews": 15059,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "休闲",
     "genres": [
       "休闲",
       "模拟"
     ],
     "year": 2026,
+    "release_date": "2026 年 9 月 21 日",
     "url": "https://store.steampowered.com/app/4019220"
   },
   {
@@ -2189,15 +2261,16 @@
     "final_price": 248,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 50.4,
-    "positive": 4813,
-    "total_reviews": 9549,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "模拟",
     "genres": [
       "模拟",
       "体育"
     ],
     "year": 2026,
+    "release_date": "2026 年 9 月 24 日",
     "url": "https://store.steampowered.com/app/4080220"
   },
   {
@@ -2208,15 +2281,16 @@
     "final_price": 33,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 86.6,
-    "positive": 4954,
-    "total_reviews": 5721,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "动作",
     "genres": [
       "动作",
       "独立"
     ],
     "year": 2026,
+    "release_date": "2026 年 7 月 30 日",
     "url": "https://store.steampowered.com/app/4108000"
   },
   {
@@ -2247,9 +2321,9 @@
     "final_price": 46,
     "discount_percent": 0,
     "currency": "CNY",
-    "rating": 81.8,
-    "positive": 2908,
-    "total_reviews": 3555,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "冒险",
     "genres": [
       "冒险",
@@ -2258,6 +2332,7 @@
       "策略"
     ],
     "year": 2026,
+    "release_date": "2026 年 8 月 12 日",
     "url": "https://store.steampowered.com/app/4164790"
   },
   {
@@ -2302,38 +2377,40 @@
   {
     "appid": 4356430,
     "name": "《NBA 2K27》",
-    "price": 209,
-    "original_price": 209,
-    "final_price": 209,
-    "discount_percent": 30,
+    "price": 298,
+    "original_price": 298,
+    "final_price": 298,
+    "discount_percent": 0,
     "currency": "CNY",
-    "rating": 49,
-    "positive": 1740,
-    "total_reviews": 3551,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "体育",
     "genres": [
       "体育"
     ],
     "year": 2026,
+    "release_date": "2026 年 9 月 3 日",
     "url": "https://store.steampowered.com/app/4356430"
   },
   {
     "appid": 4656000,
     "name": "BOMBANANA!",
-    "price": 17,
-    "original_price": 17,
-    "final_price": 17,
-    "discount_percent": 40,
+    "price": 29,
+    "original_price": 29,
+    "final_price": 29,
+    "discount_percent": 0,
     "currency": "CNY",
-    "rating": 96.4,
-    "positive": 3995,
-    "total_reviews": 4144,
+    "rating": null,
+    "positive": null,
+    "total_reviews": null,
     "type": "休闲",
     "genres": [
       "休闲",
       "独立"
     ],
     "year": 2026,
+    "release_date": "2026 年 9 月 2 日",
     "url": "https://store.steampowered.com/app/4656000"
   },
   {

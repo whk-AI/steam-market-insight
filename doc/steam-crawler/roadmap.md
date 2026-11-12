@@ -157,3 +157,4 @@ M1 文档基建（当前）
 > 进度更新区：2026-09-22 开发完成，详细变更记录见 task-list.md 台账。
 > 2026-10-26：每日更新触发时间由 08:00 调整为 **22:00**（用户要求），并开启「错过补跑 + 电池可运行」；`scripts/run-daily.bat` 加固（真实 node.exe、日志时间戳、失败非 0 退出码）。
 > 2026-10-28：修复「页面一直显示 10-18 快照」——(1) 新增 `scripts/gen-live-data.js` 把 `data/*.json` 打成 `js/live-data.js`，页面 file:// 直开也能读到最新数据，`js/main.js` 改为 api → live-data → snapshot 三级回退并区分页头标签；(2) 本机直连 `store.steampowered.com` 超时，新增 `scripts/start-proxy.ps1` / `stop-proxy.ps1`，`run-daily.bat` 自动复用或拉起本地 mihomo（127.0.0.1:7897），抓完只关自己启动的实例。当日 22:38 完成全量更新（123 款 / online 10 条）。
+> 2026-11-08：前端重构为 lobby 版（150,279 款快照）后，页面不再读 `js/data.js`，每日任务实际只刷新 `data/online.json`（实时榜单）。当晚处理：① 计划任务改由 `scripts/run-daily-hidden.vbs`（wscript）隐藏启动，22:00 不再弹黑窗（10-30/31、11-01/02/04 五次运行都是在启动几分钟后中断、没写入数据）；② 顶栏新增 `· 在线数据 MM-DD HH:mm` 时间，直接反映最近一次 22:00 抓取，`全量快照` 日期仍是 archive 构建日。当日 22:21 跑通（158 款池、123 款刷新、online 10 条）。

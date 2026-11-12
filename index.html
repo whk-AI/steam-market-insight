@@ -4,604 +4,464 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Steam 货架 123 · 游戏市场洞察</title>
-  <meta name="description" content="把 123 款 Steam 游戏摆成一家不卖游戏、只卖洞察的反向商店：TOP10 奖牌榜、类型玫瑰、折扣墙、年度趋势、好评标签墙和游戏明细。">
+  <title>Steam 市场观察 · 供给涨 84 倍，注意力更集中</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-  <meta name="theme-color" content="#0b141d">
+  <meta name="theme-color" content="#080d13">
   <link rel="stylesheet" href="CSS/style.css">
-  <link rel="stylesheet" href="CSS/insight.css">
+  <link rel="stylesheet" href="CSS/lobby.css">
 </head>
 
-<body class="poster">
+<body>
+  <div class="world" id="world" aria-hidden="true">
+    <div class="world__sky"></div>
+    <div class="world__stars"></div>
+    <div class="world__moon"></div>
+    <div class="world__ridge world__ridge--far"></div>
+    <div class="world__ridge world__ridge--mid"></div>
+    <div class="world__ridge world__ridge--near"></div>
+    <div class="world__path"></div>
+    <div class="world__fog"></div>
+    <div class="world__spot" id="world-spot"></div>
+    <div class="world__cursor" id="world-cursor"></div>
+  </div>
+
+  <div class="pointer-ring" id="pointer-ring" aria-hidden="true"></div>
+
+  <div class="boot" id="boot">
+    <div class="boot__grid"></div>
+    <div class="boot__card">
+      <img class="boot__logo" src="assets/steam-logo.png" alt="Steam">
+      <p class="boot__eyebrow">STEAM MARKET OBSERVATORY · 2010—2025</p>
+      <h1>Steam 十八年<br><span>一份走进市场的报告</span></h1>
+      <p class="boot__desc">150,279 款游戏、20,203 款年度峰值、2,000 份口碑样本。沿着一条时间线，把 Steam 的供给、类型、价格和口碑拆开看。</p>
+      <button class="boot__enter" id="enter-hall" type="button"><span>进入数据世界</span><i>→</i></button>
+      <p class="boot__hint" id="boot-hint">正在读取全量快照…</p>
+    </div>
+  </div>
+
   <header class="topbar">
-    <a class="brand" href="index.html" aria-label="回到首页">
-      <img class="brand__logo" src="assets/steam-logo.png" alt="Steam 官方图标">
-      <span class="brand__text">
-        <span class="brand__name">STEAM 货架 123</span>
-        <span class="brand__sub">POSTER NO.123 · MARKET INSIGHT</span>
-      </span>
+    <a class="brand" href="#top" aria-label="回到大厅">
+      <img class="brand__logo" src="assets/steam-logo.png" alt="">
+      <span class="brand__text"><b>STEAM 市场观察</b><small>MARKET OBSERVATORY · 150,279 GAMES</small></span>
     </a>
-    <nav class="topnav" aria-label="主导航">
-      <a class="topnav__link is-active" href="#top" aria-current="page">首页</a>
-      <a class="topnav__link" href="#chapter-reviews">口碑分析</a>
-      <a class="topnav__link" href="#chapter-trends">市场趋势</a>
+    <nav class="topnav" aria-label="页面导航">
+      <a href="#brief" class="is-active">摘要</a>
+      <a href="#lobby">类型</a>
+      <a href="#cycle">生命周期</a>
+      <a href="#season">时间线</a>
+      <a href="#price">价格</a>
+      <a href="#reputation">口碑</a>
+      <a href="#archive">档案</a>
     </nav>
     <div class="topbar__meta">
-      <span class="poster-stamp">已张贴</span>
-      <span id="fallback-tag" class="fallback-tag" hidden></span>
-      <span id="update-time" class="update-time">数据更新：连接中…</span>
+      <span class="status-dot"></span>
+      <span id="snapshot-label">全量快照</span>
+      <span class="topbar__time" id="snapshot-time">读取中</span>
+      <span class="topbar__time" id="live-time" hidden></span>
+      <button class="print-btn" id="print-report" type="button">打印报告</button>
     </div>
   </header>
 
-  <main class="page" id="top">
-    <!-- 第 0 章 · 今日精选横幅 -->
-    <section class="hero" aria-labelledby="hero-title">
-      <img class="hero__watermark" src="assets/steam-logo.png" alt="" aria-hidden="true">
-      <div class="hero__copy">
-        <p class="eyebrow">STEAM MARKET POSTER <span>·</span> 123 件样本 <span>·</span> 2026</p>
-        <h1 class="hero__title" id="hero-title">
-          今晚，Steam 货架上<br><em>摆着什么？</em>
-        </h1>
-        <p class="hero__sub">我们把 123 款游戏当成一间店里的商品：谁在门口排队，哪个货架最挤，哪件标价最高，哪件被打差评。数据不是报表，是货架上的价签。</p>
-        <div class="chips" aria-label="关键指标">
-          <span class="chip">总游戏 <strong id="chip-games">123</strong> 款</span>
-          <span class="chip">平均价 <strong id="chip-price">84.5</strong> 元<small>（含免费）</small></span>
-          <span class="chip">加权好评率 <strong id="chip-rating">83.9</strong>%</span>
-          <span class="chip">免费游戏 <strong id="chip-free">18.7</strong>%</span>
+  <main id="top">
+    <section class="brief" id="brief" data-wing="brief">
+      <div class="brief__inner">
+        <p class="eyebrow">00 / 研究摘要 · 2010—2025 全量 · 150,279 款游戏</p>
+        <h1>Steam 十八年：<span>供给涨了 84 倍，注意力却更集中</span></h1>
+        <p class="brief__lead">这不是一份游戏榜单，是一份关于 Steam 市场结构的数据报告。先用五个数字给结论，后面每一节给证据、口径和限制。</p>
+        <p class="brief__thesis"><b>一句话结论</b> 供给 18 年涨 84 倍，2025 首次回落 11.5%（17,876 款）；注意力仍在集中：TOP3 占 <span id="thesis-attention">65.3%</span> 在线，S 级只占 <span id="thesis-s">11.2%</span>。</p>
+        <div class="brief__findings">
+          <article class="finding">
+            <span class="finding__no">01 / SUPPLY</span>
+            <h3>供给不是线性增长</h3>
+            <b>84×</b>
+            <p>2010 年 240 款 → 2024 年 20,203 款 → 2025 年 17,876 款，首次低于峰值 11.5%；Steam Store 独立检索 17,801 款，两源相差 0.4%。</p>
+          </article>
+          <article class="finding">
+            <span class="finding__no">02 / OVERLAP</span>
+            <h3>独立是重叠中心</h3>
+            <b>45,373</b>
+            <p>独立 × 动作共享 45,373 款；独立 × 冒险 45,099；独立 × 休闲 45,098。</p>
+          </article>
+          <article class="finding">
+            <span class="finding__no">03 / PRICE</span>
+            <h3>免费把均价拉平</h3>
+            <b>$5.26</b>
+            <p>全样本均价；只看付费游戏，中位数 $4.99。免费游戏 18,994 款。</p>
+          </article>
+          <article class="finding">
+            <span class="finding__no">04 / REPUTATION</span>
+            <h3>S 级只占一小撮</h3>
+            <b>11.2%</b>
+            <p>2,000 份真实评价样本中 224 款 S 级；样本覆盖率 1.3%。</p>
+          </article>
+          <article class="finding">
+            <span class="finding__no">05 / ATTENTION</span>
+            <h3>注意力比供给更集中</h3>
+            <b id="brief-attention">65.5%</b>
+            <p id="brief-attention-text">TOP3 占有效 TOP10 在线 439.5 万中的 65.5%；第 10 名接口暂缺，未计入总量。</p>
+          </article>
+        </div>
+        <div class="brief__quality">
+          <span><b>口径</b> 全量 archive 快照 · 价格统一 USD</span>
+          <span><b>口碑</b> 2,000 款 / 150,279 = 1.3%，按推荐数选取</span>
+          <span><b>类型</b> 一款游戏可属于多个大类，数量可重叠</span>
+          <span><b>实时</b> <span id="brief-live">TOP10 为 2026-11-08 22:21 快照（第 10 名暂缺）</span></span>
+        </div>
+        <a class="brief__next" href="#lobby">从类型版图开始看证据 <span>↓</span></a>
+      </div>
+    </section>
+
+    <section class="lobby" id="lobby" data-wing="lobby">
+      <div class="hall">
+        <div class="hall__glow hall__glow--left"></div>
+        <div class="hall__glow hall__glow--right"></div>
+        <div class="hall__header">
+          <p class="eyebrow">01 / 类型版图 · 141,409 款有主类型</p>
+          <h2>十块互相重叠的地盘，<span>独立在中间</span></h2>
+          <p class="hall__sub">把 150,279 款游戏按主类型分开看。悬停看它和谁共享同一批游戏；点开任意一只，翻它的类型档案。</p>
+        </div>
+        <div class="hall__stats">
+          <span><b id="hall-total">150,279</b> 款游戏</span>
+          <span><b id="hall-types">10</b> 个类型角色</span>
+          <span><b id="hall-reviewed">2,000</b> 款口碑样本</span>
+          <span><b id="hall-other">8,870</b> 款未归入类型</span>
+        </div>
+        <p class="hall__links-note">线 = 同一款游戏同时属于两个大类 · 悬停角色看它的关系网</p>
+
+        <div class="hall-stage" id="hall-stage">
+          <svg id="hall-links" class="hall-links" aria-hidden="true"></svg>
+          <button class="char char--indie" type="button" data-genre="Indie" data-badge="💡"
+            style="--x:8%;--y:300px;--z:3;--s:.92">
+            <img src="assets/characters/naiwa/indie.png" alt="独立游戏角色">
+            <span class="char__platform"></span>
+            <span class="char__label">独立<small>INDIE</small><b class="char__count">56,070</b></span>
+          </button>
+          <button class="char char--casual" type="button" data-genre="Casual" data-badge="☕"
+            style="--x:28%;--y:286px;--z:2;--s:.86">
+            <img src="assets/characters/naiwa/casual.png" alt="休闲游戏角色">
+            <span class="char__platform"></span>
+            <span class="char__label">休闲<small>CASUAL</small><b class="char__count">7,222</b></span>
+          </button>
+          <button class="char char--strategy" type="button" data-genre="Strategy" data-badge="♟"
+            style="--x:51%;--y:294px;--z:2;--s:.84">
+            <img src="assets/characters/naiwa/strategy.png" alt="策略游戏角色">
+            <span class="char__platform"></span>
+            <span class="char__label">策略<small>STRATEGY</small><b class="char__count">24,954</b></span>
+          </button>
+          <button class="char char--simulation" type="button" data-genre="Simulation" data-badge="⚙"
+            style="--x:72%;--y:288px;--z:3;--s:.9">
+            <img src="assets/characters/naiwa/simulation.png" alt="模拟游戏角色">
+            <span class="char__platform"></span>
+            <span class="char__label">模拟<small>SIMULATION</small><b class="char__count">18,684</b></span>
+          </button>
+          <button class="char char--racing" type="button" data-genre="Racing" data-badge="🏁"
+            style="--x:91%;--y:250px;--z:2;--s:.8">
+            <img src="assets/characters/naiwa/racing.png" alt="竞速游戏角色">
+            <span class="char__platform"></span>
+            <span class="char__label">竞速<small>RACING</small><b class="char__count">2,456</b></span>
+          </button>
+
+          <button class="char char--adventure" type="button" data-genre="Adventure" data-badge="🗺"
+            style="--x:8%;--y:45px;--z:4;--s:.92">
+            <img src="assets/characters/naiwa/adventure.png" alt="冒险游戏角色">
+            <span class="char__platform"></span>
+            <span class="char__label">冒险<small>ADVENTURE</small><b class="char__count">6,730</b></span>
+          </button>
+          <button class="char char--action" type="button" data-genre="Action" data-badge="⚔"
+            style="--x:28%;--y:30px;--z:5;--s:1">
+            <img src="assets/characters/naiwa/action.png" alt="动作游戏角色">
+            <span class="char__platform"></span>
+            <span class="char__label">动作<small>ACTION</small><b class="char__count">4,537</b></span>
+          </button>
+          <button class="char char--rpg" type="button" data-genre="RPG" data-badge="🐉"
+            style="--x:51%;--y:38px;--z:4;--s:.94">
+            <img src="assets/characters/naiwa/rpg.png" alt="角色扮演游戏角色">
+            <span class="char__platform"></span>
+            <span class="char__label">角色扮演<small>RPG</small><b class="char__count">1,445</b></span>
+          </button>
+          <button class="char char--f2p" type="button" data-genre="Free To Play" data-badge="🎁"
+            style="--x:72%;--y:28px;--z:5;--s:1">
+            <img src="assets/characters/naiwa/f2p.png" alt="免费开玩游戏角色">
+            <span class="char__platform"></span>
+            <span class="char__label">免费开玩<small>FREE TO PLAY</small><b class="char__count">19,049</b></span>
+          </button>
+          <button class="char char--sports" type="button" data-genre="Sports" data-badge="🏀"
+            style="--x:91%;--y:38px;--z:4;--s:.9">
+            <img src="assets/characters/naiwa/sports.png" alt="体育游戏角色">
+            <span class="char__platform"></span>
+            <span class="char__label">体育<small>SPORTS</small><b class="char__count">342</b></span>
+          </button>
+        </div>
+
+        <p class="hall__hint"><span>HOVER 点亮</span><span>CLICK 翻档案</span><span>CLICK 地面 涟漪</span><span>SCROLL 往下读</span>
+        </p>
+        <p class="read-note">
+          关系网里最粗的三条线是动作—独立（45,373）、冒险—独立（45,099）、休闲—独立（45,098）。独立不是一个小众孤岛，它更像连接动作、冒险、休闲的公共层；这也是“十块地盘”会重叠的直接证据。</p>
+      </div>
+    </section>
+
+    <section class="wing wing--cycle" id="cycle" data-wing="cycle">
+      <div class="wing__head">
+        <p class="eyebrow">02 / 类型生命周期 · 2010—2025</p>
+        <h2>类型不是一起涨：<span>谁在领跑，谁在追赶</span></h2>
+        <p>把十个类型放回时间轴看：供给总量在涨，但不同类型的涨幅并不一样。颜色越亮，代表当年该类型上架越多。</p>
+        <p class="wing__note">口径：按上架年份统计；一款游戏可属于多个类型，数量可重叠；2026 年样本不完整，不进入矩阵。</p>
+      </div>
+      <p class="wing__takeaway"><b>结论</b> 十类都在涨，但增量最大的是独立、休闲、冒险、动作；“总量涨”不等于“每个类型同样涨”。</p>
+      <div class="cycle">
+        <div class="cycle__chart" id="cycle-chart"></div>
+        <aside class="cycle__side">
+          <div class="cycle__toggle" role="group" aria-label="矩阵指标">
+            <button type="button" data-cycle-mode="count">上架数量</button>
+            <button type="button" data-cycle-mode="share" class="is-on">类型份额</button>
+          </div>
+          <p class="cycle__hint">点任意格子，翻这个类型的档案。</p>
+          <p class="cycle__sub">2010 → 2025 增量最大</p>
+          <ol class="cycle__top" id="cycle-top"></ol>
+          <p class="cycle__note" id="cycle-note">份额 = 当年该类型上架数 / 当年十类型上架数之和。2010→2025 所有类型都在涨，差别在速度。</p>
+        </aside>
+      </div>
+      <p class="read-note">2010—2025
+        十类都在增长，增量最大的是独立、休闲、冒险、动作。增长不是均匀的：独立从边缘标签变成多数类型的共同底层，动作更像稳定的基本盘；这也是为什么“总量涨”不等于“每个类型同样涨”。</p>
+    </section>
+
+    <section class="wing wing--season" id="season" data-wing="season">
+      <div class="wing__head">
+        <p class="eyebrow">03 / 供给曲线 · 2010—2025</p>
+        <h2>从 240 到 20,203：<span>Steam 的供给曲线</span></h2>
+        <p>按发行年份回看全量快照。爆款 = 当年推荐数 ≥ 1000 的游戏；均价为当年有价游戏均价。2024 年是峰值，2025 年 17,876 款，首次回落 11.5%。</p>
+        <p class="wing__note">口径：2010—2025；缺失发行年的 34,502 款不进入曲线；2026 年样本不完整，不作趋势结论。2025 的月字段只覆盖到 8 月，但全年总数已与 Steam Store 17,801 条交叉核验。</p>
+      </div>
+      <p class="wing__takeaway"><b>结论</b> 2025 全年 17,876 款，较 2024 的 20,203 款下降 11.5%；Steam Store 独立检索 17,801 款，降幅约 11.9%，两源一致。这是样本内的首次年度回落。</p>
+      <div class="season__insights">
+        <span><b>2010</b> 240 款起步</span>
+        <span><b>2024</b> 20,203 款峰值</span>
+        <span><b>14 年</b> 上架量约 84 倍</span>
+        <span><b>2,150</b> 款 2025 年免费</span>
+      </div>
+      <div class="season__events" id="season-events" aria-label="时间线事件">
+        <button class="season-event" type="button" data-year="2017">
+          <span>2017</span><b>大逃杀爆发</b><small>PUBG 把“百人竞技”推上主舞台</small>
+        </button>
+        <button class="season-event" type="button" data-year="2020">
+          <span>2020</span><b>居家的一年</b><small>线下停摆，游戏时间被重新分配</small>
+        </button>
+        <button class="season-event" type="button" data-year="2024">
+          <span>2024</span><b>供给峰值</b><small>20,203 款，样本内最高</small>
+        </button>
+        <button class="season-event" type="button" data-year="2025">
+          <span>2025</span><b>首次回落</b><small>17,876 款，较 2024 峰值少 2,327 款（-11.5%）</small>
+        </button>
+      </div>
+      <p class="season__events-note">事件只作时间锚点，不改变统计口径。</p>
+      <div class="season">
+        <div class="season__stage">
+          <button class="season__play" id="season-play" type="button">▶ 播放回放</button>
+          <div class="season__year" id="season-year">2024</div>
+          <div class="season__stats">
+            <div><span>当年上架</span><b id="season-count">—</b><small>款</small></div>
+            <div><span>爆款</span><b id="season-hits">—</b><small>款</small></div>
+            <div><span>均价</span><b id="season-price">—</b><small>USD</small></div>
+            <div><span>免费</span><b id="season-free">—</b><small>款</small></div>
+          </div>
+          <p class="season__partial" id="season-partial" hidden>2025 全年总数 17,876 已核验（Steam Store 17,801）；archive 的 9–12 月 release_date 仅
+            1,450 条，月度字段不完整，因此只采用全年总数，不采用月分布。</p>
+          <div class="season__bars" id="season-bars"></div>
         </div>
       </div>
-      <aside class="live-panel" aria-label="实时在线">
-        <p class="live-panel__label"><span class="live-dot" aria-hidden="true"></span> LIVE · TOP10 当前在线合计</p>
-        <p class="live-panel__value"><strong id="hero-online">450.4</strong><span>万</span></p>
-        <p class="live-panel__note">抓取时间 <time id="hero-fetched">—</time></p>
-      </aside>
+      <p class="read-note">2010 年 240 款，2024 年 20,203 款，14 年约 84 倍；2025 年 17,876 款，较峰值少 2,327 款（-11.5%），
+        Steam Store 独立检索 17,801 款，两源相差 75 款（0.4%）。archive 的 9–12 月 release_date 只有 1,450 条，是月份字段覆盖问题，不能据此拆月度趋势；全年总数成立。</p>
     </section>
 
-    <div class="chapters">
-      <!-- 第 1 章 -->
-      <article class="chapter card" id="chapter-online" data-num="01"
-        style="--banner-a: rgba(102,192,244,.30); --banner-b: rgba(46,196,182,.20);">
-        <div class="chapter__banner">
-          <span class="chapter__num" aria-hidden="true">01</span>
-          <span class="chapter__icon" aria-hidden="true">🏆</span>
-          <span class="chapter__banner-note">TOP 10 · 当前在线</span>
+    <section class="wing wing--price" id="price" data-wing="price">
+      <div class="wing__head">
+        <p class="eyebrow">04 / 价格分层 · USD 快照</p>
+        <h2>免费把均价拉平，<span>付费内部继续分层</span></h2>
+        <p>全样本均价 <b>$5.26</b>、中位数 $1.99；只看付费游戏，均价 <b>$8.75</b>、中位数 <b>$4.99</b>。价格是筛选器，不是质量信号——免费游戏和付费游戏的样本口碑只差 2.8 分。
+        </p>
+      </div>
+      <p class="wing__takeaway"><b>结论</b> 免费游戏把全样本均价压到 $5.26，但免费/付费的样本口碑只差 2.8 分；价格不是质量信号。</p>
+      <div class="price__stats">
+        <div><span>全样本均价</span><b>$5.26</b><small>含 0 元 / 未定价</small></div>
+        <div><span>付费中位数</span><b>$4.99</b><small>90,311 款有价</small></div>
+        <div><span>免费游戏</span><b>18,994</b><small>占全量 12.6%</small></div>
+        <div><span>口碑差</span><b>2.8</b><small>免费 77.6 / 付费 80.4（2,000 样本）</small></div>
+      </div>
+      <div class="price__grid">
+        <div class="chart-card">
+          <div class="chart-card__head"><span>PRICE BANDS</span><b>价格带分布</b></div>
+          <div class="chart chart--price" id="price-bands"></div>
         </div>
-        <div class="chapter__body">
-          <p class="kicker">CHAPTER 01 · 此刻谁在线</p>
-          <h2 class="chapter__title">晚上 10 点，几百万人挤在这 10 款游戏里</h2>
-          <p class="narration">头部极度集中。前 3 款（CS2、Dota2、PUBG）占了 TOP10 在线人数的近 70%。第 1 名 136 万，第 10 名只有 7 万，量级差了近 20 倍。</p>
-          <div class="top10" id="top10-list" aria-label="Steam 实时在线 TOP10"></div>
-          <p class="chapter__summary">这是个赢家通吃的市场。</p>
+        <div class="chart-card">
+          <div class="chart-card__head"><span>TYPE × PRICE</span><b>有价均价 vs 好评率</b></div>
+          <div class="chart chart--price" id="price-type"></div>
         </div>
-      </article>
-
-      <!-- 第 2 章 -->
-      <article class="chapter card" id="chapter-types" data-num="02"
-        style="--banner-a: rgba(245,166,35,.26); --banner-b: rgba(177,140,255,.20);">
-        <div class="chapter__banner">
-          <span class="chapter__num" aria-hidden="true">02</span>
-          <span class="chapter__icon" aria-hidden="true">🛍️</span>
-          <span class="chapter__banner-note">TYPE × PRICE</span>
-        </div>
-        <div class="chapter__body">
-          <p class="kicker">CHAPTER 02 · 货架上卖什么</p>
-          <h2 class="chapter__title">动作游戏最多，但卖得最贵的不是它</h2>
-          <p class="narration">左边类型玫瑰图——动作类数量第一。右边折扣墙——价格集中在 31–100 元档；200 元以上的档位由博德之门3、Mount &amp; Blade 占据，198 元档则是
-            Stellaris、城市天际线2、HELLDIVERS 2。</p>
-          <div class="split">
-            <section class="chart-panel">
-              <h3 class="panel-label">类型数量 · 谁在货架上</h3>
-              <div class="chart chart--rose" id="chart-type-rose" role="img" aria-label="游戏类型数量玫瑰图"></div>
-            </section>
-            <section class="chart-panel">
-              <h3 class="panel-label">价格带 · 折扣角标墙</h3>
-              <div class="price-wall" id="price-wall"></div>
-            </section>
-          </div>
-          <p class="chapter__summary">动作走量，模拟和 RPG 吃客单价。</p>
-        </div>
-      </article>
-
-      <!-- 第 3 章 -->
-      <article class="chapter card" id="chapter-time" data-num="03"
-        style="--banner-a: rgba(46,196,182,.26); --banner-b: rgba(164,208,7,.18);">
-        <div class="chapter__banner">
-          <span class="chapter__num" aria-hidden="true">03</span>
-          <span class="chapter__icon" aria-hidden="true">📅</span>
-          <span class="chapter__banner-note">2009 — 2026</span>
-        </div>
-        <div class="chapter__body">
-          <p class="kicker">CHAPTER 03 · 新游戏还是老游戏</p>
-          <h2 class="chapter__title">2026 年新游井喷，但先别急着下结论</h2>
-          <p class="narration">年度趋势图显示 2026 年新游数量猛增。诚实标注：样本只有 123 款，爬虫优先抓到近期热门，2026 数字偏高不代表全市场。但有一点是真的——活下来的老游戏好评率更稳。
-          </p>
-          <div class="chart-panel chart-panel--full">
-            <h3 class="panel-label">每年上架数量 × 加权好评率</h3>
-            <div class="chart chart--trend" id="chart-trend" role="img" aria-label="年度游戏数量与加权好评率组合图"></div>
-          </div>
-          <p class="chapter__summary">样本有偏，但口碑这条线没骗人。</p>
-        </div>
-      </article>
-
-      <!-- 第 4 章 -->
-      <article class="chapter card" id="chapter-rating" data-num="04"
-        style="--banner-a: rgba(164,208,7,.22); --banner-b: rgba(245,166,35,.20);">
-        <div class="chapter__banner">
-          <span class="chapter__num" aria-hidden="true">04</span>
-          <span class="chapter__icon" aria-hidden="true">👍</span>
-          <span class="chapter__banner-note">REVIEW SCORE</span>
-        </div>
-        <div class="chapter__body">
-          <p class="kicker">CHAPTER 04 · 玩家怎么打分</p>
-          <h2 class="chapter__title">98 分不稀奇，60 分才值得看</h2>
-          <p class="narration">大部分游戏挤在 80–95 分“特别好评”区间。天花板是星露谷 98.5、边缘世界 97.9；争议款是城市天际线2（56 分）、PUBG（60.5
-            分）——在线人数高不等于玩家真喜欢。</p>
-          <div class="rating-wall" id="rating-wall" aria-label="Steam 好评率分布"></div>
-          <div class="case-grid" id="case-grid" aria-label="口碑反差案例"></div>
-          <p class="chapter__summary">在线是流量，好评才是真心。</p>
-        </div>
-      </article>
-
-      <!-- 第 5 章 -->
-      <article class="chapter card" id="chapter-tags" data-num="05"
-        style="--banner-a: rgba(177,140,255,.24); --banner-b: rgba(255,123,168,.18);">
-        <div class="chapter__banner">
-          <span class="chapter__num" aria-hidden="true">05</span>
-          <span class="chapter__icon" aria-hidden="true">🏷️</span>
-          <span class="chapter__banner-note">TAGS × YEARS</span>
-        </div>
-        <div class="chapter__body">
-          <p class="kicker">CHAPTER 05 · 标签里的秘密</p>
-          <h2 class="chapter__title">“独立”和“模拟”，为什么总一起出现？</h2>
-          <p class="narration">词云显示独立、模拟、冒险是高频标签；热力图显示动作类近年集中爆发，独立/模拟类分布更分散。</p>
-          <div class="split">
-            <section class="chart-panel">
-              <h3 class="panel-label">类型标签词云</h3>
-              <div class="chart chart--small" id="chart-wordcloud" role="img" aria-label="游戏类型标签词云"></div>
-            </section>
-            <section class="chart-panel">
-              <h3 class="panel-label">类型 × 年份热力</h3>
-              <div class="chart chart--small" id="chart-heatmap" role="img" aria-label="类型年份热力图"></div>
-            </section>
-          </div>
-          <p class="chapter__summary">动作是基本盘，独立和模拟在长尾里慢慢长。</p>
-        </div>
-      </article>
-    </div>
-
-
-    <!-- 第 6 章 · 口碑分析（原 reviews 页面合并） -->
-    <section class="merged-desk" id="chapter-reviews" aria-labelledby="review-title">
-
-      <section class="desk-hero" aria-labelledby="review-title">
-        <div class="desk-hero__copy">
-          <p class="desk-eyebrow">REVIEW DESK · 口碑分析 · 2026</p>
-          <h2 class="desk-title" id="review-title">分数不稀奇，<em>差评</em>才值得看。</h2>
-          <p class="desk-lede">
-            把 123 款游戏按玩家真实评价重新排一次队：哪些高分只是评价少，哪些低分反而人山人海，
-            以及“特别好评”这四个字，到底还能不能信。
-          </p>
-          <div class="kpi-strip" aria-label="口碑核心指标">
-            <article class="kpi-ticket">
-              <span class="kpi-ticket__label">样本</span>
-              <strong data-kpi="games">—</strong>
-              <small>款游戏</small>
-            </article>
-            <article class="kpi-ticket">
-              <span class="kpi-ticket__label">加权好评率</span>
-              <strong data-kpi="weighted">—</strong>
-              <small>按评价数加权</small>
-            </article>
-            <article class="kpi-ticket">
-              <span class="kpi-ticket__label">评价总量</span>
-              <strong data-kpi="reviews">—</strong>
-              <small>条玩家评价</small>
-            </article>
-            <article class="kpi-ticket kpi-ticket--red">
-              <span class="kpi-ticket__label">褒贬不一 / 差评</span>
-              <strong data-kpi="mixed">—</strong>
-              <small>款，值得单独看</small>
-            </article>
-          </div>
-        </div>
-        <aside class="desk-note">
-          <p class="desk-note__label">READ ME · 口径</p>
-          <p>好评率来自本地清洗快照；加权好评率按每款游戏的评价数加权，避免“1 条评价的 100 分”盖过“100 万条评价的 90 分”。</p>
-          <p class="desk-note__meta">123 款样本 · 不是 Steam 全量 · 所有图表可点击联动</p>
-        </aside>
-      </section>
-
-      <section class="board" aria-labelledby="board-band-title">
-        <header class="board__head">
-          <div class="board__title">
-            <span class="board__index">01</span>
-            <div>
-              <p class="board__kicker">RATING BANDS · 口碑分层</p>
-              <h2 id="board-band-title">先按口碑分成五档，再看每一档是谁</h2>
-            </div>
-          </div>
-          <button class="text-button" type="button" id="resetBand">清除筛选 ×</button>
-        </header>
-
-        <div class="band-grid" id="bandCards" role="group" aria-label="口碑分档筛选"></div>
-
-        <div class="board__grid board__grid--wide">
-          <article class="panel">
-            <header class="panel__head">
-              <div>
-                <p class="panel__kicker">DISTRIBUTION</p>
-                <h3>好评率分布</h3>
-              </div>
-              <span class="panel__hint" id="histogramHint">点击柱子筛选</span>
-            </header>
-            <div class="chart chart--histogram" id="chart-histogram" role="img" aria-label="好评率分布柱状图"></div>
-            <p class="panel__foot">每 10 分一档；越靠右，玩家越买账。</p>
-          </article>
-
-          <article class="panel">
-            <header class="panel__head">
-              <div>
-                <p class="panel__kicker">BY TYPE</p>
-                <h3>哪类游戏口碑最好</h3>
-              </div>
-              <span class="panel__hint">点类型联动</span>
-            </header>
-            <div class="chart chart--type" id="chart-type-rating" role="img" aria-label="各类型加权好评率横向条形图"></div>
-            <p class="panel__foot">括号里是样本数；样本太小的类型不轻易下结论。</p>
-          </article>
-        </div>
-        <p class="board__status" id="filterSummary" aria-live="polite">当前显示 123 款 · 全类型 · 全部口碑</p>
-      </section>
-
-      <section class="board" aria-labelledby="board-ranking-title">
-        <header class="board__head">
-          <div class="board__title">
-            <span class="board__index">02</span>
-            <div>
-              <p class="board__kicker">CREDIBLE LISTS · 可信榜</p>
-              <h2 id="board-ranking-title">评价数太少的高分，先放一边</h2>
-            </div>
-          </div>
-          <div class="inline-controls">
-            <span class="inline-controls__label">最低评价数</span>
-            <div class="seg" id="minReviewSeg" role="group" aria-label="最低评价数"></div>
-          </div>
-        </header>
-
-        <div class="board__grid board__grid--two">
-          <article class="panel panel--rank">
-            <header class="panel__head">
-              <div>
-                <p class="panel__kicker">HIGH SCORE</p>
-                <h3>高分且被很多人评价</h3>
-              </div>
-              <span class="panel__hint" id="topRankHint">—</span>
-            </header>
-            <ol class="ranking-list" id="topRanking"></ol>
-          </article>
-          <article class="panel panel--rank">
-            <header class="panel__head">
-              <div>
-                <p class="panel__kicker">LOW SCORE</p>
-                <h3>低分且被很多人评价</h3>
-              </div>
-              <span class="panel__hint" id="bottomRankHint">—</span>
-            </header>
-            <ol class="ranking-list" id="bottomRanking"></ol>
-          </article>
-        </div>
-        <p class="board__status">榜单按“好评率”排序，但只收评价数达到门槛的游戏；点任意一行看详情。</p>
-      </section>
-
-      <section class="board" aria-labelledby="board-scatter-title">
-        <header class="board__head">
-          <div class="board__title">
-            <span class="board__index">03</span>
-            <div>
-              <p class="board__kicker">REVIEWS × SCORE · 评价规模</p>
-              <h2 id="board-scatter-title">评价越多，分数越可信吗</h2>
-            </div>
-          </div>
-          <p class="board__aside">横轴评价数（对数）· 纵轴好评率 · 气泡越大评价越多</p>
-        </header>
-
-        <article class="panel">
-          <div class="chart chart--scatter" id="chart-review-scatter" role="img" aria-label="评价数与好评率散点图"></div>
-          <p class="panel__foot">右上角是“被很多人验证过的好评”；左下角是“评价不多、分数也不高”。气泡颜色对应口碑分档，点击可筛选。</p>
-        </article>
-      </section>
-
-      <section class="board" aria-labelledby="review-table-title">
-        <header class="board__head">
-          <div class="board__title">
-            <span class="board__index">04</span>
-            <div>
-              <p class="board__kicker">ALL 123 · 全部样本</p>
-              <h2 id="review-table-title">把每一款游戏摊开看</h2>
-            </div>
-          </div>
-          <span class="board__aside" id="tableCount">123 行</span>
-        </header>
-
-        <article class="panel panel--table">
-          <div class="filterbar">
-            <label class="field">
-              <span>类型</span>
-              <select id="typeFilter" aria-label="按类型筛选">
-                <option value="">全部类型</option>
-              </select>
-            </label>
-            <label class="field">
-              <span>口碑</span>
-              <select id="bandFilter" aria-label="按口碑筛选">
-                <option value="">全部口碑</option>
-              </select>
-            </label>
-            <label class="field field--search">
-              <span>搜索</span>
-              <input id="searchFilter" type="search" placeholder="输入游戏名…" autocomplete="off">
-            </label>
-            <button class="text-button" type="button" id="resetTable">重置</button>
-            <span class="filterbar__count" id="filterCount" aria-live="polite">123 / 123</span>
-          </div>
-
-          <div class="table-wrap" id="tableWrap">
-            <table class="game-table">
-              <thead>
-                <tr>
-                  <th scope="col"><button type="button" data-sort="name">游戏名 <span aria-hidden="true">↕</span></button>
-                  </th>
-                  <th scope="col"><button type="button" data-sort="type">类型 <span aria-hidden="true">↕</span></button>
-                  </th>
-                  <th scope="col"><button type="button" data-sort="price">价格 <span aria-hidden="true">↕</span></button>
-                  </th>
-                  <th scope="col"><button type="button" data-sort="rating">好评率 <span
-                        aria-hidden="true">↕</span></button></th>
-                  <th scope="col"><button type="button" data-sort="total_reviews">评价数 <span
-                        aria-hidden="true">↕</span></button></th>
-                  <th scope="col"><button type="button" data-sort="year">年份 <span aria-hidden="true">↕</span></button>
-                  </th>
-                </tr>
-              </thead>
-              <tbody id="tableBody"></tbody>
-            </table>
-            <p class="empty-state" id="tableEmpty" hidden>没有符合条件的游戏，换个筛选试试。</p>
-          </div>
-        </article>
-      </section>
-
-      <section class="closing-note" aria-label="阅读提示">
-        <span class="closing-note__stamp">先看差评</span>
-        <p>高分游戏大多相似，低分游戏各有各的问题。口碑页面不替玩家下结论，只把“评价数”和“分数”放在一起，让判断有据可查。</p>
-      </section>
-
+      </div>
+      <p class="read-note">免费游戏把全样本均价压到 $5.26，但 2,000 份样本里免费与付费的口碑只差 2.8 分。价格更像筛选题材和体验的门槛，而不是质量信号；付费内部 31–60、61–100
+        美元档才是主要分层。</p>
+      <p class="price__note">口径：archive 快照价格折算 USD，非实时汇率；好评率仅覆盖 2,000 款真实评价样本，不代表全量。</p>
     </section>
 
-    <!-- 第 7 章 · 市场趋势（原 trends 页面合并） -->
-    <section class="merged-desk" id="chapter-trends" aria-labelledby="trends-title">
-
-      <section class="desk-hero" aria-labelledby="trends-title">
-        <div class="desk-hero__copy">
-          <p class="desk-eyebrow">TREND DESK · 市场趋势 · 2009—2026</p>
-          <h2 class="desk-title" id="trends-title">十八年，<em>123</em> 款游戏，<br>价格和口碑怎么走？</h2>
-          <p class="desk-lede">
-            把样本按发售年份排开，看数量、均价和口碑这三条线如何互相拉扯。
-            2026 年的 46 款是样本偏差，不是全市场；但老游戏的高分，确实经得起时间。
-          </p>
-          <div class="kpi-strip" aria-label="趋势核心指标">
-            <article class="kpi-ticket">
-              <span class="kpi-ticket__label">年份跨度</span>
-              <strong data-kpi="span">—</strong>
-              <small>2009—2026</small>
-            </article>
-            <article class="kpi-ticket">
-              <span class="kpi-ticket__label">样本</span>
-              <strong data-kpi="games">—</strong>
-              <small>款游戏</small>
-            </article>
-            <article class="kpi-ticket">
-              <span class="kpi-ticket__label">2026 年上架</span>
-              <strong data-kpi="latest">—</strong>
-              <small>款，样本峰值</small>
-            </article>
-            <article class="kpi-ticket kpi-ticket--red">
-              <span class="kpi-ticket__label">全样本均价</span>
-              <strong data-kpi="price">—</strong>
-              <small>元 / 款（含免费）</small>
-            </article>
-          </div>
+    <section class="wing wing--arena" id="arena" data-wing="arena">
+      <div class="wing__head wing__head--row">
+        <div>
+          <p class="eyebrow">05 / 实时切片 · TOP 10</p>
+          <h2>今天，<span>谁在占用玩家的时间</span></h2>
+          <p id="arena-intro">只统计 Steam 实时在线 TOP10，不叫“平台总在线”；这是 2026-11-08 22:21 的快照，第 10 名接口暂缺。</p>
+          <p class="wing__note">口径：TOP10 为快照，不是当日实时；不能外推为“Steam 全平台在线”。</p>
         </div>
-        <aside class="desk-note">
-          <p class="desk-note__label">READ ME · 口径</p>
-          <p>价格与好评率是“当前快照”，不是当年的首发价或当年口碑；它回答的是“今天回看这一年上架的游戏，是什么水平”。</p>
-          <p class="desk-note__meta">换年份不会改变样本 · 所有图表和明细表同步联动</p>
-        </aside>
-      </section>
-
-      <section class="board" aria-labelledby="board-year-title">
-        <header class="board__head board__head--stack">
-          <div class="board__title">
-            <span class="board__index">01</span>
-            <div>
-              <p class="board__kicker">YEAR BY YEAR · 年度主轴</p>
-              <h2 id="board-year-title">选一年，看那一年的货架</h2>
-            </div>
-          </div>
-          <div class="timeline-wrap">
-            <div class="timeline" id="yearTimeline" role="group" aria-label="选择年份"></div>
-            <div class="timeline-actions">
-              <button class="text-button" type="button" id="playYears">▶ 播放 18 年</button>
-              <button class="text-button" type="button" id="resetYear">回到 2026</button>
-            </div>
-          </div>
-        </header>
-
-        <div class="board__grid board__grid--main">
-          <article class="panel">
-            <header class="panel__head">
-              <div>
-                <p class="panel__kicker">VOLUME × SCORE</p>
-                <h3>每年上架数量与加权好评率</h3>
-              </div>
-              <span class="panel__hint">点柱子或折线选年</span>
-            </header>
-            <div class="chart chart--yearly" id="chart-yearly" role="img" aria-label="年度上架数量与加权好评率组合图"></div>
-            <p class="panel__foot">柱＝当年上架数量；线＝当年这批游戏的加权好评率；纵向虚线是当前选中年份。</p>
-          </article>
-
-          <aside class="year-card" id="yearCard" aria-live="polite">
-            <p class="year-card__kicker">YEAR IN FOCUS</p>
-            <div class="year-card__year" id="yearFocus">2026</div>
-            <p class="year-card__delta" id="yearDelta">—</p>
-            <div class="year-card__stats">
-              <div><span>上架</span><strong id="yearCount">—</strong><small>款</small></div>
-              <div><span>加权好评</span><strong id="yearRating">—</strong><small>%</small></div>
-              <div><span>均价</span><strong id="yearPrice">—</strong><small>元</small></div>
-              <div><span>评价总量</span><strong id="yearReviews">—</strong><small>条</small></div>
-            </div>
-            <p class="year-card__label">这一年评价最多的 3 款</p>
-            <ol class="year-card__games" id="yearTopGames"></ol>
-            <p class="year-card__note" id="yearNote">—</p>
-          </aside>
+        <div class="live-stamp"><span class="status-dot"></span><b>LIVE</b><span id="arena-updated">—</span></div>
+      </div>
+      <div class="arena">
+        <div class="arena__total">
+          <span id="arena-total-label">TOP10 在线合计</span>
+          <b id="arena-total">—</b>
+          <small>人 · 当前在线</small>
         </div>
-      </section>
-
-      <section class="board" aria-labelledby="board-side-title">
-        <header class="board__head">
-          <div class="board__title">
-            <span class="board__index">02</span>
-            <div>
-              <p class="board__kicker">PRICE × TYPE · 两条侧线</p>
-              <h2 id="board-side-title">价格在涨，还是类型在换</h2>
-            </div>
-          </div>
-          <p class="board__aside">价格线是当年上架游戏的当前均价；类型份额按当年上架数量计算。</p>
-        </header>
-
-        <div class="board__grid board__grid--two">
-          <article class="panel">
-            <header class="panel__head">
-              <div>
-                <p class="panel__kicker">AVERAGE PRICE</p>
-                <h3>每年上架游戏的平均价格</h3>
-              </div>
-              <span class="panel__hint">含免费游戏</span>
-            </header>
-            <div class="chart chart--price" id="chart-price" role="img" aria-label="年度平均价格折线图"></div>
-            <p class="panel__foot">免费游戏记 0 元，所以这条线会被“免费年”拉低；它更像价格结构，而不是涨价指数。</p>
-          </article>
-
-          <article class="panel">
-            <header class="panel__head">
-              <div>
-                <p class="panel__kicker">TYPE MIX</p>
-                <h3>每年上架游戏的类型份额</h3>
-              </div>
-              <span class="panel__hint">前 5 类型 + 其他</span>
-            </header>
-            <div class="chart chart--share" id="chart-type-share" role="img" aria-label="年度类型份额堆叠面积图"></div>
-            <p class="panel__foot">动作在近年样本中占比最高；份额变化也受“当年抓到哪些游戏”影响。</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="board" aria-labelledby="trends-table-title">
-        <header class="board__head">
-          <div class="board__title">
-            <span class="board__index">03</span>
-            <div>
-              <p class="board__kicker">ALL YEARS · 18 行明细</p>
-              <h2 id="trends-table-title">十八年，一年一行</h2>
-            </div>
-          </div>
-          <span class="board__aside" id="yearTableCount">18 行</span>
-        </header>
-
-        <article class="panel panel--table">
-          <div class="table-wrap">
-            <table class="game-table">
-              <thead>
-                <tr>
-                  <th scope="col">年份</th>
-                  <th scope="col">上架</th>
-                  <th scope="col">加权好评率</th>
-                  <th scope="col">平均价格</th>
-                  <th scope="col">评价总量</th>
-                  <th scope="col">当年评价最多</th>
-                </tr>
-              </thead>
-              <tbody id="yearTableBody"></tbody>
-            </table>
-          </div>
-          <p class="panel__foot">点任意一行，回到上方对应年份。</p>
-        </article>
-      </section>
-
-      <section class="closing-note" aria-label="阅读提示">
-        <span class="closing-note__stamp">别急下结论</span>
-        <p>2026 年的数量峰值首先说明“样本怎么来的”，其次才是市场。趋势页把所有年份放在同一口径下，让数字自己说话。</p>
-      </section>
-
+        <div class="arena__list" id="arena-list"></div>
+      </div>
+      <p class="read-note" id="arena-note">当前快照的有效在线合计、前三占比与第 1/第 10 名差距，会随数据源时间同步更新；第 10 名接口缺失时页面标“—”，不当作 0 混入总量。</p>
     </section>
 
-    <!-- 年度回顾海报 -->
-    <section class="annual" id="annual" aria-labelledby="annual-title">
-      <img class="annual__watermark" src="assets/steam-logo.png" alt="" aria-hidden="true">
-      <p class="eyebrow">YEAR IN REVIEW <span>·</span> 2026</p>
-      <h2 class="annual__title" id="annual-title"><strong data-count="123">123</strong> 款游戏</h2>
-      <p class="annual__line"><strong>69.7%</strong> 在线挤在 TOP 3</p>
-      <p class="annual__line"><strong>83.9%</strong> 加权好评率</p>
-      <p class="annual__note">123 款不是全部 Steam；2026 的数字被新游样本放大，类型占比不能直接外推到整个市场。</p>
-      <a class="detail-toggle" href="#review-table-title">查看全部 123 款游戏明细 <span aria-hidden="true">→</span></a>
+    <section class="wing wing--reputation" id="reputation" data-wing="reputation">
+      <div class="wing__head">
+        <p class="eyebrow">06 / 口碑分层 · 2,000 份样本</p>
+        <h2>2,000 款样本：<span>好评率正在分层</span></h2>
+        <p>全量 archive 没有评论；这 2,000 款来自公开 Steam 游戏数据集的真实好评/差评计数，覆盖率约 1.3%，只代表样本，不代表全市场。</p>
+        <p class="wing__note">口径：2,000 / 150,279 = 1.3%，按推荐数选取；这是“热门游戏的口碑”，不是“Steam 整体口碑”。</p>
+      </div>
+      <p class="wing__takeaway"><b>结论</b> S 级 224 款只占 11.2%；高分不稀缺，真正稀缺的是“高分且评价量足够大”。</p>
+      <div class="reputation">
+        <div class="grades" id="rep-grades"></div>
+        <p class="grades-note">好评率来自 2,000 份真实评价样本；点击 S/A/B/C 切换榜单。</p>
+        <div class="reputation__grid">
+          <div class="reputation__cloud-wrap">
+            <p class="cloud-note">词云统计全量 150,279 款的关键词标签；右侧 S/A/B/C 只统计 2,000 份评价样本。</p>
+            <div class="chart chart--cloud" id="rep-cloud"></div>
+            <div class="tag-pills" id="tag-pills"></div>
+            <p class="tag-result" id="tag-result">点击词条，看看这个标签下有哪些游戏。</p>
+          </div>
+          <div class="rep-list" id="rep-list"></div>
+        </div>
+      </div>
+      <p class="read-note">2,000 份样本里 S 级 224 款、占 11.2%，但这是按推荐数选出的热门样本，不是全量口碑。S/A/B/C
+        的差别说明高分并不稀缺，真正稀缺的是“高分且评价量足够大”，所以右边榜单同时显示评价数。</p>
+    </section>
+
+    <section class="wing wing--archive" id="archive" data-wing="archive">
+      <div class="wing__head">
+        <p class="eyebrow">07 / 可查坐标 · TOP 500</p>
+        <h2>把 150,279 款游戏，<span>压成 500 个坐标</span></h2>
+        <p>按推荐数取前 500；可搜索。原始 15 万行不进浏览器，只保留可解释的切片。</p>
+        <p class="wing__note">口径：TOP500 按推荐数排序；不是销量榜，也不是收入榜。</p>
+      </div>
+      <p class="wing__takeaway"><b>结论</b> TOP500 是“被验证过的热门”，不是销量/收入榜；拿它代表全量会高估头部、低估长尾。</p>
+      <div class="archive">
+        <div class="archive__tools">
+          <input id="archive-search" type="search" placeholder="搜索游戏名 / appid，例如 ELDEN" autocomplete="off">
+          <select id="archive-genre" aria-label="按大类筛选"></select>
+          <span class="archive-count" id="archive-count">—</span>
+        </div>
+        <div class="archive__table-wrap">
+          <table class="archive__table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>游戏</th>
+                <th>大类</th>
+                <th>年份</th>
+                <th>价格</th>
+                <th>好评率</th>
+                <th>推荐数</th>
+              </tr>
+            </thead>
+            <tbody id="archive-body"></tbody>
+          </table>
+        </div>
+      </div>
+      <p class="read-note">TOP500 按推荐数排序，是“被验证过的热门”，不是销量榜或收入榜。它适合用来抽代表作品和类型样本；把它当成全量结论会高估头部、低估长尾。</p>
+    </section>
+
+    <section class="method" id="method">
+      <p class="eyebrow">08 / METHOD · 数据怎么来的</p>
+      <h2>这不是“全网 Steam”，是一份可复核的切片</h2>
+      <p>150,279 款 game 来自 archive 的 applications.csv；价格按快照期汇率折算 USD；小标签由名称/简介关键词推断，不是 Steam 用户标签；2,000 份好评率来自公开 Steam
+        游戏数据集，只覆盖有真实评价记录的样本。</p>
+      <div class="method__grid">
+        <div class="method__card">
+          <b>供给</b>
+          <p>2010 年 240 款 → 2024 年 20,203 款，14 年约 84 倍；2025 年 17,876 款，较 2024 少 2,327 款（-11.5%），
+            Steam Store 独立检索 17,801 款，两源相差 0.4%。0 年（缺失日期）34,502 款不进入年度曲线。</p>
+        </div>
+        <div class="method__card">
+          <b>类型</b>
+          <p>一款游戏可以同时属于多个 Steam 大类，所以十个角色的数字相加会超过 150,279；8,870 款没有任何大类命中，单列为“未归入”。</p>
+        </div>
+        <div class="method__card">
+          <b>口碑</b>
+          <p>2,000 份样本按 Steam 好评率分成 S（≥95）、A（85–95）、B（70–85）、C（&lt;70）；样本不是全量，结论只对样本负责。</p>
+          <p class="method__sensitivity" id="sensitivity">正在计算评价数门槛敏感性…</p>
+        </div>
+        <div class="method__card">
+          <b>价格</b>
+          <p>archive 快照价格折算 USD；全样本均价含 0 元/未定价，付费统计只取 price&gt;0；不是当日汇率，也不是首发价。</p>
+        </div>
+      </div>
+      <p class="method__warning"><b>读之前先记住：</b>这是 150,279 款的 archive 快照 + 2,000 份口碑样本，不是“全网 Steam”；小标签是关键词推断，不是 Steam
+        用户标签。所有图表都可以点，所有结论都留着口径。</p>
     </section>
   </main>
-  <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
-  <aside class="drawer" id="gameDrawer" hidden aria-hidden="true" aria-labelledby="drawerName">
-    <button class="drawer__close" id="drawerClose" type="button" aria-label="关闭详情">×</button>
-    <p class="drawer__kicker" id="drawerType">—</p>
-    <h2 class="drawer__name" id="drawerName">—</h2>
-    <div class="drawer__score">
-      <strong id="drawerRating">—</strong>
-      <span id="drawerBand">—</span>
-    </div>
-    <div class="drawer__meter" aria-hidden="true"><i id="drawerMeter"></i></div>
-    <dl class="drawer__facts">
-      <div>
-        <dt>评价数</dt>
-        <dd id="drawerReviews">—</dd>
-      </div>
-      <div>
-        <dt>价格</dt>
-        <dd id="drawerPrice">—</dd>
-      </div>
-      <div>
-        <dt>发售年</dt>
-        <dd id="drawerYear">—</dd>
-      </div>
-      <div>
-        <dt>主类型</dt>
-        <dd id="drawerMainType">—</dd>
-      </div>
-    </dl>
-    <p class="drawer__tags" id="drawerTags">—</p>
-    <a class="drawer__link" id="drawerLink" href="#" target="_blank" rel="noopener noreferrer">在 Steam 打开 ↗</a>
-  </aside>
 
-
-  <footer class="footer">
-    <span>导师制项目 · Steam 游戏市场洞察平台</span>
-    <span>TOP10 来自 Steam 实时接口；其余为 123 款本地清洗样本</span>
+  <footer class="site-footer">
+    <span>导师制项目 · Steam 市场观察 · v2.0 数据故事</span>
+    <span>全量 archive 150,279 款 · 2,000 份口碑样本 · 实时 TOP10</span>
   </footer>
+
+  <div class="dossier-backdrop" id="dossier-backdrop"></div>
+  <aside class="dossier" id="dossier" aria-hidden="true" aria-label="类型档案">
+    <button class="dossier__close" id="dossier-close" type="button" aria-label="关闭档案">×</button>
+    <div class="dossier__scroll">
+      <p class="dossier__kicker" id="dossier-kicker">ROLE FILE</p>
+      <div class="dossier__title">
+        <span class="dossier__glyph" id="dossier-glyph">A</span>
+        <div>
+          <h2 id="dossier-name">动作</h2>
+          <p id="dossier-en">ACTION</p>
+        </div>
+      </div>
+      <div class="dossier__stats">
+        <div><span>游戏数</span><b id="dossier-count">—</b></div>
+        <div><span>占比</span><b id="dossier-share">—</b></div>
+        <div><span>均价</span><b id="dossier-price">—</b></div>
+        <div><span>好评率</span><b id="dossier-rating">—</b></div>
+      </div>
+      <div class="dossier__section">
+        <div class="dossier__section-head">
+          <h3>年度上架走势</h3><span>全量 · 按发行年</span>
+        </div>
+        <div class="chart chart--dossier" id="dossier-trend"></div>
+      </div>
+      <div class="dossier__section">
+        <div class="dossier__section-head">
+          <h3>小标签墙</h3><span>点击筛选</span>
+        </div>
+        <div class="dossier__tags" id="dossier-tags"></div>
+      </div>
+      <div class="dossier__section">
+        <div class="dossier__section-head">
+          <h3>代表作品</h3><span id="dossier-games-count">—</span>
+        </div>
+        <div class="dossier__games" id="dossier-games"></div>
+      </div>
+      <p class="dossier__note">类型为多标签包含关系；小标签来自名称/简介关键词，不是 Steam 用户标签。好评率只对已补评价的样本计算。</p>
+    </div>
+  </aside>
 
   <script src="js/echarts.min.js"></script>
   <script src="js/echarts-wordcloud.min.js"></script>
   <script src="js/data.js"></script>
-  <script src="js/insight-core.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/reviews.js"></script>
-  <script src="js/trends.js"></script>
+  <script src="js/lobby.js"></script>
 </body>
 
 </html>

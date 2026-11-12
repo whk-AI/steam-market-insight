@@ -1,0 +1,16 @@
+{
+  "fetchedAt": "2026-11-11T22:29:00+08:00",
+  "source": "Steam Store search, Released_DESC, category1=998",
+  "url": "https://store.steampowered.com/search/results/?query&start=0&count=100&sort_by=Released_DESC&supportedlang=english&cc=US&category1=998",
+  "method": "从 start=23000 向旧扫描，只统计 release_date.year=2025，遇到 2024-12 停止；196 页。",
+  "start": 23000,
+  "pages": 196,
+  "lastPageRange": ["2024-12-25", "2024-12-31"],
+  "total2025": 17801,
+  "archive2025": 17876,
+  "archiveDelta": -75,
+  "archive2024": 20203,
+  "archiveYoY": -0.1152,
+  "storeYoY": -0.1189,
+  "note": "Steam Store 搜索起点在 2025-12-26 附近，起始页之前约 75 条 2025 记录未计入；17,801 + 75 ≈ archive 17,876，故两源一致。archive 的 9–12 月 release_date 仅 1,450 条，月份字段不可用；仅全年总数成立。"
+}

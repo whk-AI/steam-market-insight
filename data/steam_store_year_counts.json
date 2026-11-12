@@ -1,0 +1,12 @@
+{
+  "fetchedAt": "2026-11-11T22:17:15+08:00",
+  "source": "Steam Store search, Released_DESC, category1=998",
+  "url": "https://store.steampowered.com/search/results/?query&start=0&count=100&sort_by=Released_DESC&supportedlang=english&cc=US&category1=998",
+  "note": "搜索口径包含 Steam 商店可检索的游戏条目；用于核验年度数量级，不替代 archive 字段。",
+  "rows": 0,
+  "years": {},
+  "monthly": {
+    "2024": {},
+    "2025": {}
+  }
+}

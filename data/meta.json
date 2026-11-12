@@ -1,7 +1,73 @@
 {
-  "fetchedAt": "2026-10-18T10:36:35Z",
+  "fetchedAt": "2026-11-11T14:31:47.632Z",
+  "durationSec": 1897,
   "gameCount": 123,
-  "successCount": 123,
-  "failCount": 0,
-  "note": "首页固定 123 款样本；日常爬虫只刷新已有 appid，不扩样。"
+  "poolTotal": 166,
+  "successCount": 153,
+  "failCount": 13,
+  "failedList": [
+    {
+      "appid": 1675200,
+      "reason": "type非game"
+    },
+    {
+      "appid": 2138330,
+      "reason": "type非game"
+    },
+    {
+      "appid": 2780810,
+      "reason": "type非game"
+    },
+    {
+      "appid": 3796990,
+      "reason": "type非game"
+    },
+    {
+      "appid": 4165870,
+      "reason": "type非game"
+    },
+    {
+      "appid": 4165890,
+      "reason": "type非game"
+    },
+    {
+      "appid": 4165910,
+      "reason": "type非game"
+    },
+    {
+      "appid": 4498220,
+      "reason": "type非game"
+    },
+    {
+      "appid": 4530440,
+      "reason": "type非game"
+    },
+    {
+      "appid": 4739980,
+      "reason": "type非game"
+    },
+    {
+      "appid": 5001840,
+      "reason": "type非game"
+    },
+    {
+      "appid": 5021520,
+      "reason": "appdetails无数据"
+    },
+    {
+      "appid": 5404280,
+      "reason": "type非game"
+    }
+  ],
+  "keptCount": 0,
+  "existingCount": 123,
+  "sources": [
+    "top_sellers",
+    "new_releases",
+    "specials",
+    "热销",
+    "新品",
+    "特惠"
+  ],
+  "onlineOk": true
 }

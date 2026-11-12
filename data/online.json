@@ -1,66 +1,56 @@
 {
-  "fetchedAt": "2026-10-18T10:36:35Z",
-  "source": "Steam GetMostPlayedGames",
+  "fetchedAt": "2026-11-11T14:32:03.782Z",
+  "source": "Steam charts + GetNumberOfCurrentPlayers",
   "top": [
     {
       "rank": 1,
       "appid": 730,
-      "current_players": 1360532,
-      "last_week_rank": 1
+      "current_players": 1210535
     },
     {
       "rank": 2,
       "appid": 570,
-      "current_players": 969895,
-      "last_week_rank": 2
+      "current_players": 710529
     },
     {
       "rank": 3,
       "appid": 578080,
-      "current_players": 809673,
-      "last_week_rank": 3
+      "current_players": 700611
     },
     {
       "rank": 4,
-      "appid": 431960,
-      "current_players": 122675,
-      "last_week_rank": 4
+      "appid": 4115450,
+      "current_players": 385429
     },
     {
       "rank": 5,
-      "appid": 1422450,
-      "current_players": 255488,
-      "last_week_rank": 5
+      "appid": 1172470,
+      "current_players": 233922
     },
     {
       "rank": 6,
-      "appid": 1172470,
-      "current_players": 231338,
-      "last_week_rank": 7
+      "appid": 4262460,
+      "current_players": 173475
     },
     {
       "rank": 7,
-      "appid": 1867240,
-      "current_players": 304002,
-      "last_week_rank": 8
+      "appid": 3393110,
+      "current_players": 167881
     },
     {
       "rank": 8,
-      "appid": 3393110,
-      "current_players": 301962,
-      "last_week_rank": 6
+      "appid": 3419430,
+      "current_players": 157148
     },
     {
       "rank": 9,
-      "appid": 322170,
-      "current_players": 75166,
-      "last_week_rank": 10
+      "appid": 4348910,
+      "current_players": 152248
     },
     {
       "rank": 10,
-      "appid": 271590,
-      "current_players": 72903,
-      "last_week_rank": 11
+      "appid": 1938090,
+      "current_players": 144386
     }
   ]
 }

@@ -5,7 +5,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const zlib = require('node:zlib');
 
-const PORT = Number(process.env.PORT) || 8080;
+const PORT = Number(process.env.PORT) || 8081;
 const ROOT = __dirname; // 服务器根目录 = 项目根目录
 
 // 常见文件类型的 Content-Type 对照表
@@ -132,6 +132,9 @@ const server = http.createServer((req, res) => {
   if (pathname === '/api/games') return sendJson(res, 'games.json');
   if (pathname === '/api/meta') return sendJson(res, 'meta.json');
   if (pathname === '/api/online') return sendJson(res, 'online.json');
+  if (pathname === '/api/market/agg') return sendJson(res, 'market/market_agg.json');
+  if (pathname === '/api/market/reviews') return sendJson(res, 'market/reviews_enriched.json');
+  if (pathname === '/api/market/top500') return sendJson(res, 'market/top500.json');
 
   // ---- 静态文件 ----
   sendStaticFile(req, res, pathname === '/' ? '/index.html' : pathname);
