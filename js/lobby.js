@@ -170,7 +170,7 @@
       const valid = rows.filter((row) => Number(row.current_players) > 0);
       const missing = rows.filter((row) => !(Number(row.current_players) > 0));
       const promoted = rows.find((row) => Number(row.promoted_from) > 0);
-      const sourceNote = /SteamCharts/i.test(online.source || '') ? '（SteamCharts 榜单镜像）' : '';
+      const sourceNote = /Steam charts|SteamCharts/i.test(online.source || '') ? '（Steam 官方榜单 + 官方在线接口）' : '';
       const total = valid.reduce((sum, row) => sum + Number(row.current_players), 0);
       if (valid.length && total) {
         const top3 = valid.slice(0, 3).reduce((sum, row) => sum + Number(row.current_players), 0);

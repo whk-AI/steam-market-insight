@@ -114,7 +114,7 @@ npm start
 
 - **全量主表**：archive `applications.csv` + `application_genres.csv`，筛 `type=game` 共 150,279 款；20 列、0 null；价格按快照期汇率折算 USD。
 - **口碑样本**：公开数据集 `Z02Z/steam-games-dataset`（FronkonGames，CC-BY-4.0）的 positive/negative 计数，补 2,000 款；覆盖率 1.3%，按推荐数选取。
-- **实时 TOP10**：`data/online.json`，由 SteamCharts 榜单镜像 + `GetNumberOfCurrentPlayers` 生成；当前为 2026-11-11 22:32 的完整 10 名快照（10 款全部有效，合计 403.6 万在线，TOP3 占 65.0%）；原 Steam API 第 10 名 404，已用镜像补全，并保留第 11 名 fallback。
+- **实时 TOP10**：`data/online.json`，由 Steam 官方榜单页（`store.steampowered.com/charts/mostplayed`）取 appid 顺序 + 官方 `GetNumberOfCurrentPlayers` 取在线人数生成（配置了 `STEAM_API_KEY` 时优先用 `GetMostPlayedGames` 接口）；当前为 2026-11-11 22:32 的完整 10 名快照（10 款全部有效，合计 403.6 万在线，TOP3 占 65.0%）；官方接口对个别 appid 返回 404，由榜单页顺序补全，并保留第 11 名 fallback。
 - **字段**：`data/market/market_full.csv` 21 列，核心字段：`appid / name / type / all_genres / price / price_unknown / rating / total_reviews / year / recommendations / sub_tags`。
 - **口径**：多主类型可重叠，十类数量相加会大于 150,279；8,870 款没有命中任何大类；小标签由名称/简介关键词推断，不是 Steam 用户标签。
 - **更新频率**：全量快照随 archive 重新生成；实时 TOP10 可手动 `node scripts/fetch_online.js`，失败时保留旧快照并标注时间。

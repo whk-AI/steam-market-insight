@@ -265,7 +265,7 @@ table(
     [
         ["全量游戏主表", "archive：applications.csv + application_genres.csv", "筛 type=game 后 150,279 款", "类型、价格、发行年、推荐数"],
         ["真实口碑样本", "HuggingFace Z02Z/steam-games-dataset（FronkonGames，CC-BY-4.0）", "2,000 款 positive/negative", "好评率、S/A/B/C 分层"],
-        ["实时在线", "SteamCharts 榜单镜像 + GetNumberOfCurrentPlayers", "TOP10，10 款全有效", "今日谁在占用玩家时间"],
+        ["实时在线", "Steam 官方榜单页（charts/mostplayed）取顺序 + GetNumberOfCurrentPlayers 取在线数", "TOP10，10 款全有效", "今日谁在占用玩家时间"],
     ],
     widths=[3.0, 7.0, 3.4, 3.0],
     first_col_bold=True,
@@ -303,7 +303,7 @@ table(
         ["标签词云 + 热力图", "✅ 都有", "词云在口碑节（点击筛选）；热力图是「类型×年份」生命周期矩阵。"],
         ["≥2 类「输入即展示」交互", "✅ 6 类", "悬停看关系、点格子翻档案、点事件锚点、S/A/B/C 切换、词云点标签、搜索+下拉筛选。"],
         ["CSV ≤5MB 且前端 fetch", "⚠️ 换了实现", "29MB 全量 CSV 不进浏览器，改为 fetch 1.2MB 预聚合 JSON —— 同一份数据的工程取舍。"],
-        ["Python 抓 GetMostPlayedGames 存 JSON", "⚠️ 换了来源", "用 SteamCharts 镜像 + GetNumberOfCurrentPlayers，由 Node 脚本每日 22:00 跑，产物同样是 JSON。"],
+        ["Python 抓 GetMostPlayedGames 存 JSON", "⚠️ 换了语言", "调的就是官方 GetMostPlayedGames（配了 API Key 时），无 Key 时用官方榜单页兜底；现役是 Node 版，Python 版在 scripts/fetch_online.py 留作练习。"],
         ["ECharts timeline 动画 + 播放/暂停", "⚠️ 换了做法", "用自绘逐帧回放实现 2010—2025 播放与暂停，没用 timeline 组件。"],
         ["实时模块 60 秒刷新 + 高亮", "❌ 未做", "当前是打开即拉取 + 每日任务；已列入下一步第一条。"],
         ["≥3 条洞察", "✅ 5 条", "首页五张卡 + 每节一条 takeaway。"],
