@@ -114,7 +114,7 @@ npm start
 
 - **全量主表**：archive `applications.csv` + `application_genres.csv`，筛 `type=game` 共 150,279 款；20 列、0 null；价格按快照期汇率折算 USD。
 - **口碑样本**：公开数据集 `Z02Z/steam-games-dataset`（FronkonGames，CC-BY-4.0）的 positive/negative 计数，补 2,000 款；覆盖率 1.3%，按推荐数选取。
-- **实时 TOP10**：`data/online.json`，由 mostplayed 页面 + `GetNumberOfCurrentPlayers` 生成；当前为 2026-11-11 19:51 的完整 10 名快照（SteamCharts 镜像）；原 Steam API 第 10 名 404，已用完整快照补全，并保留第 11 名 fallback。
+- **实时 TOP10**：`data/online.json`，由 SteamCharts 榜单镜像 + `GetNumberOfCurrentPlayers` 生成；当前为 2026-11-11 22:32 的完整 10 名快照（10 款全部有效，合计 403.6 万在线，TOP3 占 65.0%）；原 Steam API 第 10 名 404，已用镜像补全，并保留第 11 名 fallback。
 - **字段**：`data/market/market_full.csv` 21 列，核心字段：`appid / name / type / all_genres / price / price_unknown / rating / total_reviews / year / recommendations / sub_tags`。
 - **口径**：多主类型可重叠，十类数量相加会大于 150,279；8,870 款没有命中任何大类；小标签由名称/简介关键词推断，不是 Steam 用户标签。
 - **更新频率**：全量快照随 archive 重新生成；实时 TOP10 可手动 `node scripts/fetch_online.js`，失败时保留旧快照并标注时间。
@@ -204,4 +204,4 @@ F:\steam-market-insight\
 | `npm run crawl` 报"Steam 接口当前不可达" | 国内访问 Steam 会间歇性断连，等几分钟重试即可；旧数据不会丢 |
 | 端口 8081 被占用 | `$env:PORT=8090; npm start`（或临时改 server.js 顶部 PORT） |
 | 页面数据是旧的 | 全量快照看顶栏；实时榜看竞技场单独时间；`npm run crawl` 只刷新实时榜 |
-| 直接双击 html 打开（file:// 协议） | 页面会自动降级使用 `js/data.js` 的本地数据；实时 TOP10 仍以 `npm start` 时的 `/api/online` 为准 |
+| 直接双击 html 打开（file:// 协议） | **不行**：页面用 `fetch` 读取 `data/market/*.json`，浏览器在 file:// 下会拦截，启动卡会提示“数据未接通”。请 `npm start` 后访问 http://localhost:8081/（`js/data.js` 是旧版遗留的 123 款数据，新页面不再使用） |
