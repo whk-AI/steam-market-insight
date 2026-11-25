@@ -308,29 +308,27 @@ async function fetchOnlineTop() {
   const apiKey = process.env.STEAM_API_KEY;
   let ids = [];
 
-  // ① 有 Steam Web API Key 时，优先用官方榜单接口；没有 key 就明确跳过，不硬编码。
-  if (apiKey) {
-    try {
-      const url = `https://api.steampowered.com/ISteamChartsService/GetMostPlayedGames/v1/?key=${encodeURIComponent(apiKey)}`;
-      const data = await fetchJson(url);
-      const ranks = data && data.response && Array.isArray(data.response.ranks) ? data.response.ranks : [];
-      ids = [...new Set(ranks.map((item) => Number(item.appid)).filter(Boolean))].slice(0, 10);
-      if (ids.length === 10) {
-        console.log('    [在线榜] 使用 GetMostPlayedGames API');
-      } else {
-        ids = [];
-      }
-    } catch (err) {
-      console.log(`    ⚠ GetMostPlayedGames 失败：${err.message}，改用 HTML 榜单`);
+  // ① GetMostPlayedGames 实际不需要 API key（带 key 只是更稳）。
+  //    取前 30 名，给缺失名次留足第 11–30 名补位空间。
+  try {
+    const url = 'https://api.steampowered.com/ISteamChartsService/GetMostPlayedGames/v1/'
+      + (apiKey ? `?key=${encodeURIComponent(apiKey)}` : '');
+    const data = await fetchJson(url);
+    const ranks = data && data.response && Array.isArray(data.response.ranks) ? data.response.ranks : [];
+    ids = [...new Set(ranks.map((item) => Number(item.appid)).filter(Boolean))].slice(0, 30);
+    if (ids.length >= 10) {
+      console.log('    [在线榜] 使用 GetMostPlayedGames API（免 key）');
+    } else {
+      ids = [];
     }
-  } else {
-    console.log('    [在线榜] 未配置 STEAM_API_KEY，跳过官方 API，使用 HTML 榜单');
+  } catch (err) {
+    console.log(`    ⚠ GetMostPlayedGames 失败：${err.message}，改用 HTML 榜单`);
   }
 
-  // ② 官方 API 不可用：抓 mostplayed 服务端渲染 HTML，取前 10 个 appid。
+  // ② 官方 API 不可用：抓 mostplayed 服务端渲染 HTML，尽量取前 30 个 appid。
   if (ids.length < 10) {
     const html = await fetchText('https://store.steampowered.com/charts/mostplayed?cc=cn&l=schinese');
-    ids = [...new Set([...html.matchAll(/\/apps\/(\d+)/g)].map((m) => Number(m[1])))].slice(0, 10);
+    ids = [...new Set([...html.matchAll(/\/apps\/(\d+)/g)].map((m) => Number(m[1])))].slice(0, 30);
   }
 
   if (ids.length < 10) {
@@ -338,6 +336,7 @@ async function fetchOnlineTop() {
   }
 
   // ③ 逐个查 GetNumberOfCurrentPlayers（免 key），拿"当前在线"而不是峰值。
+  //    取满 12 个候选；某个 appid 的接口 404 时保留 null，由前端用第 11 名补位。
   const top = [];
   for (let i = 0; i < ids.length; i += 1) {
     const appid = ids[i];
@@ -358,7 +357,6 @@ async function fetchOnlineTop() {
       current_players: Number.isFinite(current) ? current : null,
     });
   }
-
   if (top.every((x) => x.current_players == null)) {
     throw new Error('TOP10 的在线人数全部获取失败');
   }

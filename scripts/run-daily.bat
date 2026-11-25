@@ -38,6 +38,7 @@ if not errorlevel 1 set "PROXY_READY=1"
 
 if "%PROXY_READY%"=="1" (
   set "NODE_USE_ENV_PROXY=1"
+  set "NODE_OPTIONS=--use-env-proxy"
   set "HTTPS_PROXY=http://127.0.0.1:7897"
   set "HTTP_PROXY=http://127.0.0.1:7897"
   echo proxy: 127.0.0.1:7897>> "%LOG_FILE%"
@@ -45,7 +46,12 @@ if "%PROXY_READY%"=="1" (
   echo proxy: none, direct connection>> "%LOG_FILE%"
 )
 
-rem ---- step 2: crawl and write data/games.json + meta.json + online.json ----
+rem ---- step 2: refresh online first (fast, keeps TOP10 fresh even if full crawl is slow)
+rem Do not pass --use-env-proxy here: fetch_online.js retries through the proxy itself.
+"%NODE_EXE%" scripts\fetch_online.js >> "%LOG_FILE%" 2>&1
+echo online refresh exit code: %errorlevel%>> "%LOG_FILE%"
+
+rem ---- step 3: crawl and write data/games.json + meta.json + online.json ----
 "%NODE_EXE%" scripts\crawler.js >> "%LOG_FILE%" 2>&1
 set "CODE=%errorlevel%"
 

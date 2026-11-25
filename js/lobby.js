@@ -10,6 +10,8 @@
     reviews: [],
     top500: [],
     online: null,
+    newReleases: null,
+    model: null,
     characters: [],
     selectedGenre: null,
     seasonYear: 2024,
@@ -41,6 +43,9 @@
     252490: 'Rust',
     1867240: 'WARDOGS',
     3393110: 'AION 2',
+    2868840: 'Slay the Spire 2',
+    4262460: 'ROB RUN',
+    4348910: 'Probably Stolen - Cyberpunk Shopkeeper Sim',
     322170: 'Geometry Dash',
     271590: 'Grand Theft Auto V',
   };
@@ -51,6 +56,28 @@
     Simulation: '模拟', RPG: '角色扮演', Strategy: '策略', Sports: '体育',
     'Free To Play': '免费开玩', Racing: '竞速', '其他': '其他',
   };
+
+  const GENRE_CN = {
+    Indie: '独立', Action: '动作', Adventure: '冒险', Casual: '休闲',
+    Simulation: '模拟', Strategy: '策略', RPG: '角色扮演',
+    'Free To Play': '免费开玩', Sports: '体育', Racing: '竞速',
+    'Massively Multiplayer': '大型多人在线', 'Early Access': '抢先体验',
+    'Animation & Modeling': '动画与建模', 'Audio Production': '音频制作',
+    'Design & Illustration': '设计与插画', Education: '教育',
+    'Game Development': '游戏开发', 'Photo Editing': '图片编辑',
+    'Software Training': '软件培训', Utilities: '工具',
+    'Video Production': '视频制作', 'Web Publishing': '网页发布',
+  };
+
+  function genreLabel(value) {
+    const raw = String(value == null ? '' : value).trim();
+    if (TYPE_CN[raw]) return TYPE_CN[raw];
+    if (GENRE_CN[raw]) return GENRE_CN[raw];
+    // archive 里有一批历史字段是 GBK 被当 UTF-8 读出的替换字符；
+    // 这些行不强行猜具体类型，统一标成“未知”，但保留原值参与模型计算。
+    if (!raw || raw === '未知' || raw === 'δ֪' || /[\uFFFD]/.test(raw)) return '未知';
+    return raw;
+  }
 
   const CHARACTER_ORDER = ['Indie', 'Casual', 'Adventure', 'Action', 'RPG', 'Free To Play', 'Strategy', 'Simulation', 'Sports', 'Racing'];
 
@@ -85,6 +112,22 @@
     return response.json();
   }
 
+  async function loadData(primary, fallback, bundleKey) {
+    // file:// 下浏览器不允许 fetch 本地 JSON，优先读取离线 bundle；
+    // http(s) 下仍读最新 JSON，保证每日更新后刷新页面就能看到新数据。
+    if (location.protocol === 'file:' && bundleKey && window.__LOBBY_DATA__ && window.__LOBBY_DATA__[bundleKey]) {
+      return window.__LOBBY_DATA__[bundleKey];
+    }
+    // 静态页默认只读本地 JSON，避免没有后端时每次打开都产生 6 条 404。
+    // 若部署了接口，在页面里设置 window.__USE_API__ = true 再启用接口。
+    if (window.__USE_API__ !== true) {
+      const response = await fetch(fallback, { cache: 'no-store' });
+      if (!response.ok) throw new Error(fallback + ' ' + response.status);
+      return response.json();
+    }
+    return apiWithFallback(primary, fallback);
+  }
+
   function setBootError(message) {
     const hint = $('#boot-hint');
     if (hint) {
@@ -96,8 +139,26 @@
   function hideBoot() {
     const boot = $('#boot');
     if (!boot) return;
+    const video = $('#boot-video');
+    if (video) video.pause();
+    document.body.classList.remove('is-booting');
     boot.classList.add('is-gone');
     window.setTimeout(() => { boot.remove(); }, 600);
+  }
+
+  // 进入页背景是本地预渲染的 8 秒 3D 穿门动画；自动播放被拦截时静默回退到 poster。
+  function initBootVideo() {
+    const video = $('#boot-video');
+    if (!video) return;
+    document.body.classList.add('is-booting');
+    const play = () => {
+      if (video.paused) video.play().catch(() => {});
+    };
+    video.addEventListener('error', () => {
+      video.classList.add('is-error');
+    });
+    play();
+    document.addEventListener('pointerdown', play, { once: true });
   }
 
   function typeOf(genre) {
@@ -105,7 +166,8 @@
     return row || { name: genre, name_cn: TYPE_CN[genre] || genre, count: 0, share: 0, avgPrice: 0, avgRating: 0, ratingCount: 0 };
   }
 
-  function onlineName(appid) {
+  function onlineName(appid, fallback) {
+    if (fallback) return fallback;
     const top = state.top500.find((item) => Number(item.appid) === Number(appid));
     if (top) return top.name;
     if (ONLINE_NAMES[appid]) return ONLINE_NAMES[appid];
@@ -113,7 +175,32 @@
     return lookup[appid] || lookup[String(appid)] || 'APP ' + appid;
   }
 
-  // 统一 TOP10 口径：缺失名次用第 11 名补位；补位会保留来源名次，页面明确标注。
+  // 本地封面优先：先读 assets/covers/{appid}.jpg；缺失时回退 Steam header，
+  // 再失败才使用本地 Steam 标识，避免断网/新游缺图时出现破图或空行。
+  window.__steamCoverFallback = function (img) {
+    if (!img) return;
+    const stage = img.dataset.fb || 'local';
+    if (stage === 'local') {
+      img.dataset.fb = 'remote';
+      img.src = img.dataset.remote || ('https://cdn.akamai.steamstatic.com/steam/apps/' + img.dataset.appid + '/header.jpg');
+      return;
+    }
+    if (stage === 'remote') {
+      img.dataset.fb = 'logo';
+      img.classList.add('is-fallback');
+      img.src = 'assets/steam-logo.png';
+      return;
+    }
+    img.style.visibility = 'hidden';
+  };
+
+  function coverMarkup(appid, cls, alt) {
+    const local = 'assets/covers/' + appid + '.jpg';
+    const remote = 'https://cdn.akamai.steamstatic.com/steam/apps/' + appid + '/header.jpg';
+    return '<img class="' + cls + '" data-appid="' + appid + '" data-fb="local" data-remote="' + remote + '" src="' + local + '" alt="' + esc(alt || '') + '" loading="eager" onerror="window.__steamCoverFallback(this)">';
+  }
+
+  // 统一 TOP10 口径：缺失名次用第 11 名补位；显示时按“当前在线”重排，并保留来源榜位。
   function normalizedTop(online) {
     const all = online && Array.isArray(online.top) ? online.top.slice() : [];
     const rows = all.slice(0, 10).map((row) => Object.assign({}, row));
@@ -127,7 +214,10 @@
       rows[index] = Object.assign({}, candidate, { rank: row.rank || index + 1, promoted_from: candidate.rank || 11 });
       used.add(Number(candidate.appid));
     });
-    return rows;
+    return rows
+      .map((row) => Object.assign({}, row, { source_rank: Number(row.rank) || 0 }))
+      .sort((a, b) => (Number(b.current_players) || 0) - (Number(a.current_players) || 0))
+      .map((row, index) => Object.assign({}, row, { rank: index + 1 }));
   }
 
   function isPartialYear(year) {
@@ -150,8 +240,7 @@
     const total = agg.meta.totalGames;
     $('#hall-total').textContent = fmt(total);
     $('#hall-types').textContent = '10';
-    $('#hall-reviewed').textContent = fmt(agg.meta.reviewsUpdated || state.reviews.length);
-    $('#hall-other').textContent = fmt((agg.type_dist.find((item) => item.name === '其他') || {}).count || 0);
+    $('#hall-reviewed').textContent = fmt(state.reviews.length || agg.meta.reviewsUpdated);
     $('#snapshot-label').textContent = agg.meta.builtAt ? '全量快照' : '本地快照';
     $('#snapshot-time').textContent = agg.meta.builtAt
       ? agg.meta.builtAt.slice(0, 10)
@@ -170,7 +259,14 @@
       const valid = rows.filter((row) => Number(row.current_players) > 0);
       const missing = rows.filter((row) => !(Number(row.current_players) > 0));
       const promoted = rows.find((row) => Number(row.promoted_from) > 0);
-      const sourceNote = /Steam charts|SteamCharts/i.test(online.source || '') ? '（Steam 官方榜单 + 官方在线接口）' : '';
+      const promotedText = promoted
+        ? '源榜第 ' + promoted.source_rank + ' 名缺数，用第 ' + promoted.promoted_from + ' 名补足 10 行'
+        : '';
+      const sourceNote = /GetMostPlayedGames/i.test(online.source || '')
+        ? '（榜单与在线数：Steam 官方接口）'
+        : /Steam\s*charts/i.test(online.source || '')
+          ? '（榜单：SteamCharts；在线数：Steam 官方接口）'
+          : '';
       const total = valid.reduce((sum, row) => sum + Number(row.current_players), 0);
       if (valid.length && total) {
         const top3 = valid.slice(0, 3).reduce((sum, row) => sum + Number(row.current_players), 0);
@@ -180,7 +276,7 @@
         if (thesisAttention) thesisAttention.textContent = share.toFixed(1) + '%';
         $('#brief-attention-text').textContent =
           'TOP3 占 TOP10 在线 ' + compact.format(total) + ' 中的 ' + share.toFixed(1) + '%；'
-          + (missing.length ? '第 10 名接口暂缺，未计入总量。' : '10 名有效。');
+          + '10 名有效（按当前在线重排' + (promotedText ? '；' + promotedText : '') + '）。';
         const y = time.getFullYear();
         const m = String(time.getMonth() + 1).padStart(2, '0');
         const d = String(time.getDate()).padStart(2, '0');
@@ -188,11 +284,11 @@
         const mm = String(time.getMinutes()).padStart(2, '0');
         const stamp = Number.isNaN(time.getTime()) ? online.fetchedAt : y + '-' + m + '-' + d + ' ' + hh + ':' + mm;
         $('#brief-live').textContent = 'TOP10 为 ' + stamp + ' 快照'
-          + (missing.length ? '（第 10 名暂缺）' : '（10 名有效）');
+          + '（10 名有效，按当前在线重排' + (promotedText ? '；' + promotedText : '') + '）';
         $('#arena-intro').textContent =
           '只统计 Steam 实时在线 TOP10，不叫“平台总在线”；这是 ' + stamp + ' 的'
-          + (missing.length ? '快照' : '完整 10 名快照') + sourceNote
-          + (promoted ? '；第 10 名由第 ' + promoted.promoted_from + ' 名补位。' : '。');
+          + '10 名有效快照（按当前在线重排' + (promotedText ? '；' + promotedText : '') + '）'
+          + sourceNote + '。';
       }
     }
 
@@ -210,13 +306,6 @@
 
   function initLobby() {
     state.characters = CHARACTER_ORDER.map((genre) => typeOf(genre));
-    const stats = $('.hall__stats');
-    if (stats && !$('.hall__overlap')) {
-      const note = document.createElement('span');
-      note.className = 'hall__overlap';
-      note.textContent = '· 类型数量可重叠';
-      stats.appendChild(note);
-    }
     $$('.char').forEach((button) => {
       const genre = button.dataset.genre;
       if (!genre) return;
@@ -231,6 +320,61 @@
     });
     initWorld();
     initHallLinks();
+    initHallMatrix();
+    bindHallView();
+  }
+
+  function initHallMatrix() {
+    const wrap = $('#hall-matrix');
+    if (!wrap || !state.agg || !state.agg.type_pairs) return;
+    const genres = CHARACTER_ORDER.filter((genre) => typeOf(genre).count > 0);
+    const pairMap = new Map();
+    state.agg.type_pairs.forEach((pair) => {
+      pairMap.set(pair.a + '|' + pair.b, pair.count);
+      pairMap.set(pair.b + '|' + pair.a, pair.count);
+    });
+    const max = Math.max.apply(null, state.agg.type_pairs.map((pair) => pair.count).concat([1]));
+    wrap.innerHTML = '<div class="matrix-grid" style="--n:' + genres.length + '">' +
+      '<span class="matrix-cell matrix-corner">类型 × 类型</span>' +
+      genres.map((genre) => '<span class="matrix-label matrix-label--col">' + esc(TYPE_CN[genre] || genre) + '</span>').join('') +
+      genres.map((row) => '<span class="matrix-label">' + esc(TYPE_CN[row] || row) + '</span>' +
+        genres.map((col) => {
+          if (row === col) return '<span class="matrix-cell matrix-cell--diag">—</span>';
+          const count = pairMap.get(row + '|' + col) || 0;
+          const alpha = (count / max).toFixed(2);
+          const label = (TYPE_CN[row] || row) + ' × ' + (TYPE_CN[col] || col);
+          return '<span class="matrix-cell" data-a="' + row + '" data-b="' + col + '" data-count="' + count + '" title="' + esc(label + '：' + fmt(count) + ' 款') + '" style="--a:' + alpha + '">' + (count ? fmt(count) : '') + '</span>';
+        }).join('')).join('') +
+      '</div><p class="matrix-result" id="matrix-result">颜色越深，共享游戏越多；点格子看精确数量。</p>';
+    wrap.addEventListener('click', (event) => {
+      const cell = event.target.closest('.matrix-cell[data-a]');
+      if (!cell) return;
+      $$('.matrix-cell').forEach((node) => node.classList.remove('is-hot'));
+      cell.classList.add('is-hot');
+      const a = TYPE_CN[cell.dataset.a] || cell.dataset.a;
+      const b = TYPE_CN[cell.dataset.b] || cell.dataset.b;
+      const result = $('#matrix-result');
+      if (result) result.textContent = a + ' × ' + b + '：' + fmt(cell.dataset.count) + ' 款游戏同时属于两个类型（可重叠计数）。';
+    });
+  }
+
+  function bindHallView() {
+    const stage = $('#hall-stage');
+    const matrix = $('#hall-matrix');
+    const buttons = $$('[data-hall-view]');
+    if (!stage || !matrix || !buttons.length) return;
+    const hint = $('.hall__hint');
+    const networkHint = hint ? hint.innerHTML : '';
+    const matrixHint = '<span>颜色深 = 共享多</span><span>CLICK 定格</span><span>TOGGLE 回关系网</span>';
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const view = button.dataset.hallView;
+        buttons.forEach((node) => node.classList.toggle('is-active', node === button));
+        stage.hidden = view !== 'network';
+        matrix.hidden = view !== 'matrix';
+        if (hint) hint.innerHTML = view === 'matrix' ? matrixHint : networkHint;
+      });
+    });
   }
 
   function initHallLinks() {
@@ -526,10 +670,13 @@
       $('#arena-total').textContent = '—';
       return;
     }
-    const top = normalizedTop(online);
+    const top = normalizedTop(online).filter((row) => Number(row.current_players) > 0);
     const valid = top.filter((row) => Number(row.current_players) > 0);
     const missing = top.filter((row) => !(Number(row.current_players) > 0));
     const promoted = top.find((row) => Number(row.promoted_from) > 0);
+    const promotedText = promoted
+      ? '源榜第 ' + promoted.source_rank + ' 名缺数，用第 ' + promoted.promoted_from + ' 名补足 10 行'
+      : '';
     const max = Math.max.apply(null, valid.map((row) => Number(row.current_players) || 0)) || 1;
     const total = valid.reduce((sum, row) => sum + (Number(row.current_players) || 0), 0);
     const top3 = valid.slice(0, 3).reduce((sum, row) => sum + (Number(row.current_players) || 0), 0);
@@ -541,38 +688,287 @@
     $('#arena-total-label').textContent = missing.length
       ? 'TOP10 在线合计（' + valid.length + ' 款有效）'
       : 'TOP10 在线合计';
-    const note = $('#arena-note');
-    if (note) {
-      note.textContent = '有效 ' + valid.length + ' 款合计 ' + compact.format(total) + ' 在线，前三占 '
-        + (total ? ((top3 / total) * 100).toFixed(1) : '—') + '%，第 1 名是第 '
-        + (lastValid ? lastValid.rank : '—') + ' 名（最后有效名次）的 '
-        + ratio + ' 倍。'
-        + (promoted ? '第 10 名由原第 ' + promoted.promoted_from + ' 名补位，原榜该名接口缺失；' : '')
-        + (missing.length ? '缺失名次显示“—”，不当作 0 混入总量。' : '10 名全部有效。');
-      const takeaway = $('#arena-takeaway');
-      if (takeaway) {
-        takeaway.textContent = '结论 前 3 名占 ' + (total ? ((top3 / total) * 100).toFixed(1) : '—')
-          + '%，第 1 名是第 ' + (lastValid ? lastValid.rank : '—') + ' 名的 ' + ratio
-          + ' 倍；注意力集中在极少数常青服务型游戏上，不是均匀分给 10 款。';
-      }
+    const takeaway = $('#arena-takeaway');
+    if (takeaway && valid.length) {
+      const pct = total ? ((top3 / total) * 100).toFixed(1) : '—';
+      takeaway.innerHTML = '<b>结论</b> 前 3 名占 TOP10 在线的 ' + pct + '%，第 1 名是第 '
+        + valid.length + ' 名的 ' + ratio + ' 倍。这个差距不是“谁更好玩”造成的，是结构差：榜首这类长期运营的竞技服靠赛季、饰品和社区把人留住，新游再热也攒不够这种常年在线。'
+        + (promotedText ? '（' + promotedText + '；显示顺序按当前在线重排，补位者不是原榜第 ' + promoted.source_rank + ' 名。）' : '')
+        + (missing.length ? '（有 ' + missing.length + ' 个名次接口没返回，显示“—”，不当作 0 混进总数。）' : '');
     }
     const medals = ['🥇', '🥈', '🥉'];
     list.innerHTML = top.map((row) => {
-      const current = Number(row.rank) || 0;
-      const last = Number(row.last_week_rank) || current;
-      const trend = last > current ? 'up' : last < current ? 'down' : '';
+      const displayRank = Number(row.rank) || 0;
+      const sourceRank = Number(row.source_rank) || displayRank;
+      const last = Number(row.last_week_rank) || sourceRank;
+      const trend = last > sourceRank ? 'up' : last < sourceRank ? 'down' : '';
       const trendText = trend === 'up' ? '↑' : trend === 'down' ? '↓' : '—';
       const players = Number(row.current_players) || 0;
       const width = players > 0 ? Math.max(2, (players / max) * 100) : 0;
       return '<div class="arena-row">' +
-        '<span class="arena-row__rank">' + String(current).padStart(2, '0') + '</span>' +
-        '<span class="arena-row__medal">' + (medals[current - 1] || '') + '</span>' +
-        '<img class="arena-thumb" src="https://cdn.akamai.steamstatic.com/steam/apps/' + row.appid + '/header.jpg" alt="" loading="lazy" onerror="this.style.visibility=\'hidden\'">' +
-        '<span class="arena-row__name">' + esc(onlineName(row.appid)) + '</span>' +
+        '<span class="arena-row__rank">' + String(displayRank).padStart(2, '0') + '</span>' +
+        '<span class="arena-row__medal">' + (medals[displayRank - 1] || '') + '</span>' +        coverMarkup(row.appid, 'arena-thumb', onlineName(row.appid, row.name)) +
+        '<span class="arena-row__name">' + esc(onlineName(row.appid, row.name)) + '</span>' +
         '<span class="arena-row__bar"><i style="width:' + width + '%"></i></span>' +
         '<span class="arena-row__num">' + (players > 0 ? compact.format(players) : '—') + '</span>' +
         '<span class="arena-row__trend ' + trend + '">' + trendText + '</span></div>';
     }).join('');
+  }
+
+  function initNewReleases() {
+    const data = state.newReleases || {};
+    const list = $('#new-release-list');
+    const note = $('#new-release-note');
+    if (!list) return;
+    const items = Array.isArray(data.items) ? data.items : [];
+    if (!items.length) {
+      list.innerHTML = '<p class="new-release__empty">上周新游快照暂未接通。</p>';
+      if (note) note.textContent = '没有可用的上周新游数据。';
+      return;
+    }
+    list.innerHTML = items.map((item) => {
+      const date = String(item.date || '').slice(5).replace('-', '/');
+      const price = item.price ? item.price : '以商店为准';
+      return '<div class="new-release__row">' +
+        '<span class="new-release__rank">' + String(item.rank).padStart(2, '0') + '</span>' +
+        '<span class="new-release__date">' + esc(date) + '</span>' +
+        '<div class="new-release__game">' + coverMarkup(item.appid, 'new-release__thumb', item.name) +
+          '<div><div class="new-release__name">' + esc(item.name) + '</div>' +
+          '<div class="new-release__sub">APP ' + item.appid + ' · ' + esc(price) + '</div></div></div>' +
+        '<a class="new-release__store" href="' + esc(item.store || ('https://store.steampowered.com/app/' + item.appid + '/')) + '" target="_blank" rel="noopener">打开商店 ↗</a>' +
+        '</div>';
+    }).join('');
+    if (note) {
+      const when = data.fetchedAt ? new Date(data.fetchedAt).toLocaleString('zh-CN', { hour12: false }) : '—';
+      note.textContent = (data.downloadsNote || 'Steam 不公开下载量；本页只提供商店下载入口。') + ' 抓取：' + when + '。';
+    }
+  }
+
+  function initModelLab() {
+    const root = $('#model-lab');
+    if (!root) return;
+    const model = window.MODEL_DATA || state.model;
+    const prob = $('#model-prob');
+    const bar = $('#model-bar');
+    const mark = $('#model-base-mark');
+    const verdict = $('#model-verdict');
+    const metrics = $('#model-metrics');
+    const note = $('#model-note');
+    const form = $('#model-form');
+    const mainSelect = $('#model-main');
+    const freeSelect = $('#model-free');
+    const yearInput = $('#model-year');
+    const genreBox = $('#model-genres');
+    const genreCount = $('#model-genre-count');
+    const dots = $('#model-dots');
+    const dotsCaption = $('#model-dots-caption');
+    const drivers = $('#model-drivers');
+    const explain = $('#model-explain');
+    const presets = $('#model-presets');
+
+    if (!model || !Array.isArray(model.features) || typeof window.ModelLab === 'undefined') {
+      root.classList.add('is-missing');
+      prob.textContent = '—';
+      verdict.textContent = '模型文件尚未接通；页面不显示假概率。';
+      note.textContent = '运行 scripts/train_hot12.py 生成 data/ml/model.json 后，本区自动出现试算。';
+      return;
+    }
+
+    const mainFeatures = model.features.filter((item) => item.kind === 'main_genre');
+    const genreFeatures = model.features.filter((item) => item.kind === 'genre').slice(0, 10);
+    mainSelect.innerHTML = mainFeatures.map((item) =>
+      '<option value="' + esc(item.value) + '">' + esc(genreLabel(item.value)) + '</option>'
+    ).join('');
+    if (mainFeatures.some((item) => item.value === 'Indie')) mainSelect.value = 'Indie';
+
+    genreBox.innerHTML = genreFeatures.map((item) =>
+      '<label class="model-genre" data-genre="' + esc(item.value) + '">' +
+        '<input type="checkbox" value="' + esc(item.value) + '">' +
+        '<span>' + esc(genreLabel(item.value)) + '</span>' +
+      '</label>'
+    ).join('');
+
+    const updateGenreState = () => {
+      const boxes = $$('input[type="checkbox"]', genreBox);
+      let checked = boxes.filter((box) => box.checked);
+      // 兜底：键盘/脚本一次改多个 checkbox 时，也不允许超过 5 个。
+      if (checked.length > 5) {
+        checked.slice(5).forEach((box) => { box.checked = false; });
+        checked = boxes.filter((box) => box.checked);
+      }
+      genreCount.textContent = checked.length + ' / 5';
+      boxes.forEach((box) => {
+        const label = box.closest('.model-genre');
+        if (!label) return;
+        label.classList.toggle('is-on', box.checked);
+        const blocked = checked.length >= 5 && !box.checked;
+        label.classList.toggle('is-disabled', blocked);
+        box.disabled = blocked;
+      });
+    };
+
+    genreBox.addEventListener('change', () => {
+      updateGenreState();
+      render();
+    });
+    updateGenreState();
+
+    const readInput = () => ({
+      main_genre: mainSelect.value,
+      is_free: Number(freeSelect.value) || 0,
+      year: Number(yearInput.value) || 2025,
+      genres: $$('input[type="checkbox"]:checked', genreBox).map((box) => box.value),
+    });
+
+    const featureContributions = (input) => {
+      const rows = [];
+      model.features.forEach((feature) => {
+        const coef = Number(feature.coef) || 0;
+        if (feature.kind === 'main_genre' && input.main_genre === feature.value) {
+          rows.push({ label: '主类型 · ' + genreLabel(feature.value), value: coef });
+        } else if (feature.kind === 'genre' && input.genres.indexOf(feature.value) !== -1) {
+          rows.push({ label: '标签 · ' + genreLabel(feature.value), value: coef });
+        } else if (feature.kind === 'numeric') {
+          const raw = feature.name === 'year' ? input.year : input.is_free;
+          const std = Number(feature.std) || 0;
+          const z = std ? (raw - Number(feature.mean)) / std : 0;
+          rows.push({
+            label: feature.name === 'year' ? '发售年份' : (input.is_free ? '免费模式' : '付费模式'),
+            value: coef * z,
+          });
+        }
+      });
+      return rows
+        .filter((row) => Math.abs(row.value) >= 0.01)
+        .sort((a, b) => Math.abs(b.value) - Math.abs(a.value));
+    };
+
+    const renderDots = (pct, base) => {
+      const hot = Math.max(0, Math.min(100, Math.round(pct)));
+      dots.innerHTML = Array.from({ length: 100 }, (_, index) =>
+        '<span class="' + (index < hot ? 'is-hot' : '') + '"></span>'
+      ).join('');
+      dotsCaption.textContent = '≈ ' + hot + ' / 100 款达到 1,000 条评价；测试集实际基准约 ' +
+        Math.max(0, Math.min(100, Math.round(base * 100))) + ' / 100。';
+    };
+
+    const renderDrivers = (rows) => {
+      if (!rows.length) {
+        drivers.innerHTML = '<p class="model-drivers__title">为什么是这个数</p>' +
+          '<p class="model-drivers__empty">这次输入没有触发明显的正/负向特征；模型基本停在截距附近。</p>';
+        return;
+      }
+      const max = Math.max.apply(null, rows.map((row) => Math.abs(row.value)).concat([0.01]));
+      drivers.innerHTML = '<p class="model-drivers__title">为什么是这个数 <small>对数几率贡献，不是因果</small></p>' +
+        rows.slice(0, 4).map((row) => {
+          const width = Math.max(3, Math.round(Math.abs(row.value) / max * 100));
+          const up = row.value >= 0;
+          return '<div class="model-driver">' +
+            '<span class="model-driver__name">' + esc(row.label) + '</span>' +
+            '<i class="model-driver__track"><b class="' + (up ? 'is-up' : 'is-down') +
+              '" style="width:' + width + '%"></b></i>' +
+            '<b class="model-driver__value ' + (up ? 'is-up' : 'is-down') + '">' +
+              (up ? '+' : '') + row.value.toFixed(2) + '</b>' +
+          '</div>';
+        }).join('');
+    };
+
+    const render = () => {
+      try {
+        const input = readInput();
+        const p = window.ModelLab.predict(model, input);
+        const m = model.metrics.logistic_test || (model.metrics && model.metrics.selected_test) || {};
+        const base = Number(m.base_rate || model.base_rate_test || 0);
+        const pct = Math.max(0, Math.min(100, p * 100));
+        const rows = featureContributions(input);
+        prob.textContent = pct.toFixed(1) + '%';
+        bar.style.width = pct.toFixed(1) + '%';
+        mark.style.left = Math.max(0, Math.min(100, base * 100)).toFixed(1) + '%';
+        const delta = (pct - base * 100).toFixed(1);
+        verdict.textContent = (p >= base ? '高于' : '低于') + '测试集基准 ' + Math.abs(delta) +
+          ' 个百分点；概率是样本估计，不是保证，也不是因果。';
+        renderDots(pct, base);
+        renderDrivers(rows);
+        const positives = rows.filter((row) => row.value > 0).slice(0, 2).map((row) => row.label);
+        const negatives = rows.filter((row) => row.value < 0).slice(0, 2).map((row) => row.label);
+        const direction = pct >= base * 100 ? '高' : '低';
+        explain.textContent = '把这款游戏放进测试集：模型估计 ' + pct.toFixed(1) +
+          '%，' + direction + '于 ' + (base * 100).toFixed(1) + '% 的基准。' +
+          (positives.length ? '往上推的是 ' + positives.join('、') + '；' : '') +
+          (negatives.length ? '往下拉的是 ' + negatives.join('、') + '。' : '') +
+          ' 这些是模型相关性，不是“类型决定成败”。';
+        const selectedLabel = model.selected === 'histgb' ? '逻辑回归（页面）' : '逻辑回归';
+        metrics.innerHTML = [
+          ['测试样本', fmt(m.n)],
+          ['测试正例', fmt(m.positives)],
+          ['基准正例率', share(base * 100)],
+          ['PR-AUC', m.pr_auc == null ? '—' : Number(m.pr_auc).toFixed(3)],
+          ['Brier', m.brier == null ? '—' : Number(m.brier).toFixed(3)],
+          ['Top10% 命中', m.top10_hit == null ? '—' : share(m.top10_hit * 100)],
+          ['验证集 PR-AUC', model.metrics.logistic_val ? Number(model.metrics.logistic_val.pr_auc).toFixed(3) : '—'],
+          ['模型选择', selectedLabel],
+        ].map(([key, value]) => '<div><span>' + key + '</span><b>' + value + '</b></div>').join('');
+        const coverage = model.coverage || {};
+        note.textContent = '训练 2015–2021 / 验证 2022 / 测试 2023–2025；样本 ' + fmt(coverage.sample) +
+          '，标注成功 ' + fmt(coverage.labeled_ok) + '（' + share((coverage.coverage || 0) * 100) + '）。' +
+          ' 特征只用发售时的主类型、标签、免费/付费、年份；price 是快照价，未入模。' +
+          ' 数据：archive 2026-11-19；标签抓取 2026-11-20。' +
+          ' 测试 PR-AUC 未过 base+0.05 门槛，本页只作回测试算。' +
+          ' 页面推理用逻辑回归代理，若离线最佳为 HistGB 会在模型卡标注。';
+      } catch (error) {
+        console.error(error);
+        prob.textContent = '—';
+        verdict.textContent = '输入无法计算；请检查模型文件和输入值。';
+      }
+    };
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      render();
+    });
+
+    const presetData = {
+      indie: { main: 'Indie', free: '0', year: '2025', genres: [] },
+      liveops: { main: 'Action', free: '1', year: '2025', genres: ['Free To Play', 'Action'] },
+      strategy: { main: 'Strategy', free: '0', year: '2025', genres: ['Strategy', 'Simulation'] },
+    };
+    const setPresetActive = (key) => {
+      $$('.model-presets button', presets).forEach((button) => {
+        button.classList.toggle('is-active', button.dataset.preset === key);
+      });
+    };
+    const applyPreset = (key) => {
+      const preset = presetData[key];
+      if (!preset) return;
+      if (mainFeatures.some((item) => item.value === preset.main)) mainSelect.value = preset.main;
+      freeSelect.value = preset.free;
+      yearInput.value = preset.year;
+      $$('input[type="checkbox"]', genreBox).forEach((box) => {
+        box.checked = preset.genres.indexOf(box.value) !== -1;
+      });
+      updateGenreState();
+      setPresetActive(key);
+      render();
+    };
+    presets.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-preset]');
+      if (button) applyPreset(button.dataset.preset);
+    });
+    form.addEventListener('input', () => {
+      setPresetActive('');
+      render();
+    });
+
+    $('#model-reset').addEventListener('click', () => {
+      mainSelect.value = mainFeatures.some((item) => item.value === 'Indie') ? 'Indie' : (mainFeatures[0] && mainFeatures[0].value) || '';
+      freeSelect.value = '0';
+      yearInput.value = '2025';
+      $$('input[type="checkbox"]', genreBox).forEach((box) => { box.checked = false; });
+      updateGenreState();
+      setPresetActive('');
+      render();
+    });
+    render();
   }
 
   function initReputation() {
@@ -745,7 +1141,7 @@
     $('#dossier-count').textContent = fmt(row.count);
     $('#dossier-share').textContent = share(row.share);
     $('#dossier-price').textContent = price(row.avgPrice);
-    $('#dossier-rating').textContent = row.avgRating ? Number(row.avgRating).toFixed(1) + '%' : '全量未补';
+    $('#dossier-rating').textContent = row.avgRating ? Number(row.avgRating).toFixed(1) + '%' : '—';
     ensureDossierNote();
     renderDossierTrend(genre);
     renderDossierTags(genre, focusTag);
@@ -1012,7 +1408,7 @@
     const hide = () => box.classList.remove('is-visible');
 
     document.addEventListener('pointerover', (event) => {
-      const target = event.target instanceof Element ? event.target.closest('.arena-thumb, .game-thumb') : null;
+      const target = event.target instanceof Element ? event.target.closest('.arena-thumb, .game-thumb, .new-release__thumb') : null;
       if (!target || !target.getAttribute('src')) return;
       image.src = target.currentSrc || target.src;
       box.classList.add('is-visible');
@@ -1022,26 +1418,42 @@
       if (box.classList.contains('is-visible')) move(event);
     });
     document.addEventListener('pointerout', (event) => {
-      if (event.target instanceof Element && event.target.closest('.arena-thumb, .game-thumb')) hide();
+      if (event.target instanceof Element && event.target.closest('.arena-thumb, .game-thumb, .new-release__thumb')) hide();
     });
     window.addEventListener('scroll', hide, { passive: true });
   }
 
+  function resizePrintCharts() {
+    if (!window.echarts) return;
+    $$('.chart, .cycle__chart, #dossier-trend').forEach((node) => {
+      const chart = window.echarts.getInstanceByDom(node);
+      if (chart) chart.resize();
+    });
+  }
+
+  window.addEventListener('beforeprint', resizePrintCharts);
+  window.addEventListener('afterprint', resizePrintCharts);
+
   async function init() {
     bindEnter();
+    initBootVideo();
     initThumbZoom();
     initArchiveGenreScroll();
     try {
-      const [agg, reviews, top500, online] = await Promise.all([
-        apiWithFallback('/api/market/agg', 'data/market/market_agg.json'),
-        apiWithFallback('/api/market/reviews', 'data/market/reviews_enriched.json'),
-        apiWithFallback('/api/market/top500', 'data/market/top500.json'),
-        apiWithFallback('/api/online', 'data/online.json').catch(() => ({ top: [] })),
+      const [agg, reviews, top500, online, newReleases, model] = await Promise.all([
+        loadData('/api/market/agg', 'data/market/market_agg.json', 'agg'),
+        loadData('/api/market/reviews', 'data/market/reviews_enriched.json', 'reviews'),
+        loadData('/api/market/top500', 'data/market/top500.json', 'top500'),
+        loadData('/api/online', 'data/online.json', 'online').catch(() => ({ top: [] })),
+        loadData('/api/new-releases', 'data/new_releases.json', 'newReleases').catch(() => ({ items: [] })),
+        loadData('/api/ml/model', 'data/ml/model.json', 'model').catch(() => null),
       ]);
       state.agg = agg;
       state.reviews = reviews.items || [];
       state.top500 = top500;
       state.online = online;
+      state.newReleases = newReleases;
+      state.model = model;
       $('#boot-hint').textContent = '已接通 150,279 款全量快照';
       initMeta();
       initLobby();
@@ -1049,6 +1461,8 @@
       initSeason();
       initPrice();
       initOnline();
+      initNewReleases();
+      initModelLab();
       initReputation();
       renderSensitivity();
       initArchive();

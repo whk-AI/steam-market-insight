@@ -1,0 +1,35 @@
+{
+  "population": 112082,
+  "sample": 5000,
+  "seed": 42,
+  "window": "2015-01-01..2025-11-19",
+  "strata": "release year",
+  "years": {
+    "2015": 112,
+    "2016": 185,
+    "2017": 264,
+    "2018": 332,
+    "2019": 324,
+    "2020": 392,
+    "2021": 494,
+    "2022": 549,
+    "2023": 654,
+    "2024": 901,
+    "2025": 793
+  },
+  "genres": {
+    "Indie": 1805,
+    "Strategy": 786,
+    "Free To Play": 709,
+    "Simulation": 632,
+    "其他": 388,
+    "Casual": 264,
+    "Adventure": 182,
+    "Action": 103,
+    "Racing": 74,
+    "RPG": 51,
+    "Sports": 6
+  },
+  "free": 709,
+  "note": "Features exclude price/discount/reviews/rating; all are snapshots or post-release outcomes."
+}

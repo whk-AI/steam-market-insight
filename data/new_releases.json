@@ -1,0 +1,113 @@
+{
+  "fetchedAt": "2026-11-16T22:04:00+08:00",
+  "window": {
+    "from": "2026-11-09",
+    "to": "2026-11-15"
+  },
+  "ordering": "Steam Store Released_DESC，取窗口内最新上线的 10 款；不是下载量榜。",
+  "downloadsAvailable": false,
+  "downloadsNote": "Steam 不公开下载量；本页只提供 Steam 商店下载入口，不用评分数/在线数伪造下载量。",
+  "source": "Steam Store Search（Released_DESC，category1=998）",
+  "items": [
+    {
+      "rank": 1,
+      "appid": 5379220,
+      "name": "Welcome Home, Resident",
+      "date": "2026-11-15",
+      "price": "$12.99",
+      "cover": "https://cdn.akamai.steamstatic.com/steam/apps/5379220/header.jpg",
+      "store": "https://store.steampowered.com/app/5379220/",
+      "downloads": null
+    },
+    {
+      "rank": 2,
+      "appid": 4444800,
+      "name": "Obey Me! Sinner's Choice: Lucifer",
+      "date": "2026-11-15",
+      "price": "$26.99",
+      "cover": "https://cdn.akamai.steamstatic.com/steam/apps/4444800/header.jpg",
+      "store": "https://store.steampowered.com/app/4444800/",
+      "downloads": null
+    },
+    {
+      "rank": 3,
+      "appid": 4574120,
+      "name": "Civilization Idle",
+      "date": "2026-11-15",
+      "price": null,
+      "cover": "https://cdn.akamai.steamstatic.com/steam/apps/4574120/header.jpg",
+      "store": "https://store.steampowered.com/app/4574120/",
+      "downloads": null
+    },
+    {
+      "rank": 4,
+      "appid": 5441840,
+      "name": "The Inkwright",
+      "date": "2026-11-15",
+      "price": "$1.18",
+      "cover": "https://cdn.akamai.steamstatic.com/steam/apps/5441840/header.jpg",
+      "store": "https://store.steampowered.com/app/5441840/",
+      "downloads": null
+    },
+    {
+      "rank": 5,
+      "appid": 4559250,
+      "name": "No One Leaves the Starter Village",
+      "date": "2026-11-15",
+      "price": "$7.99",
+      "cover": "https://cdn.akamai.steamstatic.com/steam/apps/4559250/header.jpg",
+      "store": "https://store.steampowered.com/app/4559250/",
+      "downloads": null
+    },
+    {
+      "rank": 6,
+      "appid": 5333130,
+      "name": "Trick Nor Treat",
+      "date": "2026-11-15",
+      "price": "免费",
+      "cover": "https://cdn.akamai.steamstatic.com/steam/apps/5333130/header.jpg",
+      "store": "https://store.steampowered.com/app/5333130/",
+      "downloads": null
+    },
+    {
+      "rank": 7,
+      "appid": 5234890,
+      "name": "ParkingWars",
+      "date": "2026-11-15",
+      "price": "$2.99",
+      "cover": "https://cdn.akamai.steamstatic.com/steam/apps/5234890/header.jpg",
+      "store": "https://store.steampowered.com/app/5234890/",
+      "downloads": null
+    },
+    {
+      "rank": 8,
+      "appid": 5474070,
+      "name": "SWARM GATE",
+      "date": "2026-11-15",
+      "price": null,
+      "cover": "https://cdn.akamai.steamstatic.com/steam/apps/5474070/header.jpg",
+      "store": "https://store.steampowered.com/app/5474070/",
+      "downloads": null
+    },
+    {
+      "rank": 9,
+      "appid": 4940260,
+      "name": "GrooveDeck",
+      "date": "2026-11-15",
+      "price": null,
+      "cover": "https://cdn.akamai.steamstatic.com/steam/apps/4940260/header.jpg",
+      "store": "https://store.steampowered.com/app/4940260/",
+      "downloads": null
+    },
+    {
+      "rank": 10,
+      "appid": 4946270,
+      "name": "SonicPanic",
+      "date": "2026-11-15",
+      "price": null,
+      "cover": "https://cdn.akamai.steamstatic.com/steam/apps/4946270/header.jpg",
+      "store": "https://store.steampowered.com/app/4946270/",
+      "downloads": null
+    }
+  ]
+}

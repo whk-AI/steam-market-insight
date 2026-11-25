@@ -1,11 +1,143 @@
 {
-  "fetchedAt": "2026-11-11T14:31:47.632Z",
-  "durationSec": 1897,
+  "fetchedAt": "2026-11-24T14:56:37.020Z",
+  "durationSec": 2993,
   "gameCount": 123,
-  "poolTotal": 166,
-  "successCount": 153,
-  "failCount": 13,
+  "poolTotal": 153,
+  "successCount": 60,
+  "failCount": 93,
   "failedList": [
+    {
+      "appid": 570,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 730,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 227300,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 230410,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 236390,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 255710,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 281990,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 289070,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 294100,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 322330,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 335300,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 359550,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 374320,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 381210,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 413150,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 431960,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 435150,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 457140,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 499170,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 552990,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 553850,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 570940,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 578080,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 594650,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 632360,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 641990,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 648800,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 699130,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 784150,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 815370,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 949230,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 962130,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 990080,
+      "reason": "fetch failed"
+    },
     {
       "appid": 1675200,
       "reason": "type非game"
@@ -15,11 +147,143 @@
       "reason": "type非game"
     },
     {
-      "appid": 2780810,
-      "reason": "type非game"
+      "appid": 2139460,
+      "reason": "fetch failed"
     },
     {
-      "appid": 3796990,
+      "appid": 2208680,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 2215430,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 2272360,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 2288340,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 2290180,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 2358720,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 2406770,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 2483190,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 2507950,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 2531310,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 2567870,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 2627260,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 2651280,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 2661300,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 2669450,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 2807960,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 2868840,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 2909400,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 2918700,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 3010850,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 3028330,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 3148090,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 3240220,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 3241660,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 3280350,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 3321460,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 3347910,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 3489700,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 3527290,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 3669870,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 3722330,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 3723710,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 3768760,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 3809270,
       "reason": "type非game"
     },
     {
@@ -27,39 +291,95 @@
       "reason": "type非game"
     },
     {
-      "appid": 4165890,
-      "reason": "type非game"
-    },
-    {
       "appid": 4165910,
       "reason": "type非game"
     },
     {
-      "appid": 4498220,
+      "appid": 4771370,
       "reason": "type非game"
     },
     {
-      "appid": 4530440,
+      "appid": 4771380,
       "reason": "type非game"
     },
     {
-      "appid": 4739980,
+      "appid": 4771390,
       "reason": "type非game"
     },
     {
-      "appid": 5001840,
-      "reason": "type非game"
+      "appid": 4894680,
+      "reason": "fetch failed"
     },
     {
-      "appid": 5021520,
-      "reason": "appdetails无数据"
+      "appid": 4961260,
+      "reason": "fetch failed"
     },
     {
-      "appid": 5404280,
-      "reason": "type非game"
+      "appid": 4971710,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 5170520,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 5175310,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 5203260,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 5210420,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 5303440,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 5335510,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 5381360,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 5433150,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 5458210,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 5464560,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 5513980,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 5515070,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 5548450,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 5558370,
+      "reason": "fetch failed"
+    },
+    {
+      "appid": 5601610,
+      "reason": "fetch failed"
     }
   ],
-  "keptCount": 0,
+  "keptCount": 39,
   "existingCount": 123,
   "sources": [
     "top_sellers",

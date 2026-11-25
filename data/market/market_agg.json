@@ -3,957 +3,957 @@
     {
       "name": "Action",
       "name_cn": "动作",
-      "count": 60444,
-      "share": 40.22,
-      "avgPrice": 9.1,
-      "avgRating": 78.54,
-      "ratingCount": 851
+      "count": 61859,
+      "share": 39.81,
+      "avgPrice": 9.02,
+      "avgRating": 85.71,
+      "ratingCount": 1130
     },
     {
       "name": "Casual",
       "name_cn": "休闲",
-      "count": 58462,
-      "share": 38.9,
-      "avgPrice": 7.04,
-      "avgRating": 81.63,
-      "ratingCount": 634
+      "count": 60637,
+      "share": 39.03,
+      "avgPrice": 6.95,
+      "avgRating": 90.63,
+      "ratingCount": 281
     },
     {
       "name": "Adventure",
       "name_cn": "冒险",
-      "count": 59030,
-      "share": 39.28,
-      "avgPrice": 9.3,
-      "avgRating": 80.55,
-      "ratingCount": 858
+      "count": 60504,
+      "share": 38.94,
+      "avgPrice": 9.23,
+      "avgRating": 86.96,
+      "ratingCount": 879
     },
     {
       "name": "Indie",
       "name_cn": "独立",
-      "count": 101207,
-      "share": 67.35,
-      "avgPrice": 7.54,
-      "avgRating": 80.33,
-      "ratingCount": 1310
+      "count": 104211,
+      "share": 67.07,
+      "avgPrice": 7.44,
+      "avgRating": 89.42,
+      "ratingCount": 937
     },
     {
       "name": "Simulation",
       "name_cn": "模拟",
-      "count": 30329,
-      "share": 20.18,
-      "avgPrice": 10.72,
-      "avgRating": 77.74,
-      "ratingCount": 467
+      "count": 31325,
+      "share": 20.16,
+      "avgPrice": 10.55,
+      "avgRating": 86.49,
+      "ratingCount": 505
     },
     {
       "name": "RPG",
       "name_cn": "角色扮演",
-      "count": 28493,
-      "share": 18.96,
-      "avgPrice": 10.89,
-      "avgRating": 78.44,
-      "ratingCount": 438
+      "count": 29165,
+      "share": 18.77,
+      "avgPrice": 10.79,
+      "avgRating": 85.4,
+      "ratingCount": 546
     },
     {
       "name": "Strategy",
       "name_cn": "策略",
-      "count": 28654,
-      "share": 19.07,
-      "avgPrice": 9.96,
-      "avgRating": 78.17,
-      "ratingCount": 405
+      "count": 29403,
+      "share": 18.92,
+      "avgPrice": 9.85,
+      "avgRating": 86.15,
+      "ratingCount": 442
     },
     {
       "name": "Sports",
       "name_cn": "体育",
-      "count": 5534,
-      "share": 3.68,
-      "avgPrice": 13.29,
-      "avgRating": 81.55,
-      "ratingCount": 74
+      "count": 5701,
+      "share": 3.67,
+      "avgPrice": 13.16,
+      "avgRating": 81.84,
+      "ratingCount": 63
     },
     {
       "name": "Free To Play",
       "name_cn": "免费开玩",
-      "count": 19417,
-      "share": 12.92,
+      "count": 20967,
+      "share": 13.49,
       "avgPrice": 6.72,
-      "avgRating": 77.06,
-      "ratingCount": 248
+      "avgRating": 74.95,
+      "ratingCount": 40
     },
     {
       "name": "Racing",
       "name_cn": "竞速",
-      "count": 4948,
-      "share": 3.29,
-      "avgPrice": 11.85,
-      "avgRating": 77.93,
-      "ratingCount": 65
+      "count": 5075,
+      "share": 3.27,
+      "avgPrice": 11.72,
+      "avgRating": 84.21,
+      "ratingCount": 62
     },
     {
       "name": "其他",
       "name_cn": "其他",
-      "count": 8870,
-      "share": 5.9,
-      "avgPrice": 21.19,
-      "avgRating": 74.16,
-      "ratingCount": 26
+      "count": 8874,
+      "share": 5.71,
+      "avgPrice": 21.15,
+      "avgRating": 83.82,
+      "ratingCount": 15
     }
   ],
   "type_pairs": [
     {
+      "a": "Casual",
+      "b": "Indie",
+      "count": 46730
+    },
+    {
       "a": "Action",
       "b": "Indie",
-      "count": 45373
+      "count": 46390
     },
     {
       "a": "Adventure",
       "b": "Indie",
-      "count": 45099
-    },
-    {
-      "a": "Casual",
-      "b": "Indie",
-      "count": 45098
+      "count": 46149
     },
     {
       "a": "Action",
       "b": "Adventure",
-      "count": 28863
+      "count": 29464
     },
     {
       "a": "Indie",
       "b": "Simulation",
-      "count": 21342
+      "count": 22058
     },
     {
       "a": "Adventure",
       "b": "Casual",
-      "count": 21194
+      "count": 21821
     },
     {
       "a": "Indie",
       "b": "RPG",
-      "count": 20610
+      "count": 21054
     },
     {
       "a": "Indie",
       "b": "Strategy",
-      "count": 20299
+      "count": 20825
     },
     {
       "a": "Action",
       "b": "Casual",
-      "count": 18578
+      "count": 19103
     },
     {
       "a": "Adventure",
       "b": "RPG",
-      "count": 16513
+      "count": 16844
     },
     {
       "a": "Casual",
       "b": "Simulation",
-      "count": 15106
+      "count": 15646
     },
     {
       "a": "Free To Play",
       "b": "Indie",
-      "count": 12698
+      "count": 13185
     },
     {
       "a": "Casual",
       "b": "Strategy",
-      "count": 12553
+      "count": 12979
     },
     {
       "a": "Action",
       "b": "RPG",
-      "count": 12010
+      "count": 12260
     },
     {
       "a": "Adventure",
       "b": "Simulation",
-      "count": 10186
+      "count": 10491
     },
     {
       "a": "Simulation",
       "b": "Strategy",
-      "count": 9227
+      "count": 9449
     },
     {
       "a": "Casual",
       "b": "RPG",
-      "count": 8780
+      "count": 9061
     },
     {
       "a": "Adventure",
       "b": "Strategy",
-      "count": 8411
+      "count": 8586
     },
     {
       "a": "Action",
       "b": "Simulation",
-      "count": 8372
+      "count": 8576
     },
     {
       "a": "Action",
       "b": "Strategy",
-      "count": 8312
+      "count": 8503
     },
     {
       "a": "Casual",
       "b": "Free To Play",
-      "count": 8039
+      "count": 8379
     },
     {
       "a": "Action",
       "b": "Free To Play",
-      "count": 8009
+      "count": 8268
     },
     {
       "a": "RPG",
       "b": "Strategy",
-      "count": 7571
+      "count": 7725
     },
     {
       "a": "Adventure",
       "b": "Free To Play",
-      "count": 6899
+      "count": 7145
     },
     {
       "a": "RPG",
       "b": "Simulation",
-      "count": 6103
+      "count": 6265
     },
     {
       "a": "Free To Play",
       "b": "RPG",
-      "count": 3873
+      "count": 4010
     },
     {
       "a": "Free To Play",
       "b": "Strategy",
-      "count": 3825
+      "count": 3952
     },
     {
       "a": "Indie",
       "b": "Sports",
-      "count": 3612
+      "count": 3724
     },
     {
       "a": "Free To Play",
       "b": "Simulation",
-      "count": 3536
+      "count": 3669
     },
     {
       "a": "Indie",
       "b": "Racing",
-      "count": 3401
+      "count": 3485
     },
     {
       "a": "Casual",
       "b": "Sports",
-      "count": 2914
+      "count": 3019
     },
     {
       "a": "Simulation",
       "b": "Sports",
-      "count": 2785
+      "count": 2873
     },
     {
       "a": "Action",
       "b": "Sports",
-      "count": 2715
+      "count": 2798
     },
     {
       "a": "Action",
       "b": "Racing",
-      "count": 2624
+      "count": 2683
     },
     {
       "a": "Casual",
       "b": "Racing",
-      "count": 2357
+      "count": 2431
     },
     {
       "a": "Racing",
       "b": "Simulation",
-      "count": 1862
+      "count": 1905
     },
     {
       "a": "Racing",
       "b": "Sports",
-      "count": 1557
+      "count": 1589
     },
     {
       "a": "Adventure",
       "b": "Racing",
-      "count": 1399
+      "count": 1441
     },
     {
       "a": "Adventure",
       "b": "Sports",
-      "count": 1296
+      "count": 1351
     },
     {
       "a": "Sports",
       "b": "Strategy",
-      "count": 1176
+      "count": 1225
     },
     {
       "a": "Free To Play",
       "b": "Sports",
-      "count": 721
+      "count": 743
     },
     {
       "a": "Racing",
       "b": "Strategy",
-      "count": 647
-    },
-    {
-      "a": "Free To Play",
-      "b": "Racing",
-      "count": 629
+      "count": 666
     },
     {
       "a": "RPG",
       "b": "Sports",
-      "count": 629
+      "count": 664
+    },
+    {
+      "a": "Free To Play",
+      "b": "Racing",
+      "count": 641
     },
     {
       "a": "RPG",
       "b": "Racing",
-      "count": 475
+      "count": 490
     }
   ],
   "sub_tag_dist": {
     "Action": [
       {
         "tag": "射击",
-        "count": 10468
+        "count": 10688
       },
       {
         "tag": "平台跳跃",
-        "count": 5444
+        "count": 5545
       },
       {
         "tag": "多人",
-        "count": 4938
+        "count": 5011
       },
       {
         "tag": "生存",
-        "count": 3898
+        "count": 4004
       },
       {
         "tag": "肉鸽",
-        "count": 3847
+        "count": 3961
       },
       {
         "tag": "恐怖",
-        "count": 3802
+        "count": 3924
       },
       {
         "tag": "太空",
-        "count": 2789
+        "count": 2854
       },
       {
         "tag": "建造",
-        "count": 2070
+        "count": 2101
       },
       {
         "tag": "解谜",
-        "count": 1776
+        "count": 1819
       },
       {
         "tag": "奇幻",
-        "count": 1617
+        "count": 1647
       },
       {
         "tag": "开放世界",
-        "count": 1476
+        "count": 1511
       },
       {
         "tag": "模拟经营",
-        "count": 1332
+        "count": 1355
       },
       {
         "tag": "科幻",
-        "count": 1274
+        "count": 1306
       },
       {
         "tag": "像素",
-        "count": 1100
+        "count": 1135
       },
       {
         "tag": "僵尸",
-        "count": 1059
+        "count": 1074
       },
       {
         "tag": "音乐",
-        "count": 947
+        "count": 978
       }
     ],
     "Casual": [
       {
         "tag": "解谜",
-        "count": 6296
+        "count": 6540
       },
       {
         "tag": "射击",
-        "count": 3093
+        "count": 3191
       },
       {
         "tag": "模拟经营",
-        "count": 2977
+        "count": 3085
       },
       {
         "tag": "平台跳跃",
-        "count": 2970
+        "count": 3064
       },
       {
         "tag": "多人",
-        "count": 2719
+        "count": 2784
       },
       {
         "tag": "视觉小说",
-        "count": 2004
+        "count": 2097
       },
       {
         "tag": "建造",
-        "count": 1948
+        "count": 2002
       },
       {
         "tag": "太空",
-        "count": 1947
+        "count": 2000
       },
       {
         "tag": "肉鸽",
-        "count": 1758
+        "count": 1844
       },
       {
         "tag": "音乐",
-        "count": 1518
+        "count": 1597
       },
       {
         "tag": "生存",
-        "count": 1334
+        "count": 1397
       },
       {
         "tag": "奇幻",
-        "count": 1318
+        "count": 1357
       },
       {
         "tag": "卡牌",
-        "count": 1224
+        "count": 1275
       },
       {
         "tag": "恐怖",
-        "count": 1201
+        "count": 1269
       },
       {
         "tag": "像素",
-        "count": 812
+        "count": 855
       },
       {
         "tag": "农场",
-        "count": 750
+        "count": 789
       }
     ],
     "Adventure": [
       {
         "tag": "恐怖",
-        "count": 4922
+        "count": 5107
       },
       {
         "tag": "平台跳跃",
-        "count": 4745
+        "count": 4847
       },
       {
         "tag": "生存",
-        "count": 3390
+        "count": 3478
       },
       {
         "tag": "解谜",
-        "count": 3332
+        "count": 3404
       },
       {
         "tag": "射击",
-        "count": 3292
-      },
-      {
-        "tag": "建造",
-        "count": 2301
+        "count": 3366
       },
       {
         "tag": "奇幻",
-        "count": 2290
+        "count": 2347
+      },
+      {
+        "tag": "建造",
+        "count": 2342
       },
       {
         "tag": "多人",
-        "count": 2225
+        "count": 2270
       },
       {
         "tag": "肉鸽",
-        "count": 2058
-      },
-      {
-        "tag": "太空",
-        "count": 1910
+        "count": 2112
       },
       {
         "tag": "视觉小说",
-        "count": 1871
+        "count": 1968
+      },
+      {
+        "tag": "太空",
+        "count": 1953
       },
       {
         "tag": "开放世界",
-        "count": 1741
+        "count": 1776
       },
       {
         "tag": "剧情",
-        "count": 1490
+        "count": 1532
       },
       {
         "tag": "模拟经营",
-        "count": 1461
+        "count": 1508
       },
       {
         "tag": "回合制",
-        "count": 1182
+        "count": 1201
       },
       {
         "tag": "科幻",
-        "count": 1111
+        "count": 1135
       }
     ],
     "Indie": [
       {
         "tag": "射击",
-        "count": 8373
+        "count": 8556
       },
       {
         "tag": "解谜",
-        "count": 7657
+        "count": 7892
       },
       {
         "tag": "平台跳跃",
-        "count": 6816
+        "count": 6971
       },
       {
         "tag": "恐怖",
-        "count": 5996
+        "count": 6263
       },
       {
         "tag": "肉鸽",
-        "count": 5115
+        "count": 5269
       },
       {
         "tag": "多人",
-        "count": 5063
+        "count": 5149
       },
       {
         "tag": "生存",
-        "count": 4399
+        "count": 4543
       },
       {
         "tag": "模拟经营",
-        "count": 4296
+        "count": 4407
       },
       {
         "tag": "建造",
-        "count": 4025
+        "count": 4108
       },
       {
         "tag": "太空",
-        "count": 3879
+        "count": 3965
       },
       {
         "tag": "奇幻",
-        "count": 2882
+        "count": 2954
       },
       {
         "tag": "视觉小说",
-        "count": 2560
+        "count": 2667
       },
       {
         "tag": "回合制",
-        "count": 2492
+        "count": 2542
       },
       {
         "tag": "卡牌",
-        "count": 2156
+        "count": 2223
       },
       {
         "tag": "音乐",
-        "count": 2001
+        "count": 2083
       },
       {
         "tag": "剧情",
-        "count": 1774
+        "count": 1824
       }
     ],
     "Simulation": [
       {
         "tag": "模拟经营",
-        "count": 5202
+        "count": 5347
       },
       {
         "tag": "建造",
-        "count": 1981
+        "count": 2016
       },
       {
         "tag": "生存",
-        "count": 1396
+        "count": 1426
       },
       {
         "tag": "太空",
-        "count": 1369
+        "count": 1400
       },
       {
         "tag": "多人",
-        "count": 1194
+        "count": 1219
       },
       {
         "tag": "恐怖",
-        "count": 1091
+        "count": 1152
       },
       {
         "tag": "解谜",
-        "count": 1034
+        "count": 1054
       },
       {
         "tag": "射击",
-        "count": 1003
+        "count": 1020
       },
       {
         "tag": "视觉小说",
-        "count": 960
+        "count": 1018
       },
       {
         "tag": "沙盒",
-        "count": 787
+        "count": 799
       },
       {
         "tag": "农场",
-        "count": 766
+        "count": 787
       },
       {
         "tag": "开放世界",
-        "count": 742
+        "count": 761
       },
       {
         "tag": "奇幻",
-        "count": 696
+        "count": 716
       },
       {
         "tag": "肉鸽",
-        "count": 458
+        "count": 477
       },
       {
         "tag": "音乐",
-        "count": 441
+        "count": 459
       },
       {
         "tag": "回合制",
-        "count": 428
+        "count": 436
       }
     ],
     "RPG": [
       {
         "tag": "肉鸽",
-        "count": 2373
+        "count": 2433
       },
       {
         "tag": "奇幻",
-        "count": 2333
+        "count": 2381
       },
       {
         "tag": "回合制",
-        "count": 2187
+        "count": 2240
       },
       {
         "tag": "建造",
-        "count": 1853
+        "count": 1891
       },
       {
         "tag": "生存",
-        "count": 1517
+        "count": 1550
       },
       {
         "tag": "开放世界",
-        "count": 1224
+        "count": 1253
       },
       {
         "tag": "射击",
-        "count": 1210
+        "count": 1239
       },
       {
         "tag": "多人",
-        "count": 1084
+        "count": 1097
       },
       {
         "tag": "模拟经营",
-        "count": 908
+        "count": 925
       },
       {
         "tag": "卡牌",
-        "count": 863
+        "count": 888
       },
       {
         "tag": "剧情",
-        "count": 859
+        "count": 882
       },
       {
         "tag": "恐怖",
-        "count": 804
+        "count": 830
       },
       {
         "tag": "解谜",
-        "count": 785
+        "count": 808
       },
       {
         "tag": "太空",
-        "count": 747
+        "count": 759
       },
       {
         "tag": "视觉小说",
-        "count": 678
+        "count": 710
       },
       {
         "tag": "像素",
-        "count": 592
+        "count": 614
       }
     ],
     "Strategy": [
       {
-        "tag": "回合制",
-        "count": 2628
+        "tag": "肉鸽",
+        "count": 2695
       },
       {
-        "tag": "肉鸽",
-        "count": 2615
+        "tag": "回合制",
+        "count": 2672
       },
       {
         "tag": "卡牌",
-        "count": 2316
+        "count": 2390
       },
       {
         "tag": "建造",
-        "count": 2272
+        "count": 2311
       },
       {
         "tag": "解谜",
-        "count": 2186
+        "count": 2252
       },
       {
         "tag": "模拟经营",
-        "count": 1930
+        "count": 1976
       },
       {
         "tag": "塔防",
-        "count": 1436
+        "count": 1470
       },
       {
         "tag": "多人",
-        "count": 1428
+        "count": 1457
       },
       {
         "tag": "生存",
-        "count": 1246
+        "count": 1278
       },
       {
         "tag": "奇幻",
-        "count": 1186
+        "count": 1204
       },
       {
         "tag": "太空",
-        "count": 1169
+        "count": 1190
       },
       {
         "tag": "射击",
-        "count": 1157
+        "count": 1178
       },
       {
         "tag": "恐怖",
-        "count": 580
+        "count": 604
       },
       {
         "tag": "平台跳跃",
-        "count": 497
+        "count": 511
       },
       {
         "tag": "科幻",
-        "count": 473
+        "count": 478
       },
       {
         "tag": "像素",
-        "count": 354
+        "count": 365
       }
     ],
     "Sports": [
       {
         "tag": "足球",
-        "count": 552
+        "count": 566
       },
       {
         "tag": "多人",
-        "count": 542
+        "count": 550
       },
       {
         "tag": "模拟经营",
-        "count": 495
+        "count": 504
       },
       {
         "tag": "射击",
-        "count": 316
+        "count": 319
       },
       {
         "tag": "篮球",
-        "count": 155
+        "count": 161
       },
       {
         "tag": "平台跳跃",
-        "count": 148
+        "count": 156
       },
       {
         "tag": "解谜",
-        "count": 131
+        "count": 132
       },
       {
         "tag": "太空",
-        "count": 119
+        "count": 120
       },
       {
         "tag": "音乐",
-        "count": 117
+        "count": 119
       },
       {
         "tag": "跑酷",
-        "count": 101
+        "count": 107
       },
       {
         "tag": "钓鱼",
-        "count": 74
+        "count": 75
       },
       {
         "tag": "开放世界",
-        "count": 71
+        "count": 73
       },
       {
         "tag": "建造",
-        "count": 62
+        "count": 63
       },
       {
         "tag": "卡牌",
-        "count": 56
+        "count": 61
       },
       {
         "tag": "奇幻",
-        "count": 51
+        "count": 52
       },
       {
         "tag": "肉鸽",
-        "count": 46
+        "count": 48
       }
     ],
     "Free To Play": [
       {
         "tag": "射击",
-        "count": 1709
+        "count": 1761
       },
       {
         "tag": "多人",
-        "count": 1486
+        "count": 1528
       },
       {
         "tag": "平台跳跃",
-        "count": 1152
+        "count": 1194
       },
       {
         "tag": "解谜",
-        "count": 977
+        "count": 1018
       },
       {
         "tag": "恐怖",
-        "count": 805
+        "count": 851
       },
       {
         "tag": "太空",
-        "count": 696
+        "count": 709
       },
       {
         "tag": "模拟经营",
-        "count": 651
+        "count": 709
       },
       {
         "tag": "建造",
-        "count": 648
+        "count": 671
       },
       {
         "tag": "奇幻",
-        "count": 612
+        "count": 635
       },
       {
         "tag": "生存",
-        "count": 567
+        "count": 588
       },
       {
         "tag": "卡牌",
-        "count": 523
+        "count": 556
       },
       {
         "tag": "视觉小说",
-        "count": 500
-      },
-      {
-        "tag": "回合制",
-        "count": 484
+        "count": 523
       },
       {
         "tag": "肉鸽",
-        "count": 478
+        "count": 511
+      },
+      {
+        "tag": "回合制",
+        "count": 499
       },
       {
         "tag": "音乐",
-        "count": 379
+        "count": 401
       },
       {
         "tag": "剧情",
-        "count": 373
+        "count": 400
       }
     ],
     "Racing": [
       {
         "tag": "多人",
-        "count": 438
+        "count": 445
       },
       {
         "tag": "模拟经营",
-        "count": 354
+        "count": 362
       },
       {
         "tag": "平台跳跃",
-        "count": 320
+        "count": 332
       },
       {
         "tag": "射击",
-        "count": 214
+        "count": 218
       },
       {
         "tag": "跑酷",
-        "count": 196
+        "count": 207
       },
       {
         "tag": "开放世界",
-        "count": 165
+        "count": 168
       },
       {
         "tag": "太空",
-        "count": 131
+        "count": 137
       },
       {
         "tag": "音乐",
-        "count": 109
+        "count": 111
       },
       {
         "tag": "解谜",
@@ -961,27 +961,27 @@
       },
       {
         "tag": "生存",
-        "count": 99
-      },
-      {
-        "tag": "沙盒",
-        "count": 60
+        "count": 103
       },
       {
         "tag": "肉鸽",
-        "count": 59
+        "count": 62
+      },
+      {
+        "tag": "沙盒",
+        "count": 61
       },
       {
         "tag": "建造",
-        "count": 58
-      },
-      {
-        "tag": "科幻",
-        "count": 44
+        "count": 60
       },
       {
         "tag": "像素",
-        "count": 43
+        "count": 48
+      },
+      {
+        "tag": "科幻",
+        "count": 46
       },
       {
         "tag": "恐怖",
@@ -1019,11 +1019,11 @@
       },
       {
         "tag": "奇幻",
-        "count": 30
+        "count": 31
       },
       {
         "tag": "建造",
-        "count": 29
+        "count": 30
       },
       {
         "tag": "卡牌",
@@ -1046,11 +1046,11 @@
         "count": 19
       },
       {
-        "tag": "农场",
-        "count": 17
+        "tag": "肉鸽",
+        "count": 18
       },
       {
-        "tag": "肉鸽",
+        "tag": "农场",
         "count": 17
       }
     ]
@@ -1058,23 +1058,23 @@
   "price_bands": [
     {
       "band": "免费",
-      "count": 18994
+      "count": 20544
     },
     {
       "band": "1-30",
-      "count": 88168
+      "count": 91667
     },
     {
       "band": "31-60",
-      "count": 1736
+      "count": 1767
     },
     {
       "band": "61-100",
-      "count": 153
+      "count": 156
     },
     {
       "band": "101-200",
-      "count": 240
+      "count": 250
     },
     {
       "band": "200+",
@@ -1086,15 +1086,15 @@
     }
   ],
   "price_stats": {
-    "allMean": 5.26,
+    "allMean": 5.22,
     "allMedian": 1.99,
-    "paidMean": 8.75,
+    "paidMean": 8.64,
     "paidMedian": 4.99,
-    "freeCount": 18994,
-    "paidCount": 90311,
+    "freeCount": 20544,
+    "paidCount": 93854,
     "ratingCount": 1964,
-    "freeRating": 77.6,
-    "paidRating": 80.4
+    "freeRating": 76.3,
+    "paidRating": 87.0
   },
   "year_dist": [
     {
@@ -1215,11 +1215,11 @@
     },
     {
       "year": 2025,
-      "count": 17876
+      "count": 21935
     },
     {
       "year": 2026,
-      "count": 150
+      "count": 1184
     },
     {
       "year": 2027,
@@ -1257,7 +1257,7 @@
       "hits": 31,
       "free": 3069,
       "avgPrice": 14.64,
-      "reviews": 10586442,
+      "reviews": 10436334,
       "recommendations": 6027781
     },
     {
@@ -1266,7 +1266,7 @@
       "hits": 87,
       "free": 7,
       "avgPrice": 9.7,
-      "reviews": 1179250,
+      "reviews": 1842196,
       "recommendations": 1623461
     },
     {
@@ -1275,7 +1275,7 @@
       "hits": 66,
       "free": 7,
       "avgPrice": 9.08,
-      "reviews": 271944,
+      "reviews": 1270299,
       "recommendations": 1054413
     },
     {
@@ -1284,7 +1284,7 @@
       "hits": 84,
       "free": 15,
       "avgPrice": 9.38,
-      "reviews": 1467509,
+      "reviews": 3051982,
       "recommendations": 2509561
     },
     {
@@ -1293,7 +1293,7 @@
       "hits": 122,
       "free": 23,
       "avgPrice": 10.05,
-      "reviews": 914464,
+      "reviews": 2889491,
       "recommendations": 2455390
     },
     {
@@ -1302,7 +1302,7 @@
       "hits": 190,
       "free": 29,
       "avgPrice": 11.69,
-      "reviews": 4664189,
+      "reviews": 6172495,
       "recommendations": 3075294
     },
     {
@@ -1311,7 +1311,7 @@
       "hits": 282,
       "free": 92,
       "avgPrice": 9.47,
-      "reviews": 115967,
+      "reviews": 3721669,
       "recommendations": 3729320
     },
     {
@@ -1320,7 +1320,7 @@
       "hits": 327,
       "free": 204,
       "avgPrice": 8.23,
-      "reviews": 2344431,
+      "reviews": 9323178,
       "recommendations": 8461856
     },
     {
@@ -1329,7 +1329,7 @@
       "hits": 359,
       "free": 469,
       "avgPrice": 8.01,
-      "reviews": 3573484,
+      "reviews": 7886359,
       "recommendations": 7094536
     },
     {
@@ -1338,7 +1338,7 @@
       "hits": 389,
       "free": 723,
       "avgPrice": 7.96,
-      "reviews": 3312838,
+      "reviews": 8746836,
       "recommendations": 7377498
     },
     {
@@ -1347,7 +1347,7 @@
       "hits": 413,
       "free": 983,
       "avgPrice": 7.77,
-      "reviews": 2979535,
+      "reviews": 10170023,
       "recommendations": 9189025
     },
     {
@@ -1356,7 +1356,7 @@
       "hits": 441,
       "free": 1053,
       "avgPrice": 8.22,
-      "reviews": 2501727,
+      "reviews": 6674753,
       "recommendations": 6336094
     },
     {
@@ -1365,7 +1365,7 @@
       "hits": 511,
       "free": 1373,
       "avgPrice": 8.3,
-      "reviews": 3790855,
+      "reviews": 10227787,
       "recommendations": 9900642
     },
     {
@@ -1374,7 +1374,7 @@
       "hits": 531,
       "free": 1546,
       "avgPrice": 8.49,
-      "reviews": 1983773,
+      "reviews": 6525937,
       "recommendations": 6522435
     },
     {
@@ -1383,7 +1383,7 @@
       "hits": 512,
       "free": 1926,
       "avgPrice": 9.15,
-      "reviews": 2700352,
+      "reviews": 6815142,
       "recommendations": 6658666
     },
     {
@@ -1392,7 +1392,7 @@
       "hits": 538,
       "free": 2177,
       "avgPrice": 9.6,
-      "reviews": 2199531,
+      "reviews": 6221071,
       "recommendations": 6656678
     },
     {
@@ -1401,25 +1401,25 @@
       "hits": 609,
       "free": 3122,
       "avgPrice": 8.78,
-      "reviews": 5098582,
+      "reviews": 8152641,
       "recommendations": 8280957
     },
     {
       "year": 2025,
-      "count": 17876,
+      "count": 21935,
       "hits": 342,
-      "free": 2150,
-      "avgPrice": 9.19,
-      "reviews": 1884692,
+      "free": 3528,
+      "avgPrice": 8.59,
+      "reviews": 1996990,
       "recommendations": 3419397
     },
     {
       "year": 2026,
-      "count": 150,
+      "count": 1184,
       "hits": 0,
-      "free": 17,
-      "avgPrice": 76.19,
-      "reviews": 187291,
+      "free": 189,
+      "avgPrice": 6.56,
+      "reviews": 0,
       "recommendations": 0
     }
   ],
@@ -1443,8 +1443,8 @@
         "2022": 4585,
         "2023": 5533,
         "2024": 7069,
-        "2025": 5741,
-        "其他": 16760
+        "2025": 6823,
+        "其他": 17093
       }
     },
     {
@@ -1466,8 +1466,8 @@
         "2022": 5106,
         "2023": 6022,
         "2024": 8383,
-        "2025": 7130,
-        "其他": 11381
+        "2025": 8801,
+        "其他": 11885
       }
     },
     {
@@ -1489,8 +1489,8 @@
         "2022": 4663,
         "2023": 5518,
         "2024": 7268,
-        "2025": 6046,
-        "其他": 16365
+        "2025": 7163,
+        "其他": 16722
       }
     },
     {
@@ -1512,8 +1512,8 @@
         "2022": 7819,
         "2023": 9025,
         "2024": 12768,
-        "2025": 10877,
-        "其他": 25147
+        "2025": 13146,
+        "其他": 25882
       }
     },
     {
@@ -1535,8 +1535,8 @@
         "2022": 2327,
         "2023": 2895,
         "2024": 4028,
-        "2025": 3726,
-        "其他": 7822
+        "2025": 4476,
+        "其他": 8068
       }
     },
     {
@@ -1558,8 +1558,8 @@
         "2022": 2133,
         "2023": 2640,
         "2024": 3613,
-        "2025": 3070,
-        "其他": 8742
+        "2025": 3578,
+        "其他": 8906
       }
     },
     {
@@ -1581,8 +1581,8 @@
         "2022": 2183,
         "2023": 2627,
         "2024": 3639,
-        "2025": 3272,
-        "其他": 7561
+        "2025": 3819,
+        "其他": 7763
       }
     },
     {
@@ -1604,8 +1604,8 @@
         "2022": 489,
         "2023": 580,
         "2024": 687,
-        "2025": 590,
-        "其他": 900
+        "2025": 729,
+        "其他": 928
       }
     },
     {
@@ -1627,8 +1627,8 @@
         "2022": 1935,
         "2023": 2194,
         "2024": 3158,
-        "2025": 2172,
-        "其他": 3287
+        "2025": 3550,
+        "其他": 3459
       }
     },
     {
@@ -1650,8 +1650,8 @@
         "2022": 429,
         "2023": 516,
         "2024": 652,
-        "2025": 532,
-        "其他": 1073
+        "2025": 635,
+        "其他": 1097
       }
     },
     {
@@ -1673,7 +1673,7 @@
         "2022": 1020,
         "2023": 1426,
         "2024": 2142,
-        "2025": 2532,
+        "2025": 2536,
         "其他": 215
       }
     }
@@ -3717,9 +3717,9 @@
         "release_date": "2015-04-13",
         "metacritic": 96,
         "recommendations": 1835735,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 87.41,
+        "positive": 1739980,
+        "total_reviews": 1990556,
         "url": "https://store.steampowered.com/app/271590"
       },
       {
@@ -3759,9 +3759,9 @@
         "release_date": "2015-12-01",
         "metacritic": 0,
         "recommendations": 1213861,
-        "rating": 82.1,
-        "positive": 1282806,
-        "total_reviews": 1562492,
+        "rating": 83.86,
+        "positive": 1172854,
+        "total_reviews": 1398584,
         "url": "https://store.steampowered.com/app/359550"
       },
       {
@@ -3822,9 +3822,9 @@
         "release_date": "2024-08-19",
         "metacritic": 0,
         "recommendations": 855328,
-        "rating": 96.5,
-        "positive": 1171324,
-        "total_reviews": 1213807,
+        "rating": 96.66,
+        "positive": 1111720,
+        "total_reviews": 1150098,
         "url": "https://store.steampowered.com/app/2358720"
       },
       {
@@ -3843,9 +3843,9 @@
         "release_date": "2022-02-24",
         "metacritic": 94,
         "recommendations": 784208,
-        "rating": 93.0,
-        "positive": 1077697,
-        "total_reviews": 1158814,
+        "rating": 92.89,
+        "positive": 981540,
+        "total_reviews": 1056677,
         "url": "https://store.steampowered.com/app/1245620"
       },
       {
@@ -3864,9 +3864,9 @@
         "release_date": "2024-02-08",
         "metacritic": 0,
         "recommendations": 759870,
-        "rating": 75.7,
-        "positive": 883349,
-        "total_reviews": 1166908,
+        "rating": 76.24,
+        "positive": 775883,
+        "total_reviews": 1017635,
         "url": "https://store.steampowered.com/app/553850"
       },
       {
@@ -3885,9 +3885,9 @@
         "release_date": "2009-11-16",
         "metacritic": 89,
         "recommendations": 753023,
-        "rating": 97.5,
-        "positive": 1037916,
-        "total_reviews": 1064529,
+        "rating": 97.54,
+        "positive": 940221,
+        "total_reviews": 963983,
         "url": "https://store.steampowered.com/app/550"
       },
       {
@@ -3906,9 +3906,9 @@
         "release_date": "2019-12-05",
         "metacritic": 93,
         "recommendations": 712874,
-        "rating": 92.5,
-        "positive": 858344,
-        "total_reviews": 927940,
+        "rating": 92.25,
+        "positive": 676667,
+        "total_reviews": 733542,
         "url": "https://store.steampowered.com/app/1174180"
       },
       {
@@ -3927,9 +3927,9 @@
         "release_date": "2020-09-18",
         "metacritic": 0,
         "recommendations": 638550,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.82,
+        "positive": 736611,
+        "total_reviews": 768779,
         "url": "https://store.steampowered.com/app/739630"
       },
       {
@@ -3948,9 +3948,9 @@
         "release_date": "2016-06-14",
         "metacritic": 0,
         "recommendations": 604964,
-        "rating": 78.3,
-        "positive": 735872,
-        "total_reviews": 939811,
+        "rating": 79.05,
+        "positive": 630223,
+        "total_reviews": 797216,
         "url": "https://store.steampowered.com/app/381210"
       },
       {
@@ -3969,9 +3969,9 @@
         "release_date": "2017-08-27",
         "metacritic": 70,
         "recommendations": 560232,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 83.84,
+        "positive": 612177,
+        "total_reviews": 730170,
         "url": "https://store.steampowered.com/app/346110"
       },
       {
@@ -3990,9 +3990,9 @@
         "release_date": "2018-04-30",
         "metacritic": 83,
         "recommendations": 543864,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.54,
+        "positive": 599805,
+        "total_reviews": 627791,
         "url": "https://store.steampowered.com/app/242760"
       },
       {
@@ -4011,9 +4011,9 @@
         "release_date": "2013-08-13",
         "metacritic": 79,
         "recommendations": 436763,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 89.63,
+        "positive": 594327,
+        "total_reviews": 663082,
         "url": "https://store.steampowered.com/app/218620"
       },
       {
@@ -4032,9 +4032,9 @@
         "release_date": "2015-07-06",
         "metacritic": 86,
         "recommendations": 434286,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 87.35,
+        "positive": 509445,
+        "total_reviews": 583220,
         "url": "https://store.steampowered.com/app/252950"
       },
       {
@@ -4053,9 +4053,9 @@
         "release_date": "2021-02-02",
         "metacritic": 0,
         "recommendations": 430172,
-        "rating": 93.5,
-        "positive": 523752,
-        "total_reviews": 560163,
+        "rating": 94.32,
+        "positive": 471451,
+        "total_reviews": 499828,
         "url": "https://store.steampowered.com/app/892970"
       },
       {
@@ -4074,9 +4074,9 @@
         "release_date": "2014-12-22",
         "metacritic": 0,
         "recommendations": 421324,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 93.28,
+        "positive": 401026,
+        "total_reviews": 429921,
         "url": "https://store.steampowered.com/app/322170"
       },
       {
@@ -4116,9 +4116,9 @@
         "release_date": "2023-10-23",
         "metacritic": 0,
         "recommendations": 397515,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.18,
+        "positive": 473422,
+        "total_reviews": 487160,
         "url": "https://store.steampowered.com/app/1966720"
       },
       {
@@ -4137,9 +4137,9 @@
         "release_date": "2022-10-27",
         "metacritic": 0,
         "recommendations": 394532,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 58.76,
+        "positive": 419594,
+        "total_reviews": 714114,
         "url": "https://store.steampowered.com/app/1938090"
       },
       {
@@ -4158,9 +4158,9 @@
         "release_date": "2017-02-24",
         "metacritic": 87,
         "recommendations": 392027,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.04,
+        "positive": 403641,
+        "total_reviews": 415946,
         "url": "https://store.steampowered.com/app/367520"
       },
       {
@@ -4179,9 +4179,9 @@
         "release_date": "2011-04-18",
         "metacritic": 95,
         "recommendations": 367496,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 98.69,
+        "positive": 427835,
+        "total_reviews": 433510,
         "url": "https://store.steampowered.com/app/620"
       },
       {
@@ -4200,9 +4200,9 @@
         "release_date": "2018-12-13",
         "metacritic": 0,
         "recommendations": 362775,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 76.78,
+        "positive": 330349,
+        "total_reviews": 430252,
         "url": "https://store.steampowered.com/app/221100"
       },
       {
@@ -4221,9 +4221,9 @@
         "release_date": "2015-01-26",
         "metacritic": 87,
         "recommendations": 351357,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.2,
+        "positive": 435687,
+        "total_reviews": 457632,
         "url": "https://store.steampowered.com/app/239140"
       },
       {
@@ -4242,9 +4242,9 @@
         "release_date": "2016-04-21",
         "metacritic": 83,
         "recommendations": 348518,
-        "rating": 94.9,
-        "positive": 516748,
-        "total_reviews": 544518,
+        "rating": 95.26,
+        "positive": 475393,
+        "total_reviews": 499061,
         "url": "https://store.steampowered.com/app/322330"
       },
       {
@@ -4263,9 +4263,9 @@
         "release_date": "2024-01-18",
         "metacritic": 0,
         "recommendations": 331767,
-        "rating": 94.6,
-        "positive": 466192,
-        "total_reviews": 492803,
+        "rating": 94.1,
+        "positive": 358266,
+        "total_reviews": 380709,
         "url": "https://store.steampowered.com/app/1623730"
       },
       {
@@ -4284,9 +4284,9 @@
         "release_date": "2014-11-04",
         "metacritic": 0,
         "recommendations": 320555,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.31,
+        "positive": 334165,
+        "total_reviews": 343420,
         "url": "https://store.steampowered.com/app/250900"
       },
       {
@@ -4305,9 +4305,9 @@
         "release_date": "2020-06-03",
         "metacritic": 0,
         "recommendations": 310521,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 89.26,
+        "positive": 317074,
+        "total_reviews": 355238,
         "url": "https://store.steampowered.com/app/1172620"
       },
       {
@@ -4326,9 +4326,9 @@
         "release_date": "2018-08-08",
         "metacritic": 88,
         "recommendations": 305622,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 88.01,
+        "positive": 434239,
+        "total_reviews": 493390,
         "url": "https://store.steampowered.com/app/582010"
       },
       {
@@ -4347,9 +4347,9 @@
         "release_date": "2020-05-13",
         "metacritic": 85,
         "recommendations": 280232,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.26,
+        "positive": 333587,
+        "total_reviews": 343000,
         "url": "https://store.steampowered.com/app/548430"
       },
       {
@@ -4368,9 +4368,9 @@
         "release_date": "2016-08-12",
         "metacritic": 61,
         "recommendations": 273535,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 83.13,
+        "positive": 293332,
+        "total_reviews": 352858,
         "url": "https://store.steampowered.com/app/275850"
       },
       {
@@ -4389,9 +4389,9 @@
         "release_date": "2019-07-23",
         "metacritic": 0,
         "recommendations": 271304,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 98.57,
+        "positive": 277746,
+        "total_reviews": 281763,
         "url": "https://store.steampowered.com/app/1118200"
       },
       {
@@ -4410,9 +4410,9 @@
         "release_date": "2016-04-11",
         "metacritic": 89,
         "recommendations": 265581,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 94.33,
+        "positive": 390326,
+        "total_reviews": 413775,
         "url": "https://store.steampowered.com/app/374320"
       },
       {
@@ -4431,9 +4431,9 @@
         "release_date": "2020-09-17",
         "metacritic": 93,
         "recommendations": 262410,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 98.24,
+        "positive": 274829,
+        "total_reviews": 279741,
         "url": "https://store.steampowered.com/app/1145360"
       },
       {
@@ -4452,9 +4452,9 @@
         "release_date": "2024-07-25",
         "metacritic": 0,
         "recommendations": 261314,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 88.61,
+        "positive": 327889,
+        "total_reviews": 370046,
         "url": "https://store.steampowered.com/app/251570"
       },
       {
@@ -4494,9 +4494,9 @@
         "release_date": "2021-09-28",
         "metacritic": 0,
         "recommendations": 246475,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 68.6,
+        "positive": 196798,
+        "total_reviews": 286878,
         "url": "https://store.steampowered.com/app/1063730"
       },
       {
@@ -4515,9 +4515,9 @@
         "release_date": "2019-03-21",
         "metacritic": 88,
         "recommendations": 241127,
-        "rating": 95.2,
-        "positive": 340550,
-        "total_reviews": 357721,
+        "rating": 95.29,
+        "positive": 307041,
+        "total_reviews": 322234,
         "url": "https://store.steampowered.com/app/814380"
       },
       {
@@ -4536,9 +4536,9 @@
         "release_date": "2022-10-20",
         "metacritic": 86,
         "recommendations": 239826,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 98.46,
+        "positive": 246479,
+        "total_reviews": 250334,
         "url": "https://store.steampowered.com/app/1794680"
       },
       {
@@ -4557,9 +4557,9 @@
         "release_date": "2023-02-10",
         "metacritic": 83,
         "recommendations": 239189,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 90.22,
+        "positive": 289966,
+        "total_reviews": 321395,
         "url": "https://store.steampowered.com/app/990080"
       },
       {
@@ -4578,9 +4578,9 @@
         "release_date": "2024-02-22",
         "metacritic": 0,
         "recommendations": 236753,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 87.75,
+        "positive": 222495,
+        "total_reviews": 253546,
         "url": "https://store.steampowered.com/app/1326470"
       },
       {
@@ -4599,9 +4599,9 @@
         "release_date": "2020-06-18",
         "metacritic": 86,
         "recommendations": 231673,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.45,
+        "positive": 244524,
+        "total_reviews": 256188,
         "url": "https://store.steampowered.com/app/1237970"
       },
       {
@@ -4620,9 +4620,9 @@
         "release_date": "2023-12-13",
         "metacritic": 0,
         "recommendations": 226485,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 89.19,
+        "positive": 210654,
+        "total_reviews": 236196,
         "url": "https://store.steampowered.com/app/1144200"
       },
       {
@@ -4641,9 +4641,9 @@
         "release_date": "2020-10-22",
         "metacritic": 0,
         "recommendations": 224588,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 70.86,
+        "positive": 177352,
+        "total_reviews": 250288,
         "url": "https://store.steampowered.com/app/1238810"
       },
       {
@@ -4683,9 +4683,9 @@
         "release_date": "2013-09-12",
         "metacritic": 74,
         "recommendations": 221520,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 90.42,
+        "positive": 256128,
+        "total_reviews": 283264,
         "url": "https://store.steampowered.com/app/107410"
       },
       {
@@ -4704,9 +4704,9 @@
         "release_date": "2021-11-08",
         "metacritic": 0,
         "recommendations": 218935,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 88.62,
+        "positive": 199950,
+        "total_reviews": 225629,
         "url": "https://store.steampowered.com/app/1551360"
       },
       {
@@ -4725,9 +4725,9 @@
         "release_date": "2020-08-11",
         "metacritic": 85,
         "recommendations": 216874,
-        "rating": 93.8,
-        "positive": 332906,
-        "total_reviews": 354910,
+        "rating": 93.48,
+        "positive": 293127,
+        "total_reviews": 313577,
         "url": "https://store.steampowered.com/app/632360"
       },
       {
@@ -4746,9 +4746,9 @@
         "release_date": "2012-09-17",
         "metacritic": 89,
         "recommendations": 212812,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.44,
+        "positive": 272900,
+        "total_reviews": 295218,
         "url": "https://store.steampowered.com/app/49520"
       }
     ],
@@ -4769,9 +4769,9 @@
         "release_date": "2006-11-29",
         "metacritic": 0,
         "recommendations": 1013561,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.8,
+        "positive": 1122546,
+        "total_reviews": 1159707,
         "url": "https://store.steampowered.com/app/4000"
       },
       {
@@ -4790,9 +4790,9 @@
         "release_date": "2018-11-16",
         "metacritic": 0,
         "recommendations": 852300,
-        "rating": 97.6,
-        "positive": 997943,
-        "total_reviews": 1022483,
+        "rating": 98.04,
+        "positive": 876898,
+        "total_reviews": 894458,
         "url": "https://store.steampowered.com/app/431960"
       },
       {
@@ -4811,9 +4811,9 @@
         "release_date": "2018-11-16",
         "metacritic": 85,
         "recommendations": 623109,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 91.85,
+        "positive": 643681,
+        "total_reviews": 700785,
         "url": "https://store.steampowered.com/app/945360"
       },
       {
@@ -4853,9 +4853,9 @@
         "release_date": "2019-07-23",
         "metacritic": 0,
         "recommendations": 271304,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 98.57,
+        "positive": 277746,
+        "total_reviews": 281763,
         "url": "https://store.steampowered.com/app/1118200"
       },
       {
@@ -4895,9 +4895,9 @@
         "release_date": "2022-10-20",
         "metacritic": 86,
         "recommendations": 239826,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 98.46,
+        "positive": 246479,
+        "total_reviews": 250334,
         "url": "https://store.steampowered.com/app/1794680"
       },
       {
@@ -4916,9 +4916,9 @@
         "release_date": "2020-08-14",
         "metacritic": 90,
         "recommendations": 178941,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.01,
+        "positive": 208770,
+        "total_reviews": 215209,
         "url": "https://store.steampowered.com/app/427520"
       },
       {
@@ -4937,9 +4937,9 @@
         "release_date": "2016-07-22",
         "metacritic": 70,
         "recommendations": 166072,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 94.67,
+        "positive": 202253,
+        "total_reviews": 213640,
         "url": "https://store.steampowered.com/app/477160"
       },
       {
@@ -4958,9 +4958,9 @@
         "release_date": "2024-02-20",
         "metacritic": 90,
         "recommendations": 134993,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 98.02,
+        "positive": 150524,
+        "total_reviews": 153566,
         "url": "https://store.steampowered.com/app/2379780"
       },
       {
@@ -4979,9 +4979,9 @@
         "release_date": "2023-06-28",
         "metacritic": 90,
         "recommendations": 121675,
-        "rating": 96.5,
-        "positive": 158196,
-        "total_reviews": 163934,
+        "rating": 96.98,
+        "positive": 125422,
+        "total_reviews": 129331,
         "url": "https://store.steampowered.com/app/1868140"
       },
       {
@@ -5000,9 +5000,9 @@
         "release_date": "2016-07-22",
         "metacritic": 81,
         "recommendations": 120338,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.26,
+        "positive": 152150,
+        "total_reviews": 164906,
         "url": "https://store.steampowered.com/app/211820"
       },
       {
@@ -5021,9 +5021,9 @@
         "release_date": "2019-06-19",
         "metacritic": 0,
         "recommendations": 111093,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 90.0,
+        "positive": 107491,
+        "total_reviews": 119429,
         "url": "https://store.steampowered.com/app/774171"
       },
       {
@@ -5042,9 +5042,9 @@
         "release_date": "2012-09-26",
         "metacritic": 0,
         "recommendations": 99651,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.13,
+        "positive": 120733,
+        "total_reviews": 125598,
         "url": "https://store.steampowered.com/app/204360"
       },
       {
@@ -5063,9 +5063,9 @@
         "release_date": "2017-09-28",
         "metacritic": 0,
         "recommendations": 98390,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 93.53,
+        "positive": 114720,
+        "total_reviews": 122658,
         "url": "https://store.steampowered.com/app/674940"
       },
       {
@@ -5084,9 +5084,9 @@
         "release_date": "2023-06-23",
         "metacritic": 0,
         "recommendations": 95724,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.65,
+        "positive": 94525,
+        "total_reviews": 97801,
         "url": "https://store.steampowered.com/app/1942280"
       },
       {
@@ -5105,9 +5105,9 @@
         "release_date": "2022-08-12",
         "metacritic": 0,
         "recommendations": 81945,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.9,
+        "positive": 107786,
+        "total_reviews": 112392,
         "url": "https://store.steampowered.com/app/1817070"
       },
       {
@@ -5126,9 +5126,9 @@
         "release_date": "2020-06-18",
         "metacritic": 0,
         "recommendations": 81471,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 87.31,
+        "positive": 149064,
+        "total_reviews": 170727,
         "url": "https://store.steampowered.com/app/1222670"
       },
       {
@@ -5147,9 +5147,9 @@
         "release_date": "2021-09-01",
         "metacritic": 0,
         "recommendations": 77977,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.65,
+        "positive": 77218,
+        "total_reviews": 79892,
         "url": "https://store.steampowered.com/app/1454400"
       },
       {
@@ -5168,9 +5168,9 @@
         "release_date": "2019-11-05",
         "metacritic": 81,
         "recommendations": 74254,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 91.1,
+        "positive": 80029,
+        "total_reviews": 87849,
         "url": "https://store.steampowered.com/app/703080"
       },
       {
@@ -5189,9 +5189,9 @@
         "release_date": "2025-06-19",
         "metacritic": 0,
         "recommendations": 68129,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 93.8,
+        "positive": 64104,
+        "total_reviews": 68341,
         "url": "https://store.steampowered.com/app/2670630"
       },
       {
@@ -5210,9 +5210,9 @@
         "release_date": "2008-12-19",
         "metacritic": 84,
         "recommendations": 61843,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.44,
+        "positive": 61124,
+        "total_reviews": 66120,
         "url": "https://store.steampowered.com/app/17390"
       },
       {
@@ -5231,9 +5231,9 @@
         "release_date": "2016-11-17",
         "metacritic": 84,
         "recommendations": 58392,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 91.25,
+        "positive": 64131,
+        "total_reviews": 70278,
         "url": "https://store.steampowered.com/app/493340"
       },
       {
@@ -5273,9 +5273,9 @@
         "release_date": "2018-08-07",
         "metacritic": 81,
         "recommendations": 54926,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 90.65,
+        "positive": 65992,
+        "total_reviews": 72801,
         "url": "https://store.steampowered.com/app/728880"
       },
       {
@@ -5294,9 +5294,9 @@
         "release_date": "2014-05-15",
         "metacritic": 85,
         "recommendations": 54865,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.21,
+        "positive": 69617,
+        "total_reviews": 71614,
         "url": "https://store.steampowered.com/app/238460"
       },
       {
@@ -5315,9 +5315,9 @@
         "release_date": "2014-04-01",
         "metacritic": 62,
         "recommendations": 53408,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 90.77,
+        "positive": 62249,
+        "total_reviews": 68580,
         "url": "https://store.steampowered.com/app/265930"
       },
       {
@@ -5336,9 +5336,9 @@
         "release_date": "2016-12-08",
         "metacritic": 80,
         "recommendations": 51759,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 98.29,
+        "positive": 52785,
+        "total_reviews": 53704,
         "url": "https://store.steampowered.com/app/420530"
       },
       {
@@ -5357,9 +5357,9 @@
         "release_date": "2016-02-18",
         "metacritic": 0,
         "recommendations": 50750,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 94.44,
+        "positive": 52571,
+        "total_reviews": 55664,
         "url": "https://store.steampowered.com/app/246620"
       },
       {
@@ -5378,9 +5378,9 @@
         "release_date": "2017-12-12",
         "metacritic": 0,
         "recommendations": 49482,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 85.06,
+        "positive": 51267,
+        "total_reviews": 60270,
         "url": "https://store.steampowered.com/app/285900"
       },
       {
@@ -5399,9 +5399,9 @@
         "release_date": "2018-09-20",
         "metacritic": 0,
         "recommendations": 49409,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 69.84,
+        "positive": 42350,
+        "total_reviews": 60637,
         "url": "https://store.steampowered.com/app/838350"
       },
       {
@@ -5441,9 +5441,9 @@
         "release_date": "2023-09-20",
         "metacritic": 0,
         "recommendations": 48635,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 78.4,
+        "positive": 50198,
+        "total_reviews": 64032,
         "url": "https://store.steampowered.com/app/1260320"
       },
       {
@@ -5462,9 +5462,9 @@
         "release_date": "2015-10-15",
         "metacritic": 83,
         "recommendations": 48168,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.94,
+        "positive": 57080,
+        "total_reviews": 58880,
         "url": "https://store.steampowered.com/app/274190"
       },
       {
@@ -5483,9 +5483,9 @@
         "release_date": "2024-06-19",
         "metacritic": 0,
         "recommendations": 47259,
-        "rating": 89.6,
-        "positive": 57996,
-        "total_reviews": 64728,
+        "rating": 90.67,
+        "positive": 48180,
+        "total_reviews": 53138,
         "url": "https://store.steampowered.com/app/2567870"
       },
       {
@@ -5525,9 +5525,9 @@
         "release_date": "2015-06-05",
         "metacritic": 0,
         "recommendations": 45005,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 94.45,
+        "positive": 66735,
+        "total_reviews": 70660,
         "url": "https://store.steampowered.com/app/286160"
       },
       {
@@ -5546,9 +5546,9 @@
         "release_date": "2020-05-19",
         "metacritic": 0,
         "recommendations": 45005,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 88.11,
+        "positive": 59105,
+        "total_reviews": 67080,
         "url": "https://store.steampowered.com/app/431240"
       },
       {
@@ -5567,9 +5567,9 @@
         "release_date": "2024-10-02",
         "metacritic": 0,
         "recommendations": 44252,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 91.33,
+        "positive": 44341,
+        "total_reviews": 48550,
         "url": "https://store.steampowered.com/app/3097560"
       },
       {
@@ -5588,9 +5588,9 @@
         "release_date": "2019-09-25",
         "metacritic": 0,
         "recommendations": 43961,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 90.16,
+        "positive": 42761,
+        "total_reviews": 47427,
         "url": "https://store.steampowered.com/app/1017180"
       },
       {
@@ -5609,9 +5609,9 @@
         "release_date": "2018-09-20",
         "metacritic": 0,
         "recommendations": 43469,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 88.82,
+        "positive": 47800,
+        "total_reviews": 53814,
         "url": "https://store.steampowered.com/app/880940"
       },
       {
@@ -5630,9 +5630,9 @@
         "release_date": "2023-04-20",
         "metacritic": 0,
         "recommendations": 40827,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.84,
+        "positive": 40290,
+        "total_reviews": 41180,
         "url": "https://store.steampowered.com/app/1669980"
       },
       {
@@ -5693,9 +5693,9 @@
         "release_date": "2017-01-03",
         "metacritic": 0,
         "recommendations": 40252,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 72.16,
+        "positive": 37173,
+        "total_reviews": 51518,
         "url": "https://store.steampowered.com/app/470220"
       },
       {
@@ -5714,9 +5714,9 @@
         "release_date": "2013-08-29",
         "metacritic": 68,
         "recommendations": 38998,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.37,
+        "positive": 34126,
+        "total_reviews": 35783,
         "url": "https://store.steampowered.com/app/239820"
       },
       {
@@ -5735,9 +5735,9 @@
         "release_date": "2016-03-04",
         "metacritic": 0,
         "recommendations": 37861,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.9,
+        "positive": 46319,
+        "total_reviews": 48300,
         "url": "https://store.steampowered.com/app/386940"
       },
       {
@@ -5756,9 +5756,9 @@
         "release_date": "2019-01-15",
         "metacritic": 73,
         "recommendations": 34221,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 91.68,
+        "positive": 39671,
+        "total_reviews": 43270,
         "url": "https://store.steampowered.com/app/666140"
       },
       {
@@ -5798,9 +5798,9 @@
         "release_date": "2019-02-22",
         "metacritic": 0,
         "recommendations": 32078,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 86.52,
+        "positive": 36071,
+        "total_reviews": 41691,
         "url": "https://store.steampowered.com/app/967050"
       }
     ],
@@ -5821,9 +5821,9 @@
         "release_date": "2015-04-13",
         "metacritic": 96,
         "recommendations": 1835735,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 87.41,
+        "positive": 1739980,
+        "total_reviews": 1990556,
         "url": "https://store.steampowered.com/app/271590"
       },
       {
@@ -5905,9 +5905,9 @@
         "release_date": "2024-08-19",
         "metacritic": 0,
         "recommendations": 855328,
-        "rating": 96.5,
-        "positive": 1171324,
-        "total_reviews": 1213807,
+        "rating": 96.66,
+        "positive": 1111720,
+        "total_reviews": 1150098,
         "url": "https://store.steampowered.com/app/2358720"
       },
       {
@@ -5926,9 +5926,9 @@
         "release_date": "2019-12-05",
         "metacritic": 93,
         "recommendations": 712874,
-        "rating": 92.5,
-        "positive": 858344,
-        "total_reviews": 927940,
+        "rating": 92.25,
+        "positive": 676667,
+        "total_reviews": 733542,
         "url": "https://store.steampowered.com/app/1174180"
       },
       {
@@ -5947,9 +5947,9 @@
         "release_date": "2023-08-03",
         "metacritic": 96,
         "recommendations": 687533,
-        "rating": 96.8,
-        "positive": 834479,
-        "total_reviews": 862065,
+        "rating": 96.85,
+        "positive": 736688,
+        "total_reviews": 760662,
         "url": "https://store.steampowered.com/app/1086940"
       },
       {
@@ -5968,9 +5968,9 @@
         "release_date": "2017-08-27",
         "metacritic": 70,
         "recommendations": 560232,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 83.84,
+        "positive": 612177,
+        "total_reviews": 730170,
         "url": "https://store.steampowered.com/app/346110"
       },
       {
@@ -5989,9 +5989,9 @@
         "release_date": "2018-04-30",
         "metacritic": 83,
         "recommendations": 543864,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.54,
+        "positive": 599805,
+        "total_reviews": 627791,
         "url": "https://store.steampowered.com/app/242760"
       },
       {
@@ -6010,9 +6010,9 @@
         "release_date": "2021-02-02",
         "metacritic": 0,
         "recommendations": 430172,
-        "rating": 93.5,
-        "positive": 523752,
-        "total_reviews": 560163,
+        "rating": 94.32,
+        "positive": 471451,
+        "total_reviews": 499828,
         "url": "https://store.steampowered.com/app/892970"
       },
       {
@@ -6031,9 +6031,9 @@
         "release_date": "2023-10-23",
         "metacritic": 0,
         "recommendations": 397515,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.18,
+        "positive": 473422,
+        "total_reviews": 487160,
         "url": "https://store.steampowered.com/app/1966720"
       },
       {
@@ -6052,9 +6052,9 @@
         "release_date": "2017-02-24",
         "metacritic": 87,
         "recommendations": 392027,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.04,
+        "positive": 403641,
+        "total_reviews": 415946,
         "url": "https://store.steampowered.com/app/367520"
       },
       {
@@ -6073,9 +6073,9 @@
         "release_date": "2011-04-18",
         "metacritic": 95,
         "recommendations": 367496,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 98.69,
+        "positive": 427835,
+        "total_reviews": 433510,
         "url": "https://store.steampowered.com/app/620"
       },
       {
@@ -6094,9 +6094,9 @@
         "release_date": "2018-12-13",
         "metacritic": 0,
         "recommendations": 362775,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 76.78,
+        "positive": 330349,
+        "total_reviews": 430252,
         "url": "https://store.steampowered.com/app/221100"
       },
       {
@@ -6115,9 +6115,9 @@
         "release_date": "2016-04-21",
         "metacritic": 83,
         "recommendations": 348518,
-        "rating": 94.9,
-        "positive": 516748,
-        "total_reviews": 544518,
+        "rating": 95.26,
+        "positive": 475393,
+        "total_reviews": 499061,
         "url": "https://store.steampowered.com/app/322330"
       },
       {
@@ -6136,9 +6136,9 @@
         "release_date": "2024-01-18",
         "metacritic": 0,
         "recommendations": 331767,
-        "rating": 94.6,
-        "positive": 466192,
-        "total_reviews": 492803,
+        "rating": 94.1,
+        "positive": 358266,
+        "total_reviews": 380709,
         "url": "https://store.steampowered.com/app/1623730"
       },
       {
@@ -6157,9 +6157,9 @@
         "release_date": "2020-06-03",
         "metacritic": 0,
         "recommendations": 310521,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 89.26,
+        "positive": 317074,
+        "total_reviews": 355238,
         "url": "https://store.steampowered.com/app/1172620"
       },
       {
@@ -6178,9 +6178,9 @@
         "release_date": "2022-06-20",
         "metacritic": 0,
         "recommendations": 301606,
-        "rating": 93.0,
-        "positive": 353243,
-        "total_reviews": 379831,
+        "rating": 93.31,
+        "positive": 323198,
+        "total_reviews": 346359,
         "url": "https://store.steampowered.com/app/648800"
       },
       {
@@ -6199,9 +6199,9 @@
         "release_date": "2018-01-23",
         "metacritic": 87,
         "recommendations": 291937,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.05,
+        "positive": 304449,
+        "total_reviews": 313707,
         "url": "https://store.steampowered.com/app/264710"
       },
       {
@@ -6220,9 +6220,9 @@
         "release_date": "2016-08-12",
         "metacritic": 61,
         "recommendations": 273535,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 83.13,
+        "positive": 293332,
+        "total_reviews": 352858,
         "url": "https://store.steampowered.com/app/275850"
       },
       {
@@ -6241,9 +6241,9 @@
         "release_date": "2024-07-25",
         "metacritic": 0,
         "recommendations": 261314,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 88.61,
+        "positive": 327889,
+        "total_reviews": 370046,
         "url": "https://store.steampowered.com/app/251570"
       },
       {
@@ -6283,9 +6283,9 @@
         "release_date": "2021-09-28",
         "metacritic": 0,
         "recommendations": 246475,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 68.6,
+        "positive": 196798,
+        "total_reviews": 286878,
         "url": "https://store.steampowered.com/app/1063730"
       },
       {
@@ -6304,9 +6304,9 @@
         "release_date": "2019-03-21",
         "metacritic": 88,
         "recommendations": 241127,
-        "rating": 95.2,
-        "positive": 340550,
-        "total_reviews": 357721,
+        "rating": 95.29,
+        "positive": 307041,
+        "total_reviews": 322234,
         "url": "https://store.steampowered.com/app/814380"
       },
       {
@@ -6325,9 +6325,9 @@
         "release_date": "2023-02-10",
         "metacritic": 83,
         "recommendations": 239189,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 90.22,
+        "positive": 289966,
+        "total_reviews": 321395,
         "url": "https://store.steampowered.com/app/990080"
       },
       {
@@ -6346,9 +6346,9 @@
         "release_date": "2024-02-22",
         "metacritic": 0,
         "recommendations": 236753,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 87.75,
+        "positive": 222495,
+        "total_reviews": 253546,
         "url": "https://store.steampowered.com/app/1326470"
       },
       {
@@ -6367,9 +6367,9 @@
         "release_date": "2023-12-13",
         "metacritic": 0,
         "recommendations": 226485,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 89.19,
+        "positive": 210654,
+        "total_reviews": 236196,
         "url": "https://store.steampowered.com/app/1144200"
       },
       {
@@ -6388,9 +6388,9 @@
         "release_date": "2021-11-08",
         "metacritic": 0,
         "recommendations": 218935,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 88.62,
+        "positive": 199950,
+        "total_reviews": 225629,
         "url": "https://store.steampowered.com/app/1551360"
       },
       {
@@ -6430,9 +6430,9 @@
         "release_date": "2021-08-11",
         "metacritic": 0,
         "recommendations": 196687,
-        "rating": 73.3,
-        "positive": 222297,
-        "total_reviews": 303270,
+        "rating": 69.54,
+        "positive": 225960,
+        "total_reviews": 324927,
         "url": "https://store.steampowered.com/app/1203220"
       },
       {
@@ -6451,9 +6451,9 @@
         "release_date": "2023-05-26",
         "metacritic": 0,
         "recommendations": 192706,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 53.29,
+        "positive": 121020,
+        "total_reviews": 227104,
         "url": "https://store.steampowered.com/app/1468810"
       },
       {
@@ -6472,9 +6472,9 @@
         "release_date": "2021-03-25",
         "metacritic": 89,
         "recommendations": 189002,
-        "rating": 95.4,
-        "positive": 259540,
-        "total_reviews": 272054,
+        "rating": 95.26,
+        "positive": 208042,
+        "total_reviews": 218383,
         "url": "https://store.steampowered.com/app/1426210"
       },
       {
@@ -6514,9 +6514,9 @@
         "release_date": "2017-09-14",
         "metacritic": 93,
         "recommendations": 168260,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.81,
+        "positive": 182166,
+        "total_reviews": 190124,
         "url": "https://store.steampowered.com/app/435150"
       },
       {
@@ -6535,9 +6535,9 @@
         "release_date": "2016-07-22",
         "metacritic": 70,
         "recommendations": 166072,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 94.67,
+        "positive": 202253,
+        "total_reviews": 213640,
         "url": "https://store.steampowered.com/app/477160"
       },
       {
@@ -6556,9 +6556,9 @@
         "release_date": "2018-03-26",
         "metacritic": 0,
         "recommendations": 161508,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 80.92,
+        "positive": 140377,
+        "total_reviews": 173477,
         "url": "https://store.steampowered.com/app/552520"
       },
       {
@@ -6577,9 +6577,9 @@
         "release_date": "2018-10-05",
         "metacritic": 0,
         "recommendations": 159047,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 88.91,
+        "positive": 153091,
+        "total_reviews": 172193,
         "url": "https://store.steampowered.com/app/812140"
       },
       {
@@ -6598,9 +6598,9 @@
         "release_date": "2020-03-24",
         "metacritic": 90,
         "recommendations": 158476,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 82.48,
+        "positive": 144493,
+        "total_reviews": 175184,
         "url": "https://store.steampowered.com/app/12210"
       },
       {
@@ -6619,9 +6619,9 @@
         "release_date": "2013-03-04",
         "metacritic": 86,
         "recommendations": 158256,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.09,
+        "positive": 238239,
+        "total_reviews": 247930,
         "url": "https://store.steampowered.com/app/203160"
       },
       {
@@ -6640,9 +6640,9 @@
         "release_date": "2020-06-18",
         "metacritic": 80,
         "recommendations": 154344,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.77,
+        "positive": 162047,
+        "total_reviews": 169199,
         "url": "https://store.steampowered.com/app/1222140"
       },
       {
@@ -6682,9 +6682,9 @@
         "release_date": "UNKNOWN",
         "metacritic": 0,
         "recommendations": 150466,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 79.11,
+        "positive": 154122,
+        "total_reviews": 194830,
         "url": "https://store.steampowered.com/app/534380"
       },
       {
@@ -6703,9 +6703,9 @@
         "release_date": "2018-08-06",
         "metacritic": 89,
         "recommendations": 146528,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.08,
+        "positive": 163549,
+        "total_reviews": 168464,
         "url": "https://store.steampowered.com/app/588650"
       },
       {
@@ -6724,9 +6724,9 @@
         "release_date": "2015-11-05",
         "metacritic": 73,
         "recommendations": 143885,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 84.32,
+        "positive": 181306,
+        "total_reviews": 215026,
         "url": "https://store.steampowered.com/app/311210"
       },
       {
@@ -6745,9 +6745,9 @@
         "release_date": "2018-02-28",
         "metacritic": 70,
         "recommendations": 143745,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 55.75,
+        "positive": 113729,
+        "total_reviews": 204013,
         "url": "https://store.steampowered.com/app/433850"
       },
       {
@@ -6766,9 +6766,9 @@
         "release_date": "2022-07-19",
         "metacritic": 82,
         "recommendations": 142871,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.26,
+        "positive": 152312,
+        "total_reviews": 156607,
         "url": "https://store.steampowered.com/app/1332010"
       },
       {
@@ -6787,9 +6787,9 @@
         "release_date": "2019-11-14",
         "metacritic": 81,
         "recommendations": 140583,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 88.59,
+        "positive": 140485,
+        "total_reviews": 158579,
         "url": "https://store.steampowered.com/app/1172380"
       },
       {
@@ -6829,9 +6829,9 @@
         "release_date": "2019-10-01",
         "metacritic": 83,
         "recommendations": 130089,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 79.58,
+        "positive": 497891,
+        "total_reviews": 625616,
         "url": "https://store.steampowered.com/app/1085660"
       },
       {
@@ -6850,9 +6850,9 @@
         "release_date": "2017-05-22",
         "metacritic": 80,
         "recommendations": 129330,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 81.43,
+        "positive": 125497,
+        "total_reviews": 154113,
         "url": "https://store.steampowered.com/app/306130"
       }
     ],
@@ -6915,9 +6915,9 @@
         "release_date": "2006-11-29",
         "metacritic": 0,
         "recommendations": 1013561,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.8,
+        "positive": 1122546,
+        "total_reviews": 1159707,
         "url": "https://store.steampowered.com/app/4000"
       },
       {
@@ -6936,9 +6936,9 @@
         "release_date": "2018-11-16",
         "metacritic": 0,
         "recommendations": 852300,
-        "rating": 97.6,
-        "positive": 997943,
-        "total_reviews": 1022483,
+        "rating": 98.04,
+        "positive": 876898,
+        "total_reviews": 894458,
         "url": "https://store.steampowered.com/app/431960"
       },
       {
@@ -6957,9 +6957,9 @@
         "release_date": "2016-02-26",
         "metacritic": 89,
         "recommendations": 790798,
-        "rating": 98.5,
-        "positive": 1029310,
-        "total_reviews": 1044985,
+        "rating": 98.44,
+        "positive": 872384,
+        "total_reviews": 886195,
         "url": "https://store.steampowered.com/app/413150"
       },
       {
@@ -6999,9 +6999,9 @@
         "release_date": "2020-09-18",
         "metacritic": 0,
         "recommendations": 638550,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.82,
+        "positive": 736611,
+        "total_reviews": 768779,
         "url": "https://store.steampowered.com/app/739630"
       },
       {
@@ -7020,9 +7020,9 @@
         "release_date": "2017-08-27",
         "metacritic": 70,
         "recommendations": 560232,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 83.84,
+        "positive": 612177,
+        "total_reviews": 730170,
         "url": "https://store.steampowered.com/app/346110"
       },
       {
@@ -7041,9 +7041,9 @@
         "release_date": "2018-04-30",
         "metacritic": 83,
         "recommendations": 543864,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.54,
+        "positive": 599805,
+        "total_reviews": 627791,
         "url": "https://store.steampowered.com/app/242760"
       },
       {
@@ -7062,9 +7062,9 @@
         "release_date": "2015-07-06",
         "metacritic": 86,
         "recommendations": 434286,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 87.35,
+        "positive": 509445,
+        "total_reviews": 583220,
         "url": "https://store.steampowered.com/app/252950"
       },
       {
@@ -7083,9 +7083,9 @@
         "release_date": "2021-02-02",
         "metacritic": 0,
         "recommendations": 430172,
-        "rating": 93.5,
-        "positive": 523752,
-        "total_reviews": 560163,
+        "rating": 94.32,
+        "positive": 471451,
+        "total_reviews": 499828,
         "url": "https://store.steampowered.com/app/892970"
       },
       {
@@ -7104,9 +7104,9 @@
         "release_date": "2014-12-22",
         "metacritic": 0,
         "recommendations": 421324,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 93.28,
+        "positive": 401026,
+        "total_reviews": 429921,
         "url": "https://store.steampowered.com/app/322170"
       },
       {
@@ -7146,9 +7146,9 @@
         "release_date": "2023-10-23",
         "metacritic": 0,
         "recommendations": 397515,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.18,
+        "positive": 473422,
+        "total_reviews": 487160,
         "url": "https://store.steampowered.com/app/1966720"
       },
       {
@@ -7167,9 +7167,9 @@
         "release_date": "2017-02-24",
         "metacritic": 87,
         "recommendations": 392027,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.04,
+        "positive": 403641,
+        "total_reviews": 415946,
         "url": "https://store.steampowered.com/app/367520"
       },
       {
@@ -7188,9 +7188,9 @@
         "release_date": "2016-04-21",
         "metacritic": 83,
         "recommendations": 348518,
-        "rating": 94.9,
-        "positive": 516748,
-        "total_reviews": 544518,
+        "rating": 95.26,
+        "positive": 475393,
+        "total_reviews": 499061,
         "url": "https://store.steampowered.com/app/322330"
       },
       {
@@ -7209,9 +7209,9 @@
         "release_date": "2024-01-18",
         "metacritic": 0,
         "recommendations": 331767,
-        "rating": 94.6,
-        "positive": 466192,
-        "total_reviews": 492803,
+        "rating": 94.1,
+        "positive": 358266,
+        "total_reviews": 380709,
         "url": "https://store.steampowered.com/app/1623730"
       },
       {
@@ -7230,9 +7230,9 @@
         "release_date": "2022-06-20",
         "metacritic": 0,
         "recommendations": 301606,
-        "rating": 93.0,
-        "positive": 353243,
-        "total_reviews": 379831,
+        "rating": 93.31,
+        "positive": 323198,
+        "total_reviews": 346359,
         "url": "https://store.steampowered.com/app/648800"
       },
       {
@@ -7251,9 +7251,9 @@
         "release_date": "2013-11-08",
         "metacritic": 0,
         "recommendations": 298497,
-        "rating": 93.7,
-        "positive": 457902,
-        "total_reviews": 488689,
+        "rating": 94.19,
+        "positive": 355171,
+        "total_reviews": 377063,
         "url": "https://store.steampowered.com/app/108600"
       },
       {
@@ -7272,9 +7272,9 @@
         "release_date": "2018-01-23",
         "metacritic": 87,
         "recommendations": 291937,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.05,
+        "positive": 304449,
+        "total_reviews": 313707,
         "url": "https://store.steampowered.com/app/264710"
       },
       {
@@ -7293,9 +7293,9 @@
         "release_date": "2019-07-23",
         "metacritic": 0,
         "recommendations": 271304,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 98.57,
+        "positive": 277746,
+        "total_reviews": 281763,
         "url": "https://store.steampowered.com/app/1118200"
       },
       {
@@ -7314,9 +7314,9 @@
         "release_date": "2015-09-15",
         "metacritic": 92,
         "recommendations": 263170,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.76,
+        "positive": 264082,
+        "total_reviews": 272932,
         "url": "https://store.steampowered.com/app/391540"
       },
       {
@@ -7335,9 +7335,9 @@
         "release_date": "2020-09-17",
         "metacritic": 93,
         "recommendations": 262410,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 98.24,
+        "positive": 274829,
+        "total_reviews": 279741,
         "url": "https://store.steampowered.com/app/1145360"
       },
       {
@@ -7356,9 +7356,9 @@
         "release_date": "2024-07-25",
         "metacritic": 0,
         "recommendations": 261314,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 88.61,
+        "positive": 327889,
+        "total_reviews": 370046,
         "url": "https://store.steampowered.com/app/251570"
       },
       {
@@ -7377,9 +7377,9 @@
         "release_date": "2022-10-20",
         "metacritic": 86,
         "recommendations": 239826,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 98.46,
+        "positive": 246479,
+        "total_reviews": 250334,
         "url": "https://store.steampowered.com/app/1794680"
       },
       {
@@ -7398,9 +7398,9 @@
         "release_date": "2024-02-22",
         "metacritic": 0,
         "recommendations": 236753,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 87.75,
+        "positive": 222495,
+        "total_reviews": 253546,
         "url": "https://store.steampowered.com/app/1326470"
       },
       {
@@ -7419,9 +7419,9 @@
         "release_date": "2023-12-13",
         "metacritic": 0,
         "recommendations": 226485,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 89.19,
+        "positive": 210654,
+        "total_reviews": 236196,
         "url": "https://store.steampowered.com/app/1144200"
       },
       {
@@ -7440,9 +7440,9 @@
         "release_date": "2020-08-11",
         "metacritic": 85,
         "recommendations": 216874,
-        "rating": 93.8,
-        "positive": 332906,
-        "total_reviews": 354910,
+        "rating": 93.48,
+        "positive": 293127,
+        "total_reviews": 313577,
         "url": "https://store.steampowered.com/app/632360"
       },
       {
@@ -7461,9 +7461,9 @@
         "release_date": "2025-03-24",
         "metacritic": 0,
         "recommendations": 212737,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 98.41,
+        "positive": 200803,
+        "total_reviews": 204041,
         "url": "https://store.steampowered.com/app/3164500"
       },
       {
@@ -7482,9 +7482,9 @@
         "release_date": "2022-10-25",
         "metacritic": 77,
         "recommendations": 209060,
-        "rating": 87.7,
-        "positive": 262579,
-        "total_reviews": 299406,
+        "rating": 87.88,
+        "positive": 232360,
+        "total_reviews": 264391,
         "url": "https://store.steampowered.com/app/261550"
       },
       {
@@ -7524,9 +7524,9 @@
         "release_date": "2023-05-26",
         "metacritic": 0,
         "recommendations": 192706,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 53.29,
+        "positive": 121020,
+        "total_reviews": 227104,
         "url": "https://store.steampowered.com/app/1468810"
       },
       {
@@ -7545,9 +7545,9 @@
         "release_date": "2021-03-25",
         "metacritic": 89,
         "recommendations": 189002,
-        "rating": 95.4,
-        "positive": 259540,
-        "total_reviews": 272054,
+        "rating": 95.26,
+        "positive": 208042,
+        "total_reviews": 218383,
         "url": "https://store.steampowered.com/app/1426210"
       },
       {
@@ -7587,9 +7587,9 @@
         "release_date": "2020-08-14",
         "metacritic": 90,
         "recommendations": 178941,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.01,
+        "positive": 208770,
+        "total_reviews": 215209,
         "url": "https://store.steampowered.com/app/427520"
       },
       {
@@ -7608,9 +7608,9 @@
         "release_date": "2017-09-29",
         "metacritic": 88,
         "recommendations": 172864,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.28,
+        "positive": 179894,
+        "total_reviews": 186835,
         "url": "https://store.steampowered.com/app/268910"
       },
       {
@@ -7629,9 +7629,9 @@
         "release_date": "2016-07-22",
         "metacritic": 70,
         "recommendations": 166072,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 94.67,
+        "positive": 202253,
+        "total_reviews": 213640,
         "url": "https://store.steampowered.com/app/477160"
       },
       {
@@ -7650,9 +7650,9 @@
         "release_date": "2019-01-23",
         "metacritic": 89,
         "recommendations": 162961,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.79,
+        "positive": 178250,
+        "total_reviews": 182277,
         "url": "https://store.steampowered.com/app/646570"
       },
       {
@@ -7671,9 +7671,9 @@
         "release_date": "2020-09-03",
         "metacritic": 0,
         "recommendations": 161861,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.71,
+        "positive": 165867,
+        "total_reviews": 169751,
         "url": "https://store.steampowered.com/app/1229490"
       },
       {
@@ -7692,9 +7692,9 @@
         "release_date": "2020-09-23",
         "metacritic": 0,
         "recommendations": 160423,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 83.16,
+        "positive": 175088,
+        "total_reviews": 210551,
         "url": "https://store.steampowered.com/app/393380"
       },
       {
@@ -7713,9 +7713,9 @@
         "release_date": "2016-02-02",
         "metacritic": 76,
         "recommendations": 150705,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.83,
+        "positive": 169735,
+        "total_reviews": 175287,
         "url": "https://store.steampowered.com/app/270880"
       },
       {
@@ -7734,9 +7734,9 @@
         "release_date": "2018-08-06",
         "metacritic": 89,
         "recommendations": 146528,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.08,
+        "positive": 163549,
+        "total_reviews": 168464,
         "url": "https://store.steampowered.com/app/588650"
       },
       {
@@ -7755,9 +7755,9 @@
         "release_date": "2022-07-19",
         "metacritic": 82,
         "recommendations": 142871,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.26,
+        "positive": 152312,
+        "total_reviews": 156607,
         "url": "https://store.steampowered.com/app/1332010"
       },
       {
@@ -7776,9 +7776,9 @@
         "release_date": "2024-02-20",
         "metacritic": 90,
         "recommendations": 134993,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 98.02,
+        "positive": 150524,
+        "total_reviews": 153566,
         "url": "https://store.steampowered.com/app/2379780"
       },
       {
@@ -7797,9 +7797,9 @@
         "release_date": "2016-01-19",
         "metacritic": 84,
         "recommendations": 131748,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 91.68,
+        "positive": 137026,
+        "total_reviews": 149456,
         "url": "https://store.steampowered.com/app/262060"
       },
       {
@@ -7818,9 +7818,9 @@
         "release_date": "2021-04-01",
         "metacritic": 0,
         "recommendations": 129656,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.82,
+        "positive": 132974,
+        "total_reviews": 135943,
         "url": "https://store.steampowered.com/app/508440"
       },
       {
@@ -7839,9 +7839,9 @@
         "release_date": "2017-08-01",
         "metacritic": 81,
         "recommendations": 125574,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.95,
+        "positive": 135271,
+        "total_reviews": 138097,
         "url": "https://store.steampowered.com/app/433340"
       },
       {
@@ -7860,9 +7860,9 @@
         "release_date": "2020-03-06",
         "metacritic": 84,
         "recommendations": 124021,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.2,
+        "positive": 121562,
+        "total_reviews": 127693,
         "url": "https://store.steampowered.com/app/362890"
       },
       {
@@ -7881,9 +7881,9 @@
         "release_date": "UNKNOWN",
         "metacritic": 85,
         "recommendations": 123702,
-        "rating": 96.7,
-        "positive": 139673,
-        "total_reviews": 144439,
+        "rating": 96.75,
+        "positive": 124220,
+        "total_reviews": 128390,
         "url": "https://store.steampowered.com/app/457140"
       },
       {
@@ -7902,9 +7902,9 @@
         "release_date": "2021-10-19",
         "metacritic": 85,
         "recommendations": 123436,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.89,
+        "positive": 127792,
+        "total_reviews": 131890,
         "url": "https://store.steampowered.com/app/1092790"
       }
     ],
@@ -7925,9 +7925,9 @@
         "release_date": "2006-11-29",
         "metacritic": 0,
         "recommendations": 1013561,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.8,
+        "positive": 1122546,
+        "total_reviews": 1159707,
         "url": "https://store.steampowered.com/app/4000"
       },
       {
@@ -7946,9 +7946,9 @@
         "release_date": "2016-02-26",
         "metacritic": 89,
         "recommendations": 790798,
-        "rating": 98.5,
-        "positive": 1029310,
-        "total_reviews": 1044985,
+        "rating": 98.44,
+        "positive": 872384,
+        "total_reviews": 886195,
         "url": "https://store.steampowered.com/app/413150"
       },
       {
@@ -7988,9 +7988,9 @@
         "release_date": "2018-04-30",
         "metacritic": 83,
         "recommendations": 543864,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.54,
+        "positive": 599805,
+        "total_reviews": 627791,
         "url": "https://store.steampowered.com/app/242760"
       },
       {
@@ -8009,9 +8009,9 @@
         "release_date": "2016-04-21",
         "metacritic": 83,
         "recommendations": 348518,
-        "rating": 94.9,
-        "positive": 516748,
-        "total_reviews": 544518,
+        "rating": 95.26,
+        "positive": 475393,
+        "total_reviews": 499061,
         "url": "https://store.steampowered.com/app/322330"
       },
       {
@@ -8030,9 +8030,9 @@
         "release_date": "UNKNOWN",
         "metacritic": 0,
         "recommendations": 311820,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.39,
+        "positive": 313873,
+        "total_reviews": 322278,
         "url": "https://store.steampowered.com/app/284160"
       },
       {
@@ -8051,9 +8051,9 @@
         "release_date": "2022-06-20",
         "metacritic": 0,
         "recommendations": 301606,
-        "rating": 93.0,
-        "positive": 353243,
-        "total_reviews": 379831,
+        "rating": 93.31,
+        "positive": 323198,
+        "total_reviews": 346359,
         "url": "https://store.steampowered.com/app/648800"
       },
       {
@@ -8072,9 +8072,9 @@
         "release_date": "2013-11-08",
         "metacritic": 0,
         "recommendations": 298497,
-        "rating": 93.7,
-        "positive": 457902,
-        "total_reviews": 488689,
+        "rating": 94.19,
+        "positive": 355171,
+        "total_reviews": 377063,
         "url": "https://store.steampowered.com/app/108600"
       },
       {
@@ -8093,9 +8093,9 @@
         "release_date": "2019-07-23",
         "metacritic": 0,
         "recommendations": 271304,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 98.57,
+        "positive": 277746,
+        "total_reviews": 281763,
         "url": "https://store.steampowered.com/app/1118200"
       },
       {
@@ -8114,9 +8114,9 @@
         "release_date": "2024-07-25",
         "metacritic": 0,
         "recommendations": 261314,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 88.61,
+        "positive": 327889,
+        "total_reviews": 370046,
         "url": "https://store.steampowered.com/app/251570"
       },
       {
@@ -8135,9 +8135,9 @@
         "release_date": "UNKNOWN",
         "metacritic": 83,
         "recommendations": 253353,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 89.19,
+        "positive": 305168,
+        "total_reviews": 342150,
         "url": "https://store.steampowered.com/app/394360"
       },
       {
@@ -8156,9 +8156,9 @@
         "release_date": "2024-02-22",
         "metacritic": 0,
         "recommendations": 236753,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 87.75,
+        "positive": 222495,
+        "total_reviews": 253546,
         "url": "https://store.steampowered.com/app/1326470"
       },
       {
@@ -8177,9 +8177,9 @@
         "release_date": "2013-09-12",
         "metacritic": 74,
         "recommendations": 221520,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 90.42,
+        "positive": 256128,
+        "total_reviews": 283264,
         "url": "https://store.steampowered.com/app/107410"
       },
       {
@@ -8198,9 +8198,9 @@
         "release_date": "2021-11-08",
         "metacritic": 0,
         "recommendations": 218935,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 88.62,
+        "positive": 199950,
+        "total_reviews": 225629,
         "url": "https://store.steampowered.com/app/1551360"
       },
       {
@@ -8219,9 +8219,9 @@
         "release_date": "2025-03-24",
         "metacritic": 0,
         "recommendations": 212737,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 98.41,
+        "positive": 200803,
+        "total_reviews": 204041,
         "url": "https://store.steampowered.com/app/3164500"
       },
       {
@@ -8240,9 +8240,9 @@
         "release_date": "2015-03-10",
         "metacritic": 85,
         "recommendations": 209236,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.96,
+        "positive": 256362,
+        "total_reviews": 275770,
         "url": "https://store.steampowered.com/app/255710"
       },
       {
@@ -8261,9 +8261,9 @@
         "release_date": "2022-10-25",
         "metacritic": 77,
         "recommendations": 209060,
-        "rating": 87.7,
-        "positive": 262579,
-        "total_reviews": 299406,
+        "rating": 87.88,
+        "positive": 232360,
+        "total_reviews": 264391,
         "url": "https://store.steampowered.com/app/261550"
       },
       {
@@ -8303,9 +8303,9 @@
         "release_date": "2023-05-26",
         "metacritic": 0,
         "recommendations": 192706,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 53.29,
+        "positive": 121020,
+        "total_reviews": 227104,
         "url": "https://store.steampowered.com/app/1468810"
       },
       {
@@ -8345,9 +8345,9 @@
         "release_date": "2020-08-14",
         "metacritic": 90,
         "recommendations": 178941,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.01,
+        "positive": 208770,
+        "total_reviews": 215209,
         "url": "https://store.steampowered.com/app/427520"
       },
       {
@@ -8366,9 +8366,9 @@
         "release_date": "2016-07-22",
         "metacritic": 70,
         "recommendations": 166072,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 94.67,
+        "positive": 202253,
+        "total_reviews": 213640,
         "url": "https://store.steampowered.com/app/477160"
       },
       {
@@ -8408,9 +8408,9 @@
         "release_date": "2016-02-02",
         "metacritic": 76,
         "recommendations": 150705,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.83,
+        "positive": 169735,
+        "total_reviews": 175287,
         "url": "https://store.steampowered.com/app/270880"
       },
       {
@@ -8429,9 +8429,9 @@
         "release_date": "2016-05-09",
         "metacritic": 78,
         "recommendations": 133234,
-        "rating": 85.8,
-        "positive": 168710,
-        "total_reviews": 196632,
+        "rating": 86.03,
+        "positive": 159527,
+        "total_reviews": 185433,
         "url": "https://store.steampowered.com/app/281990"
       },
       {
@@ -8450,9 +8450,9 @@
         "release_date": "2021-04-01",
         "metacritic": 0,
         "recommendations": 129656,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.82,
+        "positive": 132974,
+        "total_reviews": 135943,
         "url": "https://store.steampowered.com/app/508440"
       },
       {
@@ -8471,9 +8471,9 @@
         "release_date": "2017-08-01",
         "metacritic": 81,
         "recommendations": 125574,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.95,
+        "positive": 135271,
+        "total_reviews": 138097,
         "url": "https://store.steampowered.com/app/433340"
       },
       {
@@ -8492,9 +8492,9 @@
         "release_date": "2022-09-30",
         "metacritic": 0,
         "recommendations": 124266,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 56.92,
+        "positive": 86192,
+        "total_reviews": 151419,
         "url": "https://store.steampowered.com/app/1811260"
       },
       {
@@ -8513,9 +8513,9 @@
         "release_date": "UNKNOWN",
         "metacritic": 85,
         "recommendations": 123702,
-        "rating": 96.7,
-        "positive": 139673,
-        "total_reviews": 144439,
+        "rating": 96.75,
+        "positive": 124220,
+        "total_reviews": 128390,
         "url": "https://store.steampowered.com/app/457140"
       },
       {
@@ -8534,9 +8534,9 @@
         "release_date": "2023-06-28",
         "metacritic": 90,
         "recommendations": 121675,
-        "rating": 96.5,
-        "positive": 158196,
-        "total_reviews": 163934,
+        "rating": 96.98,
+        "positive": 125422,
+        "total_reviews": 129331,
         "url": "https://store.steampowered.com/app/1868140"
       },
       {
@@ -8555,9 +8555,9 @@
         "release_date": "2014-12-19",
         "metacritic": 85,
         "recommendations": 121431,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.63,
+        "positive": 140238,
+        "total_reviews": 151391,
         "url": "https://store.steampowered.com/app/244210"
       },
       {
@@ -8576,9 +8576,9 @@
         "release_date": "2022-04-21",
         "metacritic": 80,
         "recommendations": 105793,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.61,
+        "positive": 104653,
+        "total_reviews": 109462,
         "url": "https://store.steampowered.com/app/1167630"
       },
       {
@@ -8597,9 +8597,9 @@
         "release_date": "2015-04-27",
         "metacritic": 88,
         "recommendations": 105352,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.22,
+        "positive": 121084,
+        "total_reviews": 127162,
         "url": "https://store.steampowered.com/app/220200"
       },
       {
@@ -8618,9 +8618,9 @@
         "release_date": "2018-04-24",
         "metacritic": 84,
         "recommendations": 104431,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.53,
+        "positive": 114315,
+        "total_reviews": 123546,
         "url": "https://store.steampowered.com/app/323190"
       },
       {
@@ -8639,9 +8639,9 @@
         "release_date": "2016-01-19",
         "metacritic": 0,
         "recommendations": 102103,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.26,
+        "positive": 104512,
+        "total_reviews": 113283,
         "url": "https://store.steampowered.com/app/387990"
       },
       {
@@ -8660,9 +8660,9 @@
         "release_date": "2024-12-10",
         "metacritic": 0,
         "recommendations": 102013,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 98.02,
+        "positive": 108883,
+        "total_reviews": 111087,
         "url": "https://store.steampowered.com/app/2527500"
       },
       {
@@ -8681,9 +8681,9 @@
         "release_date": "2017-08-01",
         "metacritic": 0,
         "recommendations": 101322,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 90.47,
+        "positive": 101846,
+        "total_reviews": 112575,
         "url": "https://store.steampowered.com/app/305620"
       },
       {
@@ -8702,9 +8702,9 @@
         "release_date": "2021-10-01",
         "metacritic": 0,
         "recommendations": 101020,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 80.49,
+        "positive": 97293,
+        "total_reviews": 120871,
         "url": "https://store.steampowered.com/app/1506830"
       },
       {
@@ -8744,9 +8744,9 @@
         "release_date": "2013-04-23",
         "metacritic": 79,
         "recommendations": 94206,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.63,
+        "positive": 106118,
+        "total_reviews": 109816,
         "url": "https://store.steampowered.com/app/219740"
       },
       {
@@ -8765,9 +8765,9 @@
         "release_date": "2023-09-28",
         "metacritic": 0,
         "recommendations": 93518,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 57.75,
+        "positive": 63281,
+        "total_reviews": 109574,
         "url": "https://store.steampowered.com/app/2195250"
       },
       {
@@ -8786,9 +8786,9 @@
         "release_date": "2013-08-13",
         "metacritic": 87,
         "recommendations": 93043,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 86.61,
+        "positive": 116432,
+        "total_reviews": 134436,
         "url": "https://store.steampowered.com/app/236850"
       },
       {
@@ -8807,9 +8807,9 @@
         "release_date": "2021-07-27",
         "metacritic": 79,
         "recommendations": 92034,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 82.4,
+        "positive": 113447,
+        "total_reviews": 137677,
         "url": "https://store.steampowered.com/app/686810"
       },
       {
@@ -8828,9 +8828,9 @@
         "release_date": "2015-12-01",
         "metacritic": 0,
         "recommendations": 90783,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 81.42,
+        "positive": 77185,
+        "total_reviews": 94804,
         "url": "https://store.steampowered.com/app/376210"
       },
       {
@@ -8849,9 +8849,9 @@
         "release_date": "2024-04-04",
         "metacritic": 0,
         "recommendations": 89389,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.03,
+        "positive": 91745,
+        "total_reviews": 95541,
         "url": "https://store.steampowered.com/app/2835570"
       },
       {
@@ -8870,9 +8870,9 @@
         "release_date": "2025-01-08",
         "metacritic": 0,
         "recommendations": 88399,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 94.58,
+        "positive": 86445,
+        "total_reviews": 91394,
         "url": "https://store.steampowered.com/app/516750"
       },
       {
@@ -8891,9 +8891,9 @@
         "release_date": "UNKNOWN",
         "metacritic": 67,
         "recommendations": 87132,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 94.17,
+        "positive": 89596,
+        "total_reviews": 95144,
         "url": "https://store.steampowered.com/app/613100"
       },
       {
@@ -8912,9 +8912,9 @@
         "release_date": "2024-09-26",
         "metacritic": 0,
         "recommendations": 86652,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 49.81,
+        "positive": 37253,
+        "total_reviews": 74796,
         "url": "https://store.steampowered.com/app/2669320"
       },
       {
@@ -8933,9 +8933,9 @@
         "release_date": "2014-11-14",
         "metacritic": 83,
         "recommendations": 86462,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.87,
+        "positive": 94484,
+        "total_reviews": 101740,
         "url": "https://store.steampowered.com/app/282070"
       },
       {
@@ -8954,9 +8954,9 @@
         "release_date": "2018-12-06",
         "metacritic": 75,
         "recommendations": 85930,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.49,
+        "positive": 93712,
+        "total_reviews": 98135,
         "url": "https://store.steampowered.com/app/233860"
       }
     ],
@@ -9019,9 +9019,9 @@
         "release_date": "2024-08-19",
         "metacritic": 0,
         "recommendations": 855328,
-        "rating": 96.5,
-        "positive": 1171324,
-        "total_reviews": 1213807,
+        "rating": 96.66,
+        "positive": 1111720,
+        "total_reviews": 1150098,
         "url": "https://store.steampowered.com/app/2358720"
       },
       {
@@ -9040,9 +9040,9 @@
         "release_date": "2016-02-26",
         "metacritic": 89,
         "recommendations": 790798,
-        "rating": 98.5,
-        "positive": 1029310,
-        "total_reviews": 1044985,
+        "rating": 98.44,
+        "positive": 872384,
+        "total_reviews": 886195,
         "url": "https://store.steampowered.com/app/413150"
       },
       {
@@ -9061,9 +9061,9 @@
         "release_date": "2020-12-09",
         "metacritic": 86,
         "recommendations": 786724,
-        "rating": 87.0,
-        "positive": 858809,
-        "total_reviews": 987137,
+        "rating": 84.39,
+        "positive": 713071,
+        "total_reviews": 844921,
         "url": "https://store.steampowered.com/app/1091500"
       },
       {
@@ -9082,9 +9082,9 @@
         "release_date": "2015-05-18",
         "metacritic": 93,
         "recommendations": 784735,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.13,
+        "positive": 802993,
+        "total_reviews": 835349,
         "url": "https://store.steampowered.com/app/292030"
       },
       {
@@ -9103,9 +9103,9 @@
         "release_date": "2022-02-24",
         "metacritic": 94,
         "recommendations": 784208,
-        "rating": 93.0,
-        "positive": 1077697,
-        "total_reviews": 1158814,
+        "rating": 92.89,
+        "positive": 981540,
+        "total_reviews": 1056677,
         "url": "https://store.steampowered.com/app/1245620"
       },
       {
@@ -9124,9 +9124,9 @@
         "release_date": "2023-08-03",
         "metacritic": 96,
         "recommendations": 687533,
-        "rating": 96.8,
-        "positive": 834479,
-        "total_reviews": 862065,
+        "rating": 96.85,
+        "positive": 736688,
+        "total_reviews": 760662,
         "url": "https://store.steampowered.com/app/1086940"
       },
       {
@@ -9145,9 +9145,9 @@
         "release_date": "2017-08-27",
         "metacritic": 70,
         "recommendations": 560232,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 83.84,
+        "positive": 612177,
+        "total_reviews": 730170,
         "url": "https://store.steampowered.com/app/346110"
       },
       {
@@ -9166,9 +9166,9 @@
         "release_date": "2013-08-13",
         "metacritic": 79,
         "recommendations": 436763,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 89.63,
+        "positive": 594327,
+        "total_reviews": 663082,
         "url": "https://store.steampowered.com/app/218620"
       },
       {
@@ -9187,9 +9187,9 @@
         "release_date": "2021-02-02",
         "metacritic": 0,
         "recommendations": 430172,
-        "rating": 93.5,
-        "positive": 523752,
-        "total_reviews": 560163,
+        "rating": 94.32,
+        "positive": 471451,
+        "total_reviews": 499828,
         "url": "https://store.steampowered.com/app/892970"
       },
       {
@@ -9208,9 +9208,9 @@
         "release_date": "2015-01-26",
         "metacritic": 87,
         "recommendations": 351357,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.2,
+        "positive": 435687,
+        "total_reviews": 457632,
         "url": "https://store.steampowered.com/app/239140"
       },
       {
@@ -9229,9 +9229,9 @@
         "release_date": "2016-04-21",
         "metacritic": 83,
         "recommendations": 348518,
-        "rating": 94.9,
-        "positive": 516748,
-        "total_reviews": 544518,
+        "rating": 95.26,
+        "positive": 475393,
+        "total_reviews": 499061,
         "url": "https://store.steampowered.com/app/322330"
       },
       {
@@ -9250,9 +9250,9 @@
         "release_date": "2024-01-18",
         "metacritic": 0,
         "recommendations": 331767,
-        "rating": 94.6,
-        "positive": 466192,
-        "total_reviews": 492803,
+        "rating": 94.1,
+        "positive": 358266,
+        "total_reviews": 380709,
         "url": "https://store.steampowered.com/app/1623730"
       },
       {
@@ -9271,9 +9271,9 @@
         "release_date": "2013-11-08",
         "metacritic": 0,
         "recommendations": 298497,
-        "rating": 93.7,
-        "positive": 457902,
-        "total_reviews": 488689,
+        "rating": 94.19,
+        "positive": 355171,
+        "total_reviews": 377063,
         "url": "https://store.steampowered.com/app/108600"
       },
       {
@@ -9292,9 +9292,9 @@
         "release_date": "2015-11-09",
         "metacritic": 84,
         "recommendations": 265619,
-        "rating": 81.2,
-        "positive": 349105,
-        "total_reviews": 429932,
+        "rating": 83.12,
+        "positive": 326054,
+        "total_reviews": 392287,
         "url": "https://store.steampowered.com/app/377160"
       },
       {
@@ -9313,9 +9313,9 @@
         "release_date": "2015-09-15",
         "metacritic": 92,
         "recommendations": 263170,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.76,
+        "positive": 264082,
+        "total_reviews": 272932,
         "url": "https://store.steampowered.com/app/391540"
       },
       {
@@ -9334,9 +9334,9 @@
         "release_date": "2020-09-17",
         "metacritic": 93,
         "recommendations": 262410,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 98.24,
+        "positive": 274829,
+        "total_reviews": 279741,
         "url": "https://store.steampowered.com/app/1145360"
       },
       {
@@ -9355,9 +9355,9 @@
         "release_date": "2024-07-25",
         "metacritic": 0,
         "recommendations": 261314,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 88.61,
+        "positive": 327889,
+        "total_reviews": 370046,
         "url": "https://store.steampowered.com/app/251570"
       },
       {
@@ -9376,9 +9376,9 @@
         "release_date": "2021-09-28",
         "metacritic": 0,
         "recommendations": 246475,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 68.6,
+        "positive": 196798,
+        "total_reviews": 286878,
         "url": "https://store.steampowered.com/app/1063730"
       },
       {
@@ -9397,9 +9397,9 @@
         "release_date": "2022-10-20",
         "metacritic": 86,
         "recommendations": 239826,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 98.46,
+        "positive": 246479,
+        "total_reviews": 250334,
         "url": "https://store.steampowered.com/app/1794680"
       },
       {
@@ -9418,9 +9418,9 @@
         "release_date": "2023-02-10",
         "metacritic": 83,
         "recommendations": 239189,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 90.22,
+        "positive": 289966,
+        "total_reviews": 321395,
         "url": "https://store.steampowered.com/app/990080"
       },
       {
@@ -9439,9 +9439,9 @@
         "release_date": "2012-09-17",
         "metacritic": 89,
         "recommendations": 212812,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.44,
+        "positive": 272900,
+        "total_reviews": 295218,
         "url": "https://store.steampowered.com/app/49520"
       },
       {
@@ -9460,9 +9460,9 @@
         "release_date": "2022-10-25",
         "metacritic": 77,
         "recommendations": 209060,
-        "rating": 87.7,
-        "positive": 262579,
-        "total_reviews": 299406,
+        "rating": 87.88,
+        "positive": 232360,
+        "total_reviews": 264391,
         "url": "https://store.steampowered.com/app/261550"
       },
       {
@@ -9481,9 +9481,9 @@
         "release_date": "2016-10-27",
         "metacritic": 74,
         "recommendations": 195051,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.02,
+        "positive": 310162,
+        "total_reviews": 337058,
         "url": "https://store.steampowered.com/app/489830"
       },
       {
@@ -9502,9 +9502,9 @@
         "release_date": "2023-05-26",
         "metacritic": 0,
         "recommendations": 192706,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 53.29,
+        "positive": 121020,
+        "total_reviews": 227104,
         "url": "https://store.steampowered.com/app/1468810"
       },
       {
@@ -9523,9 +9523,9 @@
         "release_date": "2010-10-19",
         "metacritic": 84,
         "recommendations": 185934,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.08,
+        "positive": 218763,
+        "total_reviews": 227700,
         "url": "https://store.steampowered.com/app/22380"
       },
       {
@@ -9544,9 +9544,9 @@
         "release_date": "2011-11-10",
         "metacritic": 94,
         "recommendations": 181115,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 94.84,
+        "positive": 300915,
+        "total_reviews": 317279,
         "url": "https://store.steampowered.com/app/72850"
       },
       {
@@ -9586,9 +9586,9 @@
         "release_date": "2017-09-14",
         "metacritic": 93,
         "recommendations": 168260,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.81,
+        "positive": 182166,
+        "total_reviews": 190124,
         "url": "https://store.steampowered.com/app/435150"
       },
       {
@@ -9607,9 +9607,9 @@
         "release_date": "2018-10-05",
         "metacritic": 0,
         "recommendations": 159047,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 88.91,
+        "positive": 153091,
+        "total_reviews": 172193,
         "url": "https://store.steampowered.com/app/812140"
       },
       {
@@ -9628,9 +9628,9 @@
         "release_date": "UNKNOWN",
         "metacritic": 0,
         "recommendations": 150466,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 79.11,
+        "positive": 154122,
+        "total_reviews": 194830,
         "url": "https://store.steampowered.com/app/534380"
       },
       {
@@ -9670,9 +9670,9 @@
         "release_date": "2010-03-31",
         "metacritic": 78,
         "recommendations": 131777,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.73,
+        "positive": 162632,
+        "total_reviews": 166405,
         "url": "https://store.steampowered.com/app/48700"
       },
       {
@@ -9691,9 +9691,9 @@
         "release_date": "2016-01-19",
         "metacritic": 84,
         "recommendations": 131748,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 91.68,
+        "positive": 137026,
+        "total_reviews": 149456,
         "url": "https://store.steampowered.com/app/262060"
       },
       {
@@ -9712,9 +9712,9 @@
         "release_date": "2017-05-22",
         "metacritic": 80,
         "recommendations": 129330,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 81.43,
+        "positive": 125497,
+        "total_reviews": 154113,
         "url": "https://store.steampowered.com/app/306130"
       },
       {
@@ -9733,9 +9733,9 @@
         "release_date": "2018-02-13",
         "metacritic": 76,
         "recommendations": 126617,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 84.12,
+        "positive": 136446,
+        "total_reviews": 162206,
         "url": "https://store.steampowered.com/app/379430"
       },
       {
@@ -9754,9 +9754,9 @@
         "release_date": "2024-09-09",
         "metacritic": 82,
         "recommendations": 125973,
-        "rating": 84.0,
-        "positive": 193151,
-        "total_reviews": 229942,
+        "rating": 82.87,
+        "positive": 134739,
+        "total_reviews": 162585,
         "url": "https://store.steampowered.com/app/2183900"
       },
       {
@@ -9775,9 +9775,9 @@
         "release_date": "2020-03-13",
         "metacritic": 81,
         "recommendations": 123404,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 84.02,
+        "positive": 125248,
+        "total_reviews": 149065,
         "url": "https://store.steampowered.com/app/397540"
       },
       {
@@ -9796,9 +9796,9 @@
         "release_date": "2023-06-28",
         "metacritic": 90,
         "recommendations": 121675,
-        "rating": 96.5,
-        "positive": 158196,
-        "total_reviews": 163934,
+        "rating": 96.98,
+        "positive": 125422,
+        "total_reviews": 129331,
         "url": "https://store.steampowered.com/app/1868140"
       },
       {
@@ -9817,9 +9817,9 @@
         "release_date": "2016-07-22",
         "metacritic": 81,
         "recommendations": 120338,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.26,
+        "positive": 152150,
+        "total_reviews": 164906,
         "url": "https://store.steampowered.com/app/211820"
       },
       {
@@ -9838,9 +9838,9 @@
         "release_date": "2022-01-14",
         "metacritic": 93,
         "recommendations": 113946,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.01,
+        "positive": 151706,
+        "total_reviews": 158017,
         "url": "https://store.steampowered.com/app/1593500"
       },
       {
@@ -9859,9 +9859,9 @@
         "release_date": "2022-01-20",
         "metacritic": 0,
         "recommendations": 112174,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 24.61,
+        "positive": 28726,
+        "total_reviews": 116712,
         "url": "https://store.steampowered.com/app/1832640"
       },
       {
@@ -9880,9 +9880,9 @@
         "release_date": "2023-09-05",
         "metacritic": 0,
         "recommendations": 109683,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 56.75,
+        "positive": 93942,
+        "total_reviews": 165527,
         "url": "https://store.steampowered.com/app/1716740"
       },
       {
@@ -9901,9 +9901,9 @@
         "release_date": "2025-04-24",
         "metacritic": 91,
         "recommendations": 108080,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.66,
+        "positive": 106216,
+        "total_reviews": 111032,
         "url": "https://store.steampowered.com/app/1903340"
       },
       {
@@ -9922,9 +9922,9 @@
         "release_date": "2017-10-26",
         "metacritic": 0,
         "recommendations": 107840,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 85.73,
+        "positive": 97301,
+        "total_reviews": 113496,
         "url": "https://store.steampowered.com/app/582160"
       },
       {
@@ -9943,9 +9943,9 @@
         "release_date": "2017-03-17",
         "metacritic": 84,
         "recommendations": 106906,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 87.06,
+        "positive": 122027,
+        "total_reviews": 140169,
         "url": "https://store.steampowered.com/app/524220"
       },
       {
@@ -9964,9 +9964,9 @@
         "release_date": "2019-10-15",
         "metacritic": 97,
         "recommendations": 105278,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 93.11,
+        "positive": 104010,
+        "total_reviews": 111712,
         "url": "https://store.steampowered.com/app/632470"
       },
       {
@@ -9985,9 +9985,9 @@
         "release_date": "2024-12-10",
         "metacritic": 0,
         "recommendations": 102013,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 98.02,
+        "positive": 108883,
+        "total_reviews": 111087,
         "url": "https://store.steampowered.com/app/2527500"
       },
       {
@@ -10006,9 +10006,9 @@
         "release_date": "2024-02-21",
         "metacritic": 80,
         "recommendations": 101765,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 79.57,
+        "positive": 88027,
+        "total_reviews": 110623,
         "url": "https://store.steampowered.com/app/899770"
       }
     ],
@@ -10029,9 +10029,9 @@
         "release_date": "2023-08-03",
         "metacritic": 96,
         "recommendations": 687533,
-        "rating": 96.8,
-        "positive": 834479,
-        "total_reviews": 862065,
+        "rating": 96.85,
+        "positive": 736688,
+        "total_reviews": 760662,
         "url": "https://store.steampowered.com/app/1086940"
       },
       {
@@ -10050,9 +10050,9 @@
         "release_date": "2016-04-21",
         "metacritic": 83,
         "recommendations": 348518,
-        "rating": 94.9,
-        "positive": 516748,
-        "total_reviews": 544518,
+        "rating": 95.26,
+        "positive": 475393,
+        "total_reviews": 499061,
         "url": "https://store.steampowered.com/app/322330"
       },
       {
@@ -10071,9 +10071,9 @@
         "release_date": "2018-12-17",
         "metacritic": 0,
         "recommendations": 320782,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.26,
+        "positive": 344269,
+        "total_reviews": 353960,
         "url": "https://store.steampowered.com/app/960090"
       },
       {
@@ -10113,9 +10113,9 @@
         "release_date": "2024-07-25",
         "metacritic": 0,
         "recommendations": 261314,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 88.61,
+        "positive": 327889,
+        "total_reviews": 370046,
         "url": "https://store.steampowered.com/app/251570"
       },
       {
@@ -10134,9 +10134,9 @@
         "release_date": "UNKNOWN",
         "metacritic": 83,
         "recommendations": 253353,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 89.19,
+        "positive": 305168,
+        "total_reviews": 342150,
         "url": "https://store.steampowered.com/app/394360"
       },
       {
@@ -10155,9 +10155,9 @@
         "release_date": "2013-09-12",
         "metacritic": 74,
         "recommendations": 221520,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 90.42,
+        "positive": 256128,
+        "total_reviews": 283264,
         "url": "https://store.steampowered.com/app/107410"
       },
       {
@@ -10176,9 +10176,9 @@
         "release_date": "2025-03-24",
         "metacritic": 0,
         "recommendations": 212737,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 98.41,
+        "positive": 200803,
+        "total_reviews": 204041,
         "url": "https://store.steampowered.com/app/3164500"
       },
       {
@@ -10197,9 +10197,9 @@
         "release_date": "2015-03-10",
         "metacritic": 85,
         "recommendations": 209236,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.96,
+        "positive": 256362,
+        "total_reviews": 275770,
         "url": "https://store.steampowered.com/app/255710"
       },
       {
@@ -10218,9 +10218,9 @@
         "release_date": "2022-10-25",
         "metacritic": 77,
         "recommendations": 209060,
-        "rating": 87.7,
-        "positive": 262579,
-        "total_reviews": 299406,
+        "rating": 87.88,
+        "positive": 232360,
+        "total_reviews": 264391,
         "url": "https://store.steampowered.com/app/261550"
       },
       {
@@ -10281,9 +10281,9 @@
         "release_date": "2020-08-14",
         "metacritic": 90,
         "recommendations": 178941,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.01,
+        "positive": 208770,
+        "total_reviews": 215209,
         "url": "https://store.steampowered.com/app/427520"
       },
       {
@@ -10302,9 +10302,9 @@
         "release_date": "2017-09-14",
         "metacritic": 93,
         "recommendations": 168260,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.81,
+        "positive": 182166,
+        "total_reviews": 190124,
         "url": "https://store.steampowered.com/app/435150"
       },
       {
@@ -10323,9 +10323,9 @@
         "release_date": "2019-01-23",
         "metacritic": 89,
         "recommendations": 162961,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.79,
+        "positive": 178250,
+        "total_reviews": 182277,
         "url": "https://store.steampowered.com/app/646570"
       },
       {
@@ -10344,9 +10344,9 @@
         "release_date": "2020-09-23",
         "metacritic": 0,
         "recommendations": 160423,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 83.16,
+        "positive": 175088,
+        "total_reviews": 210551,
         "url": "https://store.steampowered.com/app/393380"
       },
       {
@@ -10365,9 +10365,9 @@
         "release_date": "2019-11-14",
         "metacritic": 84,
         "recommendations": 145107,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 94.83,
+        "positive": 154061,
+        "total_reviews": 162462,
         "url": "https://store.steampowered.com/app/813780"
       },
       {
@@ -10386,9 +10386,9 @@
         "release_date": "2024-02-20",
         "metacritic": 90,
         "recommendations": 134993,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 98.02,
+        "positive": 150524,
+        "total_reviews": 153566,
         "url": "https://store.steampowered.com/app/2379780"
       },
       {
@@ -10407,9 +10407,9 @@
         "release_date": "2016-05-09",
         "metacritic": 78,
         "recommendations": 133234,
-        "rating": 85.8,
-        "positive": 168710,
-        "total_reviews": 196632,
+        "rating": 86.03,
+        "positive": 159527,
+        "total_reviews": 185433,
         "url": "https://store.steampowered.com/app/281990"
       },
       {
@@ -10428,9 +10428,9 @@
         "release_date": "2016-01-19",
         "metacritic": 84,
         "recommendations": 131748,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 91.68,
+        "positive": 137026,
+        "total_reviews": 149456,
         "url": "https://store.steampowered.com/app/262060"
       },
       {
@@ -10449,9 +10449,9 @@
         "release_date": "2009-05-05",
         "metacritic": 87,
         "recommendations": 131459,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.61,
+        "positive": 136574,
+        "total_reviews": 139925,
         "url": "https://store.steampowered.com/app/3590"
       },
       {
@@ -10470,9 +10470,9 @@
         "release_date": "2021-04-01",
         "metacritic": 0,
         "recommendations": 129656,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.82,
+        "positive": 132974,
+        "total_reviews": 135943,
         "url": "https://store.steampowered.com/app/508440"
       },
       {
@@ -10512,9 +10512,9 @@
         "release_date": "2021-10-19",
         "metacritic": 85,
         "recommendations": 123436,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.89,
+        "positive": 127792,
+        "total_reviews": 131890,
         "url": "https://store.steampowered.com/app/1092790"
       },
       {
@@ -10533,9 +10533,9 @@
         "release_date": "2022-04-21",
         "metacritic": 80,
         "recommendations": 105793,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.61,
+        "positive": 104653,
+        "total_reviews": 109462,
         "url": "https://store.steampowered.com/app/1167630"
       },
       {
@@ -10554,9 +10554,9 @@
         "release_date": "2018-04-24",
         "metacritic": 84,
         "recommendations": 104431,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.53,
+        "positive": 114315,
+        "total_reviews": 123546,
         "url": "https://store.steampowered.com/app/323190"
       },
       {
@@ -10575,9 +10575,9 @@
         "release_date": "2017-08-01",
         "metacritic": 0,
         "recommendations": 101322,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 90.47,
+        "positive": 101846,
+        "total_reviews": 112575,
         "url": "https://store.steampowered.com/app/305620"
       },
       {
@@ -10617,9 +10617,9 @@
         "release_date": "2013-08-13",
         "metacritic": 87,
         "recommendations": 93043,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 86.61,
+        "positive": 116432,
+        "total_reviews": 134436,
         "url": "https://store.steampowered.com/app/236850"
       },
       {
@@ -10638,9 +10638,9 @@
         "release_date": "2022-08-11",
         "metacritic": 82,
         "recommendations": 92380,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.62,
+        "positive": 98711,
+        "total_reviews": 103228,
         "url": "https://store.steampowered.com/app/1313140"
       },
       {
@@ -10659,9 +10659,9 @@
         "release_date": "2021-07-27",
         "metacritic": 79,
         "recommendations": 92034,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 82.4,
+        "positive": 113447,
+        "total_reviews": 137677,
         "url": "https://store.steampowered.com/app/686810"
       },
       {
@@ -10680,9 +10680,9 @@
         "release_date": "2017-09-28",
         "metacritic": 87,
         "recommendations": 87238,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.37,
+        "positive": 114776,
+        "total_reviews": 124252,
         "url": "https://store.steampowered.com/app/594570"
       },
       {
@@ -10701,9 +10701,9 @@
         "release_date": "2014-01-22",
         "metacritic": 74,
         "recommendations": 86432,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 91.75,
+        "positive": 114570,
+        "total_reviews": 124871,
         "url": "https://store.steampowered.com/app/222880"
       },
       {
@@ -10722,9 +10722,9 @@
         "release_date": "2022-02-16",
         "metacritic": 86,
         "recommendations": 86332,
-        "rating": 72.2,
-        "positive": 108670,
-        "total_reviews": 150513,
+        "rating": 72.7,
+        "positive": 87141,
+        "total_reviews": 119858,
         "url": "https://store.steampowered.com/app/1142710"
       },
       {
@@ -10743,9 +10743,9 @@
         "release_date": "2018-12-06",
         "metacritic": 75,
         "recommendations": 85930,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.49,
+        "positive": 93712,
+        "total_reviews": 98135,
         "url": "https://store.steampowered.com/app/233860"
       },
       {
@@ -10764,9 +10764,9 @@
         "release_date": "2020-09-01",
         "metacritic": 91,
         "recommendations": 85192,
-        "rating": 90.5,
-        "positive": 128763,
-        "total_reviews": 142280,
+        "rating": 90.03,
+        "positive": 114259,
+        "total_reviews": 126909,
         "url": "https://store.steampowered.com/app/1158310"
       },
       {
@@ -10785,9 +10785,9 @@
         "release_date": "2013-04-09",
         "metacritic": 68,
         "recommendations": 83710,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.79,
+        "positive": 97083,
+        "total_reviews": 101351,
         "url": "https://store.steampowered.com/app/221380"
       },
       {
@@ -10806,9 +10806,9 @@
         "release_date": "2021-01-20",
         "metacritic": 0,
         "recommendations": 78768,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.66,
+        "positive": 83095,
+        "total_reviews": 85088,
         "url": "https://store.steampowered.com/app/1366540"
       },
       {
@@ -10827,9 +10827,9 @@
         "release_date": "2021-09-01",
         "metacritic": 0,
         "recommendations": 77977,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.65,
+        "positive": 77218,
+        "total_reviews": 79892,
         "url": "https://store.steampowered.com/app/1454400"
       },
       {
@@ -10848,9 +10848,9 @@
         "release_date": "2015-04-02",
         "metacritic": 80,
         "recommendations": 77452,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 77.37,
+        "positive": 77388,
+        "total_reviews": 100024,
         "url": "https://store.steampowered.com/app/359320"
       },
       {
@@ -10869,9 +10869,9 @@
         "release_date": "UNKNOWN",
         "metacritic": 88,
         "recommendations": 75367,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 84.75,
+        "positive": 86187,
+        "total_reviews": 101701,
         "url": "https://store.steampowered.com/app/268500"
       },
       {
@@ -10890,9 +10890,9 @@
         "release_date": "2019-11-05",
         "metacritic": 81,
         "recommendations": 74254,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 91.1,
+        "positive": 80029,
+        "total_reviews": 87849,
         "url": "https://store.steampowered.com/app/703080"
       },
       {
@@ -10953,9 +10953,9 @@
         "release_date": "2013-06-25",
         "metacritic": 80,
         "recommendations": 66917,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 78.96,
+        "positive": 86713,
+        "total_reviews": 109825,
         "url": "https://store.steampowered.com/app/231430"
       },
       {
@@ -10974,9 +10974,9 @@
         "release_date": "2021-10-28",
         "metacritic": 81,
         "recommendations": 62935,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 86.01,
+        "positive": 69559,
+        "total_reviews": 80870,
         "url": "https://store.steampowered.com/app/1466860"
       },
       {
@@ -10995,9 +10995,9 @@
         "release_date": "2024-04-26",
         "metacritic": 0,
         "recommendations": 62632,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 86.28,
+        "positive": 62224,
+        "total_reviews": 72120,
         "url": "https://store.steampowered.com/app/1363080"
       },
       {
@@ -11016,9 +11016,9 @@
         "release_date": "2008-12-19",
         "metacritic": 84,
         "recommendations": 61843,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.44,
+        "positive": 61124,
+        "total_reviews": 66120,
         "url": "https://store.steampowered.com/app/17390"
       },
       {
@@ -11037,9 +11037,9 @@
         "release_date": "2012-09-14",
         "metacritic": 84,
         "recommendations": 60268,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.35,
+        "positive": 71561,
+        "total_reviews": 75052,
         "url": "https://store.steampowered.com/app/212680"
       },
       {
@@ -11058,9 +11058,9 @@
         "release_date": "2017-05-24",
         "metacritic": 80,
         "recommendations": 59676,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 74.11,
+        "positive": 64416,
+        "total_reviews": 86919,
         "url": "https://store.steampowered.com/app/582660"
       }
     ],
@@ -11081,9 +11081,9 @@
         "release_date": "2015-07-06",
         "metacritic": 86,
         "recommendations": 434286,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 87.35,
+        "positive": 509445,
+        "total_reviews": 583220,
         "url": "https://store.steampowered.com/app/252950"
       },
       {
@@ -11123,9 +11123,9 @@
         "release_date": "2021-11-08",
         "metacritic": 0,
         "recommendations": 218935,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 88.62,
+        "positive": 199950,
+        "total_reviews": 225629,
         "url": "https://store.steampowered.com/app/1551360"
       },
       {
@@ -11165,9 +11165,9 @@
         "release_date": "2022-09-30",
         "metacritic": 0,
         "recommendations": 124266,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 56.92,
+        "positive": 86192,
+        "total_reviews": 151419,
         "url": "https://store.steampowered.com/app/1811260"
       },
       {
@@ -11186,9 +11186,9 @@
         "release_date": "2014-12-19",
         "metacritic": 85,
         "recommendations": 121431,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.63,
+        "positive": 140238,
+        "total_reviews": 151391,
         "url": "https://store.steampowered.com/app/244210"
       },
       {
@@ -11228,9 +11228,9 @@
         "release_date": "2021-10-01",
         "metacritic": 0,
         "recommendations": 101020,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 80.49,
+        "positive": 97293,
+        "total_reviews": 120871,
         "url": "https://store.steampowered.com/app/1506830"
       },
       {
@@ -11249,9 +11249,9 @@
         "release_date": "2023-09-28",
         "metacritic": 0,
         "recommendations": 93518,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 57.75,
+        "positive": 63281,
+        "total_reviews": 109574,
         "url": "https://store.steampowered.com/app/2195250"
       },
       {
@@ -11270,9 +11270,9 @@
         "release_date": "2024-09-26",
         "metacritic": 0,
         "recommendations": 86652,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 49.81,
+        "positive": 37253,
+        "total_reviews": 74796,
         "url": "https://store.steampowered.com/app/2669320"
       },
       {
@@ -11291,9 +11291,9 @@
         "release_date": "2017-11-17",
         "metacritic": 0,
         "recommendations": 78299,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.31,
+        "positive": 79504,
+        "total_reviews": 83416,
         "url": "https://store.steampowered.com/app/635260"
       },
       {
@@ -11312,9 +11312,9 @@
         "release_date": "2017-06-01",
         "metacritic": 82,
         "recommendations": 66177,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 83.21,
+        "positive": 77227,
+        "total_reviews": 92807,
         "url": "https://store.steampowered.com/app/389730"
       },
       {
@@ -11333,9 +11333,9 @@
         "release_date": "2020-05-19",
         "metacritic": 0,
         "recommendations": 45005,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 88.11,
+        "positive": 59105,
+        "total_reviews": 67080,
         "url": "https://store.steampowered.com/app/431240"
       },
       {
@@ -11354,9 +11354,9 @@
         "release_date": "2020-10-08",
         "metacritic": 0,
         "recommendations": 39883,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 76.23,
+        "positive": 42906,
+        "total_reviews": 56283,
         "url": "https://store.steampowered.com/app/1313860"
       },
       {
@@ -11375,9 +11375,9 @@
         "release_date": "2019-02-25",
         "metacritic": 84,
         "recommendations": 36281,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 88.31,
+        "positive": 39383,
+        "total_reviews": 44595,
         "url": "https://store.steampowered.com/app/690790"
       },
       {
@@ -11396,9 +11396,9 @@
         "release_date": "2023-09-07",
         "metacritic": 0,
         "recommendations": 32806,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 31.22,
+        "positive": 13567,
+        "total_reviews": 43462,
         "url": "https://store.steampowered.com/app/2338770"
       },
       {
@@ -11417,9 +11417,9 @@
         "release_date": "2018-06-14",
         "metacritic": 81,
         "recommendations": 29269,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 88.12,
+        "positive": 34031,
+        "total_reviews": 38617,
         "url": "https://store.steampowered.com/app/228380"
       },
       {
@@ -11438,9 +11438,9 @@
         "release_date": "2016-12-02",
         "metacritic": 72,
         "recommendations": 28894,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 82.36,
+        "positive": 25437,
+        "total_reviews": 30884,
         "url": "https://store.steampowered.com/app/460920"
       },
       {
@@ -11459,9 +11459,9 @@
         "release_date": "2019-10-07",
         "metacritic": 0,
         "recommendations": 28579,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 94.3,
+        "positive": 26514,
+        "total_reviews": 28116,
         "url": "https://store.steampowered.com/app/655500"
       },
       {
@@ -11480,9 +11480,9 @@
         "release_date": "2024-10-28",
         "metacritic": 0,
         "recommendations": 28465,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 58.69,
+        "positive": 18767,
+        "total_reviews": 31974,
         "url": "https://store.steampowered.com/app/2878980"
       },
       {
@@ -11501,9 +11501,9 @@
         "release_date": "2020-03-11",
         "metacritic": 0,
         "recommendations": 27807,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 89.32,
+        "positive": 26014,
+        "total_reviews": 29126,
         "url": "https://store.steampowered.com/app/960170"
       },
       {
@@ -11522,9 +11522,9 @@
         "release_date": "2019-05-29",
         "metacritic": 77,
         "recommendations": 27648,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.53,
+        "positive": 36035,
+        "total_reviews": 38943,
         "url": "https://store.steampowered.com/app/805550"
       },
       {
@@ -11564,9 +11564,9 @@
         "release_date": "2020-06-18",
         "metacritic": 62,
         "recommendations": 24906,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 85.59,
+        "positive": 24868,
+        "total_reviews": 29054,
         "url": "https://store.steampowered.com/app/1262580"
       },
       {
@@ -11585,9 +11585,9 @@
         "release_date": "2023-08-18",
         "metacritic": 0,
         "recommendations": 23438,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 90.53,
+        "positive": 26261,
+        "total_reviews": 29009,
         "url": "https://store.steampowered.com/app/571740"
       },
       {
@@ -11606,9 +11606,9 @@
         "release_date": "2016-04-19",
         "metacritic": 84,
         "recommendations": 22617,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 93.97,
+        "positive": 34525,
+        "total_reviews": 36740,
         "url": "https://store.steampowered.com/app/207140"
       },
       {
@@ -11627,9 +11627,9 @@
         "release_date": "2023-06-08",
         "metacritic": 0,
         "recommendations": 22561,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 83.87,
+        "positive": 16364,
+        "total_reviews": 19511,
         "url": "https://store.steampowered.com/app/2290180"
       },
       {
@@ -11648,9 +11648,9 @@
         "release_date": "2021-11-15",
         "metacritic": 0,
         "recommendations": 21963,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 89.81,
+        "positive": 21717,
+        "total_reviews": 24180,
         "url": "https://store.steampowered.com/app/1583320"
       },
       {
@@ -11669,9 +11669,9 @@
         "release_date": "2022-07-01",
         "metacritic": 81,
         "recommendations": 20798,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 68.74,
+        "positive": 17694,
+        "total_reviews": 25740,
         "url": "https://store.steampowered.com/app/1692250"
       },
       {
@@ -11690,9 +11690,9 @@
         "release_date": "2020-07-28",
         "metacritic": 56,
         "recommendations": 18388,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 85.95,
+        "positive": 16733,
+        "total_reviews": 19469,
         "url": "https://store.steampowered.com/app/962730"
       },
       {
@@ -11711,9 +11711,9 @@
         "release_date": "2019-11-19",
         "metacritic": 84,
         "recommendations": 17120,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 89.29,
+        "positive": 28341,
+        "total_reviews": 31742,
         "url": "https://store.steampowered.com/app/1100600"
       },
       {
@@ -11732,9 +11732,9 @@
         "release_date": "2024-10-08",
         "metacritic": 0,
         "recommendations": 17010,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 62.84,
+        "positive": 12158,
+        "total_reviews": 19349,
         "url": "https://store.steampowered.com/app/1451190"
       },
       {
@@ -11753,9 +11753,9 @@
         "release_date": "2019-05-07",
         "metacritic": 78,
         "recommendations": 16637,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 94.32,
+        "positive": 18141,
+        "total_reviews": 19233,
         "url": "https://store.steampowered.com/app/681280"
       },
       {
@@ -11774,9 +11774,9 @@
         "release_date": "2023-11-06",
         "metacritic": 0,
         "recommendations": 15247,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 90.8,
+        "positive": 20927,
+        "total_reviews": 23048,
         "url": "https://store.steampowered.com/app/2252570"
       },
       {
@@ -11795,9 +11795,9 @@
         "release_date": "2024-05-31",
         "metacritic": 72,
         "recommendations": 14537,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 73.02,
+        "positive": 11826,
+        "total_reviews": 16196,
         "url": "https://store.steampowered.com/app/2488620"
       },
       {
@@ -11816,9 +11816,9 @@
         "release_date": "2020-11-24",
         "metacritic": 0,
         "recommendations": 14389,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 93.48,
+        "positive": 22342,
+        "total_reviews": 23900,
         "url": "https://store.steampowered.com/app/1263850"
       },
       {
@@ -11837,9 +11837,9 @@
         "release_date": "2021-11-09",
         "metacritic": 85,
         "recommendations": 13785,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.55,
+        "positive": 19861,
+        "total_reviews": 21460,
         "url": "https://store.steampowered.com/app/1569040"
       },
       {
@@ -11858,9 +11858,9 @@
         "release_date": "2022-11-08",
         "metacritic": 0,
         "recommendations": 13411,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 89.76,
+        "positive": 17645,
+        "total_reviews": 19657,
         "url": "https://store.steampowered.com/app/1904540"
       },
       {
@@ -11879,9 +11879,9 @@
         "release_date": "2024-08-29",
         "metacritic": 0,
         "recommendations": 12733,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 70.8,
+        "positive": 7566,
+        "total_reviews": 10687,
         "url": "https://store.steampowered.com/app/1114150"
       },
       {
@@ -11900,9 +11900,9 @@
         "release_date": "2022-09-22",
         "metacritic": 0,
         "recommendations": 12665,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 83.45,
+        "positive": 12016,
+        "total_reviews": 14399,
         "url": "https://store.steampowered.com/app/861650"
       },
       {
@@ -11921,9 +11921,9 @@
         "release_date": "2013-01-31",
         "metacritic": 0,
         "recommendations": 11429,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 93.56,
+        "positive": 16039,
+        "total_reviews": 17143,
         "url": "https://store.steampowered.com/app/212480"
       },
       {
@@ -11963,9 +11963,9 @@
         "release_date": "2016-11-09",
         "metacritic": 81,
         "recommendations": 11093,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 91.7,
+        "positive": 12504,
+        "total_reviews": 13636,
         "url": "https://store.steampowered.com/app/415200"
       },
       {
@@ -11984,9 +11984,9 @@
         "release_date": "2017-11-08",
         "metacritic": 0,
         "recommendations": 10819,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.36,
+        "positive": 10857,
+        "total_reviews": 11267,
         "url": "https://store.steampowered.com/app/732430"
       },
       {
@@ -12005,9 +12005,9 @@
         "release_date": "2025-01-16",
         "metacritic": 0,
         "recommendations": 9720,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 69.99,
+        "positive": 7712,
+        "total_reviews": 11018,
         "url": "https://store.steampowered.com/app/3058630"
       },
       {
@@ -12026,9 +12026,9 @@
         "release_date": "2020-10-08",
         "metacritic": 0,
         "recommendations": 9526,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 82.37,
+        "positive": 9661,
+        "total_reviews": 11729,
         "url": "https://store.steampowered.com/app/1259980"
       },
       {
@@ -12047,9 +12047,9 @@
         "release_date": "2023-11-02",
         "metacritic": 80,
         "recommendations": 9462,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 62.54,
+        "positive": 6135,
+        "total_reviews": 9809,
         "url": "https://store.steampowered.com/app/1849250"
       },
       {
@@ -12068,9 +12068,9 @@
         "release_date": "2025-07-22",
         "metacritic": 0,
         "recommendations": 8879,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 79.52,
+        "positive": 5903,
+        "total_reviews": 7423,
         "url": "https://store.steampowered.com/app/2399420"
       },
       {
@@ -12089,9 +12089,9 @@
         "release_date": "2020-05-29",
         "metacritic": 0,
         "recommendations": 8340,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 91.92,
+        "positive": 7930,
+        "total_reviews": 8627,
         "url": "https://store.steampowered.com/app/1293230"
       },
       {
@@ -12110,9 +12110,9 @@
         "release_date": "UNKNOWN",
         "metacritic": 80,
         "recommendations": 8011,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 83.83,
+        "positive": 23998,
+        "total_reviews": 28627,
         "url": "https://store.steampowered.com/app/44350"
       }
     ],
@@ -12133,9 +12133,9 @@
         "release_date": "UNKNOWN",
         "metacritic": 0,
         "recommendations": 4661011,
-        "rating": 85.8,
-        "positive": 8514451,
-        "total_reviews": 9923603,
+        "rating": 86.69,
+        "positive": 7642084,
+        "total_reviews": 8815087,
         "url": "https://store.steampowered.com/app/730"
       },
       {
@@ -12175,9 +12175,9 @@
         "release_date": "2015-12-01",
         "metacritic": 0,
         "recommendations": 1213861,
-        "rating": 82.1,
-        "positive": 1282806,
-        "total_reviews": 1562492,
+        "rating": 83.86,
+        "positive": 1172854,
+        "total_reviews": 1398584,
         "url": "https://store.steampowered.com/app/359550"
       },
       {
@@ -12196,9 +12196,9 @@
         "release_date": "2021-08-11",
         "metacritic": 0,
         "recommendations": 196687,
-        "rating": 73.3,
-        "positive": 222297,
-        "total_reviews": 303270,
+        "rating": 69.54,
+        "positive": 225960,
+        "total_reviews": 324927,
         "url": "https://store.steampowered.com/app/1203220"
       },
       {
@@ -12217,9 +12217,9 @@
         "release_date": "2018-02-28",
         "metacritic": 70,
         "recommendations": 143745,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 55.75,
+        "positive": 113729,
+        "total_reviews": 204013,
         "url": "https://store.steampowered.com/app/433850"
       },
       {
@@ -12238,9 +12238,9 @@
         "release_date": "2019-10-01",
         "metacritic": 83,
         "recommendations": 130089,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 79.58,
+        "positive": 497891,
+        "total_reviews": 625616,
         "url": "https://store.steampowered.com/app/1085660"
       },
       {
@@ -12259,9 +12259,9 @@
         "release_date": "2015-01-29",
         "metacritic": 0,
         "recommendations": 120716,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.2,
+        "positive": 162769,
+        "total_reviews": 169201,
         "url": "https://store.steampowered.com/app/319630"
       },
       {
@@ -12280,9 +12280,9 @@
         "release_date": "2020-06-18",
         "metacritic": 0,
         "recommendations": 81471,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 87.31,
+        "positive": 149064,
+        "total_reviews": 170727,
         "url": "https://store.steampowered.com/app/1222670"
       },
       {
@@ -12301,9 +12301,9 @@
         "release_date": "2022-02-11",
         "metacritic": 0,
         "recommendations": 65139,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 71.02,
+        "positive": 143481,
+        "total_reviews": 202021,
         "url": "https://store.steampowered.com/app/1599340"
       },
       {
@@ -12322,9 +12322,9 @@
         "release_date": "2007-10-10",
         "metacritic": 92,
         "recommendations": 43844,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 89.91,
+        "positive": 1044264,
+        "total_reviews": 1161472,
         "url": "https://store.steampowered.com/app/440"
       },
       {
@@ -12343,9 +12343,9 @@
         "release_date": "2020-10-15",
         "metacritic": 75,
         "recommendations": 35213,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 84.69,
+        "positive": 40941,
+        "total_reviews": 48342,
         "url": "https://store.steampowered.com/app/933110"
       },
       {
@@ -12364,9 +12364,9 @@
         "release_date": "2021-10-12",
         "metacritic": 0,
         "recommendations": 34064,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 85.04,
+        "positive": 84113,
+        "total_reviews": 98914,
         "url": "https://store.steampowered.com/app/1721470"
       },
       {
@@ -12385,9 +12385,9 @@
         "release_date": "2021-11-15",
         "metacritic": 0,
         "recommendations": 33237,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 69.66,
+        "positive": 123333,
+        "total_reviews": 177041,
         "url": "https://store.steampowered.com/app/1240440"
       },
       {
@@ -12406,9 +12406,9 @@
         "release_date": "2012-02-14",
         "metacritic": 82,
         "recommendations": 30818,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 89.91,
+        "positive": 66359,
+        "total_reviews": 73809,
         "url": "https://store.steampowered.com/app/203770"
       },
       {
@@ -12427,9 +12427,9 @@
         "release_date": "2022-12-10",
         "metacritic": 0,
         "recommendations": 28947,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 54.09,
+        "positive": 29495,
+        "total_reviews": 54529,
         "url": "https://store.steampowered.com/app/674020"
       },
       {
@@ -12448,9 +12448,9 @@
         "release_date": "2017-11-08",
         "metacritic": 85,
         "recommendations": 21470,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 84.58,
+        "positive": 50196,
+        "total_reviews": 59348,
         "url": "https://store.steampowered.com/app/504370"
       },
       {
@@ -12469,9 +12469,9 @@
         "release_date": "2018-09-26",
         "metacritic": 0,
         "recommendations": 21355,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 86.3,
+        "positive": 31616,
+        "total_reviews": 36634,
         "url": "https://store.steampowered.com/app/532210"
       },
       {
@@ -12490,9 +12490,9 @@
         "release_date": "2020-02-19",
         "metacritic": 0,
         "recommendations": 20813,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 80.77,
+        "positive": 20925,
+        "total_reviews": 25906,
         "url": "https://store.steampowered.com/app/420290"
       },
       {
@@ -12532,9 +12532,9 @@
         "release_date": "UNKNOWN",
         "metacritic": 0,
         "recommendations": 17189,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 41.82,
+        "positive": 10612,
+        "total_reviews": 25377,
         "url": "https://store.steampowered.com/app/226700"
       },
       {
@@ -12553,9 +12553,9 @@
         "release_date": "2018-06-05",
         "metacritic": 0,
         "recommendations": 15493,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 88.4,
+        "positive": 76919,
+        "total_reviews": 87012,
         "url": "https://store.steampowered.com/app/823130"
       },
       {
@@ -12595,9 +12595,9 @@
         "release_date": "2019-05-23",
         "metacritic": 0,
         "recommendations": 12974,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 59.53,
+        "positive": 9796,
+        "total_reviews": 16455,
         "url": "https://store.steampowered.com/app/489940"
       },
       {
@@ -12637,9 +12637,9 @@
         "release_date": "2021-10-07",
         "metacritic": 0,
         "recommendations": 11155,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 85.02,
+        "positive": 108841,
+        "total_reviews": 128011,
         "url": "https://store.steampowered.com/app/1677740"
       },
       {
@@ -12679,9 +12679,9 @@
         "release_date": "2019-06-13",
         "metacritic": 0,
         "recommendations": 9738,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 54.87,
+        "positive": 7428,
+        "total_reviews": 13538,
         "url": "https://store.steampowered.com/app/311310"
       },
       {
@@ -12721,9 +12721,9 @@
         "release_date": "2015-02-10",
         "metacritic": 77,
         "recommendations": 9190,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 69.98,
+        "positive": 33844,
+        "total_reviews": 48362,
         "url": "https://store.steampowered.com/app/273350"
       },
       {
@@ -12742,9 +12742,9 @@
         "release_date": "2021-10-19",
         "metacritic": 0,
         "recommendations": 8936,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 86.16,
+        "positive": 9267,
+        "total_reviews": 10756,
         "url": "https://store.steampowered.com/app/1526490"
       },
       {
@@ -12763,9 +12763,9 @@
         "release_date": "2024-09-16",
         "metacritic": 0,
         "recommendations": 8827,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 85.52,
+        "positive": 7014,
+        "total_reviews": 8202,
         "url": "https://store.steampowered.com/app/2904000"
       },
       {
@@ -12784,9 +12784,9 @@
         "release_date": "2018-05-08",
         "metacritic": 83,
         "recommendations": 8792,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 84.98,
+        "positive": 294373,
+        "total_reviews": 346404,
         "url": "https://store.steampowered.com/app/444090"
       },
       {
@@ -12805,9 +12805,9 @@
         "release_date": "2024-08-20",
         "metacritic": 0,
         "recommendations": 8182,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 73.1,
+        "positive": 10260,
+        "total_reviews": 14036,
         "url": "https://store.steampowered.com/app/961200"
       },
       {
@@ -12826,9 +12826,9 @@
         "release_date": "2014-03-28",
         "metacritic": 0,
         "recommendations": 7709,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 86.56,
+        "positive": 10433,
+        "total_reviews": 12053,
         "url": "https://store.steampowered.com/app/270550"
       },
       {
@@ -12847,9 +12847,9 @@
         "release_date": "2010-12-15",
         "metacritic": 88,
         "recommendations": 7656,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 73.69,
+        "positive": 26813,
+        "total_reviews": 36388,
         "url": "https://store.steampowered.com/app/8500"
       },
       {
@@ -12868,9 +12868,9 @@
         "release_date": "2017-07-07",
         "metacritic": 0,
         "recommendations": 7561,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 91.2,
+        "positive": 506516,
+        "total_reviews": 555368,
         "url": "https://store.steampowered.com/app/304930"
       },
       {
@@ -12889,9 +12889,9 @@
         "release_date": "2018-10-23",
         "metacritic": 0,
         "recommendations": 7156,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 37.32,
+        "positive": 3683,
+        "total_reviews": 9868,
         "url": "https://store.steampowered.com/app/681660"
       },
       {
@@ -12910,9 +12910,9 @@
         "release_date": "2024-08-27",
         "metacritic": 0,
         "recommendations": 6717,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 57.53,
+        "positive": 8257,
+        "total_reviews": 14353,
         "url": "https://store.steampowered.com/app/2437170"
       },
       {
@@ -12931,9 +12931,9 @@
         "release_date": "2021-08-26",
         "metacritic": 0,
         "recommendations": 6473,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 93.63,
+        "positive": 39667,
+        "total_reviews": 42367,
         "url": "https://store.steampowered.com/app/843380"
       },
       {
@@ -12952,9 +12952,9 @@
         "release_date": "2022-08-18",
         "metacritic": 0,
         "recommendations": 6324,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 73.76,
+        "positive": 28297,
+        "total_reviews": 38365,
         "url": "https://store.steampowered.com/app/611500"
       },
       {
@@ -12973,9 +12973,9 @@
         "release_date": "2015-10-21",
         "metacritic": 74,
         "recommendations": 5948,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 90.65,
+        "positive": 20023,
+        "total_reviews": 22088,
         "url": "https://store.steampowered.com/app/368230"
       },
       {
@@ -13057,9 +13057,9 @@
         "release_date": "2019-12-09",
         "metacritic": 0,
         "recommendations": 4548,
-        "rating": 61.75,
-        "positive": 5991,
-        "total_reviews": 9702,
+        "rating": 0.0,
+        "positive": 0,
+        "total_reviews": 0,
         "url": "https://store.steampowered.com/app/1195460"
       },
       {
@@ -13185,9 +13185,9 @@
         "release_date": "2015-07-06",
         "metacritic": 86,
         "recommendations": 434286,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 87.35,
+        "positive": 509445,
+        "total_reviews": 583220,
         "url": "https://store.steampowered.com/app/252950"
       },
       {
@@ -13206,9 +13206,9 @@
         "release_date": "UNKNOWN",
         "metacritic": 0,
         "recommendations": 311820,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.39,
+        "positive": 313873,
+        "total_reviews": 322278,
         "url": "https://store.steampowered.com/app/284160"
       },
       {
@@ -13227,9 +13227,9 @@
         "release_date": "2021-11-08",
         "metacritic": 0,
         "recommendations": 218935,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 88.62,
+        "positive": 199950,
+        "total_reviews": 225629,
         "url": "https://store.steampowered.com/app/1551360"
       },
       {
@@ -13248,9 +13248,9 @@
         "release_date": "2014-12-19",
         "metacritic": 85,
         "recommendations": 121431,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.63,
+        "positive": 140238,
+        "total_reviews": 151391,
         "url": "https://store.steampowered.com/app/244210"
       },
       {
@@ -13290,9 +13290,9 @@
         "release_date": "2025-01-08",
         "metacritic": 0,
         "recommendations": 88399,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 94.58,
+        "positive": 86445,
+        "total_reviews": 91394,
         "url": "https://store.steampowered.com/app/516750"
       },
       {
@@ -13311,9 +13311,9 @@
         "release_date": "2018-06-28",
         "metacritic": 0,
         "recommendations": 82529,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 77.48,
+        "positive": 72724,
+        "total_reviews": 93865,
         "url": "https://store.steampowered.com/app/646910"
       },
       {
@@ -13353,9 +13353,9 @@
         "release_date": "2017-11-17",
         "metacritic": 0,
         "recommendations": 78299,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.31,
+        "positive": 79504,
+        "total_reviews": 83416,
         "url": "https://store.steampowered.com/app/635260"
       },
       {
@@ -13374,9 +13374,9 @@
         "release_date": "2014-10-08",
         "metacritic": 0,
         "recommendations": 62411,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 93.65,
+        "positive": 64644,
+        "total_reviews": 69029,
         "url": "https://store.steampowered.com/app/307690"
       },
       {
@@ -13395,9 +13395,9 @@
         "release_date": "2017-07-28",
         "metacritic": 0,
         "recommendations": 47196,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 91.35,
+        "positive": 47065,
+        "total_reviews": 51521,
         "url": "https://store.steampowered.com/app/645630"
       },
       {
@@ -13416,9 +13416,9 @@
         "release_date": "2022-12-01",
         "metacritic": 0,
         "recommendations": 42533,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 60.28,
+        "positive": 29906,
+        "total_reviews": 49608,
         "url": "https://store.steampowered.com/app/1846380"
       },
       {
@@ -13437,9 +13437,9 @@
         "release_date": "2019-02-25",
         "metacritic": 84,
         "recommendations": 36281,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 88.31,
+        "positive": 39383,
+        "total_reviews": 44595,
         "url": "https://store.steampowered.com/app/690790"
       },
       {
@@ -13458,9 +13458,9 @@
         "release_date": "2021-08-11",
         "metacritic": 0,
         "recommendations": 30052,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.94,
+        "positive": 28630,
+        "total_reviews": 29841,
         "url": "https://store.steampowered.com/app/1190000"
       },
       {
@@ -13479,9 +13479,9 @@
         "release_date": "2018-06-14",
         "metacritic": 81,
         "recommendations": 29269,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 88.12,
+        "positive": 34031,
+        "total_reviews": 38617,
         "url": "https://store.steampowered.com/app/228380"
       },
       {
@@ -13500,9 +13500,9 @@
         "release_date": "2016-11-03",
         "metacritic": 0,
         "recommendations": 28760,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 82.28,
+        "positive": 24830,
+        "total_reviews": 30176,
         "url": "https://store.steampowered.com/app/493490"
       },
       {
@@ -13521,9 +13521,9 @@
         "release_date": "2019-10-07",
         "metacritic": 0,
         "recommendations": 28579,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 94.3,
+        "positive": 26514,
+        "total_reviews": 28116,
         "url": "https://store.steampowered.com/app/655500"
       },
       {
@@ -13542,9 +13542,9 @@
         "release_date": "2019-05-29",
         "metacritic": 77,
         "recommendations": 27648,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.53,
+        "positive": 36035,
+        "total_reviews": 38943,
         "url": "https://store.steampowered.com/app/805550"
       },
       {
@@ -13563,9 +13563,9 @@
         "release_date": "2020-06-18",
         "metacritic": 62,
         "recommendations": 24906,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 85.59,
+        "positive": 24868,
+        "total_reviews": 29054,
         "url": "https://store.steampowered.com/app/1262580"
       },
       {
@@ -13584,9 +13584,9 @@
         "release_date": "2019-09-18",
         "metacritic": 0,
         "recommendations": 24844,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.49,
+        "positive": 25941,
+        "total_reviews": 28047,
         "url": "https://store.steampowered.com/app/585420"
       },
       {
@@ -13605,9 +13605,9 @@
         "release_date": "2016-04-19",
         "metacritic": 84,
         "recommendations": 22617,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 93.97,
+        "positive": 34525,
+        "total_reviews": 36740,
         "url": "https://store.steampowered.com/app/207140"
       },
       {
@@ -13626,9 +13626,9 @@
         "release_date": "2020-06-18",
         "metacritic": 78,
         "recommendations": 21007,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 77.3,
+        "positive": 17586,
+        "total_reviews": 22750,
         "url": "https://store.steampowered.com/app/1262560"
       },
       {
@@ -13647,9 +13647,9 @@
         "release_date": "2022-07-01",
         "metacritic": 81,
         "recommendations": 20798,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 68.74,
+        "positive": 17694,
+        "total_reviews": 25740,
         "url": "https://store.steampowered.com/app/1692250"
       },
       {
@@ -13668,9 +13668,9 @@
         "release_date": "2020-06-04",
         "metacritic": 0,
         "recommendations": 20692,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 69.92,
+        "positive": 16504,
+        "total_reviews": 23603,
         "url": "https://store.steampowered.com/app/1262540"
       },
       {
@@ -13689,9 +13689,9 @@
         "release_date": "2019-01-17",
         "metacritic": 0,
         "recommendations": 17607,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 77.31,
+        "positive": 16065,
+        "total_reviews": 20780,
         "url": "https://store.steampowered.com/app/991780"
       },
       {
@@ -13710,9 +13710,9 @@
         "release_date": "2024-02-21",
         "metacritic": 0,
         "recommendations": 17425,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 83.56,
+        "positive": 17126,
+        "total_reviews": 20496,
         "url": "https://store.steampowered.com/app/1458140"
       },
       {
@@ -13731,9 +13731,9 @@
         "release_date": "2006-12-21",
         "metacritic": 76,
         "recommendations": 16794,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.05,
+        "positive": 17923,
+        "total_reviews": 18660,
         "url": "https://store.steampowered.com/app/2990"
       },
       {
@@ -13752,9 +13752,9 @@
         "release_date": "2019-05-07",
         "metacritic": 78,
         "recommendations": 16637,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 94.32,
+        "positive": 18141,
+        "total_reviews": 19233,
         "url": "https://store.steampowered.com/app/681280"
       },
       {
@@ -13773,9 +13773,9 @@
         "release_date": "2021-12-16",
         "metacritic": 0,
         "recommendations": 16449,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 97.4,
+        "positive": 15939,
+        "total_reviews": 16364,
         "url": "https://store.steampowered.com/app/1520370"
       },
       {
@@ -13794,9 +13794,9 @@
         "release_date": "2025-04-19",
         "metacritic": 0,
         "recommendations": 15526,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 89.75,
+        "positive": 18520,
+        "total_reviews": 20634,
         "url": "https://store.steampowered.com/app/394690"
       },
       {
@@ -13815,9 +13815,9 @@
         "release_date": "2024-05-31",
         "metacritic": 72,
         "recommendations": 14537,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 73.02,
+        "positive": 11826,
+        "total_reviews": 16196,
         "url": "https://store.steampowered.com/app/2488620"
       },
       {
@@ -13836,9 +13836,9 @@
         "release_date": "2015-03-12",
         "metacritic": 0,
         "recommendations": 14176,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 93.42,
+        "positive": 13506,
+        "total_reviews": 14457,
         "url": "https://store.steampowered.com/app/293760"
       },
       {
@@ -13857,9 +13857,9 @@
         "release_date": "2022-05-06",
         "metacritic": 0,
         "recommendations": 13628,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.46,
+        "positive": 14516,
+        "total_reviews": 15207,
         "url": "https://store.steampowered.com/app/1239690"
       },
       {
@@ -13878,9 +13878,9 @@
         "release_date": "2024-08-29",
         "metacritic": 0,
         "recommendations": 12733,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 70.8,
+        "positive": 7566,
+        "total_reviews": 10687,
         "url": "https://store.steampowered.com/app/1114150"
       },
       {
@@ -13899,9 +13899,9 @@
         "release_date": "2015-04-23",
         "metacritic": 68,
         "recommendations": 12032,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.41,
+        "positive": 13466,
+        "total_reviews": 14572,
         "url": "https://store.steampowered.com/app/320300"
       },
       {
@@ -13920,9 +13920,9 @@
         "release_date": "2025-01-22",
         "metacritic": 0,
         "recommendations": 11640,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 95.07,
+        "positive": 10676,
+        "total_reviews": 11230,
         "url": "https://store.steampowered.com/app/2634950"
       },
       {
@@ -13941,9 +13941,9 @@
         "release_date": "2013-01-31",
         "metacritic": 0,
         "recommendations": 11429,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 93.56,
+        "positive": 16039,
+        "total_reviews": 17143,
         "url": "https://store.steampowered.com/app/212480"
       },
       {
@@ -13983,9 +13983,9 @@
         "release_date": "2021-10-07",
         "metacritic": 0,
         "recommendations": 11155,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 85.02,
+        "positive": 108841,
+        "total_reviews": 128011,
         "url": "https://store.steampowered.com/app/1677740"
       },
       {
@@ -14004,9 +14004,9 @@
         "release_date": "2016-11-09",
         "metacritic": 81,
         "recommendations": 11093,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 91.7,
+        "positive": 12504,
+        "total_reviews": 13636,
         "url": "https://store.steampowered.com/app/415200"
       },
       {
@@ -14046,9 +14046,9 @@
         "release_date": "2017-11-08",
         "metacritic": 0,
         "recommendations": 10819,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 96.36,
+        "positive": 10857,
+        "total_reviews": 11267,
         "url": "https://store.steampowered.com/app/732430"
       },
       {
@@ -14067,9 +14067,9 @@
         "release_date": "2023-10-09",
         "metacritic": 0,
         "recommendations": 10355,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 47.56,
+        "positive": 4749,
+        "total_reviews": 9985,
         "url": "https://store.steampowered.com/app/2440510"
       },
       {
@@ -14088,9 +14088,9 @@
         "release_date": "2017-10-04",
         "metacritic": 0,
         "recommendations": 10327,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 82.25,
+        "positive": 10485,
+        "total_reviews": 12747,
         "url": "https://store.steampowered.com/app/300380"
       },
       {
@@ -14109,9 +14109,9 @@
         "release_date": "2025-03-24",
         "metacritic": 0,
         "recommendations": 10241,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 80.9,
+        "positive": 5544,
+        "total_reviews": 6853,
         "url": "https://store.steampowered.com/app/2625420"
       },
       {
@@ -14151,9 +14151,9 @@
         "release_date": "2019-06-13",
         "metacritic": 0,
         "recommendations": 9738,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 54.87,
+        "positive": 7428,
+        "total_reviews": 13538,
         "url": "https://store.steampowered.com/app/311310"
       },
       {
@@ -14172,9 +14172,9 @@
         "release_date": "2025-01-16",
         "metacritic": 0,
         "recommendations": 9720,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 69.99,
+        "positive": 7712,
+        "total_reviews": 11018,
         "url": "https://store.steampowered.com/app/3058630"
       },
       {
@@ -14193,9 +14193,9 @@
         "release_date": "2024-04-18",
         "metacritic": 0,
         "recommendations": 9671,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 78.42,
+        "positive": 6295,
+        "total_reviews": 8027,
         "url": "https://store.steampowered.com/app/2698940"
       },
       {
@@ -14214,9 +14214,9 @@
         "release_date": "2017-09-15",
         "metacritic": 0,
         "recommendations": 9633,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 81.06,
+        "positive": 9957,
+        "total_reviews": 12284,
         "url": "https://store.steampowered.com/app/621830"
       }
     ],
@@ -14258,9 +14258,9 @@
         "release_date": "2014-09-30",
         "metacritic": 84,
         "recommendations": 59738,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.43,
+        "positive": 83849,
+        "total_reviews": 90715,
         "url": "https://store.steampowered.com/app/241930"
       },
       {
@@ -14279,9 +14279,9 @@
         "release_date": "2018-12-28",
         "metacritic": 0,
         "recommendations": 28216,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 89.34,
+        "positive": 22235,
+        "total_reviews": 24888,
         "url": "https://store.steampowered.com/app/993090"
       },
       {
@@ -14300,9 +14300,9 @@
         "release_date": "2020-11-24",
         "metacritic": 0,
         "recommendations": 18732,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 85.71,
+        "positive": 19720,
+        "total_reviews": 23009,
         "url": "https://store.steampowered.com/app/955900"
       },
       {
@@ -14321,9 +14321,9 @@
         "release_date": "2016-02-22",
         "metacritic": 0,
         "recommendations": 18070,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 99.09,
+        "positive": 21620,
+        "total_reviews": 21818,
         "url": "https://store.steampowered.com/app/431730"
       },
       {
@@ -14342,9 +14342,9 @@
         "release_date": "UNKNOWN",
         "metacritic": 0,
         "recommendations": 15577,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 93.46,
+        "positive": 16196,
+        "total_reviews": 17330,
         "url": "https://store.steampowered.com/app/223850"
       },
       {
@@ -14363,9 +14363,9 @@
         "release_date": "2011-03-04",
         "metacritic": 0,
         "recommendations": 14274,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 91.5,
+        "positive": 15415,
+        "total_reviews": 16847,
         "url": "https://store.steampowered.com/app/71250"
       },
       {
@@ -14384,9 +14384,9 @@
         "release_date": "2015-07-06",
         "metacritic": 0,
         "recommendations": 10789,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 71.42,
+        "positive": 8507,
+        "total_reviews": 11911,
         "url": "https://store.steampowered.com/app/384300"
       },
       {
@@ -14405,9 +14405,9 @@
         "release_date": "2020-06-30",
         "metacritic": 0,
         "recommendations": 9362,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 92.08,
+        "positive": 10137,
+        "total_reviews": 11009,
         "url": "https://store.steampowered.com/app/1066890"
       },
       {
@@ -14426,9 +14426,9 @@
         "release_date": "2014-05-08",
         "metacritic": 0,
         "recommendations": 6743,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 85.75,
+        "positive": 6218,
+        "total_reviews": 7251,
         "url": "https://store.steampowered.com/app/228180"
       },
       {
@@ -14447,9 +14447,9 @@
         "release_date": "2020-10-14",
         "metacritic": 0,
         "recommendations": 6669,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 98.2,
+        "positive": 6674,
+        "total_reviews": 6796,
         "url": "https://store.steampowered.com/app/1292940"
       },
       {
@@ -14489,9 +14489,9 @@
         "release_date": "2022-11-17",
         "metacritic": 0,
         "recommendations": 5780,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 74.39,
+        "positive": 4452,
+        "total_reviews": 5985,
         "url": "https://store.steampowered.com/app/1461810"
       },
       {
@@ -14510,9 +14510,9 @@
         "release_date": "2021-11-25",
         "metacritic": 0,
         "recommendations": 5705,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 71.83,
+        "positive": 3981,
+        "total_reviews": 5542,
         "url": "https://store.steampowered.com/app/1787090"
       },
       {
@@ -14531,9 +14531,9 @@
         "release_date": "2022-06-24",
         "metacritic": 0,
         "recommendations": 5682,
-        "rating": 0.0,
-        "positive": 0,
-        "total_reviews": 0,
+        "rating": 68.25,
+        "positive": 3667,
+        "total_reviews": 5373,
         "url": "https://store.steampowered.com/app/1812620"
       },
       {
@@ -15224,9 +15224,9 @@
         "release_date": "2023-10-04",
         "metacritic": 0,
         "recommendations": 984,
-        "rating": 87.59,
-        "positive": 833,
-        "total_reviews": 951,
+        "rating": 0.0,
+        "positive": 0,
+        "total_reviews": 0,
         "url": "https://store.steampowered.com/app/687800"
       },
       {
@@ -15245,9 +15245,9 @@
         "release_date": "2021-06-07",
         "metacritic": 0,
         "recommendations": 967,
-        "rating": 61.82,
-        "positive": 714,
-        "total_reviews": 1155,
+        "rating": 0.0,
+        "positive": 0,
+        "total_reviews": 0,
         "url": "https://store.steampowered.com/app/1366950"
       },
       {
@@ -35125,19 +35125,21 @@
     "3764420": "Turnfall",
     "3860230": "Bastion Frontier",
     "3862690": "Ammo Bounce",
-    "3419430": "Bongo Cat",
-    "1422450": "Deadlock"
+    "1422450": "Deadlock",
+    "2868840": "Slay the Spire 2",
+    "2767030": "Marvel Rivals",
+    "1973530": "Limbus Company"
   },
   "meta": {
-    "source": "Steam 2025 archive (applications.csv + application_genres.csv) + reviews_enriched.json",
-    "totalGames": 150279,
-    "withPrice": 90311,
-    "freeCount": 18994,
-    "withDate": 150279,
-    "withMetacritic": 4166,
+    "source": "Steam 2025 archive (applications.csv + application_genres.csv) + reviews_enriched.json + FronkonGames 2026-09-08 快照晚期补条目 (extra_fronk.csv)",
+    "totalGames": 155372,
+    "withPrice": 93854,
+    "freeCount": 20544,
+    "withDate": 155372,
+    "withMetacritic": 4167,
     "withRecommendations": 19851,
-    "reviewsUpdated": 2000,
-    "builtAt": "2026-11-11T10:16:43.711667+00:00",
+    "reviewsUpdated": 1964,
+    "builtAt": "2026-11-25T06:10:50.076287+00:00",
     "note": "代表作品与类型统计按多主类型归属：一款游戏可属于多个 Steam 大类（数量可重叠）；代表作品每类取推荐数前 50。",
     "subTagNote": "小标签数量基于游戏描述关键词推断，非 Steam 官方精确值",
     "priceNote": "价格按快照期近似汇率折算 USD，非实时汇率"

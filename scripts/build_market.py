@@ -366,6 +366,18 @@ def main():
         })
 
     full = pd.DataFrame.from_records(records)
+
+    # 合并 Fronk 晚期补条目（extra_fronk.csv 由 merge_fronk_late.py 产出）；
+    # 本地 archive 记录优先，同 appid 不被覆盖。
+    extra_path = OUT / "extra_fronk.csv"
+    if extra_path.exists():
+        extra = pd.read_csv(extra_path, encoding="utf-8-sig", dtype={"appid": "int64"})
+        before = len(full)
+        full = pd.concat([full, extra], ignore_index=True)
+        full = full.drop_duplicates(subset="appid", keep="first").reset_index(drop=True)
+        print(f">>> 合并 extra_fronk.csv: {len(extra)} 款，合并后 {len(full)} 款"
+              f"（去重 {before + len(extra) - len(full)}）", flush=True)
+
     full = full.sort_values(["recommendations", "appid"], ascending=[False, True]).reset_index(drop=True)
     print(">>> 写出 market_full.csv ...", flush=True)
     full.to_csv(OUT / "market_full.csv", index=False, encoding="utf-8-sig")
@@ -500,8 +512,9 @@ def main():
     top500 = reviewed.head(500)[top500_cols].to_dict(orient="records")
     top_by_type = {}
     for genre in MAIN_GENRES + ["其他"]:
+        mask = genre_masks[genre].reindex(reviewed.index, fill_value=False)
         top_by_type[genre] = (
-            reviewed[genre_masks[genre]]
+            reviewed[mask]
             .head(50)[top500_cols]
             .to_dict(orient="records")
         )
@@ -545,7 +558,7 @@ def main():
         "top_by_type": top_by_type,
         "name_lookup": name_lookup,
         "meta": {
-            "source": "Steam 2025 archive (applications.csv + application_genres.csv) + reviews_enriched.json",
+            "source": "Steam 2025 archive (applications.csv + application_genres.csv) + reviews_enriched.json + FronkonGames 2026-09-08 快照晚期补条目 (extra_fronk.csv)",
             "totalGames": total,
             "withPrice": with_price,
             "freeCount": free_count,
@@ -565,9 +578,9 @@ def main():
 
     # ---------- 校验 ----------
     print("\n>>> 校验", flush=True)
-    print("rows:", total, "expect 150279", flush=True)
-    print("free:", free_count, "expect 18994", flush=True)
-    print("withPrice:", with_price, "expect 90311", flush=True)
+    print("rows:", total, flush=True)
+    print("free:", free_count, flush=True)
+    print("withPrice:", with_price, flush=True)
     print("duplicate appid:", int(full["appid"].duplicated().sum()), flush=True)
     print("null cells:", int(full.isna().sum().sum()), flush=True)
     print("price_unknown:", int(full["price_unknown"].sum()), flush=True)

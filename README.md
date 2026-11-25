@@ -23,7 +23,7 @@
 - 全量 archive：150,279 款 type=game；多主类型统计，不把重叠强行抹平
 - 2,000 份真实好评/差评样本：S/A/B/C 分档，不伪造 Steam 实时评价
 - 结论先行：首页先给 5 个发现，再展开证据与限制
-- 断网可运行：ECharts 等第三方库已本地化，不依赖 CDN
+- 断网可运行：ECharts 等第三方库已本地化，不依赖 CDN；页面数据已打包进 `js/lobby-data.js`，**双击 `index.html` 也能完整显示**（file:// 下不再被 fetch 拦截）
 - 可复核：`scripts/build_market.py`、`scripts/fetch_hf_reviews.py` 与 `data/market/` 全链路保留
 - 答辩材料：`docs/答辩提纲.md`（数据链路、5 个结论、演示顺序、常见问答）
 
@@ -39,10 +39,10 @@
 |---|---|---|
 | 第1-2周 | 基础准备：JS 基础、Kaggle 数据集、Git | ✅ 已完成 |
 | 第3-4周 | 数据处理 + 爬虫 + 本地服务器 | ✅ 已完成 |
-| 第5-6周 | 可视化进阶 + **数据大屏制作** | 🔄 进行中 |
-| 第7-8周 | 交互完善（多图联动、筛选、指标卡） | ☐ 待开始 |
-| 第9-12周 | 分析深化 + 平台整合 | ☐ 待开始 |
-| 第13-16周 | 文档整理、演示视频、期末验收 | ☐ 待开始 |
+| 第5-6周 | 可视化进阶 + **数据大屏制作** | ✅ 已完成 |
+| 第7-8周 | 交互完善（多图联动、筛选、指标卡） | ✅ 已完成 |
+| 第9-12周 | 分析深化 + 平台整合 | ✅ 已完成 |
+| 第13-16周 | 文档整理、演示视频、期末验收 | 🔄 进行中 |
 
 ### 已完成 ✅
 
@@ -72,6 +72,7 @@
 - `js/papaparse.min.js`：练习页与 `scripts/verify_week9_data.js` 仍在使用，保留。
 - `data/market/`：全量市场数据（`market_full.csv` 仅用于离线核对，不进入前端；页面只读 `market_agg.json`、`top500.json`、`reviews_enriched.json`）。
 - 角色素材：`assets/characters/naiwa/` 的 10 个 APNG 来自 [timerring/codex-pet-naiwa](https://github.com/timerring/codex-pet-naiwa)（MIT），按 Steam 大类语义匹配；原图可在 `naifrog/previews/` 核对。
+- 进入页 3D：`assets/intro/steam-archive-intro.mp4`（8 秒、1280×720、H.264、无音轨）与 `poster.jpg`；由 Blender 4.5.9 LTS + `scripts/build_intro_scene.py` 预渲染，页面不依赖 WebGL。重新渲染：`tools/blender-4.5.9-windows-x64/blender.exe -b --factory-startup --python scripts/build_intro_scene.py`，输出在 `renders/intro/`，再复制到 `assets/intro/`。
 - 评价样本：2,000 款真实好评/差评计数来自公开数据集 [Z02Z/steam-games-dataset](https://huggingface.co/datasets/Z02Z/steam-games-dataset)（CC-BY-4.0），只覆盖有评价记录的样本。
 
 ## 快速开始
@@ -114,7 +115,7 @@ npm start
 
 - **全量主表**：archive `applications.csv` + `application_genres.csv`，筛 `type=game` 共 150,279 款；20 列、0 null；价格按快照期汇率折算 USD。
 - **口碑样本**：公开数据集 `Z02Z/steam-games-dataset`（FronkonGames，CC-BY-4.0）的 positive/negative 计数，补 2,000 款；覆盖率 1.3%，按推荐数选取。
-- **实时 TOP10**：`data/online.json`，由 Steam 官方榜单页（`store.steampowered.com/charts/mostplayed`）取 appid 顺序 + 官方 `GetNumberOfCurrentPlayers` 取在线人数生成（配置了 `STEAM_API_KEY` 时优先用 `GetMostPlayedGames` 接口）；当前为 2026-11-11 22:32 的完整 10 名快照（10 款全部有效，合计 403.6 万在线，TOP3 占 65.0%）；官方接口对个别 appid 返回 404，由榜单页顺序补全，并保留第 11 名 fallback。
+- **实时 TOP10**：`data/online.json`，由 Steam 官方 `GetMostPlayedGames` 榜单取前 30 名，再用 `GetNumberOfCurrentPlayers` 逐款取“当前在线”，补足 10 行；当前为 2026-11-22 20:53 的快照（10 名有效，合计 397 万在线，TOP3 占 67.7%；源榜第 6 名 Deadlock 当前在线接口 404，用第 11 名补足；显示顺序按当前在线重排，并标注源榜名次）。
 - **字段**：`data/market/market_full.csv` 21 列，核心字段：`appid / name / type / all_genres / price / price_unknown / rating / total_reviews / year / recommendations / sub_tags`。
 - **口径**：多主类型可重叠，十类数量相加会大于 150,279；8,870 款没有命中任何大类；小标签由名称/简介关键词推断，不是 Steam 用户标签。
 - **更新频率**：全量快照随 archive 重新生成；实时 TOP10 可手动 `node scripts/fetch_online.js`，失败时保留旧快照并标注时间。
@@ -123,7 +124,7 @@ npm start
 
 项目已配置一个 Windows 计划任务，**每天 22:00** 自动运行 `scripts/run-daily.bat` 抓取数据（当前触发时间：22:00，日期 2026-10-26 起生效）。
 - 任务名 `SteamMarketCrawlerDaily`，触发方式：每日 22:00
-- 执行内容：`wscript.exe "scripts\run-daily-hidden.vbs"` → `scripts\run-daily.bat` → `node scripts\crawler.js`，日志追加到 `data\crawler.log`
+- 执行内容：`wscript.exe "scripts\run-daily-hidden.vbs"` → `scripts\run-daily.bat` → 先 `node scripts\fetch_online.js` 快速刷新在线榜，再 `node scripts\crawler.js` 抓全量，日志追加到 `data\crawler.log`
   - 用 `wscript` 隐藏启动，**22:00 不会再弹出黑色 cmd 窗口**（以前窗口会亮 25 分钟，一旦被关掉更新就中断，10-30 至 11-04 有 5 次就是这么没写进数据的）；
   - `run-daily-hidden.vbs` 会等批处理结束再退出，任务状态因此能反映真实结果（`0x0` = 已写入，非 0 = 保留旧数据）。
 - 查看/修改：`Win + R` 输入 `taskschd.msc`，任务名 `SteamMarketCrawlerDaily`
@@ -204,4 +205,13 @@ F:\steam-market-insight\
 | `npm run crawl` 报"Steam 接口当前不可达" | 国内访问 Steam 会间歇性断连，等几分钟重试即可；旧数据不会丢 |
 | 端口 8081 被占用 | `$env:PORT=8090; npm start`（或临时改 server.js 顶部 PORT） |
 | 页面数据是旧的 | 全量快照看顶栏；实时榜看竞技场单独时间；`npm run crawl` 只刷新实时榜 |
-| 直接双击 html 打开（file:// 协议） | **不行**：页面用 `fetch` 读取 `data/market/*.json`，浏览器在 file:// 下会拦截，启动卡会提示“数据未接通”。请 `npm start` 后访问 http://localhost:8081/（`js/data.js` 是旧版遗留的 123 款数据，新页面不再使用） |
+| 直接双击 html 打开（file:// 协议） | **可以**：页面优先读取 `js/lobby-data.js` 里的 `window.__LOBBY_DATA__`，不依赖 fetch；更新 `data/` 后运行 `python scripts/build_lobby_bundle.py` 重新生成。也可以 `npm start` 后访问 http://localhost:8081/ |
+
+## A0 机器学习回测（2026-11-20）
+
+- 任务：只用**发售时**的主类型 / 标签 / 免费付费 / 年份，判断游戏在发售后 **12 个月**是否达到 1,000 条评价。
+- 数据：`data/ml/train_sample.csv` 5,000 款分层样本；`data/ml/labels.csv` 4,985 条有效 12 个月标签（覆盖率 99.7%）。标签来自 Steam `appreviewhistogram`，只统计发售后 12 个日历月。
+- 切分：2015–2021 训练 / 2022 验证 / 2023–2025 测试，不随机切分；首发价拿不到，价格特征未入模。
+- 结果：测试集 2,341 款、78 款高热度（3.3%，低于 5% 正例率下限）。逻辑回归 PR-AUC **0.049**，虽略高于 3.3% 基准，但远低于“比基准高 0.05”的停止线；ROC-AUC 0.653，Top10% 命中 4.3%。**A0 未过门槛**，页面 09 只作“回测/风险排序”演示，不包装成可用预测。
+- 文件：`data/ml/model.json`、`js/model-data.js`（离线推理）、`js/model.js`、`scripts/train_hot12.py`、`scripts/fetch_ml_labels.py`。页面 **09 模型实验室**可输入主类型/标签/免费/年份试算；标签已用中文展示，“独立小团队 / 免费长线 / 策略模拟”三个场景按钮可一键对照，100 点阵显示自然频率，结果卡同时给出基准、PR-AUC、Brier、Top10%、样本覆盖和当前输入的主要驱动项；改任意控件即时更新，便于现场解释“输入→概率→为什么”。
+- 数据打包：更新 `data/market/*.json`、`data/online.json`、`data/new_releases.json` 或 `data/ml/model.json` 后，运行 `python scripts/build_lobby_bundle.py`，否则双击 `index.html` 仍会读到旧 bundle。

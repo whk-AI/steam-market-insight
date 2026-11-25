@@ -1,56 +1,156 @@
 {
-  "fetchedAt": "2026-11-11T14:32:03.782Z",
+  "fetchedAt": "2026-11-24T14:57:29.552Z",
   "source": "Steam charts + GetNumberOfCurrentPlayers",
   "top": [
     {
       "rank": 1,
       "appid": 730,
-      "current_players": 1210535
+      "current_players": 1027725
     },
     {
       "rank": 2,
-      "appid": 570,
-      "current_players": 710529
+      "appid": 578080,
+      "current_players": 616865
     },
     {
       "rank": 3,
-      "appid": 578080,
-      "current_players": 700611
+      "appid": 570,
+      "current_players": 738860
     },
     {
       "rank": 4,
-      "appid": 4115450,
-      "current_players": 385429
+      "appid": 4262460,
+      "current_players": 333767
     },
     {
       "rank": 5,
-      "appid": 1172470,
-      "current_players": 233922
+      "appid": 431960,
+      "current_players": 107285
     },
     {
       "rank": 6,
-      "appid": 4262460,
-      "current_players": 173475
+      "appid": 1422450,
+      "current_players": null
     },
     {
       "rank": 7,
-      "appid": 3393110,
-      "current_players": 167881
+      "appid": 1172470,
+      "current_players": 180848
     },
     {
       "rank": 8,
-      "appid": 3419430,
-      "current_players": 157148
+      "appid": 2868840,
+      "current_players": 130097
     },
     {
       "rank": 9,
-      "appid": 4348910,
-      "current_players": 152248
+      "appid": 4115450,
+      "current_players": 158400
     },
     {
       "rank": 10,
       "appid": 1938090,
-      "current_players": 144386
+      "current_players": 88180
+    },
+    {
+      "rank": 11,
+      "appid": 3240220,
+      "current_players": 117658
+    },
+    {
+      "rank": 12,
+      "appid": 1091500,
+      "current_players": 68456
+    },
+    {
+      "rank": 13,
+      "appid": 236390,
+      "current_players": 67522
+    },
+    {
+      "rank": 14,
+      "appid": 322170,
+      "current_players": 37278
+    },
+    {
+      "rank": 15,
+      "appid": 359550,
+      "current_players": 37494
+    },
+    {
+      "rank": 16,
+      "appid": 2767030,
+      "current_players": 31377
+    },
+    {
+      "rank": 17,
+      "appid": 271590,
+      "current_players": 85867
+    },
+    {
+      "rank": 18,
+      "appid": 1973530,
+      "current_players": 45365
+    },
+    {
+      "rank": 19,
+      "appid": 230410,
+      "current_players": 59831
+    },
+    {
+      "rank": 20,
+      "appid": 250900,
+      "current_players": 40094
+    },
+    {
+      "rank": 21,
+      "appid": 2357570,
+      "current_players": 40390
+    },
+    {
+      "rank": 22,
+      "appid": 381210,
+      "current_players": 44870
+    },
+    {
+      "rank": 23,
+      "appid": 1174180,
+      "current_players": 61970
+    },
+    {
+      "rank": 24,
+      "appid": 227300,
+      "current_players": 47019
+    },
+    {
+      "rank": 25,
+      "appid": 413150,
+      "current_players": 66627
+    },
+    {
+      "rank": 26,
+      "appid": 3393110,
+      "current_players": 118542
+    },
+    {
+      "rank": 27,
+      "appid": 440,
+      "current_players": 94948
+    },
+    {
+      "rank": 28,
+      "appid": 1867240,
+      "current_players": 44942
+    },
+    {
+      "rank": 29,
+      "appid": 252490,
+      "current_players": 79113
+    },
+    {
+      "rank": 30,
+      "appid": 4348910,
+      "current_players": 76166
     }
   ]
 }
